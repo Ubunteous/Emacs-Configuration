@@ -1,0 +1,11 @@
+# org
+*.org
+!readme.org
+
+# backups
+*~
+*#
+
+# dir
+docs/*
+files/*

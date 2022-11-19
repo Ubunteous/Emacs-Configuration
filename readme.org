@@ -1,0 +1,3 @@
+#+title: Emacs configuration
+
+straight.el contains imports to every module loaded by straight. Comment one line to remove a package from the current configuration.
