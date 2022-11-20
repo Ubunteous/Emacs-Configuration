@@ -46,6 +46,9 @@
 (load-user-file "perso/break-time")
 (breaktime-start (* 22 60)) ;; 22 minutes
 
+;; Make later
+;; (load-user-file "built-in/cursor")
+
 ;; Discarded
 ;; (load-user-file "perso/modeline-timer")
 ;; (load-user-file "perso/work-timer")
@@ -175,6 +178,8 @@
 (load-user-file "utilities/diminish")
 (load-user-file "utilities/hl-todo")
 (load-user-file "utilities/dimmer")
+
+(load-user-file "utilities/wgrep")
 
 ;; Ready
 ;; (load-user-file "utilities/esup")
