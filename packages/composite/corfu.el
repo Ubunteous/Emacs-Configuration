@@ -61,7 +61,8 @@
   ;; Swap M-/ and C-M-/
   :general
   ("M-:" 'dabbrev-completion
-   "C-M-:" 'dabbrev-expand)
+   "C-M-:" 'dabbrev-expand
+   "M-/" 'eval-expression)
   ;; Other useful Dabbrev configurations.
   :custom
   (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
