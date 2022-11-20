@@ -19,7 +19,7 @@
           ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
             "Homepage"
             "Browse homepage"
-	    (lambda (&rest _) (browse-url "https://github.com")))
+	    (lambda (&rest _) (browse-url "https://github.com/Ubunteous")))
            ("★"
 	    "Star"
 	    "Reach for the stars"
