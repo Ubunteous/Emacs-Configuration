@@ -29,7 +29,8 @@
 (load-user-file "built-in/recentf")
 (load-user-file "built-in/fly")
 (load-user-file "built-in/misc")
-(load-user-file "built-in/dired") ;; => maybe add git compatibility later
+(load-user-file "built-in/dired") ;; => add git compatibility later
+(load-user-file "built-in/auto-insert")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;   built-in (soon)  ;;
@@ -46,14 +47,6 @@
 (load-user-file "perso/break-time")
 (breaktime-start (* 22 60)) ;; 22 minutes
 
-;; Make later
-;; (load-user-file "built-in/cursor")
-
-;; Discarded
-;; (load-user-file "perso/modeline-timer")
-;; (load-user-file "perso/work-timer")
-;; (load-user-file "perso/countdown-timer")
-
 ;;;;;;;;;;;;;;;;;;
 ;;   workflow   ;;
 ;;;;;;;;;;;;;;;;;;
@@ -69,9 +62,6 @@
 ;; (load-user-file "workflow/hydra")
 ;; (load-user-file "workflow/realgud")
 
-;; Discarded
-;; (load-user-file "workflow/god-mode")
-
 ;;;;;;;;;;;;;
 ;;   org   ;;
 ;;;;;;;;;;;;;
@@ -79,7 +69,7 @@
 (load-user-file "org/org")
 (load-user-file "org/org-modern")
 (load-user-file "org/org-fragtog")
-(load-user-file "org/jupyter") ;; => convert org -> ipynb with ox-ipynb
+(load-user-file "org/jupyter") ;;convert org -> ipynb with ox-ipynb
 (load-user-file "org/org-cliplink")
 
 ;; Ready
@@ -99,13 +89,6 @@
 ;; (load-user-file "org/org-roam")
 ;; (load-user-file "org/deft")
 
-;; Discarded
-;; (load-user-file "org/org-bullets")
-;; (load-user-file "org/org-superstar")
-;; (load-user-file "org/svg-tag")
-;; (load-user-file "org/org-pomodoro")
-;; (load-user-file "org/org-ref") ;; citar is a better alternative
-
 ;;;;;;;;;;;;;;;;;;;;
 ;;   appearance   ;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -118,20 +101,11 @@
 (load-user-file "appearance/moody")
 (load-user-file "appearance/kind-icon")
 
-;; Discarded
-;; (load-user-file "appearance/solarized")
-;; (load-user-file "appearance/poet")
-;; (load-user-file "appearance/cascadia")
-;; (load-user-file "appearance/fira-code-mode") ;; works a bit too well. remove from latex/org
-;; modeline (can also be configured with delighted)
-;; (load-user-file "appearance/doom-appearance")
-;; (load-user-file "appearance/powerline")
-;; (load-user-file "appearance/minimap")
-
 ;;;;;;;;;;;;;;;;;;;
 ;;   composite   ;;
 ;;;;;;;;;;;;;;;;;;;
 
+(load-user-file "composite/tempel")
 (load-user-file "composite/orderless")
 (load-user-file "composite/vertico")
 (load-user-file "composite/prescient") ;; alternative to orderless
@@ -141,15 +115,10 @@
 (load-user-file "composite/marginalia")
 (load-user-file "composite/corfu")
 
+(load-user-file "composite/minimal-swiper")
+
 ;; Ready
 ;; (load-user-file "composite/cape")
-
-;; Discarded
-(load-user-file "composite/minimal-swiper")
-;; (load-user-file "composite/ivy") ;; => needs prescient, counsel
-;; (load-user-file "composite/counsel")
-;; (load-user-file "composite/swiper"))
-;; (load-user-file "composite/company")
 
 ;;;;;;;;;;;;;;;;;;;
 ;;   utilities   ;;
@@ -184,9 +153,6 @@
 ;; Ready
 ;; (load-user-file "utilities/esup")
 
-;; Discarded
-;; (load-user-file "utilities/olivetti")
-
 ;;;;;;;;;;;;;;;;;;;;;
 ;;   programming   ;;
 ;;;;;;;;;;;;;;;;;;;;;
@@ -211,14 +177,10 @@
 ;; (load-user-file "programming/yuck")
 ;; (load-user-file "programming/fountain") ;; use with wrap
 
-;; discarded
-;; (load-user-file "programming/python/ein")
-;; (load-user-file "programming/kbd")
-;; (load-user-file "programming/python/highlight-indentation")
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               LATER                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; most of these packages are ready to used but will need some practice
 ;; before full integration. I will add one at a time to my configuration
@@ -252,8 +214,53 @@
 ;; (load-user-file "wgrep")
 ;; (load-user-file "deadgrep")
 ;; (load-user-file "symbol-overlay")
-;; (load-user-file "tempel")
 ;; (load-user-file "bufler") ;; useful: can move to buffer in same group
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;             DISCARDED              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; perso
+;; (load-user-file "perso/modeline-timer")
+;; (load-user-file "perso/work-timer")
+;; (load-user-file "perso/countdown-timer")
+
+;; workflow
+;; (load-user-file "workflow/god-mode")
+
+;; org
+;; (load-user-file "org/org-bullets")
+;; (load-user-file "org/org-superstar")
+;; (load-user-file "org/svg-tag")
+;; (load-user-file "org/org-pomodoro")
+;; (load-user-file "org/org-ref") ;; citar is a better alternative
+
+;; appearance
+;; (load-user-file "appearance/solarized")
+;; (load-user-file "appearance/poet")
+;; (load-user-file "appearance/cascadia")
+;; (load-user-file "appearance/fira-code-mode") ;; works a bit too well. remove from latex/org
+;; modeline (can also be configured with delighted)
+;; (load-user-file "appearance/doom-appearance")
+;; (load-user-file "appearance/powerline")
+;; (load-user-file "appearance/minimap")
+
+;; composite
+;; (load-user-file "composite/ivy") ;; => needs prescient, counsel
+;; (load-user-file "composite/counsel")
+;; (load-user-file "composite/swiper"))
+;; (load-user-file "composite/company")
+
+;; utilities
+;; (load-user-file "utilities/olivetti")
+
+;; programming
+;; (load-user-file "programming/python/ein")
+;; (load-user-file "programming/kbd")
+;; (load-user-file "programming/python/highlight-indentation")
+
+;; later
+;; (load-user-file "later/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               DEBUG                ;;
