@@ -64,6 +64,34 @@
      (put cmd 'repeat-map 'other-window-repeat-map)))
  other-window-repeat-map)
 
+;; ORG HEADING MOTION
+(defvar heading-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "n") #'org-next-visible-heading)
+    (define-key map (kbd "p") #'org-previous-visible-heading)
+    (define-key map (kbd "f") #'org-forward-heading-same-level)
+    (define-key map (kbd "b") #'org-backward-heading-same-level)
+    map))
+
+(map-keymap
+ (lambda (_key cmd)
+   (when (symbolp cmd)
+     (put cmd 'repeat-map 'heading-repeat-map)))
+ heading-repeat-map)
+
+;; ORG SOURCE BLOCK MOTION
+(defvar src-block-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "n") #'org-babel-next-src-block)
+    (define-key map (kbd "p") #'org-babel-previous-src-block)
+    map))
+
+(map-keymap
+ (lambda (_key cmd)
+   (when (symbolp cmd)
+     (put cmd 'repeat-map 'src-block-repeat-map)))
+ src-block-repeat-map)
+
 ;; MINI VIM
 
 ;; basic vim motions with emacs bindings
