@@ -12,7 +12,6 @@
   :straight auctex
   :mode ("\\.tex\\'" . LaTeX-mode)
   ;;:requires reftex
-  ;;:hook ((visual-line-mode math-mode) . LaTeX-mode)
   :general (LaTeX-mode-map "C-c s" 'latex-compile)
   :config
   ;;(latex-preview-pane-enable) ;;requires pdf-tools
@@ -29,7 +28,9 @@
 	TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
 	TeX-source-correlate-start-server t)
   (setq-default TeX-master nil)
+  ;;:hook ((visual-line-mode math-mode) . LaTeX-mode)
   :hook
+  (tex-mode-hook . (lambda () (setq ispell-parser 'tex)))
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
   (LaTeX-mode-hook . (lambda () (reftex-mode t) (flyspell-mode t)))
   
