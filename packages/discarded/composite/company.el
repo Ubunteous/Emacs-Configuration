@@ -12,7 +12,6 @@
   ((prog-mode . company-mode)
    (after-init . global-company-mode)))
 
-
 (use-package company-prescient
   :defer t
   :after company
