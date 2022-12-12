@@ -12,6 +12,15 @@
   "Load a file from the packages ~/.emacs/directory"
   (load-file (expand-file-name (concat file ".el") (concat "~/.emacs.d/packages/"))))
 
+;; (setq omit-heavy nil)
+;; ;; not that great. it barely saves me .1 or .2 seconds
+;; (defun do-omit-heavy (omit-heavy function)
+;;   "Do not execute a functiuon if OMIT-HEAVY is true.
+;; Useful to reload quickly a configuration when testing new changes"
+;;   (if omit-heavy
+;;       ()
+;;     'function))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               PACKAGES             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,7 +29,7 @@
 ;;   built-in   ;;
 ;;;;;;;;;;;;;;;;;;
 
-;; Almost ready
+;; Almost ready. alt to swiper and consult-line
 ;; (load-user-file "built-in/isearch")
 
 (load-user-file "built-in/align")
@@ -31,12 +40,13 @@
 (load-user-file "built-in/misc")
 (load-user-file "built-in/dired") ;; => add git compatibility later
 (load-user-file "built-in/auto-insert")
+(load-user-file "built-in/completion")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;   built-in (soon)  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-(load-user-file "built-in/tree-sitter") ;; => emacs 29
+;; (load-user-file "built-in/tree-sitter") ;; => emacs 29
 ;; (load-user-file "built-in/eglot") ;; => emacs 29
 
 ;;;;;;;;;;;;;;;
@@ -52,14 +62,15 @@
 ;;;;;;;;;;;;;;;;;;
 
 (load-user-file "workflow/magit")
-(load-user-file "workflow/projectile")
+;; use project.el instead if it can use .git instead of .vc
 (load-user-file "workflow/ace-window") ;; add rotate/transpose frame
-(load-user-file "workflow/vterm")
+;; (load-user-file "workflow/vterm") ;; vterm should be installed from NixOS configuration
 (load-user-file "workflow/perspective")
 
 ;; Prepare
 ;; (load-user-file "workflow/forge")
 ;; (load-user-file "workflow/hydra")
+;; (load-user-file "lsp-mode")
 ;; (load-user-file "workflow/realgud")
 
 ;;;;;;;;;;;;;
@@ -67,27 +78,30 @@
 ;;;;;;;;;;;;;
 
 (load-user-file "org/org")
+(load-user-file "org/jupyter") ;;convert org -> ipynb with ox-ipynb
 (load-user-file "org/org-modern")
 (load-user-file "org/org-fragtog")
-(load-user-file "org/jupyter") ;;convert org -> ipynb with ox-ipynb
 (load-user-file "org/org-cliplink")
+(load-user-file "org/org-fancy-priorities")
 
 ;; Ready
 ;; (load-user-file "org/org-download")
 ;; (load-user-file "org/ob-async")
 
-;; Prepare
-;; (load-user-file "org/org-super-agenda")
-;; (load-user-file "org/org-ql")
+;; zettelkasten
+(load-user-file "org/org-roam") ;; roam timestamps package? / roam-ui
+;; (load-user-file "org/org-ql") ;; check git documentation
+;; (load-user-file "org/org-transclusion")
+
+;; Not essential (will likely be discarded, except (zettel)deft?)
+;; (load-user-file "org/deft")
+;; (load-user-file "org/org-brain")
 ;; (load-user-file "org/org-make-toc")
 ;; (load-user-file "org/org-sidebar")
 ;; (load-user-file "org/toc-org")
 
-;; Later with zetteldeft
-;; (load-user-file "org/org-transclusion")
-;; (load-user-file "org/org-brain")
-;; (load-user-file "org/org-roam")
-;; (load-user-file "org/deft")
+;; discarded as it slows down startup by .15-0.75s
+;; (load-user-file "org/org-super-agenda") ;; very slow startup
 
 ;;;;;;;;;;;;;;;;;;;;
 ;;   appearance   ;;
@@ -109,28 +123,27 @@
 (load-user-file "composite/orderless")
 (load-user-file "composite/vertico")
 (load-user-file "composite/prescient") ;; alternative to orderless
-(load-user-file "composite/embark") ;; => use with consult
+(load-user-file "composite/embark") ;; use it with consult
 (load-user-file "composite/consult")
 (load-user-file "composite/citar")
 (load-user-file "composite/marginalia")
 (load-user-file "composite/corfu")
+(load-user-file "composite/cape") ;; surprisingly useful!
 
 (load-user-file "composite/minimal-swiper")
-
-;; Ready
-;; (load-user-file "composite/cape")
 
 ;;;;;;;;;;;;;;;;;;;
 ;;   utilities   ;;
 ;;;;;;;;;;;;;;;;;;;
 
 ;; sort later with column 1 = new commands (actives) 2: mix 3: passives
-(load-user-file "utilities/devdocs")
+;; (load-user-file "utilities/devdocs")
 ;; (load-user-file "utilities/quickrun")
 (load-user-file "utilities/evil-nerd-commenter")
 (load-user-file "utilities/crux")
 (load-user-file "utilities/visual-regexp")
 (load-user-file "utilities/browse-kill-ring")
+(load-user-file "utilities/expand-region")
 
 (load-user-file "utilities/move-text")
 (load-user-file "utilities/aggressive-indent")
@@ -148,7 +161,7 @@
 (load-user-file "utilities/hl-todo")
 (load-user-file "utilities/dimmer")
 
-(load-user-file "utilities/wgrep")
+;; (load-user-file "utilities/wgrep")
 
 ;; Ready
 ;; (load-user-file "utilities/esup")
@@ -159,7 +172,7 @@
 
 ;; Python
 (load-user-file "programming/python/python")
-(load-user-file "programming/python/anaconda") ;;
+(load-user-file "programming/python/anaconda")
 (load-user-file "programming/python/highlight-indent-guides")
 
 ;; (load-user-file "programming/python/pytest") ;; does not work right now
@@ -181,23 +194,16 @@
 ;;               LATER                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;; most of these packages are ready to used but will need some practice
+;; most of these packages are ready to use but will need some practice
 ;; before full integration. I will add one at a time to my configuration
 
+;; (load-user-file "emacs-refactor")
 ;; (load-user-file "poetry")
 ;; (load-user-file "dumb-jump")
-;; (load-user-file "expand-region")
-;; (load-user-file "yasnippet")
 ;; (load-user-file "which-key")
-;; (load-user-file "lsp-mode")
-;; (load-user-file "realgud")
-;; black => linter included in python.el for the time being
-
 ;; (load-user-file "purpose")
 ;; (load-user-file "prism")
 ;; (load-user-file "polymode")
-;; (load-user-file "amx")
 ;; (load-user-file "iedit") ;; => multi-occur edit
 ;; (load-user-file "imenu-list")
 ;; (load-user-file "transient") => I dislike them
@@ -205,13 +211,10 @@
 ;; (load-user-file "bookmark+")
 ;; (load-user-file "anzu")
 ;; (load-user-file "fix-word")
-;; (load-user-file "avy")
 ;; (load-user-file "multiple-cursors")
 ;; (load-user-file "unfill")
 ;; (load-user-file "zzz-to-char")
-;; (load-user-file "clippy") ;; what a nightmare
 ;; (load-user-file "easy-kill")
-;; (load-user-file "wgrep")
 ;; (load-user-file "deadgrep")
 ;; (load-user-file "symbol-overlay")
 ;; (load-user-file "bufler") ;; useful: can move to buffer in same group
@@ -221,12 +224,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; perso
-;; (load-user-file "perso/modeline-timer")
 ;; (load-user-file "perso/work-timer")
-;; (load-user-file "perso/countdown-timer")
+;; (load-user-file "perso/modeline-timer") ;; where did it go?
+;; (load-user-file "perso/countdown-timer") ;; where did it go?
 
 ;; workflow
 ;; (load-user-file "workflow/god-mode")
+;; (load-user-file "workflow/projectile") ;; project.el does the job 90% of the time
 
 ;; org
 ;; (load-user-file "org/org-bullets")
@@ -241,7 +245,7 @@
 ;; (load-user-file "appearance/cascadia")
 ;; (load-user-file "appearance/fira-code-mode") ;; works a bit too well. remove from latex/org
 ;; modeline (can also be configured with delighted)
-;; (load-user-file "appearance/doom-appearance")
+;; (load-user-file "appearance/doom-modeline")
 ;; (load-user-file "appearance/powerline")
 ;; (load-user-file "appearance/minimap")
 
@@ -250,17 +254,22 @@
 ;; (load-user-file "composite/counsel")
 ;; (load-user-file "composite/swiper"))
 ;; (load-user-file "composite/company")
+;; (load-user-file "composite/amx")
 
 ;; utilities
 ;; (load-user-file "utilities/olivetti")
+;; (load-user-file "utilities/auto-compile")
+;; (load-user-file "utilities/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
+;; (load-user-file "utilities/clippy") ;; what a nightmare
+;; (load-user-file "utilities/yasnippet") ;; replaced by tempel
+;; (load-user-file "utilities/avy")
 
 ;; programming
 ;; (load-user-file "programming/python/ein")
 ;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/python/highlight-indentation")
 
-;; later
-;; (load-user-file "later/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               DEBUG                ;;

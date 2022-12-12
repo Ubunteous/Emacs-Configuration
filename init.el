@@ -1,4 +1,4 @@
-;;; init.el --- Summary
+;;; init.el --- early bird  -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -97,7 +97,7 @@
 (load-file "~/.emacs.d/straight.el")
 
 ;; (load-file "~/.emacs.d/custom/pull-down-packages.el")
-(load-file "~/.emacs.d/custom/pull-down-guide.el")
+;; (load-file "~/.emacs.d/custom/pull-down-guide.el")
 (load-file "~/.emacs.d/custom/preferences.el")
 
 ;; set custom file in which emacs will add stuff on its own

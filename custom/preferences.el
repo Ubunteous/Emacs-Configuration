@@ -8,9 +8,6 @@
 ;; winner mode (window history)
 ;; (winner-mode 1)
 
-;; hide scroll bar
-;; (scroll-bar-mode -1)
-
 ;; default is set to 300 characters
 ;; (setq auto-save-interval 20)
 
@@ -30,6 +27,9 @@
 
 ;; set apropos results by relevancy
 (setq apropos-sort-by-scores t)
+
+;; disable the menu bar (it's useful but currently broken)
+(menu-bar-mode -1)
 
 ;; save M-x and file history ; Need to check how it works first
 ;;(savehist-mode 1) ;; already defined elsewhere
