@@ -2,9 +2,6 @@
 ;;               TEMPEL               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(lambda (s)
-  )
-
 (use-package tempel
   :defer t
   ;; Require trigger prefix before template name when completing.
@@ -34,4 +31,8 @@
   ;; (global-tempel-abbrev-mode)
   :general
   ("M-+" 'tempel-complete) ;; Alternative tempel-expand
-  ("M-*" 'tempel-insert))
+  ("M-*" 'tempel-insert)
+
+  (tempel-map
+   "C-n" 'tempel-next
+   "C-p" 'tempel-previous))

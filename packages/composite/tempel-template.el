@@ -75,11 +75,12 @@ eshell-mode
 
 org-mode
 
-(jupyter "#+BEGIN_SRC jupyter-python :session py :async yes" n> r> n> "#+END_SRC")
+(jupyter "#+BEGIN_SRC jupyter-python :session py :async yes" n> r> n> "#+END_SRC" n n)
 ;; (title "#+title: " p n "#+author: Daniel Mendler" n "#+language: en" n n)
 ;;   (setq name (upcase (nth 0 (s-split "\\." (buffer-name)))))
 
 (title "#+title: " p n)
+(cite "\\cite{" r "}")
 (quote "#+begin_quote" n> r> n> "#+end_quote")
 (example "#+begin_example" n> r> n> "#+end_example")
 (center "#+begin_center" n> r> n> "#+end_center")
