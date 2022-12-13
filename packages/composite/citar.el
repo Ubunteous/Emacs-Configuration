@@ -6,9 +6,11 @@
   :defer t
   :custom
   (citar-bibliography '("./references/references.bib"))
+  (citar-org-local-bib-files)
   :general
-  ("C-c i" 'citar-insert-citation
-   :map 'minibuffer-local-map
+  ("C-c i" 'citar-insert-citation)
+  
+  (minibuffer-local-map
    "M-b" 'citar-insert-preset)
   :config
   (setq citar-latex-prompt-for-extra-arguments nil
