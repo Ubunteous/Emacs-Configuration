@@ -15,7 +15,7 @@
   (global-corfu-mode)
   :custom
   (corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
-  (corfu-preselect-first nil) ;; Disable candidate preselection
+  ;; (corfu-preselect-first nil) ;; Disable candidate preselection
   ;; Optional customizations
   ;; :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
@@ -54,19 +54,6 @@
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
   (setq tab-always-indent 'complete))
-
-;; Use Dabbrev with Corfu!
-(use-package dabbrev
-  :straight (:type built-in)
-  ;; Swap M-/ and C-M-/
-  :general
-  ("M-:" 'dabbrev-completion
-   "C-M-:" 'dabbrev-expand
-   "M-/" 'eval-expression)
-  ;; Other useful Dabbrev configurations.
-  :custom
-  (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
-
 
 (use-package corfu-history
   :defer t
