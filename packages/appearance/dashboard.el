@@ -44,5 +44,5 @@
   (setq dashboard-items	;; bookmarks, agenda, registers
 	'((recents  . 5)
 	  ;; (projects . 3)
-	  (bookmarks . 5)
-	  (agenda   . 5))))
+	  (bookmarks . 5))))
+	  ;; (agenda   . 5))))

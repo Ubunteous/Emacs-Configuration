@@ -3,7 +3,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-super-agenda
-  :defer t)
+  ;; :defer t
+  :defer 3
+  :init
+  (org-super-agenda-mode)
+  :config
+  (setq org-super-agenda-groups
+	'((:auto-category t))))
+  
+;; (org-agenda-list)
+;; (org-todo-list)
+;; (org-agenda)
+;; (org-agenda-list-stuck-projects)
+
+;; (setq org-super-agenda-groups
+;; 	'((:name "Next Items"
+;; 		 :time-grid t
+;; 		 :tag ("NEXT" "outbox"))
+;;         (:name "Important"
+;; 		 :priority "A")
+;;         (:name "Quick Picks"
+;; 		 :effort< "0:30")
+;;         (:priority<= "B"
+;;                      :scheduled future
+;;                      :order 1))))
 
 ;; (let ((org-super-agenda-groups
 ;;        '(;; Each group has an implicit boolean OR operator between its selectors.
