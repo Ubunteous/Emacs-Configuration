@@ -99,6 +99,9 @@
   ;; Optionally configure the narrowing key.
   ;; Both < and C-+ work reasonably well.
   (setq consult-narrow-key "<") ;; (kbd "C-+")
+
+  ;; influences consult-line and consult-grep
+  (setq consult-point-placement 'match-end)
   )
 
 
