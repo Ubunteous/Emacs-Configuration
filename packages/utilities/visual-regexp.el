@@ -5,14 +5,14 @@
 (use-package visual-regexp
   :defer t
   :general
-  ("C-c e" 'vr/replace
-   "C-c q" 'vr/querry-replace
-   "C-c m" 'vr/mc-mark))
+  ("C-c v e" 'vr/replace
+   "C-c v q" 'vr/querry-replace
+   "C-c v m" 'vr/mc-mark))
 
 
 (use-package visual-regexp-steroids
   :defer t
   :after visual-regexp
   :general
-  ("C-c s" 'vr/isearch-forward
-   "C-c r" 'vr/isearch-backward))
+  ("C-c v s" 'vr/isearch-forward
+   "C-c v r" 'vr/isearch-backward))
