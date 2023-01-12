@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+;; remove overwrite-mode to avoid activating it by mistake
+(defun overwrite-mode ())
+
 ;; keeps a server running (not necessary>use emacs-client directly)
 ;;(server-start)
 
@@ -77,7 +80,7 @@
 
 ;; insert matching pair of parenthesis
 (electric-pair-mode t)
-(setq electric-pair-preserve-balance t) ;; add " if another behind
+;; (setq electric-pair-preserve-balance t) ;; add " if another behind
 
 (setq-default electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
 
