@@ -19,14 +19,18 @@
 
 ;; can be combined with org
 (use-package jupyter
-  :defer t
-  ;; :custom
-  ;; (jupyter-runtime-directory "~/.local/share/jupyter/runtime/")
-  :general
-  (org-mode-map
-   "C-c j"
-   '(lambda () (interactive)
-      (tempel-insert 'jupyter))))
+  :defer t)
+
+;; :custom
+;; (jupyter-runtime-directory "~/.local/share/jupyter/runtime/")
+
+;; not necessary anymore with:
+;; (org-insert-structure-template "src jupyter-python")
+;; :general
+;; (org-mode-map
+;;  "C-c j"
+;;  '(lambda () (interactive)
+;;     (tempel-insert 'jupyter))))
 
 
 ;; add jupyter-python to babel

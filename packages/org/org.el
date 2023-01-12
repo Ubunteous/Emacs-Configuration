@@ -31,6 +31,8 @@
 	    "C-c C-n" 'org-babel-next-src-block
 	    "C-c C-p" 'org-babel-previous-src-block
 
+	    "C-c j" 'org-insert-jupyter-block
+	    
 	    ;; overrides persp-list-buffers in org buffers
 	    "C-c b" 'org-switchb)
   :config
@@ -117,6 +119,13 @@
   ;; (:session . "jl")
   ;; (:kernel . "julia-1.0")))
 
+  (defun org-insert-jupyter-block ()
+    "Insert a jupyter block (with linebreak if mark inactive)"
+    (interactive)
+    (if mark-active
+	(org-insert-structure-template "src jupyter-python")
+      (org-insert-structure-template "src jupyter-python\n")))
+  
   ;;;;;;;;;;;;;;;;;
   ;;   CAPTURE   ;;
   ;;;;;;;;;;;;;;;;;
@@ -215,6 +224,8 @@
 
   (setq org-startup-truncated nil) ;; risky with tables and links
 
+  (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
+  
   ;; do not use image real size in org (as it may be too big)
   (setq org-image-actual-width nil)
 
@@ -227,10 +238,7 @@
   ;; (setq org-support-shift-select 1)) ;; heresy
 
   :hook
-  (org-babel-after-execute . org-redisplay-inline-images)
-
-
-  )
+  (org-babel-after-execute . org-redisplay-inline-images))
 
 
 ;; export org citations to latex
