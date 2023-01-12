@@ -11,4 +11,5 @@
           ("FIXME"  . "#FF0000")
           ("DEBUG"  . "#A020F0")
           ("GOTCHA" . "#FF4500")
-          ("STUB"   . "#1E90FF"))))
+          ("STUB"   . "#1E90FF")
+	  ("DONE"   . "#1EFF90"))))

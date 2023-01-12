@@ -8,7 +8,8 @@
   :general
   (:keymaps 'which-key-mode-map
 	    ;; with bindings starting wit C-x, use SPC to cycle
-	    "C-x SPC" 'which-key-show-next-page-cycle)
+	    "C-x §" 'which-key-show-next-page-cycle ;; cannot use space as it shadows rectangle-mode
+	    "C-c SPC" 'which-key-show-next-page-cycle)
   :init
   (which-key-mode)
   :config
