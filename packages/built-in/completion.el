@@ -7,14 +7,15 @@
   :straight (:type built-in)
   :general
   ("M-:" 'hippie-expand
-   "M-/" 'eval-expression)
-  :config
+   "M-/" 'eval-expression))
+
+  ;; :config
   ;; Most of these variables will be introduced in emacs 29
   ;; (setq completions-format 'one-column)
   ;; (setq completions-header-format nil)
   ;; (setq completions-max-height 20)
   ;; (setq completions-auto-select nil)
-  )
+  ;; )
 
 ;; Use Dabbrev with Corfu! => don't, hippie is better
 ;; (use-package dabbrev
