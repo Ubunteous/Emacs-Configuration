@@ -5,16 +5,8 @@
 (use-package hydra
   :defer t)
 
-(use-package dash
-  :defer t)
-
-(use-package s
-  :defer t)
-
-(use-package posframe
-  :defer t)
-
 (use-package hydra-posframe
+  ;; dependencies: dash, s, posframe
   :defer t
   :straight
   (hydra-posframe :type git :host github :repo "ladicle/hydra-posframe")
@@ -28,6 +20,7 @@
   (hydra-posframe-border-face ((t (:background "Teal")))))
 
 (use-package major-mode-hydra
+  ;; pretty hydra
   :defer t
   :general
   ("C-c q" 'major-mode-hydra))
