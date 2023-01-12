@@ -44,8 +44,8 @@
 (use-package emacs
   :straight (:type built-in)
   :config
-  ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
+  ;; TAB cycle if there are only few candidates (in this case, 2)
+  (setq completion-cycle-threshold 2)
   ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
   ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
   ;; (setq read-extended-command-predicate
