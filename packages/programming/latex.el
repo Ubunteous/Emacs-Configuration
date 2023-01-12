@@ -13,11 +13,12 @@
   :mode ("\\.tex\\'" . LaTeX-mode)
   ;;:requires reftex
   :general (LaTeX-mode-map "C-c s" 'latex-compile)
-  :config
+  :init
+  ;; do not open the master with an incorrect encoding (fr characters)
+  (setq latexenc-dont-use-TeX-master-flag t)
+  :config  
   ;;(latex-preview-pane-enable) ;;requires pdf-tools
   (setq TeX-PDF-mode t
-	;; do not open the master with an incorrect encoding (fr characters)
-	latexenc-dont-use-TeX-master-flag t
 	;;bibtex-dialect 'biblatex ;; prefer biblatex to default
 	TeX-save-query nil
 	reftex-plug-into-AUCTeX t
