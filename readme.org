@@ -1,5 +1,22 @@
 #+title: Emacs configuration
 
-straight.el contains imports to every module loaded by straight. Comment one line to remove a package from the current configuration.
+This is my emacs configuration.
 
-You can consult these modules in the packages directory.
+A few highlights:
++ Modular structure organised with use-package, general and straight for reproducible builds
++ Fast startup (<1s on my system) and clean directory thanks to no-littering
++ Full configuration containing everything you may need with more than 150 packages available
+
+Packages are currently grouped in the following directories:
++ Appearance: fonts, themes and icons
++ Built-in: configuration of packages already available in vanilla emacs
++ Composite: packages working together such as embark, orderless and vertico
++ Utilities: utilities which need to be invoked by the user
++ Passive-utils: utilities working automatically without needing a user input
++ Org: anything related to org-mode
++ Perso: my own experimentations
++ Programming: major modes and utilities for specific programming languages
++ Workflow: packages extending emacs' toolbox
++ Later: packages to audition later
++ Discarded: packages set up but not used in the current configuration
+  
