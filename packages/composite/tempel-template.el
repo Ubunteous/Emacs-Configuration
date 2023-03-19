@@ -76,8 +76,8 @@ eshell-mode
 org-mode
 
 (jupyter "#+BEGIN_SRC jupyter-python :session py :async yes" n> r> n> "#+END_SRC" n n)
-;; (title "#+title: " p n "#+author: Daniel Mendler" n "#+language: en" n n)
-;;   (setq name (upcase (nth 0 (s-split "\\." (buffer-name)))))
+(jupyter-header "#+PROPERTY: header-args:jupyter-python :session py :async yes" n n)
+(jupyter-html-preview ":display plain")
 
 (title "#+title: " p n)
 (cite "\\cite{" r "}")
