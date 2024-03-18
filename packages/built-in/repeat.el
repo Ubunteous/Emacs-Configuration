@@ -3,9 +3,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package repeat
-  :straight (:type built-in)
+  :elpaca nil 
+  ;; :straight (:type built-in)
   :config
   (repeat-mode))
+
+;; ORGTODO
+(defvar todo-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "t") #'org-todo)
+    map))
+
+(map-keymap
+ (lambda (_key cmd)
+   (when (symbolp cmd)
+     ;;(put cmd 'scroll-up-command 'scroll-down-command)))
+     (put cmd 'repeat-map 'todo-repeat-map)))
+ todo-repeat-map)
+
 
 ;; SCROLL
 (defvar scroll-repeat-map
@@ -82,6 +97,7 @@
 ;; ORG SOURCE BLOCK MOTION
 (defvar src-block-repeat-map
   (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "c") #'org-babel-execute-src-block)
     (define-key map (kbd "n") #'org-babel-next-src-block)
     (define-key map (kbd "p") #'org-babel-previous-src-block)
     map))
@@ -91,6 +107,33 @@
    (when (symbolp cmd)
      (put cmd 'repeat-map 'src-block-repeat-map)))
  src-block-repeat-map)
+
+
+;; SEARCH (swiper)
+(defvar swiper-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "s") #'swiper-C-s)
+    (define-key map (kbd "r") #'swiper-isearch-C-r)
+    map))
+
+(map-keymap
+ (lambda (_key cmd)
+   (when (symbolp cmd)
+     (put cmd 'repeat-map 'swiper-repeat-map)))
+ swiper-repeat-map)
+
+;; ;; SEARCH (isearch)
+;; (defvar isearch-repeat-map
+;;   (let ((map (make-sparse-keymap)))
+;;     (define-key map (kbd "s") #'isearch-repeat-forward)
+;;     (define-key map (kbd "r") #'isearch-repeat-backward)
+;;     map))
+
+;; (map-keymap
+;;  (lambda (_key cmd)
+;;    (when (symbolp cmd)
+;;      (put cmd 'repeat-map 'isearch-repeat-map)))
+;;  isearch-repeat-map)
 
 ;; MINI VIM
 
