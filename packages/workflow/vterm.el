@@ -3,8 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package vterm
-  ;; :defer t
-  :straight (:type built-in)
+  :defer t
+  ;; :straight (:type built-in)
   :config
   (setq vterm-kill-buffer-on-exit t)
 
