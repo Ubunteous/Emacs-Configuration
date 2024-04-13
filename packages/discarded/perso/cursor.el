@@ -12,7 +12,8 @@
 ;; https://github.com/ozh/github-colors/blob/master/colors.json
 
 (use-package emacs
-  :straight (:type built-in)
+  ;; :straight (:type built-in)
+  :elpaca nil
   :hook
   ;; default #ffffff
   ((emacs-lisp-mode . (lambda ()
@@ -22,4 +23,7 @@
 
    (python-mode . (lambda ()
 		    (set-cursor-color "#3572A5")))
+
+   (python-ts-mode . (lambda ()
+		       (set-cursor-color "#3572A5")))
    ))

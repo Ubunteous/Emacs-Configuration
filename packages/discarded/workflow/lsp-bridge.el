@@ -18,12 +18,15 @@
 
 ;; (use-package acm
 ;;   :defer t
-;;   :straight (:type git :host github :repo "twlz0ne/acm-terminal"))
+;;   ;; :straight (:type git :host github :repo "twlz0ne/acm-terminal"))
+;;   :elpaca (:type git :host github :repo "twlz0ne/acm-terminal"))
 
 (use-package lsp-bridge
   :defer t
-  :straight ( :type git :host github :repo "manateelazycat/lsp-bridge"
-	      :files (:defaults ".py" "langserver" "acm"))
+  ;; :straight (:type git :host github :repo "manateelazycat/lsp-bridge"
+  ;; 		   :files (:defaults ".py" "langserver" "acm"))
+  :elpaca (:type git :host github :repo "manateelazycat/lsp-bridge"
+		 :files (:defaults ".py" "langserver" "acm"))
   :init
   (global-lsp-bridge-mode)
   ;; :config
