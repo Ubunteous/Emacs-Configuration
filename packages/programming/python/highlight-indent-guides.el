@@ -5,10 +5,13 @@
 (use-package highlight-indent-guides
   :defer t
   :config
-  (setq highlight-indent-guides-method 'character) ;; fill, column, character, bitmap
+  ;; Face colors are auto calculated
+  (setq highlight-indent-guides-auto-enabled nil)
 
-  highlight-indent-guides-responsive 'stack ;; nil, top, stack
-  ;; (set-face-background 'highlight-indent-guides-odd-face "darkgray")
-  ;; (set-face-background 'highlight-indent-guides-even-face "dimgray")
-  ;; (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
-  :hook python-mode)
+  ;; (set-face-background 'highlight-indent-guides-odd-face "red")
+  ;; (set-face-background 'highlight-indent-guides-even-face "blue")
+  (set-face-foreground 'highlight-indent-guides-character-face "DarkGoldenrod3")
+
+  (setq highlight-indent-guides-responsive 'stack) ;; nil, top, stack
+  (setq highlight-indent-guides-method 'character) ;; fill, column, character, bitmap
+  :hook (python-mode python-ts-mode))

@@ -3,22 +3,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; try elpy and other alternatives
+;; note: C-c C-c may use the wrong directory and become unable
+;; to import modules. Fix it with M-x cd
 
 (use-package python
-  :straight (:type built-in)
+  :defer t
+  ;; :straight (:type built-in)
+  :elpaca nil
   :general
-  (python-mode-map "C-c C-p"
-		   '(lambda () (interactive)
-		      (run-python (python-shell-calculate-command) nil t)
-		      ;; (python-shell-send-buffer nil)
-		      (ace-select-window)))
+  ((python-mode-map python-ts-mode-map) "C-c C-p"
+   '(lambda () (interactive)
+      (run-python (python-shell-calculate-command) nil t)
+      ;; (python-shell-send-buffer nil)
+      (ace-select-window)))
   :config
   ;; (setq python-indent-guess-indent-offset t) ;; already t by default
   (setq python-indent-guess-indent-offset-verbose nil) ;; no error message when guessing indentation
   (setq python-shell-interpreter "python3"))
 
 ;; (use-package python
-;;   :straight (:type built-in)
+;;   ;; :straight (:type built-in)
+;; :elpaca nil
 ;;   :init
 ;;   (add-to-list 'all-the-icons-icon-alist
 ;;                '("\\.py$" all-the-icons-alltheicon "python" :height 1.1 :face all-the-icons-dblue))

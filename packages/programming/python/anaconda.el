@@ -4,4 +4,6 @@
 
 (use-package anaconda-mode
   :defer t
-  :hook python-mode)
+  :hook python-ts-mode)
+  ;; :hook python-mode)
+  ;; :hook (python-mode python-ts-mode))

@@ -4,7 +4,7 @@
 
 (use-package blacken
   :defer t
-  :hook (python-mode . blacken-mode))
+  :hook (python-mode python-ts-mode))
 
 ;; (use-package python-black
 ;;   :defer t

@@ -4,7 +4,7 @@
 
 (use-package python-isort
   :defer t
-  :hook (python-mode . python-isort-on-save-mode))
+  :hook ((python-mode python-ts-mode) . python-isort-on-save-mode))
 
 ;; not maintained
 ;; (use-package py-isort
