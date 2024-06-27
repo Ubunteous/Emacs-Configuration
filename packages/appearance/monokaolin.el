@@ -2,11 +2,14 @@
 ;;               THEMES               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package kaolin-themes)
-(use-package monokai-pro-theme)
+(use-package kaolin-themes
+  :config
+  (load-theme 'kaolin-aurora t))
 
-(load-theme 'kaolin-aurora t)
-(load-theme 'monokai-pro-classic t)
+(use-package monokai-pro-theme
+  :if (display-graphic-p) ;; makes terminal bg green
+  :config
+  (load-theme 'monokai-pro-classic t))
 
 ;;:config
 ;;(load-theme 'kaolin-aurora t) ;;(set-face-foreground 'font-lock-string-face "red") ;strings
