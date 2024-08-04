@@ -4,7 +4,7 @@
 
 (use-package java-mode
   :defer t
-  :elpaca nil 
+  :ensure nil
   ;; :straight (:type built-in)
 
   :hook
