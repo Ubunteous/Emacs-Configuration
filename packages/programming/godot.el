@@ -12,10 +12,10 @@
 ;; hence, no need for socket --socket-name=SOCKET_NAME_HERE -n {file} +{line}
 
 (use-package gdscript-mode
-  :elpaca (gdscript-mode
-           :type git
-           :host github
-           :repo "godotengine/emacs-gdscript-mode")
+  :ensure (gdscript-mode
+	   :type git
+	   :host github
+	   :repo "godotengine/emacs-gdscript-mode")
   :config
   ;; (setq gdscript-godot-executable "/path/to/godot")
   ;; (setq gdscript-docs-local-path "/home/gdquest/Documents/docs/godot")
