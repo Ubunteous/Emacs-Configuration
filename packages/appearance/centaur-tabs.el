@@ -15,5 +15,9 @@
    centaur-tabs-set-icons t
    centaur-tabs-set-bar 'over
    centaur-tabs-style "bar"
-   centaur-tabs-modified-marker "*"))
+   centaur-tabs-modified-marker "*")
 
+  (setq centaur-tabs-ace-jump-keys
+	'(?& ?é ?\" ?\' ?\( ?- ?è ?_ ?ç))
+  :general
+  ("C-c j" 'centaur-tabs-ace-jump))
