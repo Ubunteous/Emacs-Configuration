@@ -83,17 +83,20 @@ org-mode
 		   )
 (jupyter-header-js "#+PROPERTY: header-args:jupyter-javascript :session js :async yes" n n)
 (jupyter-html-preview ":display plain")
+(javascript-header "#+PROPERTY: header-args:js :results output :async yes" n n)
 
 ;; (title (make-string (length title) ?=) n (p "Title: " title) n (make-string (length title) ?=) n)(
 (python-methods "\[x for x in dir(" p ") if not x.startswith('_')\]")
 (python-header "#+PROPERTY: header-args :results output" n n)
 
-;; (javascript-methods "console.log(Object.getOwnPropertyNames(" p "));")
-(javascript-methods "console.log(Object.getOwnPropertyNames(" q ").filter(" n
-		    "function (p) {" n
-		    "return typeof Math[p] === 'function';" n
-		    "}" n
-		    "));")
+(javascript-methods-instance "console.log(Object.getOwnPropertyNames(" p ".__proto__));")
+(javascript-methods-class "console.log(Object.getOwnPropertyNames(" p ".prototype));")
+;; (javascript-methods "console.log(Object.getOwnPropertyNames(" q ").filter(" n
+;; 		    "function (p) {" n
+;; 		    "return typeof Math[p] === 'function';" n
+;; 		    "}" n
+;; 		    "));")
+;; console.log(Object.getOwnPropertyNames(String.__proto__));
 
 (class "class " p "(" p "):" n> q)
 (common-import-ddict "from collections import defaultdict")
@@ -131,6 +134,9 @@ org-mode
 (src "#+begin_src " p n> r> n> "#+end_src" :post (org-edit-src-code))
 (elisp "#+begin_src emacs-lisp" n> r> n "#+end_src" :post (org-edit-src-code))
 
+js-ts-mode
+(javascript-methods-instance "console.log(Object.getOwnPropertyNames(" p ".__proto__));")
+(javascript-methods-class "console.log(Object.getOwnPropertyNames(" p ".prototype));")
 
 python-ts-mode
 (def_function "def " p "(" p "):" n> q)
