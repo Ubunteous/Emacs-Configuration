@@ -34,21 +34,187 @@
   ;; 		 (window-parameters . ((no-other-window . t)
   ;;                                      (no-delete-other-windows . t)))))
 
-  ;; Note: org roam ignores newline add the end of the capture
+  ;; ;; Make sure the backlinks buffer always shows up in a side window
+  ;; (add-to-list 'display-buffer-alist
+  ;;              '("\\*org-roam\\*"
+  ;;                (display-buffer-in-side-window)
+  ;;                (side . right)
+  ;;                (window-width . 0.4)
+  ;;                (window-height . fit-window-to-buffer)))
+
+  ;; makes org-roam-find-file easier => not sure if the following var exists
+  ;; (setq org-roam-completion-system 'ido)
+
+  ;; Note: org roam ignores newline at the end of the capture
   ;; org roam capture template (remove title as it is already provided by org auto-insert.el)
+
+  ;; add the following .dir-locals.el to avoid auto-insert clash
+  ;; ((org-mode . ((auto-insert-alist . nil))))
   (setq org-roam-capture-templates
 	'(("d" "default" plain "%?" :target
 	   ;; (file "%<%Y%m%d%H%M%S>-${slug}.org")
 	   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+	   ;; :immediate-finish t
 	   :unnarrowed t
-	   :empty-lines 1)))
-  
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+	   :empty-lines 1)
+
+	  ("a" "alter" plain "%?"
+	   :if-new (file+head "${slug}.org"
+			      "#+title: ${title}")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("c" "alter-character" plain "%?"
+	   :if-new (file+head "characters/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :character:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ;; ("p" "alter-plot" plain "%?"
+	  ;;  :if-new (file+head "${slug}.org"
+	  ;; 		      "#+title: ${title}\n#+filetags: :plot:\n\n")
+	  ;; :immediate-finish t
+	  ;; :empty-lines 1
+	  ;; :unnarrowed t)
+
+	  ("s" "alter-scene" plain "%?"
+	   :if-new (file+head "scene/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("w" "alter-worldbuilding" plain "%?"
+	   :if-new (file+head "$worldbuilding/{slug}.org"
+			      "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  
+	  ("e" "alter-écriture" plain "%?"
+	   :if-new (file+head "écriture/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :écriture:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("g" "alter-gamedesign" plain "%?"
+	   :if-new (file+head "gamedesign/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :gamedesign:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("i" "alter-index" plain "%?"
+	   :if-new (file+head "index/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :index:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ;; ("f" "fiction" plain "%?"
+	  ;;  :if-new (file+head "${title}.org"
+	  ;; 		      "#+title: ${title}")
+	  ;;  ;; :immediate-finish t
+	  ;;  :empty-lines 1
+	  ;;  :unnarrowed t)
+
+	  ;; ("m" "musique" plain "%?"
+	  ;;  :if-new (file+head "${title}.org"
+	  ;; 		      "#+title: ${title}")
+	  ;;  ;; :immediate-finish t
+	  ;;  :empty-lines 1
+	  ;;  :unnarrowed t)
+
+	  ;; ("r" "rêves" plain "%?"
+	  ;;  :if-new (file+head "${title}.org"
+	  ;; 		      "#+title: ${title}")
+	  ;; :immediate-finish t
+	  ;; :empty-lines 1
+	  ;; :unnarrowed t)
+	  ))
+
+  (cl-defmethod org-roam-node-type ((node org-roam-node))
+    "Return the TYPE of NODE."
+    (condition-case nil
+	(file-name-nondirectory
+	 (directory-file-name
+          (file-name-directory
+           (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (error "")))
+
+  ;; appearance in vertico completion buffer
   (setq org-roam-node-display-template
-	(concat "${title:*} "
-		(propertize "${tags:10}" 'face 'org-tag)))
+	(concat
+	 ;; "${type:8} ${title:*} "
+	 "${type:13} > "
+	 (propertize "${title:40} " 'face 'org-tag)
+	 (propertize "${tags:14}" 'face 'org-verbatim) ;; does not work anymore
+	 ))
+
+  ;; (setq org-roam-db-update-on-save t)
   :hook
   ((org-roam-mode . org-roam-db-autosync-mode)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;          CONSULT-ORG-ROAM          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package consult-org-roam
+  :ensure t
+  :after org-roam
+  ;; :init
+  ;; (require 'consult-org-roam)
+  ;; Activate the minor mode
+  ;; (consult-org-roam-mode 1)
+  ;; :custom
+  :config
+  ;; Use `ripgrep' for searching with `consult-org-roam-search'
+  (setq consult-org-roam-grep-func #'consult-ripgrep)
+  ;; Configure a custom narrow key for `consult-buffer'
+  (setq consult-org-roam-buffer-narrow-key ?r)
+  ;; Display org-roam buffers right after non-org-roam buffers
+  ;; in consult-buffer (and not down at the bottom)
+  (setq consult-org-roam-buffer-after-buffers t)
+  ;; :config
+  ;; Eventually suppress previewing for certain functions
+  ;; (consult-customize
+  ;;  consult-org-roam-forward-links
+  ;;  :preview-key (kbd "M-."))
+  :general
+  ;; Define some convenient keybindings as an addition
+  ("C-c r e" 'consult-org-roam-file-find
+   "C-c r b" 'consult-org-roam-backlinks
+   "C-c r l" 'consult-org-roam-forward-links
+   "C-c r r" 'consult-org-roam-search)
+  :hook
+  ((org-roam-mode . consult-org-roam-mode)))
+
+
+;; avoid confirmation prompt if cancel capture
+(defun my/return-t (orig-fun &rest args) t)
+
+(defun my/disable-yornp (orig-fun &rest args)
+  (advice-add 'yes-or-no-p :around #'my/return-t)
+  (advice-add 'y-or-n-p :around #'my/return-t)
+  (let ((res (apply orig-fun args)))
+    (advice-remove 'yes-or-no-p #'my/return-t)
+    (advice-remove 'y-or-n-p #'my/return-t)
+    res))
+(advice-add 'org-roam-capture--finalize :around #'my/disable-yornp)
+
+(defun capture-slipbox ()
+  (interactive)
+  "Send a capture directly to the roam inbox."
+  (org-capture "slipbox" "s"))
+
+;; Every Zettel is a Draft until Declared otherwise
+;; (defun my/tag-new-node-as-draft ()
+;;   (org-roam-tag-add '("draft")))
+;; (add-hook 'org-roam-capture-new-node-hook #'my/tag-new-node-as-draft)
 
 
 ;; Bind this to C-c r I
