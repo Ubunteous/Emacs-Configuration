@@ -5,19 +5,37 @@
 ;; EXTENSIONS: protocol, graph, dailies, export
 (use-package org-roam
   :defer t
+  :custom-face
+  (org-roam-link-current ((nil (:background "#e24888" :underline t))))
+  (org-roam-link ((nil (:background "#e24888" :underline t))))
   :custom
-  (org-roam-directory (file-truename "~/org/org-roam"))
+  (org-roam-directory (file-truename "~/org/Alter/roam"))
   ;; (org-roam-db (file-truename "~/org/org-roam/database/org-roam.db"))
   ;; (org-roam-completion-everywhere t)
   :general
-  ("C-c r l" 'org-roam-buffer-toggle
+  ("C-c r g" 'org-roam-buffer-toggle
    ;; "C-c r d" 'org-roam-buffer-display-dedicated
 
+   ;; if a new file has a name similar to another one, use ido-select-text
    "C-c r i" 'org-roam-node-insert
    "C-c r c" 'org-roam-capture
    "C-c r f" 'org-roam-node-find
+   "C-c l" 'org-roam-node-find
 
-   "C-c r g" 'org-roam-graph)
+   ;; "C-c r o" 'org-id-get-create
+   "C-c r t" 'org-roam-tag-add
+   ;; "C-c r a" 'org-roam-alias-add
+
+   ;; "C-c r r" 'org-roam-node-random
+   ;; "C-c r g" 'org-roam-graph
+
+   ;; "C-c r y" 'org-id-get-create
+   "C-c r n" 'capture-slipbox
+
+   "C-c r d" 'delve-index
+
+   "C-c r s" 'org-roam-db-sync
+   )
   :config
   ;; exclude headlines with the "ATTACH" tag
   ;; (setq org-roam-db-node-include-function
