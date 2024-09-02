@@ -136,3 +136,9 @@
    :sort nil
    :lookup #'consult--lookup-location
    :state (consult--jump-state)))
+
+
+(defun consult-info-emacs ()
+  "Search through Emacs info pages."
+  (interactive)
+  (consult-info "emacs" "efaq" "elisp" "cl" "compat"))
