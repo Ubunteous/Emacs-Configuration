@@ -36,6 +36,7 @@
    "M-g I" 'consult-imenu-multi
    ;; M-s bindings (search-map)
    "M-s d" 'consult-find
+   "C-c o" '(lambda () (interactive) (consult-find "~/org/"))
    "M-s D" 'consult-locate
    "M-s g" 'consult-grep
    "M-s G" 'consult-git-grep
@@ -101,9 +102,32 @@
   (setq consult-narrow-key "<") ;; (kbd "C-+")
 
   ;; influences consult-line and consult-grep
-  (setq consult-point-placement 'match-end)
-  )
+  (setq consult-point-placement 'match-end))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;          CONSULT-UTILITIES         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (use-package consult-notes
+;;   :defer t
+;;   :config
+;;   (setq consult-notes-file-dir-sources '(("Org"  ?o  "~/org/Projets/") ;; narrowing key o
+;; 					 ("Alter" ?a "~/org/Alter/roam/" :hidden t))) ;; Set notes dir(s), see below
+;;   ;; Set org-roam integration, denote integration, or org-heading integration e.g.:
+;;   (setq consult-notes-org-headings-files '("~/org/Alter/roam/index/sequences.org"
+;;                                            ;; "org/Alter/roam/index/"
+;; 					   ))
+
+;;   ;; search only for text files in denote dir
+;;   ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files))
+
+;;   (consult-notes-org-headings-mode)
+;;   (when (locate-library "org-roam")
+;;     (consult-notes-org-roam-mode)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;          CONSULT-FUNCTIONS         ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; -*- lexical-binding: t -*-
 
