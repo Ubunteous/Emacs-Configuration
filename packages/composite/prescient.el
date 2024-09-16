@@ -7,5 +7,5 @@
   :config
   (prescient-persist-mode +1)
 
-  (custom-set-variables
-   '(prescient-save-file "~/.emacs.d/files/prescient/prescient-save.el")))
+  ;; USED TO BE A CUSTOM SET
+  (setq prescient-save-file "~/.emacs.d/files/prescient/prescient-save.el"))
