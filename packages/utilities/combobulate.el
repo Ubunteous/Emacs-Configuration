@@ -5,13 +5,13 @@
 (use-package combobulate
   :ensure (combobulate :type git :host github :repo "mickeynp/combobulate")
   :preface
-  (setq combobulate-key-prefix "C-c b")
+  (setq combobulate-key-prefix "C-c y")
   :hook
-  ((python-ts-mode . combobulate-mode)
-   (js-ts-mode . combobulate-mode)
-   (html-ts-mode . combobulate-mode)
-   (css-ts-mode . combobulate-mode)
-   (yaml-ts-mode . combobulate-mode)
-   (typescript-ts-mode . combobulate-mode)
-   (json-ts-mode . combobulate-mode)
-   (tsx-ts-mode . combobulate-mode)))
+  (python-ts-mode
+   js-ts-mode
+   html-ts-mode
+   css-ts-mode
+   yaml-ts-mode
+   typescript-ts-mode
+   json-ts-mode
+   tsx-ts-mode))
