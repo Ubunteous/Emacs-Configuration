@@ -2,10 +2,6 @@
 ;;                JANET               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; used by org-babel
-(use-package janet-mode
-  :defer t)
-
 (use-package janet-ts-mode
   :defer t
   :ensure (:host github
@@ -16,7 +12,14 @@
 		     "C-c s" '(lambda () (interactive)
 				(if (get-buffer "*ajrepl-repl*")
 				    (ajrepl-send-buffer)
-				  (ajrepl)))))
+				  (ajrepl))))
+  ;; dirty. janet-mode always comes back in auto-mode-alist
+  ;; :hook janet-mode ;; potentially makes org mode hang
+  )
+
+;; used by org-babel
+(use-package janet-mode
+  :defer t)
 
 (use-package ajrepl
   :defer t
