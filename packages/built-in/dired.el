@@ -2,11 +2,6 @@
 ;;               DIRED-X              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;(use-package dired
-;;  :straight (:type built-in)
-;;  :defer t)
-
-
 ;; Colourful columns for dired
 ;;(use-package diredfl
 ;;  :defer t
@@ -15,18 +10,29 @@
 
 (use-package dired
   :defer t
-  :straight (:type built-in)
-  :config (setq dired-dwim-target t))
+  :ensure nil
+  ;; :straight (:type built-in)
+  :config
+  (setq dired-dwim-target t)
+  (setq dired-free-space nil)
+  (setq dired-listing-switches "--group-directories-first -al"))
 
 
 (use-package dired-x
   :defer t
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :hook ((dired-mode . dired-omit-mode)
-	 (dired-mode . dired-hide-details-mode))) ;; buffers/backup
-;; :config
-;; (use-package diredfl
-;; :config (diredfl-global-mode 1)))
+	 (dired-mode . dired-hide-details-mode)) ;; buffers/backup
+  :config
+  ;; (use-package diredfl
+  ;; :config (diredfl-global-mode 1)))
+  ;; (setq dired-omit-files "\\`[.]?#\\|\\`[.][.]?\\'\\|.log$\\|.out$")
+
+  ;; Hide .log and .out files (useful in latex directories)
+  ;; (setq dired-omit-files
+	;; (concat dired-omit-files "\\|.log$\\|.out$"))
+  )
 
 
 (use-package diredfl
@@ -38,7 +44,8 @@
 ;; For more sorting options, use the variable dired-use-ls-dired
 (use-package ls-lisp
   :defer t
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :config
   (setq ls-lisp-dirs-first t
 	ls-lisp-use-insert-directory-program nil))

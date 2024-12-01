@@ -4,7 +4,8 @@
 
 (use-package newsticker
   :defer t
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :general
   ("C-c w" 'newsticker-treeview)
   :init

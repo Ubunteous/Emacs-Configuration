@@ -11,7 +11,8 @@
 
 (use-package smtpmail
   :defer t
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :config
   ;; debug issues with authinfo
   (setq auth-source-debug t)

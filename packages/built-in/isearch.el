@@ -3,11 +3,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package isearch
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :defer t
   :config
   (setq isearch-repeat-on-direction-change t)
-  
+
+  (setq isearch-lazy-count t
+	lazy-count-prefix-format nil
+	lazy-count-suffix-format "  (%s/%s)")
   :custom-face
   (isearch ((t (
 		:weight bold
@@ -18,7 +22,6 @@
 
   (lazy-highlight ((t (:foreground "light sea green" :background "black"))))
   (isearch-fail ((t (:foreground "black"  :background "MediumPurple"))))
-
   :general
   ;; (:keymaps 'minibuffer-local-isearch-map
   ;; 	    "<left>" 'isearch-reverse-exit-minibuffer

@@ -1,6 +1,6 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                EGLOT               ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;                EGLOT               ;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eglot
   :ensure nil
@@ -40,15 +40,15 @@
   ;; native modes extend to their ts counterpart. maybe due to treesit-auto
   (add-to-list 'eglot-server-programs '(c-mode . ("ccls"))) ;; also does c++
   (add-to-list 'eglot-server-programs '(c++-mode . ("ccls"))) ;; also does c++
-  
+
   (add-to-list 'eglot-server-programs '(python-mode . ("pyright")))
   ;; (add-to-list 'eglot-server-programs '(bash-mode . ("bash-language-server")))
 
   ;; (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
-  ;; (add-to-list 'eglot-server-programs '(sql-mode . ("postgres_lsp")))
+  (add-to-list 'eglot-server-programs '(sql-mode . ("postgres_lsp")))
   ;; (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   ;; (add-to-list 'eglot-server-programs '(java-mode . ("jdt-language-server")))
-  ;; (add-to-list 'eglot-server-programs '(js-mode . ("typescript-language-server")))
+  (add-to-list 'eglot-server-programs '(js-ts-mode . ("typescript-language-server")))
   ;; (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server")))
 
   ;; ;; missing HEX package manager
@@ -63,11 +63,15 @@
   ;; regular typst mode vs treesit
   ;; (add-to-list 'eglot-server-programs '(typst--markup-mode . ("typst-lsp")))
   ;; (add-to-list 'eglot-server-programs '(typst-ts-mode . ("typst-lsp")))
-  
+
   ;; (add-to-list 'eglot-server-programs '(LaTeX-mode . ("texlab")))
   (add-to-list 'eglot-server-programs '(lua-mode . ("lua-language-server")))
   ;; (add-to-list 'eglot-server-programs '(haskell-mode . ("haskell-language-server-wrapper")))
 
+  ;; built-in
+  (add-to-list 'eglot-server-programs '(csharp-ts-mode . ("OmniSharp" "-lsp")))
+  ;; (add-to-list 'eglot-server-programs '(csharp-ts-mode . ("csharp-ls")))
+  
   ;; note: gdscript is currently slowed down by :completionProvider
   ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . (""))) ;; not needed
 
@@ -115,21 +119,22 @@
     ;; sql-mode
     ;; rust-ts-mode
     ;; java-ts-mode
-    ;; js-ts-mode
+    js-ts-mode
     ;; typescript-ts-mode
-    
+
     lua-mode
     ;; typst--markup-mode
     ;; typst-ts-mode
     ;; LaTeX-mode
-    ;; haskell-mode
+    ;; haskell-mode / haskell-ts-mode
 
-    python-ts-mode
+    ;; python-ts-mode
     gdscript-ts-mode
-
+    csharp-ts-mode
+    
     ;; elixir-mode
-    clojure-ts-mode
-    nix-ts-mode) . eglot-ensure))
+    ;; nix-ts-mode
+    clojure-ts-mode) . eglot-ensure))
 
 
 ;; makes eldoc info appear at point

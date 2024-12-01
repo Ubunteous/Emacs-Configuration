@@ -4,22 +4,28 @@
 
 (use-package ibuffer
   :defer t
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :config
   (setq ibuffer-saved-filter-groups
 	'(("home"
 	   ("emacs-config" (or (filename . ".emacs.d")
 			       (filename . "emacs-config")))
-           ("martinowen.net" (filename . "martinowen.net"))
+           ;; ("martinowen.net" (filename . "martinowen.net"))
+	   ("Godot" (or (mode . gdscript-ts-mode)
+			(filename . "\\tscn\\'")))
 	   ("Python" (mode . python-mode))
+	   ("Nix" (mode . nix-ts-mode))
+	   ("Clojure" (or (mode . clojure-ts-mode)
+			  (mode . clojure-ts-clojurescript-mode)))
 	   ("Org" (or (mode . org-mode)
 		      (filename . "OrgMode")))
-           ("code" (filename . "code"))
+           ;; ("code" (filename . "code"))
 	   ("Web Dev" (or (mode . html-mode)
 			  (mode . css-mode)))
-	   ("Subversion" (name . "\*svn"))
+	   ;; ("Subversion" (name . "\*svn"))
 	   ("Magit" (name . "\*magit"))
-	   ("ERC" (mode . erc-mode))
+	   ;; ("ERC" (mode . erc-mode))
 	   ("Help" (or (name . "\*Help\*")
 		       (name . "\*Apropos\*")
 		       (name . "\*info\*"))))))

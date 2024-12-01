@@ -3,7 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hs-mode
-  :straight (:type built-in)
+  :ensure nil
+  ;; :straight (:type built-in)
   :defer t
   :general
   ;; code folding
