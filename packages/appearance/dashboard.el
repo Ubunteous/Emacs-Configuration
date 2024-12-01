@@ -11,13 +11,11 @@
   ;; :after (nerd-icons)
   ;; :init
   ;; (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-
-  ;; ;; uncomment to bring back icons at startup
-  ;; :custom
-  ;; ;; startup is slightly slower ? (not sure)
-  ;; (dashboard-icon-type 'all-the-icons) ;; wrongly set to nil unless in :custom
-  ;; (dashboard-set-heading-icons nil)
-  ;; (dashboard-set-file-icons t)
+  :custom
+  ;; startup might be slightly slower with icons
+  (dashboard-icon-type 'all-the-icons) ;; wrongly set to nil unless in :custom
+  (dashboard-set-heading-icons nil)
+  (dashboard-set-file-icons t)
   :config
   ;; needed for icons
   (advice-add #'dashboard-replace-displayable :override #'identity)
@@ -56,7 +54,7 @@
 
   (setq dashboard-page-separator "\n\f\n")
   (setq dashboard-banner-logo-title "Welcome to Emacs")
-  (setq dashboard-startup-banner "~/.emacs.d/files/dashboard/emacs.png")
+  (setq dashboard-startup-banner "~/.emacs.d/files/elpaca/builds/dashboard/banners/logo.png")
   ;; (setq dashboard-startup-banner 'logo) ;'official 'logo 1,2,3 (text) or gif/png/txt
 
   (setq dashboard-items	;; bookmarks, agenda, registers

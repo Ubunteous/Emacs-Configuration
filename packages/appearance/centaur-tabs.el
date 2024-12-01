@@ -13,6 +13,7 @@
   (setq
    ;;centaur-tabs--buffer-show-groups t
    centaur-tabs-set-icons t
+   centaur-tabs-icon-type 'all-the-icons
    centaur-tabs-set-bar 'over
    centaur-tabs-style "bar"
    centaur-tabs-modified-marker "*")

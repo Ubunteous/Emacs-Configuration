@@ -8,6 +8,11 @@
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode)
   (moody-replace-eldoc-minibuffer-message-function)
+
+  ;; ;; completely disable incorrect modeline git branch
+  ;; (setq vc-handled-backends (delq 'Git vc-handled-backends))
+  ;; (setq vc-handled-backends nil)
+
   (setq moody-mode-line-height 32))
 
 ;; :config
