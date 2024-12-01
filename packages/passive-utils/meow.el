@@ -185,7 +185,8 @@
    '("N" . meow-next-expand)
    ;; '("p" . meow-yank)
    '("p" . meow-yank-delete-selection)
-   '("q" . meow-quit)
+   ;; '("q" . meow-quit)
+   '("q" . kill-buffer-and-window)
    '("r" . meow-replace)
    ;; '("R" . meow-org-motion-mode) ;; custom mode
    '("t" . meow-till)
@@ -268,8 +269,6 @@
   "Imitate vim's T backward search."
   (interactive)
   (nt--call-negative 'meow-till))
-
-
 
 (defun meow-yank-delete-selection ()
   "Yank and delete selection if it exists."

@@ -4,9 +4,10 @@
 
 (use-package auto-capitalize
   :defer t
-  :straight
-  (auto-capitalize :type git :host github :repo "yuutayamada/auto-capitalize-el")
-  :hook (LaTeX-mode . auto-capitalize-mode)
+  ;; :straight
+  ;; (auto-capitalize :type git :host github :repo "yuutayamada/auto-capitalize-el")
+  :ensure (auto-capitalize :type git :host github :repo "yuutayamada/auto-capitalize-el")
+  :hook ((LaTeX-mode org-mode) . auto-capitalize-mode)
   :config
   (setq auto-capitalize-words `("I" "English")))
 

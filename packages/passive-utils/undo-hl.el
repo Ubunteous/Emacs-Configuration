@@ -3,8 +3,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package undo-hl
-  :straight
-  (undo-hl :type git :host github :repo "casouri/undo-hl")
+  ;; :straight
+  ;; (undo-hl :type git :host github :repo "casouri/undo-hl")
+  :ensure (undo-hl :type git :host github :repo "casouri/undo-hl")
   :hook ((text-mode . undo-hl-mode)
          (prog-mode . undo-hl-mode))
   :custom-face
