@@ -2,9 +2,15 @@
 ;;              CALENDAR              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(eval-after-load "calendar" '(progn
-			       (define-key calendar-mode-map "<" 'lawlist-scroll-year-calendar-backward)
-			       (define-key calendar-mode-map ">" 'lawlist-scroll-year-calendar-forward) ))
+(use-package calendar
+  :defer t
+  :ensure nil
+  ;; :straight (:type built-in)
+  :general
+  (:keymaps 'calendar-mode-map
+	    "<" 'lawlist-scroll-year-calendar-backward
+	    ">" 'lawlist-scroll-year-calendar-forward))
+
 
 (defmacro lawlist-calendar-for-loop (var from init to final do &rest body)
   "Execute a for loop.

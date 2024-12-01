@@ -7,6 +7,7 @@
 (defvar major-mode-colors
   '((fundamental-mode . "#fefff8")
     (python-mode . "#3572A5")
+    (python-ts-mode . "#3572A5")
     (emacs-lisp-mode . "#c065db")
     (latex-mode . "#3D6117")
     (org-mode . "#77aa99")))
