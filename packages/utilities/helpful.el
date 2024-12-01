@@ -19,7 +19,7 @@
   ;; Lookup the current symbol at point. C-c C-d is a common keybinding
   ;; for this in lisp modes.
   ("C-c C-d" #'helpful-at-point)
-  ("C-c C-c" #'helpful-at-point)
+  ;; ("C-c C-c" #'helpful-at-point)
 
   ;; Look up *F*unctions (excludes macros).
 

@@ -8,7 +8,7 @@
   :config
   (setq iedit-auto-save-occurrence-in-kill-ring nil)
   :general
-  ("C-c e" 'iedit-replace))
+  ("C-c i" 'iedit-replace))
 
 
 

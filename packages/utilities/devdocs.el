@@ -8,7 +8,7 @@
   ("C-c D" 'devdocs-lookup
    "C-c E" 'devdocs-at-point)
   :hook
-  (python-mode . (lambda () (setq-local devdocs-current-docs '("python~3.11")))))
+  ((python-mode python-ts-mode) . (lambda () (setq-local devdocs-current-docs '("python~3.11")))))
 
 
 (defun devdocs-at-point ()

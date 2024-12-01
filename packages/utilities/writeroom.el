@@ -16,18 +16,32 @@
   (setq writeroom-width 60
 	writeroom-fullscreen-effect "maximized")
   ;; writeroom-added-width-left -10)
+
+  ;; (add-to-list writeroom-global-effects my-writeroom-theme)
   :hook
   ((writeroom-mode . centaur-tabs-local-mode)
-
+   (magit-status-mode . writeroom-mode)
+   
    ;; switch to writeroom if there is only one window open
    (org-mode . (lambda ()
 		 (when (= (count-windows) 1)
 		   (writeroom-mode))))
    
-   (writeroom-mode-enable . (lambda ()
-			      (display-line-numbers-mode -1)
-			      (flycheck-mode -1)))
+   ;; (writeroom-mode-enable . (lambda ()
+   ;; 			      (display-line-numbers-mode -1)
+   ;; 			      (flycheck-mode -1)))
 
-   (writeroom-mode-disable . (lambda ()
-			       (display-line-numbers-mode 1)
-			       (flycheck-mode 1)))))
+   ;; (writeroom-mode-disable . (lambda ()
+   ;; 			       (display-line-numbers-mode 1)
+   ;; 			       (flycheck-mode 1)))
+
+   ))
+
+;; (defun my-writeroom-theme (arg)
+;;   (cond
+;;    ((= arg 1)
+;;     (display-line-numbers-mode -1)
+;;     (flycheck-mode -1))
+;;    ((= arg -1)
+;;     (display-line-numbers-mode 1)
+;;     (flycheck-mode 1))))
