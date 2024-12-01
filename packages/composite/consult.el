@@ -166,3 +166,43 @@
   "Search through Emacs info pages."
   (interactive)
   (consult-info "emacs" "efaq" "elisp" "cl" "compat"))
+
+(defun mode-name ()
+  "Get the language associated to the current major-mode."
+  (let ((mode (symbol-name major-mode)))
+    (if (and (> (length mode) 6)
+	     (equal (substring mode -7) "ts-mode"))
+	(setq suffix-pos -8) ;; ts-mode
+      (setq suffix-pos -5))
+    
+    (setq mode (substring (symbol-name major-mode) 0 suffix-pos))
+    mode))
+
+
+(defun consult-doc ()
+  "Open the org doc of the appropriate language."
+  (interactive)
+  ;; only show 2 windows after function call
+  (when (not (eq (length (window-list)) 1))
+    (delete-other-windows))
+
+  (let* ((doc-file (concat (mode-name) ".org"))
+	 (file-path (concat "~/org/Informatics/Languages/" doc-file)))
+    
+    (catch 'nofile
+      (when (not (file-exists-p file-path))
+	(throw 'nofile (error (concat "File: " file-path " not found."))))
+
+      ;; needs to be chained or other-window won't work
+      (progn
+	(split-window-right)
+	(other-window 1)
+	(if (get-buffer doc-file)
+	    (switch-to-buffer doc-file)
+	  (find-file (concat file-path))))))
+
+  (org-cycle-overview)
+  (consult-org-heading)
+  (read-only-mode)
+  (org-cycle)
+  (use-local-map (copy-keymap org-mode-map)))

@@ -13,11 +13,12 @@
   ;; '(partial-completion substring first-initialism flex))
   ;; '(partial-completion substring initials flex))
 
-  (setq completion-category-overrides
-	'((file (styles . (partial-completion substring)))
-	  (buffer (styles . (basic partial-completion substring)))
-	  ;; (project-file (styles . (partial-completion substring)))
-	  (info-menu (styles . (substring))))))
+  ;; (setq completion-category-overrides
+  ;; 	'((file (styles . (partial-completion substring)))
+  ;; 	  (buffer (styles . (basic partial-completion substring)))
+  ;; 	  ;; (project-file (styles . (partial-completion substring)))
+  ;; 	  (info-menu (styles . (substring)))))
+  )
 
 ;; (defun first-initialism (pattern index _total)
 ;;   (if (= index 0) 'orderless-initialism))

@@ -4,6 +4,7 @@
 
 ;; if dict not found on NixOS, add this file:
 ;; ~/.aspell.conf # content: dict-dir /run/current-system/sw/lib/aspell
+;; echo "dict-dir /run/current-system/sw/lib/aspell" > ~/.aspell.conf
 
 (use-package jinx
   :defer  t

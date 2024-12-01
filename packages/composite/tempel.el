@@ -5,10 +5,6 @@
 (use-package tempel
   :defer t
   ;; Require trigger prefix before template name when completing.
-  :custom
-  ;; forces to prefix template name with sign. disable with nil
-  ;; (tempel-trigger-prefix "<")
-  (tempel-path "~/.emacs.d/packages/composite/tempel-template.el")
   ;; :init
   ;; ;; Setup completion at point
   ;; (defun tempel-setup-capf ()
@@ -39,6 +35,7 @@
    "RET" 'tempel-next ;; risky. but C-o may replace it
    "C-p" 'tempel-previous)
   :config
+  (setq tempel-path "~/.emacs.d/packages/composite/tempel-template")
   ;; Setup completion at point
   (defun tempel-setup-capf ()
     ;; Add the Tempel Capf to `completion-at-point-functions'.
@@ -63,11 +60,12 @@
   ;; 		   (tempel-setup-capf))))
 
   ;; (eglot-managed-mode . tempel-setup-capf)
-  (eglot-managed-mode . (lambda ()
-			  (setq-local completion-at-point-functions
-				      (append
-				       '(tempel-expand tempel-complete eglot-completion-at-point)
-				       (nthcdr 3 completion-at-point-functions))))))
+  ;; (eglot-managed-mode . (lambda ()
+  ;; 			  (setq-local completion-at-point-functions
+  ;; 				      (append
+  ;; 				       '(tempel-expand tempel-complete eglot-completion-at-point)
+  ;; 				       (nthcdr 3 completion-at-point-functions)))))
+  )
 
 (use-package tempel-collection
   :defer t
@@ -77,4 +75,6 @@
 (use-package eglot-tempel
   :defer t
   :after eglot
-  :hook eglot-managed-mode)
+  ;; :preface (eglot-tempel-mode)
+  ;; :init (eglot-tempel-mode t)
+  :hook (eglot-managed-mode . (lambda () (setq eglot-tempel-mode t))))
