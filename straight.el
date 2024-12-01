@@ -64,9 +64,9 @@
 (load-user-file "perso/calendar") ;; year-calendar function
 (load-user-file "perso/align")
 (load-user-file "perso/header")
-(load-user-file "perso/break-time")
+;; (load-user-file "perso/break-time")
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
-(breaktime-start (* 22 60)) ;; 22 minutes
+;; (breaktime-start (* 22 60)) ;; 22 minutes
 
 ;;;;;;;;;;;;;;;;;;
 ;;   workflow   ;;
@@ -100,10 +100,15 @@
 ;; (load-user-file "org/ob-async")
 
 ;; zettelkasten
-(load-user-file "org/org-roam") ;; roam timestamps package? / roam-ui
+(load-user-file "org/org-roam")
+(load-user-file "org/org-roam-ui")
+(load-user-file "org/delve")
+
 ;; (load-user-file "org/org-ql") ;; check git documentation
 ;; (load-user-file "org/org-transclusion")
+
 ;; (load-user-file "org/deft")
+;; (load-user-file "org/notdeft")
 
 ;;;;;;;;;;;;;;;;;;;;
 ;;   appearance   ;;
@@ -162,6 +167,7 @@
 ;;   passive-utils   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+(load-user-file "passive-utils/rainbow") ;; maybe already built-in (with css mode)
 (load-user-file "passive-utils/adaptive-wrap")
 (load-user-file "passive-utils/aggressive-indent")
 (load-user-file "passive-utils/auto-capitalize") ;; => LaTeX mode only
@@ -190,6 +196,7 @@
 (load-user-file "programming/python/black")
 ;; (load-user-file "programming/python/isort")
 
+(load-user-file "programming/kbd")
 ;; (load-user-file "programming/clojure")
 ;; (load-user-file "programming/fountain") ;; use with wrap
 (load-user-file "programming/haskell")
@@ -243,6 +250,7 @@
 ;; org
 ;; (load-user-file "org/org-brain")
 ;; (load-user-file "org/org-bullets")
+;; (load-user-file "org/org-contrib")
 ;; (load-user-file "org/org-make-toc")
 ;; (load-user-file "org/org-pomodoro")
 ;; (load-user-file "org/org-ref") ;; citar is a better alternative
@@ -274,16 +282,15 @@
 ;; (load-user-file "utilities/avy")
 
 ;; passive-utils
-;; (load-user-file "utilities/olivetti")
-;; (load-user-file "passive-utils/magit-todos") ;; cool but slow startup DONE
-;; (load-user-file "utilities/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
 ;; (load-user-file "utilities/auto-compile")
 ;; (load-user-file "utilities/clippy") ;; what a nightmare
+;; (load-user-file "passive-utils/magit-todos") ;; cool but slow startup DONE
+;; (load-user-file "utilities/olivetti")
+;; (load-user-file "utilities/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
 ;; (load-user-file "utilities/smartparens")
 
 ;; programming
 ;; (load-user-file "programming/python/ein")
-;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/python/highlight-indentation")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

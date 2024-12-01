@@ -6,7 +6,9 @@
 *~
 *#
 
-# dir
+# dirs
 docs/*
 files/*
 eln-cache/*
+elpa/*
+elpaca/*
