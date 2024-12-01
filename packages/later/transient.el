@@ -4,92 +4,94 @@
 
 
 (use-package cl-lib
-  :straight (:type built-in)
+  ;; :straight (:type built-in)
+  :ensure nil
   :after transient)
 
 (use-package transient
   ;; cannot be deferred
-  :straight (:type built-in)
+  ;; :straight (:type built-in)
+  :ensure nil
   :init (global-set-key (kbd "C-c o") 'pmx-transient-toy)
   :config
   
   (transient-define-suffix pmx-show-prefix ()
-    "Show the prefix that invoked this suffix"
-    :description "prefix"
-    (interactive)
-    (message "Current prefix key: %s" transient-current-prefix))
+			   "Show the prefix that invoked this suffix"
+			   :description "prefix"
+			   (interactive)
+			   (message "Current prefix key: %s" transient-current-prefix))
   
   (transient-define-suffix pmx-show-command ()
-    "Show this command"
-    :description "current command"
-    (interactive)
-    (message "Current command: %s" transient-current-command))
+			   "Show this command"
+			   :description "current command"
+			   (interactive)
+			   (message "Current command: %s" transient-current-command))
   
   (transient-define-suffix pmx-show-suffixes ()
-    "Show the current suffixes"
-    :description "suffixes"
-    (interactive)
-    (message "Current suffixes: %s" (cl-mapcar
-                                     (lambda (obj)
-                                       (oref obj description))
-                                     transient-current-suffixes)))
+			   "Show the current suffixes"
+			   :description "suffixes"
+			   (interactive)
+			   (message "Current suffixes: %s" (cl-mapcar
+							    (lambda (obj)
+							      (oref obj description))
+							    transient-current-suffixes)))
   
   (transient-define-suffix pmx-show-args ()
-    "Show current infix args"
-    :description "infix args"
-    (interactive)
-    (message "Current infix args: %s" (transient-args transient-current-command)))
+			   "Show current infix args"
+			   :description "infix args"
+			   (interactive)
+			   (message "Current infix args: %s" (transient-args transient-current-command)))
   
   (transient-define-suffix pmx-send-message ()
-    "Send message to minibuffer"
-    :description "send message"
-    :transient t
-    (interactive)
-    (message "Message sent at %s. Happy?" (shell-command-to-string "echo -n $(date)")))
+			   "Send message to minibuffer"
+			   :description "send message"
+			   :transient t
+			   (interactive)
+			   (message "Message sent at %s. Happy?" (shell-command-to-string "echo -n $(date)")))
   
   (transient-define-argument pmx-affirmative ()
-    "Are we affirmative?"
-    :description "affirmative"
-    :argument "affirmative")
+			     "Are we affirmative?"
+			     :description "affirmative"
+			     :argument "affirmative")
   
   (transient-define-argument pmx-yep-nope ()
-    "Is it yep or is it nope?"
-    :description "yep or nope"
-    :class 'transient-option
-    :shortarg "-y"
-    :argument "--yepnope="
-    :choices '("yep" "nope"))
+			     "Is it yep or is it nope?"
+			     :description "yep or nope"
+			     :class 'transient-option
+			     :shortarg "-y"
+			     :argument "--yepnope="
+			     :choices '("yep" "nope"))
   
   (transient-define-argument pmx-abc ()
-    "Which letters do you like?"
-    :description "abc"
-    :class 'transient-option
-    :shortarg "-a"
-    :argument "--abc="
-    :choices '("A" "B" "C"))
+			     "Which letters do you like?"
+			     :description "abc"
+			     :class 'transient-option
+			     :shortarg "-a"
+			     :argument "--abc="
+			     :choices '("A" "B" "C"))
   
   (defvar pmx--variable "A string" "A variable brought to you by pmx")
   
   (transient-define-argument pmx-set-lisp-variable ()
-    "Set a lisp variable, pmx--variable.  Won't show up in infix arguments."
-    :description "set pmx--variable"
-    :class 'transient-lisp-variable
-    :shortarg "-l"
-    :variable 'pmx--variable
-    :argument "--letters=")
+			     "Set a lisp variable, pmx--variable.  Won't show up in infix arguments."
+			     :description "set pmx--variable"
+			     :class 'transient-lisp-variable
+			     :shortarg "-l"
+			     :variable 'pmx--variable
+			     :argument "--letters=")
   
   (transient-define-suffix pmx-show-lisp-variable ()
-    "Access pmx--variable"
-    :description "show pmx--variable"
-    (interactive)
-    (message "Current value of pmx--variable: %s" pmx--variable))
+			   "Access pmx--variable"
+			   :description "show pmx--variable"
+			   (interactive)
+			   (message "Current value of pmx--variable: %s" pmx--variable))
   
   (transient-define-suffix pmx-dynamic-suffix ()
-    "Description depends on pmx--variable"
-    :if-not '(lambda () (string-equal pmx--variable "abc"))
-    :description '(lambda () (format "pmx %s" pmx--variable))
-    (interactive)
-    (message "Current value of pmx--variable: %s" pmx--variable))
+			   "Description depends on pmx--variable"
+			   :if-not '(lambda () (string-equal pmx--variable "abc"))
+			   :description '(lambda () (format "pmx %s" pmx--variable))
+			   (interactive)
+			   (message "Current value of pmx--variable: %s" pmx--variable))
   
   (transient-define-prefix pmx-nested-transient ()
     "Some subcommands, like tree menus from the land of mice"

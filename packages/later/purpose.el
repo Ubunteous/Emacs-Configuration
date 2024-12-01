@@ -6,5 +6,6 @@
   :init (purpose-mode)
   :config
   (add-to-list 'purpose-user-mode-purposes '(python-mode . py))
+  (add-to-list 'purpose-user-mode-purposes '(python-ts-mode . py))
   (add-to-list 'purpose-user-mode-purposes '(emacs-lisp-mode . el))
   (purpose-compile-user-configuration))
