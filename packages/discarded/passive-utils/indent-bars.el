@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package indent-bars
-  :elpaca (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
+  :ensure (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
   :custom
   (indent-bars-treesit-support t)
   (indent-bars-no-descend-string t)

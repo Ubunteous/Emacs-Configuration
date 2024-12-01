@@ -5,7 +5,7 @@
 (use-package format-all
   ;; :commands format-all-mode
   :hook prog-mode
-  ;; :elpaca nil
+  ;; :ensure nil
   :config
   (setq format-all-show-errors 'always) ;; 'warnings 'errors 'never
 

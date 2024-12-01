@@ -13,7 +13,7 @@
 
 (use-package emacs
   ;; :straight (:type built-in)
-  :elpaca nil
+  :ensure nil
   :hook
   ;; default #ffffff
   ((emacs-lisp-mode . (lambda ()
