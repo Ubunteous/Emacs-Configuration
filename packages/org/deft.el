@@ -7,8 +7,8 @@
   :config
   ;; (setq deft-extensions '("txt" "tex" "org"))
   (setq deft-extensions '("org"))
-  (setq deft-directory "~/Deft/notes")
-  (setq deft-recursive t)
+  (setq deft-directory "~/org/Alter/roam/")
+  (setq deft-recursive t) ;; also search in subdirectories
   (setq deft-use-filename-as-title t) ;; otherwise first line of the file is the name
 
   ;; Rules to transform the file's title

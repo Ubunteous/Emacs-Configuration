@@ -5,7 +5,9 @@
 (use-package org
   :defer t
   ;; :after jupyter
-  :straight (:type built-in)
+  ;; :after ox-latex
+  ;; :straight (:type built-in)
+  :ensure nil
   :custom-face
   ;; (org-agenda-date ((t (:foreground "light sea green"))))
   (org-agenda-calendar-event ((t (:foreground "light sea green"))))
@@ -23,15 +25,16 @@
 
   ;; org-agenda-list
   (:keymaps 'org-mode-map
-	    "C-n" 'org-next-visible-heading
-	    "C-p" 'org-previous-visible-heading
-	    "C-f" 'org-forward-heading-same-level
-	    "C-b" 'org-backward-heading-same-level
+	    "C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
 
-	    "C-c C-n" 'org-babel-next-src-block
-	    "C-c C-p" 'org-babel-previous-src-block
+	    ;; removed as I need the default bindings for navigation
+	    ;; "C-n" 'org-next-visible-heading
+	    ;; "C-p" 'org-previous-visible-heading
+	    ;; "C-f" 'org-forward-heading-same-level
+	    ;; "C-b" 'org-backward-heading-same-level
 
-	    "C-c j" 'org-insert-jupyter-block
+	    "C-c C-n" 'org-babel-next-block-end
+	    "C-c C-p" 'org-babel-previous-block-end
 	    
 	    ;; overrides persp-list-buffers in org buffers
 	    "C-c b" 'org-switchb)
@@ -47,18 +50,28 @@
 
   ;; latex export classes
   (setq org-latex-classes
-	'(("article" "\\documentclass[12pt]{article}"
+	'(("article"
+	   ;; deal with indentation later
+	   "\\documentclass[12pt]{article}
+
+[PACKAGES]
+\\usepackage[inline]{enumitem}
+\\setlist[itemize]{nosep}
+
+[EXTRA]"
 	   ("\\section{%s}" . "\\section*{%s}")
 	   ("\\subsection{%s}" . "\\subsection*{%s}")
 	   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 	   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-	   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+	   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+	   )))
 
-  ;; more latex export
+  ;; more latex export settings
   (setq org-export-with-author nil
 	org-export-with-date nil
 	org-export-with-toc nil
-	org-export-with-title nil)
+	org-export-with-title nil
+	org-latex-caption-above nil)
 
   ;; latex export default packages
   (setq org-latex-default-packages-alist
@@ -74,7 +87,8 @@
 	  ("" "amsmath" t)
 	  ("" "amssymb" t)
 	  ;; ("" "capt-of" nil)
-	  ("" "hyperref" nil)))
+	  ("" "hyperref" nil)
+	  ))
 
   ;; latex export other packages
   (setq org-latex-packages-alist
@@ -97,49 +111,82 @@
 
   ;; org structure
   (setq org-structure-template-alist
-	'(("c" . "center\n")
+	'(("a" . "src C :includes <stdio.h> <stdlib.h>\n")
 	  ("C" . "comment\n")
-	  ("s" . "src\n")
-	  ("p" . "src python\n")
-	  ("j" . "src jupyter-python\n")))
+	  ("c" . "src clojure\n")
+	  ("e" . "src elisp\n")
+	  ("f" . "src python\n")
+	  ("h" . "src html\n")
+	  ("i" . "src js\n")
+	  ("l" . "src lilypond :file lily.png\n")
+	  ("m" . "center\n")
+	  ("n" . "src nix\n")
+	  ;; ("p" . "src python\n")
+	  ;; ("Q" . "src sql-mode\n")
+	  ("q" . "src sql\n")
+	  ("r" . "src\n")
+	  ("t" . "src janet\n")
+	  ("#" . "src csharp\n")
+	  ("u" . "src lua\n")
+	  ;; ("u" . "src jupyter-python\n")
+	  ("s" . "src shell\n")
+	  ("w" . "src css\n")))
+
+  ;; defaults to gcc
+  ;; (setq org-babel-C-compiler "clang")
 
   ;; babel evaluation prompt
   (setq org-confirm-babel-evaluate nil)
+
+  ;; Inf-clojure, cider, babashka (slime, nbb)
+  (setq org-babel-clojure-backend 'cider)
 
   ;; language support
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
      (shell . t)
-     (jupyter . t)
-     (python . t)))
+     (latex . t)
+     (clojure . t)
+     (C . t)
+     ;; (typescript . t)
+     (js . t)
+     ;; (jupyter . t)
+     (python . t)
+     (sql . t)
+     (sql-mode . t)
+     (nix . t)
+     (janet . t)
+     (csharp . t)
+     (html . t)
+     (lua . t)
+     (org . t)
+     (lilypond . t)
+     ))
 
   ;; This can be used to customise headers
   ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
   ;; (:session . "jl")
   ;; (:kernel . "julia-1.0")))
 
-  (defun org-insert-jupyter-block ()
-    "Insert a jupyter block (with linebreak if mark inactive)"
-    (interactive)
-    (if mark-active
-	(org-insert-structure-template "src jupyter-python")
-      (org-insert-structure-template "src jupyter-python\n")))
-  
   ;;;;;;;;;;;;;;;;;
   ;;   CAPTURE   ;;
   ;;;;;;;;;;;;;;;;;
 
   ;; (setq org-directory "~/org") ;; default
-  (setq org-default-notes-file (concat org-directory "/emacs/agenda.org"))
+  (setq org-default-notes-file (concat org-directory "~/.notes"))
 
   (setq org-capture-templates
 	'(("t" "New task for the agenda"
-	   entry (file "~/org/emacs/agenda.org")
+	   entry (file "~/org/agenda.org")
            "* %?%i %t" :empty-lines-before 1)
 	  ("d" "New deadline for the agenda"
-	   entry (file "~/org/emacs/agenda.org")
-           "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1))) ;; %t <%<%m-%d %a>>
+	   entry (file "~/org/agenda.org")
+           "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
+	  ("s" "Slipbox"
+	   entry (file "~/org/Alter/inbox.org")
+	   "* %?\n")
+	  ))
 
   ;; shift org capture default date to tomorrow
   (advice-add 'org-capture :around
@@ -222,12 +269,36 @@
   ;; (setq org-indent-mode t)
   ;; (setq org-startup-indented t)
 
+  ;; set everywhere #+STARTUP: overview
+  (setq org-startup-folded t)
+
+  ;; space after section. no space after list on alt+enter
+  (setq org-blank-before-new-entry '((heading . t) (plain-list-item)))
+
+  ;; 29.2 bug: emacs always edit in dedicated buffer
+  ;; => This is due to the treesit auto package or major-mode-remap-alist
+  ;; Disable editing source code in dedicated buffer
+  ;; => Too intrusive. (electric-indent-mode 0) should suffice
+  ;; (defun org-edit-src-code nil)
+
+  ;; follow org link on enter (like left click or C-c C-o)
+  (setq org-return-follows-link  t)
+
+  ;; collapse some sections when opening an org file
+  ;; (setq org-startup-folded 'show2levels)
+
+  ;; open #+Include: file in same window with C-c ' (org-edit-special)
+  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+
+  (setq org-src-preserve-indentation t)
+
   (setq org-startup-truncated nil) ;; risky with tables and links
 
   (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
-  
+
   ;; do not use image real size in org (as it may be too big)
-  (setq org-image-actual-width nil)
+  ;; (setq org-image-actual-width nil)
+  (setq org-image-actual-width 300)
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -237,11 +308,72 @@
 
   ;; (setq org-support-shift-select 1)) ;; heresy
 
-  :hook
-  (org-babel-after-execute . org-redisplay-inline-images))
+  (setq org-use-speed-commands t)
+  ;; :hook
+  ;; might be risky if it cancels normal image display
+  ;; (org-babel-after-execute . org-redisplay-inline-images)
+
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;;   HTML EXPORT   ;;
+  ;;;;;;;;;;;;;;;;;;;;;
+
+  (setq org-html-postamble nil
+	org-html-head-include-default-style nil
+	org-html-meta-tags nil
+	org-html-xml-declaration nil)
+
+  ;; don't touch those
+  ;; (setq org-html-doctype-alist nil)
+  ;; (setq org-html-doctype "")
+
+  )
 
 
 ;; export org citations to latex
-(require 'oc-biblatex)
-(setq org-cite-export-processors '((latex biblatex) (t basic)))
+;; (require 'oc-biblatex)
+;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
 
+;;;;;;;;;;;;;;;;;;;
+;;   FUNCTIONS   ;;
+;;;;;;;;;;;;;;;;;;;
+
+(defun org-babel-previous-block-end ()
+  "Go to the last line of code of the previous source block."
+  (interactive)
+  (org-babel-previous-src-block)
+  (search-forward "#+end\_src")
+  (previous-line)
+  (org-end-of-line))
+
+
+(defun org-babel-next-block-end ()
+  "Go to the last line of code of the next source block."
+  (interactive)
+  (org-babel-next-src-block)
+  (search-forward "#+end\_src")
+  (previous-line)
+  (org-end-of-line))
+
+
+(defun org-collapse-top-level-heading ()
+  ;; go to top * heading and close it
+  (interactive)
+  ;; go to main header if not within it (too deep)
+  (let ((start-level (funcall outline-level)))
+    (when (> start-level 1)
+      (outline-up-heading 1))
+    ;; fold
+    (org-fold-hide-subtree)))
+
+
+;; (defun org-latex-compile ()
+;;   "Export to LaTeX and open pdf."
+;;   (interactive)
+;;   (save-buffer)
+;;   (org-export-dispatch "lo"))
+
+;; (defun org-beamer-compile ()
+;;   "Export to Beamer LaTeX and open pdf."
+;;   (interactive)
+;;   (save-buffer)
+;;   (org-export-dispatch "lO"))

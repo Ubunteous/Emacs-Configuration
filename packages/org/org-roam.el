@@ -97,13 +97,14 @@
 	  ;; :empty-lines 1
 	  ;; :unnarrowed t)
 
-	  ("s" "alter-scene" plain "%?"
-	   :if-new (file+head "scene/${slug}.org"
+	  
+	  ("b" "alter-boite-a-idees" plain "%?"
+	   :if-new (file+head "idees/${slug}.org"
 			      "#+title: ${title}\n#+filetags: :scene:\n\n")
 	   ;; :immediate-finish t
 	   :empty-lines 1
 	   :unnarrowed t)
-
+	  
 	  ("w" "alter-worldbuilding" plain "%?"
 	   :if-new (file+head "$worldbuilding/{slug}.org"
 			      "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
@@ -133,6 +134,13 @@
 	   :empty-lines 1
 	   :unnarrowed t)
 
+	  ("l" "alter-lieux" plain "%?"
+	   :if-new (file+head "lieux/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
 	  ;; ("f" "fiction" plain "%?"
 	  ;;  :if-new (file+head "${title}.org"
 	  ;; 		      "#+title: ${title}")
@@ -153,6 +161,71 @@
 	  ;; :immediate-finish t
 	  ;; :empty-lines 1
 	  ;; :unnarrowed t)
+
+	  ("s" "scènes")
+	  ("sp" "prélude" plain "%?"
+	   :if-new (file+head "scene/prélude/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+	  
+	  ("se" "cité-ambre" plain "%?"
+	   :if-new (file+head "scene/cité-ambre/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("sf" "académie-florale" plain "%?"
+	   :if-new (file+head "scene/académie-florale/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("sk" "arène-kinétis" plain "%?"
+	   :if-new (file+head "scene/arène-kinétis/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("si" "fort-intérieur" plain "%?"
+	   :if-new (file+head "scene/fort-intérieur/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+	  
+	  ("sa" "cathédrale-albâtre" plain "%?"
+	   :if-new (file+head "scene/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+	  
+	  ("sc" "ile-céleste" plain "%?"
+	   :if-new (file+head "scene/ile-céleste/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+	  
+	  ("sh" "hangdoc" plain "%?"
+	   :if-new (file+head "scene/hangdoc/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
+	  ("ss" "showdown" plain "%?"
+	   :if-new (file+head "scene/showdown/${slug}.org"
+			      "#+title: ${title}\n#+filetags: :scene:\n\n")
+	   ;; :immediate-finish t
+	   :empty-lines 1
+	   :unnarrowed t)
+
 	  ))
 
   (cl-defmethod org-roam-node-type ((node org-roam-node))

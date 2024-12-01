@@ -13,7 +13,8 @@
    org-catch-invisible-edits 'show-and-error
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
-
+   org-modern-star 'replace
+   
    org-modern-hide-stars " "
    org-modern-list '((43 . "+")  ;; +
 		     (45 . "-")  ;; -
