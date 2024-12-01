@@ -4,7 +4,7 @@
 
 (use-package typescript-mode
   :defer t
-  :elpaca nil
+  :ensure nil
   :general
   (:keymaps 'typescript-ts-mode-map
 	    "C-c C-c" 'recompile)

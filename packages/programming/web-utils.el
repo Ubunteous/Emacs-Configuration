@@ -2,14 +2,20 @@
 ;;              WEB-UTILS             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; use either this or web-mode
+;; (use-package html
+;;   :defer t
+;;   :ensure nil
+;;   :mode ("\\.html\\'" . mhtml-mode))
+
 (use-package web-mode
   :defer t
   ;; :mode "\\.jsx?$'" ;; auto-enable for .js/.jsx files
   :mode "\\.html\\'"
   :config
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-  (setq web-mode-markup-indent-offset 4))
-;; :hook
+  (setq web-mode-markup-indent-offset 4)
+  :hook (web-mode . sgml-electric-tag-pair-mode))
 ;; (web-mode . web-mode-init-hook))
 
 ;; (defun web-mode-init-hook ()

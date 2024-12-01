@@ -15,13 +15,14 @@
   ;; (setq clojure-ts-indent-style 'fixed)
   ;; (setq clojure-ts-comment-macro-font-lock-body t)
   ;; (setq clojure-ts-toplevel-inside-comment-form t)
-  :mode "\\.clj\\'")
+  ;; :mode "\\.clj\\'")
+  :mode ("\\.clj\\'" "\\.edn\\'"))
 
 
-;; cider may compete for completion and eldoc with elgot
-(use-package cider
-  :defer t
-  :hook ((clojure-mode clojure-ts-mode) . cider-mode))
+;; ;; cider may compete for completion and eldoc with elgot
+;; (use-package cider
+;;   :defer t
+;;   :hook ((clojure-mode clojure-ts-mode) . cider-mode))
 
 
 ;; (use-package clj-refactor
@@ -33,6 +34,11 @@
 ;;   ;; (yas-minor-mode 1) ; for adding require/use/import statements
 ;;   (cljr-add-keybindings-with-prefix "C-c C-r C-r"))
 
-;; check later
-;; (use-package inf-clojure
-;;   :defer t)
+
+;; a lighter repl. needs some keybindings
+(use-package inf-clojure
+  :defer t
+  :config
+  (setq inf-clojure-repl-type 'clojure)
+  :general (:keymaps 'clojure-ts-mode-map
+		     "C-c C-c" 'inf-clojure-eval-buffer))

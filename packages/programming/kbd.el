@@ -8,7 +8,7 @@
   :defer t
   ;; :straight
   ;; (kbd-mode :type git :host github :repo "kmonad/kbd-mode")
-  :elpaca
+  :ensure nil
   (kbd-mode :type git :host github :repo "kmonad/kbd-mode")
 
   ;; :load-path "~/.config/emacs/elisp/"

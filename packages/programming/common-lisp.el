@@ -4,7 +4,7 @@
 
 (use-package common-lisp-mode
   :defer t
-  :elpaca nil
+  :ensure nil
   :mode ("\\.cl\\'"))
 
 (use-package slime

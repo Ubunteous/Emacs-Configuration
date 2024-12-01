@@ -9,7 +9,7 @@
 (use-package python
   :defer t
   ;; :straight (:type built-in)
-  :elpaca nil
+  :ensure nil
   :general
   ((python-mode-map python-ts-mode-map) "C-c C-p"
    '(lambda () (interactive)
@@ -23,7 +23,7 @@
 
 ;; (use-package python
 ;;   ;; :straight (:type built-in)
-;; :elpaca nil
+;; :ensure nil
 ;;   :init
 ;;   (add-to-list 'all-the-icons-icon-alist
 ;;                '("\\.py$" all-the-icons-alltheicon "python" :height 1.1 :face all-the-icons-dblue))

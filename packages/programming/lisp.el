@@ -3,7 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (use-package lisp-mode
-;;   :straight (:type built-in)
+;;   ;; :straight (:type built-in)
+:ensure nil
 ;;   :defer t
 ;;   :mode "\\.yuck\\'"
 ;;   :config
