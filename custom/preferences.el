@@ -41,18 +41,6 @@
 ;; suspend-frame is useless in window mode. I am thus replacing it
 (put 'suspend-frame' disabled t)
 
-(general-define-key
- ;; undo
- [remap suspend-frame] 'undo)
-
-;; Shortcuts
-(general-define-key
- ;; eval buffer quickly
- ;; note: # can be used before a lambda which may be byte compiled
- ;; "C-c x" #'(lambda () (interactxive) (save-buffer) (eval-buffer) (message "buffer evaluation complete"))
- :keymaps 'emacs-lisp-mode-map
- "C-c x" 'eval-region-or-buffer)
-
 (defun eval-region-or-buffer ()
   (interactive)
   (cond
@@ -114,7 +102,7 @@
 (delete-selection-mode +1)
 
 ;; line-number
-(display-line-numbers-mode)
+(display-line-numbers-mode) ;; better than linum
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; remove the tool bar
@@ -134,8 +122,6 @@
 
 ;; This line corrects a problem with the monokai theme
 ;; (set-face-attribute 'widget-field nil :background "#272821")
-
-
 
 ;; show trailing white spaces
 (setq show-trailing-whitespace t)
@@ -172,13 +158,14 @@
 ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
 
 ;; move auto save folder in specific directory
-(custom-set-variables
- '(auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-"))
- '(auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~")))
+;; THERE CAN ONLY BE ONE custom-set-...
+;; ;; (custom-set-variables
+;;  '(auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-"))
+;;  '(auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~")))
 
 ;; move bookmarks in specific directory
-(custom-set-variables
- '(bookmark-default-file "~/.emacs.d/files/bookmark/bookmarks"))
+;; USED TO HAVE A CUSTOM-SET
+(setq bookmark-default-file "~/.emacs.d/files/bookmark/bookmarks")
 
 ;; need to install a dict and setup a daemon first
 ;; (setq dictionary-server "localhost")
