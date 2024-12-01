@@ -7,13 +7,16 @@
 
 ;; git porcelaine
 (use-package magit
+  ;; fixes emacs 29 issue with old transient package (dependency)
+  :ensure (:tag "v3.3.0")
   :defer t
   :config
   ;; ;; updates modeline with branch. higher cost than hook
   ;; (setq auto-revert-check-vc-info t
   ;;       auto-revert-interval 10)
 
-
+  ;; full screen magit
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-remote-add-set-remote.pushDefault nil))
 
 

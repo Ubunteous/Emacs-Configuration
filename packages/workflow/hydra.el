@@ -8,7 +8,9 @@
 (use-package hydra-posframe
   ;; dependencies: dash, s, posframe
   :defer t
-  :straight
+  ;; :straight
+  ;; (hydra-posframe :type git :host github :repo "ladicle/hydra-posframe")
+  :ensure
   (hydra-posframe :type git :host github :repo "ladicle/hydra-posframe")
   :config
   (hydra-posframe-mode)

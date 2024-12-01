@@ -21,11 +21,14 @@
 ;; + run mu init in terminal
 ;; + Setup .authinfo with machine XXX login XXX port XXX password XXX (credentials asked first time sending a mail with mu4e)
 
+;; Troubleshooting:
+;; Once in a while try, mu init --maildir ~/Maildir/
+
 (use-package mu4e
-  :straight (:local-repo 
-             "/run/current-system/sw/share/emacs/site-lisp/mu4e" ;; nixos compatible
-	     ;; :local-repo path to "~/.nix-profile/share/emacs/site-lisp/mu4e" should work with home manager
-	     :type built-in)
+  ;; :straight (:local-repo "/run/current-system/sw/share/emacs/site-lisp/mu4e" :type built-in) ;; nixos compatible
+  ;; :local-repo path to "~/.nix-profile/share/emacs/site-lisp/mu4e" should work with home manager
+
+  :ensure nil
   ;; :commands (mu4e)
   :general
   ("C-c m" 'mu4e)
@@ -59,7 +62,7 @@
   ;; allow for updating mail using 'U' in the main view:
   ;; (setq mu4e-get-mail-command "offlineimap")
   (setq mu4e-get-mail-command "offlineimap -f INBOX")
-  
+
   (setq mu4e-update-interval 3600) ;; hourly update
   ;; (setq mu4e-index-update-in-background nil) ;; default is t
 

@@ -11,7 +11,7 @@
 (use-package notmuch
   :defer t
   :general
-  ("C-c m" 'notmuch)
+  ("C-c w" 'notmuch)
   ;; (:keymaps 'notmuch-show-mode-map
   ;; 	    "S" (lambda ()
   ;; 		  "mark message as spam"
@@ -24,6 +24,18 @@
   ;; 		  (notmuch-search-tag (list "-inbox" "+spam"))
   ;; 		  (next-line)))
   :config
+  ;; I will decide later which one I prefer
+  ;; Options: 'sendmail-query-once, 'smtpmail-send-it
+
+  ;; send mail
+  (setq send-mail-function 'smtpmail-send-it)
+
+  ;; fix message send error
+  ;; (setq smtpmail-stream-type 'starttls) ;; did not serve
+  (setq smtpmail-debug-info nil) ;; do not show debug trace
+  
+  (setq message-directory "mbsync")
+  
   ;; setup the mail address and use name
   (setq mail-user-agent 'message-user-agent)
 
@@ -36,7 +48,7 @@
   ;; A few commonly used saved searches.
   (setq notmuch-saved-searches
 	(quote
-	 ((:name "inbox" :query "tag:inbox AND -tag:work" :key "i" :sort-order oldest-first)
+	 ((:name "inbox" :query "tag:inbox AND -tag:work" :key "i" :sort-order newest-first) ;; oldest-first
 	  (:name "flagged" :query "tag:flagged" :key "f") ;; flagged messages
 	  (:name "sent" :query "tag:sent -tag:work" :key "t" :sort-order newest-first)
 	  (:name "drafts" :query "tag:draft" :key "d")

@@ -5,12 +5,12 @@
 (use-package jsonrpc
   ;; temporary fork
   :defer t
-  :elpaca (jsonrpc :type git :host github :repo "svaante/jsonrpc"))
+  :ensure (jsonrpc :type git :host github :repo "svaante/jsonrpc"))
 
 (use-package dape
   :defer t
   :after jsonrpc
-  :elpaca (dape :type git :host github :repo "svaante/dape")
+  :ensure (dape :type git :host github :repo "svaante/dape")
   
   ;; To use window configuration like gud (gdb-mi)
   ;; :init
