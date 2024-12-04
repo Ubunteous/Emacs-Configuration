@@ -302,7 +302,7 @@
     (message "Buffer evaluated!"))))
 
 ;; remove overwrite-mode to avoid activating it by mistake
-;; ;; (defun overwrite-mode ()) ;; this breaks evil
+(defun overwrite-mode ()) ;; used to break evil. hope it works with meow
 
 (defun word-boundary-at-point-or-region (&optional callback)
   "Return the boundary (beginning and end) of the word at point, or region, if any.
