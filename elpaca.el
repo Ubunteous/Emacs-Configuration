@@ -53,9 +53,10 @@
 			      "recentf"
 			      "repeat"
 			      "smtpmail"
-			      "isearch"
 			      "treesit"
-			      "eglot"))
+			      "eglot"
+			      "eglot-booster"
+			      "isearch"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
 ;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
