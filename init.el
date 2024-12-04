@@ -119,6 +119,9 @@
           (error "%s" (with-current-buffer buffer (buffer-string))))
       ((error) (warn "%s" err) (delete-directory repo 'recursive))))
   (unless (require 'elpaca-autoloads nil t)
+    ;; required by windows with its different path system
+    (when (eq system-type 'windows-nt)
+      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
     (load "./elpaca-autoloads")))
@@ -128,7 +131,7 @@
 ;; Disable package.el in favour of elpaca.el
 (setq package-enable-at-startup nil)
 
-;; ;; Install use-package support
+;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
@@ -153,12 +156,28 @@
           (apply fn args)
         (elpaca-use-package-mode 1)))))
 
+
+;; Uncomment for systems which cannot create symlinks (like windows 10):
+(when (eq system-type 'windows-nt)
+  ;; requires a restart even if error about symlinks
+  (elpaca-no-symlink-mode)
+
+  ;; hack to use find-file at c:/Users/<name>/
+  (setq default-directory "~/../../Documents/")
+
+  (setq package-archives
+	'(("gnu-elpa" . "https://elpa.gnu.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+          ("melpa" . "https://melpa.org/packages/"))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               GENERAL              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Block until current queue processed. replaces (elpaca-wait)
-(use-package general :ensure (:wait t) :demand t)
+(use-package general
+  :ensure (:wait t)
+  :demand t)
 
 ;; switch to bindings list when opened
 (defun general-list-keybindings ()
@@ -186,7 +205,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (load-file "~/.emacs.d/straight.el")
-(load-file "~/.emacs.d/elpaca.el")
+
+(if (eq system-type 'windows-nt)
+    (load-file "~/.emacs.d/winpaca.el")
+  (load-file "~/.emacs.d/elpaca.el"))
 
 ;; (load-file "~/.emacs.d/custom/pull-down-packages.el")
 ;; (load-file "~/.emacs.d/custom/pull-down-guide.el")
