@@ -12,3 +12,4 @@ files/*
 eln-cache/*
 elpa/*
 elpaca/*
+server/*
