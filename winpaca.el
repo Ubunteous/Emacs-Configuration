@@ -53,7 +53,7 @@
 			      "recentf"
 			      "repeat"
 			      "smtpmail"
-			      "treesit"
+			      ;; "treesit"
 			      "eglot"
 			      ;; "eglot-booster"
 			      "isearch"))
@@ -132,11 +132,11 @@
 			 ;; more casual-packages to discover
 			 ;; "casual-agenda"
 
-			 ;; "ob-janet"
+			 "ob-janet"
 			 "ob-csharp"
-			 ;; "ob-html"
+			 "ob-html"
 			 "ob-sql"
-			 ;; "ob-nix"
+			 "ob-nix"
 			 ;; "ob-async"
 
 			 ;; deft
