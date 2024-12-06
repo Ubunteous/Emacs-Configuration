@@ -89,6 +89,8 @@ org-mode
 (python-methods "\[x for x in dir(" p ") if not x.startswith('_')\]")
 (python-header "#+PROPERTY: header-args :results output" n n)
 
+(csharp-writeline "System.Console.WriteLine(" q ")")
+
 (javascript-methods-instance "console.log(Object.getOwnPropertyNames(" p ".__proto__));")
 (javascript-methods-class "console.log(Object.getOwnPropertyNames(" p ".prototype));")
 ;; (javascript-methods "console.log(Object.getOwnPropertyNames(" q ").filter(" n
