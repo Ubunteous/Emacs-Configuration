@@ -39,6 +39,8 @@
 (use-package inf-clojure
   :defer t
   :config
-  (setq inf-clojure-repl-type 'clojure)
+  (setq inf-clojure-repl-type 'clojure
+	inf-clojure-custom-startup "clojure")
   :general (:keymaps 'clojure-ts-mode-map
-		     "C-c C-c" 'inf-clojure-eval-buffer))
+		     "C-c C-c" 'inf-clojure-eval-buffer
+		     "C-x C-e" 'inf-clojure-eval-last-sexp))
