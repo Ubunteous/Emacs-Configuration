@@ -53,9 +53,9 @@
 			      "recentf"
 			      "repeat"
 			      "smtpmail"
-			      "treesit"
+			      ;; "treesit"
 			      "eglot"
-			      "eglot-booster"
+			      ;; "eglot-booster"
 			      "isearch"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
@@ -98,7 +98,8 @@
 (load-user-files "workflow" '("ace-window" ;; add rotate/transpose frame
 			      ;; "forge" ;; bring back for emacs 30 and change magit version
 			      "magit"
-			      "notmuch")) ;; requires notmuch package from outside emacs
+			      ;; "notmuch"
+			      )) ;; requires notmuch package from outside emacs
 
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
 ;; (load-user-file "workflow/perspective")
@@ -116,15 +117,15 @@
 (elpaca-wait)
 
 (load-user-files "org" '("org"
-			 "jupyter" ;; convert org -> ipynb with ox-ipynb
+			 ;; "jupyter" ;; convert org -> ipynb with ox-ipynb
 			 "org-modern"
-			 "org-fragtog"
-			 "org-fancy-priorities"
+			 ;; "org-fragtog"
+			 ;; "org-fancy-priorities"
 
 			 "org-appear"
 			 ;; zettelkasten
-			 "org-roam"
-			 "org-roam-ui"
+			 ;; "org-roam"
+			 ;; "org-roam-ui"
 			 ;; "delve" ;; bring back for emacs 30
 
 			 ;; not ready yet
@@ -139,8 +140,9 @@
 			 ;; "ob-async"
 
 			 ;; deft
-			 "deft"
-			 "notdeft"))
+			 ;; "deft"
+			 ;; "notdeft"
+			 ))
 
 ;; Ready
 ;; (load-user-file "org/org-cliplink")
@@ -165,7 +167,7 @@
 			       "vertico"
 
 			       "tempel"
-			       "jinx"
+			       ;; "jinx"
 
 			       ;; "citar"
 			       "minimal-swiper"))
@@ -175,22 +177,23 @@
 ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files "utilities" '("crux"
-			       "devdocs"
+			       ;; "devdocs"
 			       "evil-nerd-commenter"
-			       "expand-region"
+			       ;; "expand-region"
 			       "helpful"
 			       "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
-			       "minions"
+			       ;; "minions"
 			       "move-text"
-			       "multiple-cursors"
+			       ;; "multiple-cursors"
 			       "visual-regexp"
 			       "vundo"
 			       "writeroom"
 			       ;; "powerthesaurus"
 			       ;; "outli"
-			       "docker"
-			       "combobulate"
-			       "wgrep"))
+			       ;; "docker"
+			       ;; "combobulate"
+			       ;; "wgrep"
+			       ))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
 ;; (load-user-file "utilities/esup")
@@ -212,7 +215,7 @@
 				   "browse-kill-ring"
 				   "diminish"
 				   "dimmer" ;; DONE
-				   "hl-todo"
+				   ;; "hl-todo"
 				   "undo-hl" ;; => not in melpa yet
 				   ;; "symbol-overlay" ;; strong. maybe use later
 				   "no-littering"))
@@ -226,35 +229,37 @@
 ;;   programming   ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "programming" '("godot"
-				 "python/python"
-				 "python/anaconda"
+(load-user-files "programming" '("c#"
+				 
+				 ;; "godot"
+				 ;; "python/python"
+				 ;; "python/anaconda"
 				 ;; "python/elpy"
-				 "python/highlight-indent-guides"
-				 "c#"
+				 ;; "python/highlight-indent-guides"
 
 				 ;; "guile"
-				 "janet"
-				 "clojure"
-				 "javascript"
-				 "typescript"
-				 "web-utils"
-				 "caddyfile"
-				 "yaml"
+				 ;; "janet"
+				 ;; "clojure"
+				 ;; "javascript"
+				 ;; "typescript"
+				 ;; "web-utils"
+				 ;; "caddyfile"
+				 ;; "yaml"
 
-				 "sql/sql"
+				 ;; "sql/sql"
 				 ;; "sql/pgmacs"
 				 ;; "sql/ejc"
 
-				 "c"
-				 "nix"
-				 "lua"
-				 "just"
-				 "yuck"
-				 "latex"
-				 "lilypond"
-				 ;; "typst"
-				 "haskell"))
+				 ;; "c"
+				 ;; "nix"
+				 ;; "lua"
+				 ;; "just"
+				 ;; "yuck"
+				 ;; "latex"
+				 ;; "lilypond"
+				 ;; ;; "typst"
+				 ;; "haskell"
+				 ))
 
 ;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/elixir")

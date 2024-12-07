@@ -4,6 +4,11 @@
 
 ;; missing bindings to build and run. also test and debug
 
+(use-package csharp
+  :defer t
+  :ensure nil
+  :hook (csharp-mode . read-only-mode))
+
 ;; (use-package sharper
 ;;   :defer t
 ;;   :general ("C-c #" 'sharper-main-transient))
