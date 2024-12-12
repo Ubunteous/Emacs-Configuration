@@ -19,10 +19,10 @@
   :mode ("\\.clj\\'" "\\.edn\\'"))
 
 
-;; ;; cider may compete for completion and eldoc with elgot
-;; (use-package cider
-;;   :defer t
-;;   :hook ((clojure-mode clojure-ts-mode) . cider-mode))
+;; cider may compete for completion and eldoc with elgot
+(use-package cider
+  :defer t
+  :hook ((clojure-mode clojure-ts-mode) . cider-mode))
 
 
 ;; (use-package clj-refactor
@@ -35,12 +35,13 @@
 ;;   (cljr-add-keybindings-with-prefix "C-c C-r C-r"))
 
 
-;; a lighter repl. needs some keybindings
-(use-package inf-clojure
-  :defer t
-  :config
-  (setq inf-clojure-repl-type 'clojure
-	inf-clojure-custom-startup "clojure")
-  :general (:keymaps 'clojure-ts-mode-map
-		     "C-c C-c" 'inf-clojure-eval-buffer
-		     "C-x C-e" 'inf-clojure-eval-last-sexp))
+;; ;; a lighter repl. needs some keybindings
+;; (use-package inf-clojure
+;;   :defer t
+;;   :config
+;;   (setq inf-clojure-repl-type 'clojure
+;; 	inf-clojure-custom-startup "clojure")
+;;   :general (:keymaps 'clojure-ts-mode-map
+;; 		     "C-c C-c" 'inf-clojure-eval-buffer
+;; 		     "C-x C-e" 'inf-clojure-eval-last-sexp))
+
