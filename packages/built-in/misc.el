@@ -237,6 +237,7 @@
   ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
 
+  (setq xref-search-program #'ripgrep)
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:background "#272821"))))
