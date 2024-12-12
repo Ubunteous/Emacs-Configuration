@@ -71,7 +71,8 @@
 ;;;;;;;;;;;;;;;
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
-			   "align"))
+			   "align"
+			   "dired-count-lines"))
 
 ;; (load-user-file "perso/break-time")
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
