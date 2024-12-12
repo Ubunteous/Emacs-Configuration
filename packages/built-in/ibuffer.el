@@ -14,6 +14,13 @@
            ;; ("martinowen.net" (filename . "martinowen.net"))
 	   ("Godot" (or (mode . gdscript-ts-mode)
 			(filename . "\\tscn\\'")))
+
+	   ("C#" (or (mode . csharp-mode)
+		     (mode . nxml-mode)
+		     (filename . "\\resx\\'")
+		     (filename . "\\sln\\'")
+		     (filename . "\\csproj\\'")))
+	   
 	   ("Python" (mode . python-mode))
 	   ("Nix" (mode . nix-ts-mode))
 	   ("Clojure" (or (mode . clojure-ts-mode)
