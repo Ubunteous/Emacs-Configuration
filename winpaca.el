@@ -230,6 +230,7 @@
 ;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files "programming" '("c#"
+				 "ahk"
 				 
 				 ;; "godot"
 				 ;; "python/python"

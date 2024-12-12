@@ -254,6 +254,7 @@
 				 "latex"
 				 "lilypond"
 				 ;; "typst"
+				 ;; "ahk"
 				 "haskell"))
 
 ;; (load-user-file "programming/kbd")
