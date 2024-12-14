@@ -174,7 +174,7 @@
 	     (equal (substring mode -7) "ts-mode"))
 	(setq suffix-pos -8) ;; ts-mode
       (setq suffix-pos -5))
-    
+
     (setq mode (substring (symbol-name major-mode) 0 suffix-pos))
     mode))
 
@@ -187,8 +187,14 @@
     (delete-other-windows))
 
   (let* ((doc-file (concat (mode-name) ".org"))
-	 (file-path (concat "~/org/Informatics/Languages/" doc-file)))
-    
+
+	 (dir (cond ((string-equal doc-file "clojure.org") "clojure/")
+		    (t "")))
+
+	 (file-path (concat "~/org/Informatics/Languages/"
+			    dir
+			    doc-file)))
+
     (catch 'nofile
       (when (not (file-exists-p file-path))
 	(throw 'nofile (error (concat "File: " file-path " not found."))))
