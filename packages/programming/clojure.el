@@ -22,6 +22,9 @@
 ;; cider may compete for completion and eldoc with elgot
 (use-package cider
   :defer t
+  :config
+  ;; load a dev/user.clj file (specified in deps.edn) on jack-in
+  (setq cider-clojure-cli-global-options "-A:server:client:dev")
   :hook ((clojure-mode clojure-ts-mode) . cider-mode))
 
 
