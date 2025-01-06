@@ -102,7 +102,7 @@
 (delete-selection-mode +1)
 
 ;; line-number
-(display-line-numbers-mode) ;; better than linum
+;; (display-line-numbers-mode) ;; better than linum
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; remove the tool bar
