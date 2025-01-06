@@ -139,7 +139,8 @@
 			 "ob-sql"
 			 "ob-nix"
 			 ;; "ob-async"
-
+			 "ob-powershell"
+			 
 			 ;; deft
 			 ;; "deft"
 			 ;; "notdeft"
@@ -232,6 +233,7 @@
 
 (load-user-files "programming" '("c#"
 				 "ahk"
+				 "powershell"
 				 
 				 ;; "godot"
 				 ;; "python/python"

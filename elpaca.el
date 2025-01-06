@@ -49,6 +49,7 @@
 			      "dired" ;; => add git compatibility
 			      "fly"
 			      "ibuffer"
+			      ;; "icomplete" ;; competes with vertico
 			      "misc"
 			      "recentf"
 			      "repeat"
@@ -72,6 +73,8 @@
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
 			   "align"
+			   "smart-insert"
+			   "auto-close-compilation"
 			   "dired-count-lines"))
 
 ;; (load-user-file "perso/break-time")
@@ -88,6 +91,7 @@
 				"centaur-tabs"
 				"fira"
 				"moody"
+				"spacious-padding"
 				"kind-icon"))
 
 ;; (load-user-file "appearance/nerd-icons")
@@ -99,6 +103,12 @@
 (load-user-files "workflow" '("ace-window" ;; add rotate/transpose frame
 			      ;; "forge" ;; bring back for emacs 30 and change magit version
 			      "magit"
+
+			      
+			      ;; font is transparent. e.g.: ls /path/to/file is hard to see
+			      ;; "vterm" ;; vterm should be installed from NixOS configuration
+			      ;; "eat" ;; slower than vterm but written in elisp
+
 			      "notmuch")) ;; requires notmuch package from outside emacs
 
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
@@ -106,9 +116,6 @@
 ;; (load-user-file "workflow/elfeed") ;; alt: newsticker built-in
 ;; (load-user-file "workflow/hydra")
 ;; (load-user-file "workflow/mu4e-alert") ;; slightly slow startup. maybe use a hook
-
-;; font is transparent. e.g.: ls /path/to/file is hard to see
-;; (load-user-file "workflow/vterm") ;; vterm should be installed from NixOS configuration
 
 ;;;;;;;;;;;;;
 ;;   org   ;;
@@ -134,11 +141,13 @@
 
 			 "ob-janet"
 			 "ob-csharp"
+			 ;; "ob-go"
 			 "ob-html"
 			 "ob-sql"
 			 "ob-nix"
 			 ;; "ob-async"
-
+			 "ob-powershell"
+			 
 			 ;; deft
 			 "deft"
 			 "notdeft"))
@@ -176,6 +185,9 @@
 ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files "utilities" '("crux"
+			       ;; "popper" ;; try later
+			       ;; "consult-dir" ;; cool but similar to consult-buffer
+			       ;; "gptel"
 			       "devdocs"
 			       "evil-nerd-commenter"
 			       "expand-region"
@@ -189,6 +201,7 @@
 			       "writeroom"
 			       ;; "powerthesaurus"
 			       ;; "outli"
+			       "symbol-overlay-mc"
 			       "docker"
 			       "combobulate"
 			       "wgrep"))
@@ -242,6 +255,9 @@
 				 "web-utils"
 				 "caddyfile"
 				 "yaml"
+				 "markdown"
+				 "scss"
+				 "powershell"
 
 				 "sql/sql"
 				 ;; "sql/pgmacs"
@@ -358,6 +374,7 @@
 ;; (load-user-file "fix-word")
 
 ;; passive-utils
+;; "languagetool" ;; service broken on nixos
 ;; (load-user-file "passive-utils/reformatter")
 ;; (load-user-file "passive-utils/format-all") ;; great but not easily extendable
 ;; (load-user-file "utilities/olivetti")
