@@ -24,3 +24,13 @@
   :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+;; ;; found on reddit
+;; (use-package sudo-edit
+;;   :after embark
+;;   :defer t
+;;   :general
+;;   (:keymaps 'embark-file-map
+;; 	    "s" 'sudo-edit-find-file
+;; 	    'embark-become-file-buffer-map
+;; 	    "s" . 'sudo-edit-find-file))
