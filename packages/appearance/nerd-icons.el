@@ -29,3 +29,9 @@
   :config
   (nerd-icons-completion-mode)
   :hook (marginalia-mode . nerd-icons-completion-marginalia-setup))
+
+;; ;; not tested
+;; (use-package nerd-icons-corfu
+;;   :after corfu
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
