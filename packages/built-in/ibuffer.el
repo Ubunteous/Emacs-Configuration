@@ -20,7 +20,9 @@
 		     (filename . "\\resx\\'")
 		     (filename . "\\sln\\'")
 		     (filename . "\\csproj\\'")))
+
 	   
+	   ("LaTeX" (mode . LaTeX-mode))
 	   ("Python" (mode . python-mode))
 	   ("Nix" (mode . nix-ts-mode))
 	   ("Clojure" (or (mode . clojure-ts-mode)

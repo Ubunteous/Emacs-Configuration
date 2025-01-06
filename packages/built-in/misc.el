@@ -2,7 +2,7 @@
 ;;                MISC                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package misc ; misc.el
+(use-package misc
   :ensure nil
   ;; :straight (:type built-in)
   :init
@@ -195,8 +195,12 @@
   (setq package-user-dir "~/.emacs.d/files/elpa")
 
   ;; save automatically before M-x compile
-  (setq compilation-ask-about-save nil)
-
+  (setq compilation-ask-about-save nil
+	compilation-scroll-output t
+	compilation-auto-jump-to-first-error t
+	;; compilation-max-output-line-length nil
+	compilation-always-kill t)
+  
   ;; create directory with find file if it does not exist
   (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
     "Create parent directory if not exists while visiting file."
@@ -238,6 +242,12 @@
   ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
 
   (setq xref-search-program #'ripgrep)
+
+  ;; hide lint messages on package update
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+		 (display-buffer-no-window)
+		 (allow-no-window . t)))
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:background "#272821"))))
@@ -246,7 +256,8 @@
   ("C-c t" 'execute-extended-command)
   ("C-c k" 'kill-buffer-refocus)
   ("C-c u" 'mode-line-other-buffer)
-
+  ("C-g" 'keyboard-quit-dwim)
+  
   ("C-c n" 'previous-buffer)
   ("C-c e" 'next-buffer)
 
@@ -279,6 +290,31 @@
 
   (unless (eq 1 (length (cl-delete-duplicates (mapcar #'window-buffer (window-list)))))
     (delete-window)))
+
+(defun keyboard-quit-dwim ()
+  "Do-What-I-Mean behaviour for a general `keyboard-quit'.
+
+The generic `keyboard-quit' does not do the expected thing when
+the minibuffer is open.  Whereas we want it to close the
+minibuffer, even without explicitly focusing it.
+
+The DWIM behaviour of this command is as follows:
+
+- When the region is active, disable it.
+- When a minibuffer is open, but not focused, close the minibuffer.
+- When the Completions buffer is selected, close it.
+- In every other case use the regular `keyboard-quit'."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((derived-mode-p 'completion-list-mode)
+    (delete-completion-window))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
 
 (defun server-restart ()
   "Kill and start server"
