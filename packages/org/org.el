@@ -116,11 +116,13 @@
 	  ("c" . "src clojure\n")
 	  ("e" . "src elisp\n")
 	  ("f" . "src python\n")
+	  ;; ("g" . "src go\n")
 	  ("h" . "src html\n")
 	  ("i" . "src js\n")
 	  ("l" . "src lilypond :file lily.png\n")
 	  ("m" . "center\n")
 	  ("n" . "src nix\n")
+	  ("p" . "src powershell\n")
 	  ;; ("p" . "src python\n")
 	  ;; ("Q" . "src sql-mode\n")
 	  ("q" . "src sql\n")
@@ -149,9 +151,11 @@
      (latex . t)
      (clojure . t)
      (C . t)
+     ;; (go . t)
      ;; (typescript . t)
      (js . t)
      ;; (jupyter . t)
+     (powershell . t)
      (python . t)
      (sql . t)
      (sql-mode . t)
@@ -356,7 +360,7 @@
 
 
 (defun org-collapse-top-level-heading ()
-  ;; go to top * heading and close it
+  "Go to top * heading and close it."
   (interactive)
   ;; go to main header if not within it (too deep)
   (let ((start-level (funcall outline-level)))
@@ -365,6 +369,18 @@
     ;; fold
     (org-fold-hide-subtree)))
 
+
+(defun org-babel-eval-wipe-error-buffer ()
+  "Redefine this function to delete the Org Babel buffer."
+  (let ((ob-buffer (get-buffer org-babel-error-buffer-name)))
+    (when ob-buffer
+      ;;   (progn
+      ;;    (other-window 1)
+      ;;    (kill-buffer-refocus)
+      ;;    ;; (delete-window ob-buffer)
+      ;;    )
+
+      (delete-other-windows))))
 
 ;; (defun org-latex-compile ()
 ;;   "Export to LaTeX and open pdf."
