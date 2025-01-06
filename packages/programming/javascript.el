@@ -37,27 +37,3 @@
 ;;   ;; (setq js-comint-program-command "node")
 ;;   ;; (setq js-comint-program-arguments '("--interactive"))
 ;;   )
-
-(defun smart-insert-semicolon () (interactive)
-       """Checks the last char of a line to figure out if
-a semicolon needs to be added before inserting a newline"""
-       (when
-	   (and
-	    ;; current line is not a comment
-	    (save-excursion
-	      (call-interactively 'back-to-indentation)
-	      (and
-	       (not (eobp)) ;; check char-after exists
-	       (not (= ?/ (char-after)))))
-	    
-	    ;; cursor is at the end of the line
-	    (eolp)
-	    
-	    ;; last character is a word or )/]
-	    (or
-	     (= ?w (char-syntax (char-before))) ;; word
-	     (eq ?\) (char-before)) ;; )
-	     (eq ?\] (char-before))))  ;; ]
-
-	 (insert ";"))
-       (newline))
