@@ -72,6 +72,7 @@
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
 			   "align"
+			   "auto-close-compilation"
 			   "dired-count-lines"))
 
 ;; (load-user-file "perso/break-time")
@@ -88,7 +89,8 @@
 				"centaur-tabs"
 				"fira"
 				"moody"
-				"kind-icon"))
+				"kind-icon"
+				"spacious-padding"))
 
 ;; (load-user-file "appearance/nerd-icons")
 
