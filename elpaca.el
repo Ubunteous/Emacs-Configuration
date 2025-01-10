@@ -126,6 +126,7 @@
 (load-user-files "org" '("org"
 			 "jupyter" ;; convert org -> ipynb with ox-ipynb
 			 "org-modern"
+			 ;; "ord-modern-indent"
 			 "org-fragtog"
 			 "org-fancy-priorities"
 
@@ -220,6 +221,7 @@
 				   "apheleia"
 				   "rainbow-delimiters"
 				   "adaptive-wrap"
+				   "ultra-scroll"
 				   "aggressive-indent"
 				   "auto-capitalize" ;; => LaTeX/org mode only
 				   "beacon"
