@@ -56,7 +56,7 @@
 			      "smtpmail"
 			      "treesit"
 			      "eglot"
-			      "eglot-booster"
+			      ;; "eglot-booster"
 			      "isearch"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
