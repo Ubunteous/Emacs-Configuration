@@ -23,12 +23,18 @@
   (text-mode . flyspell-mode)
   :config
   ;; use aspell instead on ispell (requires aspell installation)
-  (setq ispell-program-name "aspell")
+  (if (eq system-type 'windows-nt)
+      (progn
+	(setenv "LANG" "en_GB.UTF-8")
+	(setenv "DICPATH" "C:/Hunspell/dictionaries/") ;; dic/aff files
+	(setq ispell-program-name "C:/Hunspell/hunspell/bin/hunspell.exe"))
+    (setq ispell-program-name "aspell"))
+
   (setq ispell-choices-win-default-height 10) ;; default too small
 
   ;; broken in NixOS (sept 2023). temporary fix below:
   ;; echo "dict-dir /run/current-system/sw/lib/aspell" >> ~/.aspell.conf
-  (setq ispell-dictionary "english")
+  (setq ispell-dictionary "en_GB")
   ;; Sets flyspell correction to use two-finger mouse click
   (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word))
 
@@ -45,3 +51,10 @@
 
 ;; (add-to-list 'flycheck-checkers 'python-mypy t)
 ;; (flycheck-add-next-checker 'python-pylint 'python-mypy t))
+
+(use-package flyspell-correct
+  :after flyspell
+  :general
+  :general (:keymaps 'flyspell-mode-map
+		     ;; shadows ispell-word
+		     "M-$" 'flyspell-correct-wrapper))
