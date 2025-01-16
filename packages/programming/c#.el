@@ -8,9 +8,9 @@
   :defer t
   :ensure nil
   :general
-  ;; (:keymaps 'csharp-ts-mode-map
-  ;; 	    ;; this somehow prevents indentation
-  ;; 	    "RET" 'smart-insert-semicolon)
+  (:keymaps 'csharp-ts-mode-map
+	    ;; this somehow prevents indentation
+	    "RET" 'smart-insert-semicolon)
   :hook (csharp-mode . read-only-mode))
 
 ;; (use-package sharper

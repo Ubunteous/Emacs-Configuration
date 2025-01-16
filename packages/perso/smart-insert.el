@@ -24,7 +24,7 @@ a semicolon needs to be added before inserting a newline"""
 	     (eq ?\] (char-before))))  ;; ]
 
 	 (insert ";"))
-       (newline))
+       (newline-and-indent))
 
 (defun smart-insert-colon () (interactive)
        """Checks the first and last char of a line to figure out if
