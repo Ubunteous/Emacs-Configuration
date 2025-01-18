@@ -90,6 +90,7 @@
 				"dashboard"
 				"centaur-tabs"
 				"fira"
+				;; "nova"
 				"moody"
 				"spacious-padding"
 				"kind-icon"))
