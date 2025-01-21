@@ -72,6 +72,7 @@
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
 			   "align"
+			   "smart-insert"
 			   "auto-close-compilation"
 			   "dired-count-lines"))
 
@@ -238,6 +239,7 @@
 (load-user-files "programming" '("c#"
 				 "ahk"
 				 "powershell"
+				 "scss"
 				 
 				 ;; "godot"
 				 ;; "python/python"
