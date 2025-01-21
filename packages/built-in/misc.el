@@ -187,6 +187,9 @@
 	(remq 'process-kill-buffer-query-function
 	      kill-buffer-query-functions))
 
+  ;; remove warning
+  ;; (put 'upcase-region 'disabled nil)
+
   ;; line-number
   (display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
