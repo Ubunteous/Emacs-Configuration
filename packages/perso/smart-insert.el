@@ -28,7 +28,7 @@ a semicolon needs to be added before inserting a newline"""
 (defun smart-insert-colon () (interactive)
        """Checks the first and last char of a line to figure out if
 a colon needs to be added before inserting a space"""
-       (if
+       (when
 	   (and
 	    ;; current line is not a comment/selector (starts with whitespace/indent)
 	    (save-excursion
@@ -45,5 +45,5 @@ a colon needs to be added before inserting a space"""
 	    ;; last character is a word
 	    (= ?w (char-syntax (char-before))))
 
-	   (insert ": ")
-	 (insert " ")))
+	 (insert ":"))
+       (insert " "))
