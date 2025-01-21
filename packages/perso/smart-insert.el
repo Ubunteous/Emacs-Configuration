@@ -17,11 +17,12 @@ a semicolon needs to be added before inserting a newline"""
 	    ;; cursor is at the end of the line
 	    (eolp)
 	    
-	    ;; last character is a word or )/]
+	    ;; last character is a word or )/]/"
 	    (or
 	     (= ?w (char-syntax (char-before))) ;; word
 	     (eq ?\) (char-before)) ;; )
-	     (eq ?\] (char-before))))  ;; ]
+	     (eq ?\] (char-before))
+	     (eq ?\" (char-before))))  ;; "
 
 	 (insert ";"))
        (newline-and-indent))
@@ -29,7 +30,7 @@ a semicolon needs to be added before inserting a newline"""
 (defun smart-insert-colon () (interactive)
        """Checks the first and last char of a line to figure out if
 a colon needs to be added before inserting a space"""
-       (when
+       (if
 	   (and
 	    ;; current line is not a comment/selector (starts with whitespace/indent)
 	    (save-excursion
@@ -46,5 +47,5 @@ a colon needs to be added before inserting a space"""
 	    ;; last character is a word
 	    (= ?w (char-syntax (char-before))))
 
-	 (insert ": ")))
-
+	   (insert ": ")
+	 (insert " ")))
