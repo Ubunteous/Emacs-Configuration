@@ -17,12 +17,10 @@ a semicolon needs to be added before inserting a newline"""
 	    ;; cursor is at the end of the line
 	    (eolp)
 	    
-	    ;; last character is a word or )/]/"
+	    ;; last character is a word or a closing delimiter
 	    (or
 	     (= ?w (char-syntax (char-before))) ;; word
-	     (eq ?\) (char-before)) ;; )
-	     (eq ?\] (char-before))
-	     (eq ?\" (char-before))))  ;; "
+	     (member (char-before) '(?\) ?\] ?\" ?\%))))
 
 	 (insert ";"))
        (newline-and-indent))
