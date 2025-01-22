@@ -40,7 +40,7 @@ a colon needs to be added before inserting a space"""
 		(= ?\C-i  (char-after)))))
 	    
 	    ;; cursor is at the end of the line
-	    (eolp)
+	    ;; (eolp)
 	    
 	    ;; last character is a word
 	    (= ?w (char-syntax (char-before))))
