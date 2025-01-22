@@ -149,7 +149,8 @@
 			 "ob-nix"
 			 ;; "ob-async"
 			 "ob-powershell"
-			 
+
+			 ;; "htmlize"
 			 ;; deft
 			 "deft"
 			 "notdeft"))
