@@ -1,12 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                SCSS                ;;
+;;                 CSS                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package scss-mode
+(use-package css-mode
   :ensure nil
   :defer t
   :general
-  (:keymaps 'scss-mode-map
+  (:keymaps 'css-mode-map
 	    "RET" 'smart-insert-semicolon
 	    "SPC" 'smart-insert-colon))
-
