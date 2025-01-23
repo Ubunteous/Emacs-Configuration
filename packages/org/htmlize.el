@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package htmlize
-  :defer t
+  ;; :defer t
   :after org
   :config
   (require 'ox-publish)
