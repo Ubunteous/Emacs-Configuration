@@ -27,6 +27,21 @@
       ;; (file-name-directory buffer-file-name)
       (concat "~/.emacs.d/packages/" dir "/" file ".el")))))
 
+
+(defun load-user-files-per-system (dir windows linux both)
+  "Load config files depending on the operating system."
+  ;; (fset #'partial-load-user-files `(lambda (_list) (load-user-files ,dir _list)))
+
+  ;; (if (eq system-type 'windows-nt)
+  ;;     (mapcar 'partial-load-user-files `(,windows ,both))
+  ;;   (mapcar 'partial-load-user-files `(,linux ,both)))
+
+  (if (eq system-type 'windows-nt)
+      (load-user-files dir windows)
+    (load-user-files dir linux))
+  
+  (load-user-files dir both))
+
 ;; (setq omit-heavy nil)
 ;; ;; not that great. it barely saves me .1 or .2 seconds
 ;; (defun do-omit-heavy (omit-heavy function)
@@ -44,7 +59,14 @@
 ;;   built-in   ;;
 ;;;;;;;;;;;;;;;;;;
 
-(load-user-files "built-in" '("auto-insert"
+(load-user-files-per-system "built-in"
+			    '()
+
+			    '("smtpmail"
+			      "treesit"
+			      "eglot")
+			    
+			    '("auto-insert"
 			      "completion"
 			      "dired" ;; => add git compatibility
 			      "fly"
@@ -53,9 +75,6 @@
 			      "misc"
 			      "recentf"
 			      "repeat"
-			      "smtpmail"
-			      "treesit"
-			      "eglot"
 			      ;; "eglot-booster"
 			      "isearch"))
 
@@ -73,6 +92,7 @@
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
 			   "align"
+			   "fix-encoding"
 			   "smart-insert"
 			   "auto-close-compilation"
 			   "dired-count-lines"))
@@ -81,9 +101,9 @@
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
 ;; (breaktime-start (* 22 60)) ;; 22 minutes
 
-;;;;;;;;;;;;;;;;;;;;
-;;   appearance   ;;
-;;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;;
+;; ;;   appearance   ;;
+;; ;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files "appearance" '("monokaolin"
 				"all-the-icons"
@@ -101,16 +121,17 @@
 ;;   workflow   ;;
 ;;;;;;;;;;;;;;;;;;
 
-(load-user-files "workflow" '("ace-window" ;; add rotate/transpose frame
+(load-user-files-per-system "workflow"
+			    '()
+			    '("notmuch")
+			    '("ace-window" ;; add rotate/transpose frame
 			      ;; "forge" ;; bring back for emacs 30 and change magit version
 			      "magit"
-
 			      
 			      ;; font is transparent. e.g.: ls /path/to/file is hard to see
 			      ;; "vterm" ;; vterm should be installed from NixOS configuration
 			      ;; "eat" ;; slower than vterm but written in elisp
-
-			      "notmuch")) ;; requires notmuch package from outside emacs
+			      )) ;; requires notmuch package from outside emacs
 
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
 ;; (load-user-file "workflow/perspective")
@@ -124,36 +145,37 @@
 
 (elpaca-wait)
 
-(load-user-files "org" '("org"
-			 "jupyter" ;; convert org -> ipynb with ox-ipynb
-			 "org-modern"
-			 ;; "ord-modern-indent"
-			 "org-fragtog"
-			 "org-fancy-priorities"
+(load-user-files-per-system "org"
+			    '("htmlize")
 
-			 "org-appear"
-			 ;; zettelkasten
-			 "org-roam"
-			 "org-roam-ui"
-			 ;; "delve" ;; bring back for emacs 30
+			    '("jupyter" ;; convert org -> ipynb with ox-ipynb
+			      "org-fragtog"
+			      "org-fancy-priorities"
+			      ;; zettelkasten
+			      ;; "delve" ;; bring back for emacs 30
+			      "org-roam"
+			      "org-roam-ui"
+			      ;; deft
+			      "deft"
+			      "notdeft")
+			    
+			    '("org"
+			      "org-modern"
+			      ;; "ord-modern-indent"
+			      "org-appear"
 
-			 ;; not ready yet
-			 ;; more casual-packages to discover
-			 ;; "casual-agenda"
+			      ;; not ready yet
+			      ;; more casual-packages to discover
+			      ;; "casual-agenda"
 
-			 "ob-janet"
-			 "ob-csharp"
-			 ;; "ob-go"
-			 "ob-html"
-			 "ob-sql"
-			 "ob-nix"
-			 ;; "ob-async"
-			 "ob-powershell"
-
-			 ;; "htmlize"
-			 ;; deft
-			 "deft"
-			 "notdeft"))
+			      "ob-janet"
+			      "ob-csharp"
+			      ;; "ob-go"
+			      "ob-html"
+			      "ob-sql"
+			      "ob-nix"
+			      ;; "ob-async"
+			      "ob-powershell"))
 
 ;; Ready
 ;; (load-user-file "org/org-cliplink")
@@ -167,47 +189,55 @@
 ;;   composite   ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "composite" '("cape" ;; surprisingly useful!
-			       "corfu"
+(load-user-files-per-system "composite"
+			    '()
 
-			       "embark" ;; use it with consult
-			       "marginalia"
-			       "orderless"
-			       "consult"
-			       "prescient" ;; alternative to orderless
-			       "vertico"
+			    '("jinx")
+			    
+			    '("cape" ;; surprisingly useful!
+			      "corfu"
 
-			       "tempel"
-			       "jinx"
+			      "embark" ;; use it with consult
+			      "marginalia"
+			      "orderless"
+			      "consult"
+			      "prescient" ;; alternative to orderless
+			      "vertico"
 
-			       ;; "citar"
-			       "minimal-swiper"))
+			      "tempel"
+
+			      ;; "citar"
+			      "minimal-swiper"))
 
 ;;;;;;;;;;;;;;;;;;;
 ;;   utilities   ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "utilities" '("crux"
-			       ;; "popper" ;; try later
-			       ;; "consult-dir" ;; cool but similar to consult-buffer
-			       ;; "gptel"
-			       "devdocs"
-			       "evil-nerd-commenter"
-			       "expand-region"
-			       "helpful"
-			       "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
-			       "minions"
-			       "move-text"
-			       "multiple-cursors"
-			       "visual-regexp"
-			       "vundo"
-			       "writeroom"
-			       ;; "powerthesaurus"
-			       ;; "outli"
-			       "symbol-overlay-mc"
-			       "docker"
-			       "combobulate"
-			       "wgrep"))
+(load-user-files-per-system "utilities"
+			    '()
+			    
+			    '("devdocs"
+			      "expand-region"
+			      "minions"
+			      "multiple-cursors"
+			      ;; "powerthesaurus"
+			      ;; "outli"
+			      "symbol-overlay-mc"
+			      "docker"
+			      "combobulate"
+			      "wgrep")
+			    
+			    '("crux"
+			      ;; "popper" ;; try later
+			      ;; "consult-dir" ;; cool but similar to consult-buffer
+			      ;; "gptel"
+			      "evil-nerd-commenter"
+			      "helpful"
+			      "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
+			      "move-text"
+			      "visual-regexp"
+			      "vundo"
+			      "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
 ;; (load-user-file "utilities/esup")
@@ -218,22 +248,26 @@
 ;;   passive-utils   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "passive-utils" '("which-key"
-				   "meow"
-				   "apheleia"
-				   "rainbow-delimiters"
-				   "adaptive-wrap"
-				   "ultra-scroll"
-				   "aggressive-indent"
-				   "auto-capitalize" ;; => LaTeX/org mode only
-				   "beacon"
-				   "browse-kill-ring"
-				   "diminish"
-				   "dimmer" ;; DONE
-				   "hl-todo"
-				   "undo-hl" ;; => not in melpa yet
-				   ;; "symbol-overlay" ;; strong. maybe use later
-				   "no-littering"))
+(load-user-files-per-system "passive-utils"
+			    '()
+
+			    '("apheleia"
+			      "hl-todo")
+			    
+			    '("which-key"
+			      "meow"
+			      "rainbow-delimiters"
+			      "adaptive-wrap"
+			      "ultra-scroll"
+			      "aggressive-indent"
+			      "auto-capitalize" ;; => LaTeX/org mode only
+			      "beacon"
+			      "browse-kill-ring"
+			      "diminish"
+			      "dimmer" ;; DONE
+			      "undo-hl" ;; => not in melpa yet
+			      ;; "symbol-overlay" ;; strong. maybe use later
+			      "no-littering"))
 
 ;; (load-user-file "passive-utils/diff-hl") ;; not essential but fun
 ;; (load-user-file "passive-utils/evil")
@@ -244,39 +278,44 @@
 ;;   programming   ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "programming" '("godot"
-				 "python/python"
-				 "python/anaconda"
-				 ;; "python/elpy"
-				 "python/highlight-indent-guides"
-				 "c#"
+(load-user-files-per-system "programming"
+			    '("c#"
+			      "ahk"
+			      "powershell"
+			      "css")
 
-				 ;; "guile"
-				 "janet"
-				 "clojure"
-				 "javascript"
-				 "typescript"
-				 "web-utils"
-				 "caddyfile"
-				 "yaml"
-				 "markdown"
-				 "scss"
-				 "powershell"
+			    '("godot"
+			      "python/python"
+			      "python/anaconda"
+			      ;; "python/elpy"
+			      "python/highlight-indent-guides"
 
-				 "sql/sql"
-				 ;; "sql/pgmacs"
-				 ;; "sql/ejc"
+			      ;; "guile"
+			      "janet"
+			      "clojure"
+			      "javascript"
+			      "typescript"
+			      "web-utils"
+			      "caddyfile"
+			      "yaml"
+			      "markdown"
+			      "scss"
 
-				 "c"
-				 "nix"
-				 "lua"
-				 "just"
-				 "yuck"
-				 "latex"
-				 "lilypond"
-				 ;; "typst"
-				 ;; "ahk"
-				 "haskell"))
+			      "sql/sql"
+			      ;; "sql/pgmacs"
+			      ;; "sql/ejc"
+
+			      "c"
+			      "nix"
+			      "lua"
+			      "just"
+			      "yuck"
+			      "latex"
+			      "lilypond"
+			      ;; "typst"
+			      "haskell")
+			    
+			    '())
 
 ;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/elixir")

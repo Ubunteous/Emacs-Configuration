@@ -205,10 +205,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (load-file "~/.emacs.d/straight.el")
-
-(if (eq system-type 'windows-nt)
-    (load-file "~/.emacs.d/winpaca.el")
-  (load-file "~/.emacs.d/elpaca.el"))
+(load-file "~/.emacs.d/elpaca.el")
 
 ;; (load-file "~/.emacs.d/custom/pull-down-packages.el")
 ;; (load-file "~/.emacs.d/custom/pull-down-guide.el")
