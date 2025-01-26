@@ -230,7 +230,7 @@
 			    '("crux"
 			      ;; "popper" ;; try later
 			      ;; "consult-dir" ;; cool but similar to consult-buffer
-			      ;; "gptel"
+			      "gptel"
 			      "evil-nerd-commenter"
 			      "helpful"
 			      "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
