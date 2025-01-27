@@ -8,7 +8,9 @@
 
   (let ((pmin (point-min))
 	(pmax (point-max)))
-    (replace-string "Ã " "à" nil (pmin) (pmax))
-    (replace-string "Ã©" "é" nil (pmin) (pmax))
-    (replace-string "Ãª" "ê" nil (pmin) (pmax))
-    (replace-string "Ã¨" "è" nil (pmin) (pmax))))
+    (replace-string "Ã¢" "â" nil pmin pmax)
+    (replace-string "Ã " "à" nil pmin pmax)
+    (replace-string "Ã©" "é" nil pmin pmax)
+    (replace-string "Ãª" "ê" nil pmin pmax)
+    (replace-string "Ã¨" "è" nil pmin pmax)
+    (replace-string "Ã®" "î" nil pmin pmax)))
