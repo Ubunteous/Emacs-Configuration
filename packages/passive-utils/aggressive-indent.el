@@ -7,5 +7,6 @@
   :config
   (add-to-list 'aggressive-indent-dont-indent-if
 	       '(derived-mode-p 'sql-mode))
-  :hook ((anaconda-mode . (lambda () (setq aggressive-indent-mode nil)))
-	 (prog-mode . aggressive-indent-mode)))
+  :hook (prog-mode . (lambda ()
+		       (unless (member major-mode '(c-mode c-ts-mode anaconda-mode))
+			 (aggressive-indent-mode)))))
