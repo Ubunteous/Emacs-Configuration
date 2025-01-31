@@ -58,3 +58,23 @@
   :general (:keymaps 'flyspell-mode-map
 		     ;; shadows ispell-word
 		     "M-$" 'flyspell-correct-wrapper))
+
+(use-package flycheck-overlay
+  :defer t
+  :ensure (flycheck-overlay :type git :host github :repo "konrad1977/flycheck-overlay")
+  :after flycheck
+  :config
+  (setq flycheck-overlay-info-icon "●")
+  (setq flycheck-overlay-warning-icon "➤")
+  (setq flycheck-overlay-error-icon "✘")
+  
+  (setq flycheck-overlay-show-at-eol t)
+  (setq flycheck-overlay-hide-when-cusor-is-on-same-line t)
+  (setq flycheck-overlay-hide-checker-name t)
+  :hook flycheck-mode)
+
+;; broken
+;; (use-package flycheck-inline
+;;   :defer t
+;;   :after flycheck
+;;   :hook flycheck-mode)
