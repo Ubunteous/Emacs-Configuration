@@ -22,6 +22,25 @@
 ;;   "Hooks for Web mode.  Adjust indent."
 ;;   (setq web-mode-markup-indent-offset 4))
 
+(defun get-html-element-css-style ()
+  "Get the current tag/class/id and find its style in an open css buffer."
+  (interactive)
+  (search-backward-regexp "<[a-z1-6]+\\|class=\"[a-z]+\\|id=\"[a-z]+")
+
+  (unless (= (char-after) ?<)
+    (forward-sexp))
+  (forward-char)
+
+  ;; search
+  (let ((search-term (symbol-name (sexp-at-point))))
+
+    (multi-occur
+     (mapcar
+      (lambda (buf)
+        (if (string-match "\w*.s?css" (buffer-name buf)) buf))
+      (buffer-list))
+     (concat search-term ".*{") 5)))
+
 ;; to use it
 ;; + create a js file containing alert("Hello");
 ;; M-x run-skewer
