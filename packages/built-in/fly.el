@@ -6,6 +6,8 @@
 (use-package flycheck
   :defer t
   :diminish flycheck-mode "check"
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   :hook (prog-mode . flycheck-mode))
 
 ;; spell checking
