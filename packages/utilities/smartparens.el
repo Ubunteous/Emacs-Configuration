@@ -7,4 +7,5 @@
   :defer t
   :config
   (require 'smartparens-config)
-  :hook (prog-mode . smartparens-strict-mode))
+;; :hook (prog-mode . smartparens-strict-mode))
+  :hook prog-mode)
