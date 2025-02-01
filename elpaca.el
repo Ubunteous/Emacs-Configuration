@@ -231,12 +231,18 @@
 			      ;; "popper" ;; try later
 			      ;; "consult-dir" ;; cool but similar to consult-buffer
 			      "gptel"
+			      "outline-indent" ;; does not work well with python
 			      "evil-nerd-commenter"
 			      "helpful"
 			      "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
 			      "move-text"
 			      "visual-regexp"
 			      "vundo"
+
+			      ;; choose one paredit superset to replace electric (pair) mode
+			      "smartparens" ;; currently maintained
+			      ;; "lispy" ;; vi-like bindings conflicting with meow
+			      
 			      "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
@@ -425,7 +431,6 @@
 ;; (load-user-file "utilities/recursion-indicator") ;; interesting but not as useful as minibuffer-depth-indicate-mode
 ;; (load-user-file "utilities/auto-compile")
 ;; (load-user-file "utilities/clippy") ;; what a nightmare
-;; (load-user-file "utilities/smartparens")
 ;; (load-user-file "passive-utils/indent-bars")
 
 ;; (load-user-files "discarded/passive-utils" '("happy-margins"))

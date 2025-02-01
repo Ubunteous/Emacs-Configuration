@@ -69,15 +69,15 @@
   (setq initial-scratch-message ";; This is where the fun begins")
 
   ;; insert matching pair of parenthesis
-  (electric-pair-mode t)
+  ;; (electric-pair-mode t)
   ;; (setq electric-pair-preserve-balance t) ;; add " if another behind
 
-  (setq-default electric-pair-inhibit-predicate
-		'(lambda (CHAR)
-		   (or (electric-pair-conservative-inhibit CHAR)
-		       ;; also inhibit when using char " after a word
-		       (and (eq (char-before) ?\")
-			    (eq (char-syntax (char-before (1- (point)))) ?w)))))
+  ;; (setq-default electric-pair-inhibit-predicate
+  ;; 		'(lambda (CHAR)
+  ;; 		   (or (electric-pair-conservative-inhibit CHAR)
+  ;; 		       ;; also inhibit when using char " after a word
+  ;; 		       (and (eq (char-before) ?\")
+  ;; 			    (eq (char-syntax (char-before (1- (point)))) ?w)))))
   
   ;; prevent insertion of double "
   ;; (setq electric-pair-inhibit-predicate
