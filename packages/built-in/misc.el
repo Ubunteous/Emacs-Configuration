@@ -142,6 +142,8 @@
   ;; (defadvice occur-1 (after occur-maximize activate)
   ;;   (other-window 1))
 
+  (setq tab-width 4)
+  
   ;; toggle-truncate-lines or visual-line-mode or global-visual-line-mode
   ;;(setq-default truncate-lines t)
   (global-visual-line-mode t)

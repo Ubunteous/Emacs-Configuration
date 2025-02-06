@@ -22,6 +22,7 @@
     (replace-string "Ã®" "î" nil pmin pmax)
     (replace-string "�" "î" nil pmin pmax)
     (replace-string "Ã´" "ô" nil pmin pmax)
+    (replace-string "�" "ô" nil pmin pmax)
     (replace-string "Ã¹" "ù" nil pmin pmax)
     (replace-string "�" "ù" nil pmin pmax)
     (replace-string "û" "û" nil pmin pmax)))
