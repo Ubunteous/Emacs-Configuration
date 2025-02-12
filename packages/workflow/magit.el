@@ -17,8 +17,8 @@
 
   ;; full screen magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  (setq magit-remote-add-set-remote.pushDefault nil))
-
+  (setq magit-remote-add-set-remote.pushDefault nil)
+  (setopt magit-format-file-function #'magit-format-file-all-the-icons)) ;; for v4.3.0+
 
 ;; (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
 ;;   (setq ad-return-value
