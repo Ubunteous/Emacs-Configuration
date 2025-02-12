@@ -39,8 +39,9 @@
   (defun sql-connect-to-pqsql-mydb ()
     (interactive)
     (sql-connect 'pgsql-mydb "*pgsql-mydb*"))
-  :general (:keymaps 'sql-mode-map
-		     "?\"" '(lambda () (insert ?\'))))
+  :general
+  (:keymaps 'sql-mode-map
+	    "\"" '(lambda () (interactive) (insert ?\'))))
 
 (use-package sqlup-mode
   :defer t
