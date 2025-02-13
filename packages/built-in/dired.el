@@ -27,8 +27,8 @@
   :ensure nil
   ;; :straight (:type built-in)
   :hook ((dired-mode . dired-omit-mode)
-	 (dired-mode . hl-line-mode)
-	 (dired-mode . dired-hide-details-mode)) ;; buffers/backup
+		 (dired-mode . hl-line-mode)
+		 (dired-mode . dired-hide-details-mode)) ;; buffers/backup
   :config
   ;; (use-package diredfl
   ;; :config (diredfl-global-mode 1)))
@@ -37,7 +37,9 @@
   ;; Hide .log and .out files (useful in latex directories)
   ;; (setq dired-omit-files
   ;; (concat dired-omit-files "\\|.log$\\|.out$"))
-  )
+
+  (when windows-system-p
+	(setq dired-omit-files (concat dired-omit-files  "\\|.resx$\\|.Designer.cs$"))))
 
 
 (use-package diredfl
