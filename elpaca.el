@@ -32,11 +32,11 @@
   "Load config files depending on the operating system."
   ;; (fset #'partial-load-user-files `(lambda (_list) (load-user-files ,dir _list)))
 
-  ;; (if (eq system-type 'windows-nt)
+  ;; (if windows-system-p
   ;;     (mapcar 'partial-load-user-files `(,windows ,both))
   ;;   (mapcar 'partial-load-user-files `(,linux ,both)))
 
-  (if (eq system-type 'windows-nt)
+  (if windows-system-p
       (load-user-files dir windows)
     (load-user-files dir linux))
   

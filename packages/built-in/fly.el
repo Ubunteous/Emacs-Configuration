@@ -25,11 +25,11 @@
   (text-mode . flyspell-mode)
   :config
   ;; use aspell instead on ispell (requires aspell installation)
-  (if (eq system-type 'windows-nt)
+  (if windows-system-p
       (progn
-	(setenv "LANG" "en_GB.UTF-8")
-	(setenv "DICPATH" "C:/Hunspell/dictionaries/") ;; dic/aff files
-	(setq ispell-program-name "C:/Hunspell/hunspell/bin/hunspell.exe"))
+		(setenv "LANG" "en_GB.UTF-8")
+		(setenv "DICPATH" "C:/Hunspell/dictionaries/") ;; dic/aff files
+		(setq ispell-program-name "C:/Hunspell/hunspell/bin/hunspell.exe"))
     (setq ispell-program-name "aspell"))
 
   (setq ispell-choices-win-default-height 10) ;; default too small

@@ -31,6 +31,8 @@
  initial-scratch-message ""             ; Empty the initial *scratch* buffer
  initial-buffer-choice t)
 
+(setq windows-system-p (eq system-type 'windows-nt))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               STRAIGHT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -120,7 +122,7 @@
       ((error) (warn "%s" err) (delete-directory repo 'recursive))))
   (unless (require 'elpaca-autoloads nil t)
     ;; required by windows with its different path system
-    (when (eq system-type 'windows-nt)
+    (when windows-system-p
       (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
@@ -158,7 +160,7 @@
 
 
 ;; Uncomment for systems which cannot create symlinks (like windows 10):
-(when (eq system-type 'windows-nt)
+(when windows-system-p
   ;; requires a restart even if error about symlinks
   (elpaca-no-symlink-mode)
 
@@ -166,7 +168,7 @@
   (setq default-directory "~/../../Documents/")
 
   (setq package-archives
-	'(("gnu-elpa" . "https://elpa.gnu.org/packages/")
+		'(("gnu-elpa" . "https://elpa.gnu.org/packages/")
           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
           ("melpa" . "https://melpa.org/packages/"))))
 
