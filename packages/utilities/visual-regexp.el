@@ -6,7 +6,7 @@
   :defer t
   :general
   ("C-c v e" 'vr/replace
-   "C-c v q" 'vr/querry-replace
+   "C-c v q" 'vr/query-replace
    "C-c v m" 'vr/mc-mark))
 
 
