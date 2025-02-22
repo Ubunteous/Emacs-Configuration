@@ -69,22 +69,23 @@
   (setq initial-scratch-message ";; This is where the fun begins")
 
   ;; insert matching pair of parenthesis
-  ;; (electric-pair-mode t)
-  ;; (setq electric-pair-preserve-balance t) ;; add " if another behind
+  (electric-pair-mode t)
+  (setq electric-pair-preserve-balance t) ;; add " if another behind
 
-  ;; (setq-default electric-pair-inhibit-predicate
-  ;; 		'(lambda (CHAR)
-  ;; 		   (or (electric-pair-conservative-inhibit CHAR)
-  ;; 		       ;; also inhibit when using char " after a word
-  ;; 		       (and (eq (char-before) ?\")
-  ;; 			    (eq (char-syntax (char-before (1- (point)))) ?w)))))
+  ;; smarter electric insert
+  (setq-default electric-pair-inhibit-predicate
+		'(lambda (CHAR)
+		   (or (electric-pair-conservative-inhibit CHAR)
+		       ;; also inhibit when using char " after a word
+		       (and (eq (char-before) ?\")
+			    (eq (char-syntax (char-before (1- (point)))) ?w)))))
   
-  ;; prevent insertion of double "
+  ;; ;; prevent insertion of double "
   ;; (setq electric-pair-inhibit-predicate
   ;; 	(lambda (c)
   ;;         (if (char-equal c ?\") t (electric-pair-default-inhibit c))))
 
-  ;; remove
+  ;; ;; remove
   ;; (setq-default electric-pair-inhibit-predicate
   ;;               (lambda (c)
   ;;                 (if (looking-at "[ \n\t]")
@@ -104,9 +105,9 @@
   ;;(setq inhibit-startup-echo-area-message t)
 
   ;; Make M-x compile silent
-;;; Shut up compile saves
+  ;; Shut up compile saves
   ;;(setq compilation-ask-about-save nil)
-;;; Don't save *anything*
+  ;; Don't save *anything*
   ;;(setq compilation-save-buffers-predicate '(lambda () nil))
 
   ;; highlight the current line
@@ -168,7 +169,7 @@
   ;; move auto save folder in specific directory
   ;; USED TO BE A CUSTOM SET
   (setq auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-")
-		auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~"))
+	auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~"))
 
   ;; move bookmarks in specific directory
   (custom-set-variables
@@ -186,8 +187,8 @@
 
   ;; query: live processes
   (setq kill-buffer-query-functions
-		(remq 'process-kill-buffer-query-function
-			  kill-buffer-query-functions))
+	(remq 'process-kill-buffer-query-function
+	      kill-buffer-query-functions))
 
   ;; remove warning
   ;; (put 'upcase-region 'disabled nil)
@@ -201,17 +202,17 @@
 
   ;; save automatically before M-x compile
   (setq compilation-ask-about-save nil
-		compilation-scroll-output t
-		compilation-auto-jump-to-first-error t
-		;; compilation-max-output-line-length nil
-		compilation-always-kill t)
+	compilation-scroll-output t
+	compilation-auto-jump-to-first-error t
+	;; compilation-max-output-line-length nil
+	compilation-always-kill t)
   
   ;; create directory with find file if it does not exist
   (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
     "Create parent directory if not exists while visiting file."
     (unless (file-exists-p filename)
       (let ((dir (file-name-directory filename)))
-		(unless (file-exists-p dir)
+	(unless (file-exists-p dir)
           (make-directory dir t)))))
 
   ;; Does not work yet. Learn more about rg / fd first before replacing emacs' defaults
@@ -251,8 +252,8 @@
   ;; hide lint messages on package update
   (add-to-list 'display-buffer-alist
                '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-				 (display-buffer-no-window)
-				 (allow-no-window . t)))
+		 (display-buffer-no-window)
+		 (allow-no-window . t)))
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:background "#272821"))))
@@ -277,12 +278,12 @@
 
   ;; auto balance windows upon deletion
   ("C-x 0" '(lambda ()
-			  (interactive)
-			  (delete-window)
-			  
-			  ;; balance windows if more than 1
-			  (unless (= 1 (length (window-list)))
-				(balance-windows))))
+	      (interactive)
+	      (delete-window)
+	      
+	      ;; balance windows if more than 1
+	      (unless (= 1 (length (window-list)))
+		(balance-windows))))
   ;; :hook
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)

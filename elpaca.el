@@ -240,7 +240,7 @@
 			      "vundo"
 
 			      ;; choose one paredit superset to replace electric (pair) mode
-			      "smartparens" ;; currently maintained
+			      ;; "smartparens" ;; currently missing electric-pairs smart predicate
 			      ;; "lispy" ;; vi-like bindings conflicting with meow
 			      
 			      "writeroom"))
