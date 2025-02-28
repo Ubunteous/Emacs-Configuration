@@ -15,7 +15,10 @@
   :config
   (setq corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
   ;; (setq corfu-preselect-first nil) ;; Disable candidate preselection
-  (setq corfu-auto t) ;; Enable auto completion
+
+  ;; disable when using corfu-candidate-overlay
+  (setq corfu-auto t) ;; auto completion dropdown
+
   ;; (setq corfu-auto-prefix 4) ;; number of characters needed to trigger popup
   ;; (setq corfu-separator ?\s)          ;; Orderless field separator
   ;; (setq corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
@@ -32,17 +35,16 @@
   ;; Enable Corfu only for certain modes.
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
-
   :general (:keymaps 'corfu-map
-		     "<escape>" 'corfu-quit
+					 "<escape>" 'corfu-quit
 
-		     ;; "TAB" 'corfu-next
-		     ;; "S-TAB" 'corfu-previous
+					 ;; "TAB" 'corfu-next
+					 ;; "S-TAB" 'corfu-previous
 
-		     "C-n" 'corfu-next
-		     "TAB" 'corfu-insert
-		     "C-p" 'corfu-previous
-		     "RET" 'newline))
+					 "C-n" 'corfu-next
+					 "TAB" 'corfu-insert
+					 "C-p" 'corfu-previous
+					 "RET" 'newline))
 
 ;; will show most likely candidate transparently
 ;; cannot be used when corfu-auto is true
@@ -66,6 +68,22 @@
 ;;   :hook prog-mode . (lambda ()
 ;; 		      (let ((inhibit-message t))
 ;; 			(corfu-candidate-overlay-mode +1))))
+
+
+
+;; (use-package corfu-candidate-overlay
+;;   :ensure (corfu-candidate-overlay :type git
+;; 								   ;; :files (:defaults "*.el")
+;; 								   :repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay")  
+;;   :after corfu
+;;   ;; :config
+;;   ;; enable corfu-candidate-overlay mode globally
+;;   ;; this relies on having corfu-auto set to nil
+;;   ;; (corfu-candidate-overlay-mode +1)
+;;   ;; :general
+;;   ;; "C-<tab>" 'completion-at-point
+;;   ;; "C-S-<tab>" 'corfu-candidate-overlay-complete-at-point
+;;   :hook prog-mode)
 
 (use-package emacs
   ;; :straight (:type built-in)
