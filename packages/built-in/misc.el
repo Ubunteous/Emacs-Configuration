@@ -21,6 +21,9 @@
   ;; default to horizontal split
   (setq split-width-threshold 1)
 
+  ;; ;; add project name in modeline
+  ;; (setq project-mode-line t)
+  
   ;; Remember and restore the last cursor location of opened files
   (save-place-mode 1)
   (setq save-place-file "~/.emacs.d/files/save-place.el")
@@ -156,9 +159,9 @@
   (setq ring-bell-function #'ignore)
 
   ;; correct accents in filenames
-  ;; (prefer-coding-system 'utf-8)
-  ;;(set-default-coding-systems 'utf-8)
-  ;; (setq file-name-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (setq file-name-coding-system 'utf-8)
 
   ;; use minibuffer in minibuffer. useful to search in minibuffer with swiper
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico

@@ -60,23 +60,24 @@
 ;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "built-in"
-			    '()
+							'()
 
-			    '("smtpmail"
-			      "treesit"
-			      "eglot")
-			    
-			    '("auto-insert"
-			      "completion"
-			      "dired" ;; => add git compatibility
-			      "fly"
-			      "ibuffer"
-			      ;; "icomplete" ;; competes with vertico
-			      "misc"
-			      "recentf"
-			      "repeat"
-			      ;; "eglot-booster"
-			      "isearch"))
+							'("smtpmail"
+							  "treesit"
+							  "eglot")
+							
+							'("auto-insert"
+							  "completion"
+							  "dired" ;; => add git compatibility
+							  "fly"
+							  "ibuffer"
+							  ;; "icomplete" ;; competes with vertico
+							  "misc"
+							  "recentf"
+							  "repeat"
+							  "which-key"			  
+							  ;; "eglot-booster"
+							  "isearch"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
 ;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
@@ -255,25 +256,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "passive-utils"
-			    '()
+							'()
 
-			    '("apheleia"
-			      "hl-todo")
-			    
-			    '("which-key"
-			      "meow"
-			      "rainbow-delimiters"
-			      "adaptive-wrap"
-			      "ultra-scroll"
-			      "aggressive-indent"
-			      "auto-capitalize" ;; => LaTeX/org mode only
-			      "beacon"
-			      "browse-kill-ring"
-			      "diminish"
-			      "dimmer" ;; DONE
-			      "undo-hl" ;; => not in melpa yet
-			      ;; "symbol-overlay" ;; strong. maybe use later
-			      "no-littering"))
+							'("apheleia"
+							  "hl-todo")
+							
+							'("meow"
+							  ;; "which-key" ;; now built-in
+							  "rainbow-delimiters"
+							  "adaptive-wrap"
+							  "ultra-scroll"
+							  "aggressive-indent"
+							  "auto-capitalize" ;; => LaTeX/org mode only
+							  "beacon"
+							  "browse-kill-ring"
+							  "diminish"
+							  "dimmer" ;; DONE
+							  "undo-hl" ;; => not in melpa yet
+							  ;; "symbol-overlay" ;; strong. maybe use later
+							  "no-littering"))
 
 ;; (load-user-file "passive-utils/diff-hl") ;; not essential but fun
 ;; (load-user-file "passive-utils/evil")
