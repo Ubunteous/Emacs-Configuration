@@ -21,23 +21,23 @@
 
   ;; a bit redundant with C-c C-d (org-deadline)
   (:keymaps 'org-capture-mode-map
-	    "C-c d" 'org-timestamp-up-day)
+			"C-c d" 'org-timestamp-up-day)
 
   ;; org-agenda-list
   (:keymaps 'org-mode-map
-	    "C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
+			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
 
-	    ;; removed as I need the default bindings for navigation
-	    ;; "C-n" 'org-next-visible-heading
-	    ;; "C-p" 'org-previous-visible-heading
-	    ;; "C-f" 'org-forward-heading-same-level
-	    ;; "C-b" 'org-backward-heading-same-level
+			;; removed as I need the default bindings for navigation
+			;; "C-n" 'org-next-visible-heading
+			;; "C-p" 'org-previous-visible-heading
+			;; "C-f" 'org-forward-heading-same-level
+			;; "C-b" 'org-backward-heading-same-level
 
-	    "C-c C-n" 'org-babel-next-block-end
-	    "C-c C-p" 'org-babel-previous-block-end
-	    
-	    ;; overrides persp-list-buffers in org buffers
-	    "C-c b" 'org-switchb)
+			"C-c C-n" 'org-babel-next-block-end
+			"C-c C-p" 'org-babel-previous-block-end
+			
+			;; overrides persp-list-buffers in org buffers
+			"C-c b" 'org-switchb)
   :config
   ;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
@@ -50,53 +50,53 @@
 
   ;; latex export classes
   (setq org-latex-classes
-	'(("article"
-	   ;; deal with indentation later
-	   "\\documentclass[12pt]{article}
+		'(("article"
+		   ;; deal with indentation later
+		   "\\documentclass[12pt]{article}
 
 [PACKAGES]
 \\usepackage[inline]{enumitem}
 \\setlist[itemize]{nosep}
 
 [EXTRA]"
-	   ("\\section{%s}" . "\\section*{%s}")
-	   ("\\subsection{%s}" . "\\subsection*{%s}")
-	   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-	   ("\\paragraph{%s}" . "\\paragraph*{%s}")
-	   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-	   )))
+		   ("\\section{%s}" . "\\section*{%s}")
+		   ("\\subsection{%s}" . "\\subsection*{%s}")
+		   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+		   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+		   ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+		   )))
 
   ;; more latex export settings
   (setq org-export-with-author nil
-	org-export-with-date nil
-	org-export-with-toc nil
-	org-export-with-title nil
-	org-latex-caption-above nil)
+		org-export-with-date nil
+		org-export-with-toc nil
+		org-export-with-title nil
+		org-latex-caption-above nil)
 
   ;; latex export default packages
   (setq org-latex-default-packages-alist
-	'(("AUTO" "inputenc" t
-	   ("pdflatex"))
-	  ;;("T1" "fontenc" t
-	  ;; ("pdflatex"))
-	  ("" "graphicx" t)
-	  ;; ("" "longtable" nil)
-	  ;; ("" "wrapfig" nil)
-	  ;; ("" "rotating" nil)
-	  ;; ("normalem" "ulem" t)
-	  ("" "amsmath" t)
-	  ("" "amssymb" t)
-	  ;; ("" "capt-of" nil)
-	  ("" "hyperref" nil)
-	  ))
+		'(("AUTO" "inputenc" t
+		   ("pdflatex"))
+		  ;;("T1" "fontenc" t
+		  ;; ("pdflatex"))
+		  ("" "graphicx" t)
+		  ;; ("" "longtable" nil)
+		  ;; ("" "wrapfig" nil)
+		  ;; ("" "rotating" nil)
+		  ;; ("normalem" "ulem" t)
+		  ("" "amsmath" t)
+		  ("" "amssymb" t)
+		  ;; ("" "capt-of" nil)
+		  ("" "hyperref" nil)
+		  ))
 
   ;; latex export other packages
   (setq org-latex-packages-alist
-	'(("margin=2cm" "geometry")))
+		'(("margin=2cm" "geometry")))
   ;; ("" "parskip")
 
   (setq org-latex-hyperref-template ;; for pictures
-	"\\hypersetup{pdfborder=0 0 0}\n\n")
+		"\\hypersetup{pdfborder=0 0 0}\n\n")
 
   ;; pdf export will open in evince (with C-c C-e l o)
   (add-to-list 'org-file-apps '("\\.pdf" . "evince %s"))
@@ -111,28 +111,29 @@
 
   ;; org structure
   (setq org-structure-template-alist
-	'(("a" . "src C :includes <stdio.h> <stdlib.h>\n")
-	  ("C" . "comment\n")
-	  ("c" . "src clojure\n")
-	  ("e" . "src elisp\n")
-	  ("f" . "src python\n")
-	  ;; ("g" . "src go\n")
-	  ("h" . "src html\n")
-	  ("i" . "src js\n")
-	  ("l" . "src lilypond :file lily.png\n")
-	  ("m" . "center\n")
-	  ("n" . "src nix\n")
-	  ("p" . "src powershell\n")
-	  ;; ("p" . "src python\n")
-	  ;; ("Q" . "src sql-mode\n")
-	  ("q" . "src sql\n")
-	  ("r" . "src\n")
-	  ("t" . "src janet\n")
-	  ("#" . "src csharp\n")
-	  ("u" . "src lua\n")
-	  ;; ("u" . "src jupyter-python\n")
-	  ("s" . "src shell\n")
-	  ("w" . "src css\n")))
+		'(("a" . "src C :includes <stdio.h> <stdlib.h>\n")
+		  ("C" . "comment\n")
+		  ("c" . "src clojure\n")
+		  ("e" . "src elisp\n")
+		  ("f" . "src python\n")
+		  ;; ("g" . "src go\n")
+		  ("h" . "src html\n")
+		  ("i" . "src js\n")
+		  ("l" . "src lilypond :file lily.png\n")
+		  ("m" . "center\n")
+		  ("n" . "src nix\n")
+		  ("p" . "src powershell\n")
+		  ;; ("p" . "src python\n")
+		  ;; ("Q" . "src sql-mode\n")
+		  ("q" . "src sql\n")
+		  ("r" . "src\n")
+		  ("s" . "src shell\n")
+		  ("t" . "src janet\n")
+		  ("#" . "src csharp\n")
+		  ("u" . "src lua\n")
+		  ;; ("u" . "src jupyter-python\n")
+		  ("w" . "src css\n")
+		  ("x" . "src restclient\n")))
 
   ;; defaults to gcc
   ;; (setq org-babel-C-compiler "clang")
@@ -166,6 +167,7 @@
      (lua . t)
      (org . t)
      (lilypond . t)
+	 (restclient . t)
      ))
 
   ;; This can be used to customise headers
@@ -181,31 +183,31 @@
   (setq org-default-notes-file (concat org-directory "~/.notes"))
 
   (setq org-capture-templates
-	'(("t" "New task for the agenda"
-	   entry (file "~/org/agenda.org")
+		'(("t" "New task for the agenda"
+		   entry (file "~/org/agenda.org")
            "* %?%i %t" :empty-lines-before 1)
-	  ("d" "New deadline for the agenda"
-	   entry (file "~/org/agenda.org")
+		  ("d" "New deadline for the agenda"
+		   entry (file "~/org/agenda.org")
            "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
-	  ("s" "Slipbox"
-	   entry (file "~/org/Alter/inbox.org")
-	   "* %?\n")
-	  ))
+		  ("s" "Slipbox"
+		   entry (file "~/org/Alter/inbox.org")
+		   "* %?\n")
+		  ))
 
   ;; shift org capture default date to tomorrow
   (advice-add 'org-capture :around
               (lambda (oldfun &rest args)
-		(let ((org-overriding-default-time
+				(let ((org-overriding-default-time
                        (funcall
-			(lambda ()
+						(lambda ()
                           (let ((day (string-to-number (format-time-string "%d")))
-				(month (string-to-number (format-time-string "%m")))
-				(year (string-to-number (format-time-string "%Y"))))
+								(month (string-to-number (format-time-string "%m")))
+								(year (string-to-number (format-time-string "%Y"))))
                             (encode-time 1 1 0 (1+ day) month year))))))
                   (apply oldfun args))))
 
   (setq org-deadline-warning-days 0
-	org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
+		org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
 
   ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
   ;;  "* %?\nEntered on %U\n  %i\n  %a")))
@@ -225,8 +227,8 @@
   ;; show the previous day
   ;; span of 'day, 'week, 'month, 'year, or any number of days (int)
   (setq org-agenda-start-on-weekday nil
-	org-agenda-start-day "-3d"
-	org-agenda-span 14)
+		org-agenda-start-day "-3d"
+		org-agenda-span 14)
 
   ;; org agenda align entries content
   ;; (setq org-agenda-prefix-format
@@ -246,7 +248,7 @@
 
   ;; Window: current, other, only | Frame: reorganize, other | Tab: other
   (setq org-agenda-window-setup 'only-window
-	org-agenda-restore-windows-after-quit t)
+		org-agenda-restore-windows-after-quit t)
 
   ;;;;;;;;;;;;;;;
   ;;   DIARY   ;;
@@ -322,9 +324,9 @@
   ;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-html-postamble nil
-	org-html-head-include-default-style nil
-	org-html-meta-tags nil
-	org-html-xml-declaration nil)
+		org-html-head-include-default-style nil
+		org-html-meta-tags nil
+		org-html-xml-declaration nil)
 
   ;; don't touch those
   ;; (setq org-html-doctype-alist nil)

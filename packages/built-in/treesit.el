@@ -33,7 +33,7 @@
 ;; ;; Note that treesit-fold is similar to hs-mode
 ;; (use-package treesit-fold
 ;;   :defer t
-;;   :ensure (ts-fold :type git :host github :repo "abougouffa/treesit-fold")
+;;   :ensure (ts-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold")
 ;;   :hook
 ;;   ;; (tree-sitter-after-on . ts-fold-indicators-mode) ;; ts-fold unavailable with treesit
 ;;   (python-ts-mode . treesit-fold-mode))

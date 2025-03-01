@@ -20,5 +20,4 @@
   (swiper-match-face-2 ((t (:background "light sea green"))))
   (swiper-match-face-3 ((t (:background "light sea green"))))
   (swiper-match-face-4 ((t (:background "light sea green"))))
-  (swiper-line-face ((t (:foreground "unspecified"))))
-  )
+  (swiper-line-face ((t (:foreground "unspecified")))))

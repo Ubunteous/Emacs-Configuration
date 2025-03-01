@@ -147,36 +147,37 @@
 (elpaca-wait)
 
 (load-user-files-per-system "org"
-			    '("htmlize")
+							'("htmlize")
 
-			    '("jupyter" ;; convert org -> ipynb with ox-ipynb
-			      "org-fragtog"
-			      "org-fancy-priorities"
-			      ;; zettelkasten
-			      ;; "delve" ;; bring back for emacs 30
-			      "org-roam"
-			      "org-roam-ui"
-			      ;; deft
-			      "deft"
-			      "notdeft")
-			    
-			    '("org"
-			      "org-modern"
-			      ;; "ord-modern-indent"
-			      "org-appear"
+							'("jupyter" ;; convert org -> ipynb with ox-ipynb
+							  "org-fragtog"
+							  "org-fancy-priorities"
+							  ;; zettelkasten
+							  ;; "delve" ;; bring back for emacs 30
+							  "org-roam"
+							  "org-roam-ui"
+							  ;; deft
+							  "deft"
+							  "notdeft")
+							
+							'("org"
+							  "org-modern"
+							  ;; "ord-modern-indent"
+							  "org-appear"
 
-			      ;; not ready yet
-			      ;; more casual-packages to discover
-			      ;; "casual-agenda"
+							  ;; not ready yet
+							  ;; more casual-packages to discover
+							  ;; "casual-agenda"
 
-			      "ob-janet"
-			      "ob-csharp"
-			      ;; "ob-go"
-			      "ob-html"
-			      "ob-sql"
-			      "ob-nix"
-			      ;; "ob-async"
-			      "ob-powershell"))
+							  "ob-janet"
+							  "ob-restclient"			  
+							  "ob-csharp"
+							  ;; "ob-go"
+							  "ob-html"
+							  "ob-sql"
+							  "ob-nix"
+							  ;; "ob-async"
+							  "ob-powershell"))
 
 ;; Ready
 ;; (load-user-file "org/org-cliplink")
@@ -215,36 +216,37 @@
 ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "utilities"
-			    '()
-			    
-			    '("devdocs"
-			      "expand-region"
-			      "minions"
-			      "multiple-cursors"
-			      ;; "powerthesaurus"
-			      ;; "outli"
-			      "symbol-overlay-mc"
-			      "docker"
-			      "combobulate"
-			      "wgrep")
-			    
-			    '("crux"
-			      ;; "popper" ;; try later
-			      ;; "consult-dir" ;; cool but similar to consult-buffer
-			      "gptel"
-			      "outline-indent" ;; does not work well with python
-			      "evil-nerd-commenter"
-			      "helpful"
-			      "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
-			      "move-text"
-			      "visual-regexp"
-			      "vundo"
+							'()
+							
+							'("devdocs"
+							  "expand-region"
+							  "minions"
+							  "multiple-cursors"
+							  ;; "powerthesaurus"
+							  ;; "outli"
+							  "symbol-overlay-mc"
+							  "docker"
+							  "combobulate"
+							  ;; "restclient"
+							  "wgrep")
+							
+							'("crux"
+							  ;; "popper" ;; try later
+							  ;; "consult-dir" ;; cool but similar to consult-buffer
+							  "gptel"
+							  "outline-indent" ;; does not work well with python
+							  "evil-nerd-commenter"
+							  "helpful"
+							  "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
+							  "move-text"
+							  "visual-regexp"
+							  "vundo"
 
-			      ;; choose one paredit superset to replace electric (pair) mode
-			      ;; "smartparens" ;; currently missing electric-pairs smart predicate
-			      ;; "lispy" ;; vi-like bindings conflicting with meow
-			      
-			      "writeroom"))
+							  ;; choose one paredit superset to replace electric (pair) mode
+							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
+							  ;; "lispy" ;; vi-like bindings conflicting with meow
+							  
+							  "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
 ;; (load-user-file "utilities/esup")
