@@ -171,26 +171,3 @@
 (load custom-file :no-error-if-file-is-missing)
 
 ;;; init.el ends here
-
-;; (defun load-user-file (file)
-;;   "Add FILE to configuration (located in directory: packages)."
-;;   (interactive "f")
-;;   "Load a file from the packages ~/.emacs/directory"
-;;   (load-file (expand-file-name (concat file ".el") (concat "~/.emacs.d/packages/"))))
-;; 
-;; (load-user-file "programming/latex-straight")
-
-;; fixes an emacs 29.4 bug where cl-loaddefs is recompiled on startup
-(defun fixed-native-compile-async-skip-p
-    (native-compile-async-skip-p file load selector)
-  (let* ((naive-elc-file (file-name-with-extension file "elc"))
-         (elc-file       (replace-regexp-in-string
-                          "\\.el\\.elc$" ".elc" naive-elc-file)))
-    (or (gethash elc-file comp--no-native-compile)
-        (funcall native-compile-async-skip-p file load selector))))
-
-(advice-add 'native-compile-async-skip-p
-			:around 'fixed-native-compile-async-skip-p)
-
-
-
