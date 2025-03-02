@@ -117,7 +117,7 @@
   (elpaca-no-symlink-mode)
 
 ;; hack to use find-file at c:/Users/<name>/
-; (setq default-directory "~/../../Documents/")
+(setq default-directory "~/../../Documents/"))
 
 (setq package-archives
 	  '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
@@ -191,5 +191,6 @@
 
 (advice-add 'native-compile-async-skip-p
 			:around 'fixed-native-compile-async-skip-p)
+
 
 
