@@ -2,9 +2,14 @@
 ;;              ORG-ROAM              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; (use-package emacsql
+;;   :defer t
+;;   :ensure (emacsql :type git :host github :repo "magit/emacsql"))
+
 ;; EXTENSIONS: protocol, graph, dailies, export
 (use-package org-roam
   :defer t
+  ;; :after emacsql
   :custom-face
   (org-roam-link-current ((nil (:background "#e24888" :underline t))))
   (org-roam-link ((nil (:background "#e24888" :underline t))))
@@ -69,182 +74,182 @@
   ;; add the following .dir-locals.el to avoid auto-insert clash
   ;; ((org-mode . ((auto-insert-alist . nil))))
   (setq org-roam-capture-templates
-	'(("d" "default" plain "%?" :target
-	   ;; (file "%<%Y%m%d%H%M%S>-${slug}.org")
-	   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-	   ;; :immediate-finish t
-	   :unnarrowed t
-	   :empty-lines 1)
+		'(("d" "default" plain "%?" :target
+		   ;; (file "%<%Y%m%d%H%M%S>-${slug}.org")
+		   (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+		   ;; :immediate-finish t
+		   :unnarrowed t
+		   :empty-lines 1)
 
-	  ("a" "alter" plain "%?"
-	   :if-new (file+head "${slug}.org"
-			      "#+title: ${title}")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("a" "alter" plain "%?"
+		   :if-new (file+head "${slug}.org"
+							  "#+title: ${title}")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("c" "alter-character" plain "%?"
-	   :if-new (file+head "characters/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :character:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("c" "alter-character" plain "%?"
+		   :if-new (file+head "characters/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :character:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ;; ("p" "alter-plot" plain "%?"
-	  ;;  :if-new (file+head "${slug}.org"
-	  ;; 		      "#+title: ${title}\n#+filetags: :plot:\n\n")
-	  ;; :immediate-finish t
-	  ;; :empty-lines 1
-	  ;; :unnarrowed t)
+		  ;; ("p" "alter-plot" plain "%?"
+		  ;;  :if-new (file+head "${slug}.org"
+		  ;; 		      "#+title: ${title}\n#+filetags: :plot:\n\n")
+		  ;; :immediate-finish t
+		  ;; :empty-lines 1
+		  ;; :unnarrowed t)
 
-	  
-	  ("b" "alter-boite-a-idees" plain "%?"
-	   :if-new (file+head "idees/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
-	  
-	  ("w" "alter-worldbuilding" plain "%?"
-	   :if-new (file+head "$worldbuilding/{slug}.org"
-			      "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  
+		  ("b" "alter-boite-a-idees" plain "%?"
+		   :if-new (file+head "idees/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
+		  
+		  ("w" "alter-worldbuilding" plain "%?"
+		   :if-new (file+head "$worldbuilding/{slug}.org"
+							  "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  
-	  ("e" "alter-écriture" plain "%?"
-	   :if-new (file+head "écriture/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :écriture:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  
+		  ("e" "alter-écriture" plain "%?"
+		   :if-new (file+head "écriture/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :écriture:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("g" "alter-gamedesign" plain "%?"
-	   :if-new (file+head "gamedesign/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :gamedesign:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("g" "alter-gamedesign" plain "%?"
+		   :if-new (file+head "gamedesign/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :gamedesign:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("i" "alter-index" plain "%?"
-	   :if-new (file+head "index/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :index:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("i" "alter-index" plain "%?"
+		   :if-new (file+head "index/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :index:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("l" "alter-lieux" plain "%?"
-	   :if-new (file+head "lieux/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("l" "alter-lieux" plain "%?"
+		   :if-new (file+head "lieux/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ;; ("f" "fiction" plain "%?"
-	  ;;  :if-new (file+head "${title}.org"
-	  ;; 		      "#+title: ${title}")
-	  ;;  ;; :immediate-finish t
-	  ;;  :empty-lines 1
-	  ;;  :unnarrowed t)
+		  ;; ("f" "fiction" plain "%?"
+		  ;;  :if-new (file+head "${title}.org"
+		  ;; 		      "#+title: ${title}")
+		  ;;  ;; :immediate-finish t
+		  ;;  :empty-lines 1
+		  ;;  :unnarrowed t)
 
-	  ;; ("m" "musique" plain "%?"
-	  ;;  :if-new (file+head "${title}.org"
-	  ;; 		      "#+title: ${title}")
-	  ;;  ;; :immediate-finish t
-	  ;;  :empty-lines 1
-	  ;;  :unnarrowed t)
+		  ;; ("m" "musique" plain "%?"
+		  ;;  :if-new (file+head "${title}.org"
+		  ;; 		      "#+title: ${title}")
+		  ;;  ;; :immediate-finish t
+		  ;;  :empty-lines 1
+		  ;;  :unnarrowed t)
 
-	  ;; ("r" "rêves" plain "%?"
-	  ;;  :if-new (file+head "${title}.org"
-	  ;; 		      "#+title: ${title}")
-	  ;; :immediate-finish t
-	  ;; :empty-lines 1
-	  ;; :unnarrowed t)
+		  ;; ("r" "rêves" plain "%?"
+		  ;;  :if-new (file+head "${title}.org"
+		  ;; 		      "#+title: ${title}")
+		  ;; :immediate-finish t
+		  ;; :empty-lines 1
+		  ;; :unnarrowed t)
 
-	  ("s" "scènes")
-	  ("sp" "prélude" plain "%?"
-	   :if-new (file+head "scene/prélude/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
-	  
-	  ("se" "cité-ambre" plain "%?"
-	   :if-new (file+head "scene/cité-ambre/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("s" "scènes")
+		  ("sp" "prélude" plain "%?"
+		   :if-new (file+head "scene/prélude/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
+		  
+		  ("se" "cité-ambre" plain "%?"
+		   :if-new (file+head "scene/cité-ambre/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("sf" "académie-florale" plain "%?"
-	   :if-new (file+head "scene/académie-florale/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("sf" "académie-florale" plain "%?"
+		   :if-new (file+head "scene/académie-florale/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("sk" "arène-kinétis" plain "%?"
-	   :if-new (file+head "scene/arène-kinétis/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("sk" "arène-kinétis" plain "%?"
+		   :if-new (file+head "scene/arène-kinétis/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("si" "fort-intérieur" plain "%?"
-	   :if-new (file+head "scene/fort-intérieur/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
-	  
-	  ("sa" "cathédrale-albâtre" plain "%?"
-	   :if-new (file+head "scene/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
-	  
-	  ("sc" "ile-céleste" plain "%?"
-	   :if-new (file+head "scene/ile-céleste/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
-	  
-	  ("sh" "hangdoc" plain "%?"
-	   :if-new (file+head "scene/hangdoc/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("si" "fort-intérieur" plain "%?"
+		   :if-new (file+head "scene/fort-intérieur/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
+		  
+		  ("sa" "cathédrale-albâtre" plain "%?"
+		   :if-new (file+head "scene/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
+		  
+		  ("sc" "ile-céleste" plain "%?"
+		   :if-new (file+head "scene/ile-céleste/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
+		  
+		  ("sh" "hangdoc" plain "%?"
+		   :if-new (file+head "scene/hangdoc/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ("ss" "showdown" plain "%?"
-	   :if-new (file+head "scene/showdown/${slug}.org"
-			      "#+title: ${title}\n#+filetags: :scene:\n\n")
-	   ;; :immediate-finish t
-	   :empty-lines 1
-	   :unnarrowed t)
+		  ("ss" "showdown" plain "%?"
+		   :if-new (file+head "scene/showdown/${slug}.org"
+							  "#+title: ${title}\n#+filetags: :scene:\n\n")
+		   ;; :immediate-finish t
+		   :empty-lines 1
+		   :unnarrowed t)
 
-	  ))
+		  ))
 
   (cl-defmethod org-roam-node-type ((node org-roam-node))
     "Return the TYPE of NODE."
     (condition-case nil
-	(file-name-nondirectory
-	 (directory-file-name
+		(file-name-nondirectory
+		 (directory-file-name
           (file-name-directory
            (file-relative-name (org-roam-node-file node) org-roam-directory))))
       (error "")))
 
   ;; appearance in vertico completion buffer
   (setq org-roam-node-display-template
-	(concat
-	 ;; "${type:8} ${title:*} "
-	 "${type:13} > "
-	 (propertize "${title:40} " 'face 'org-tag)
-	 (propertize "${tags:14}" 'face 'org-verbatim) ;; does not work anymore
-	 ))
+		(concat
+		 ;; "${type:8} ${title:*} "
+		 "${type:13} > "
+		 (propertize "${title:40} " 'face 'org-tag)
+		 (propertize "${tags:14}" 'face 'org-verbatim) ;; does not work anymore
+		 ))
 
   ;; (setq org-roam-db-update-on-save t)
   :hook

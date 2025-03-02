@@ -126,7 +126,7 @@
 							'()
 							'("notmuch")
 							'("ace-window" ;; add rotate/transpose frame
-							  ;; "forge" ;; bring back for emacs 30 and change magit version
+							  ;; "forge" ;; bring back later
 							  "magit"
 							  
 							  ;; font is transparent. e.g.: ls /path/to/file is hard to see
@@ -153,7 +153,7 @@
 							  "org-fragtog"
 							  "org-fancy-priorities"
 							  ;; zettelkasten
-							  ;; "delve" ;; bring back for emacs 30
+							  ;; "delve" ;; bring back later
 							  "org-roam"
 							  "org-roam-ui"
 							  ;; deft
