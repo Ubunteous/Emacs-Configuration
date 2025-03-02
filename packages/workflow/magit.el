@@ -9,11 +9,15 @@
 ;;   :defer t
 ;;   :ensure (compat :type git :host github :repo "emacs-compat/compat"))
 
+(use-package transient
+  :defer t
+  :ensure (transient :type git :host github :repo "magit/transient"))
 
 (use-package magit
   ;; fixes emacs 29 issue with old transient package (dependency)
-  :ensure (:tag "v3.3.0")
-  :after compat
+  ;; :ensure (:tag "v3.3.0")
+  ;; :after compat
+  :after transient
   :defer t
   :config
   ;; ;; updates modeline with branch. higher cost than hook
