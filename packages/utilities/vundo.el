@@ -5,7 +5,7 @@
 (use-package vundo
   :commands (vundo)
   ;; :straight (vundo :type git :host github :repo "casouri/vundo")
-  ;; :ensure (vundo :type git :host github :repo "casouri/vundo")
+  :ensure (vundo :type git :host github :repo "casouri/vundo")
   :config
   ;; Take less on-screen space.
   (setq vundo-compact-display t)

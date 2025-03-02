@@ -5,10 +5,15 @@
 ;; remove last unmerged commit (set as unstaged change)
 ;; (magit-reset-soft "HEAD~1"))
 
-;; git porcelaine
+;; (use-package compat
+;;   :defer t
+;;   :ensure (compat :type git :host github :repo "emacs-compat/compat"))
+
+
 (use-package magit
   ;; fixes emacs 29 issue with old transient package (dependency)
   :ensure (:tag "v3.3.0")
+  :after compat
   :defer t
   :config
   ;; ;; updates modeline with branch. higher cost than hook

@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package spacious-padding
+  :ensure (spacious-padding :type git :host github :repo "protesilaos/spacious-padding")
   :defer t
   ;; :config
   ;; (setq spacious-padding-subtle-mode-line nil

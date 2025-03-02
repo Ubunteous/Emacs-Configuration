@@ -2,11 +2,14 @@
 ;;              KIND-ICON             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package svg-lib)
+(use-package svg-lib
+  :ensure (svg-lib :type git :host github :repo "rougier/svg-lib")
+  :defer t)
 
 (use-package kind-icon
   ;; :defer t
-  :after corfu
+  :after corfu svg-lib
+  :ensure (kind-icon :type git :host github :repo "jdtsmith/kind-icon")
   ;; :custom
   ;; (kind-icon-default-face 'corfu-default) ;; to compute blended backgrounds correctly
   :config

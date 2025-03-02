@@ -34,69 +34,18 @@
 (setq windows-system-p (eq system-type 'windows-nt))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               STRAIGHT             ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; replaced by elpaca
-
-;; ;; saves some time on startup by changing when straight looks for changes
-;; (setq straight-check-for-modifications '(check-on-save find-when-checking))
-;; (setq straight-check-for-modifications nil) ;; doom style
-;; 
-;; ;; fix for version 29.1
-;; (define-obsolete-variable-alias
-;;   'native-comp-deferred-compilation-deny-list
-;;   'native-comp-jit-compilation-deny-list
-;;   "Renamed in emacs#95692f6")
-;; 
-;; (custom-set-variables
-;;  '(straight-base-dir "~/.emacs.d/files/straight/")
-;;  '(straight-build-cache-fixed-name "~/.emacs.d/files/straight/build-cache.el"))
-;; 
-;; ;; straight (requires git)
-;; (defvar bootstrap-version)
-;; (let ((bootstrap-file
-;;        (expand-file-name "files/straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-;;       (bootstrap-version 5))
-;;   (unless (file-exists-p bootstrap-file)
-;;     (with-current-buffer
-;;         (url-retrieve-synchronously
-;;          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-;;          'silent 'inhibit-cookies)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp))
-;;     ;; move straight away from the base directory. combine it with no-littering.el
-;;     (rename-file "~/.emacs.d/straight/" "~/.emacs.d/files/")
-;;     (find-file "~/.emacs.d/files/")) ;; it's dirty but it works
-;;   (load bootstrap-file nil 'nomessage))
-;; 
-;; ;; prevents the user from relying on package-install
-;; (put 'package-install 'disabled "\nDO NOT USE package-install anymore.\nRely on straight-use-package instead")
-;; 
-;; ;; Disable package.el in favour of straight.el
-;; (setq package-enable-at-startup nil)
-;; 
-;; ;; Install use-package with straight-use-package
-;; ;; use-package is part of emacs from 29.1
-;; ;; (straight-use-package 'use-package)
-;; 
-;; ;; configure use-package to always use straight
-;; (use-package straight
-;;   :custom (straight-use-package-by-default t))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               ELPACA               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar elpaca-core-date '(20241109)) ;; set to the build date of Emacs
+(defvar elpaca-core-date '(20250103)) ;; set to the build date of Emacs
 
-(defvar elpaca-installer-version 0.8)
+(defvar elpaca-installer-version 0.10)
 (defvar elpaca-directory (expand-file-name "files/elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil
-                              :files (:defaults (:exclude "extensions"))
+                              :ref nil :depth 1 :inherit ignore
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
                               :build (:not elpaca--activate-package)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
@@ -105,34 +54,37 @@
   (add-to-list 'load-path (if (file-exists-p build) build repo))
   (unless (file-exists-p repo)
     (make-directory repo t)
-    (when (< emacs-major-version 28) (require 'subr-x))
+    (when (<= emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
-        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                 ((zerop (call-process "git" nil buffer t "clone"
-                                       (plist-get order :repo) repo)))
-                 ((zerop (call-process "git" nil buffer t "checkout"
-                                       (or (plist-get order :ref) "--"))))
-                 (emacs (concat invocation-directory invocation-name))
-                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-                 ((require 'elpaca))
-                 ((elpaca-generate-autoloads "elpaca" repo)))
+        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                  ,@(when-let* ((depth (plist-get order :depth)))
+                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                  ,(plist-get order :repo) ,repo))))
+                  ((zerop (call-process "git" nil buffer t "checkout"
+                                        (or (plist-get order :ref) "--"))))
+                  (emacs (concat invocation-directory invocation-name))
+                  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                        "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                  ((require 'elpaca))
+                  ((elpaca-generate-autoloads "elpaca" repo)))
             (progn (message "%s" (buffer-string)) (kill-buffer buffer))
           (error "%s" (with-current-buffer buffer (buffer-string))))
       ((error) (warn "%s" err) (delete-directory repo 'recursive))))
   (unless (require 'elpaca-autoloads nil t)
-    ;; required by windows with its different path system
+	;; required by windows with its different path system
     (when windows-system-p
-      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
+      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))	
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+
 ;; Disable package.el in favour of elpaca.el
 (setq package-enable-at-startup nil)
-
+; 
 ;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
@@ -164,13 +116,13 @@
   ;; requires a restart even if error about symlinks
   (elpaca-no-symlink-mode)
 
-  ;; hack to use find-file at c:/Users/<name>/
-  (setq default-directory "~/../../Documents/")
+;; hack to use find-file at c:/Users/<name>/
+; (setq default-directory "~/../../Documents/")
 
-  (setq package-archives
-		'(("gnu-elpa" . "https://elpa.gnu.org/packages/")
-          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-          ("melpa" . "https://melpa.org/packages/"))))
+(setq package-archives
+	  '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+        ("melpa" . "https://melpa.org/packages/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               GENERAL              ;;
@@ -238,4 +190,6 @@
         (funcall native-compile-async-skip-p file load selector))))
 
 (advice-add 'native-compile-async-skip-p
-	    :around 'fixed-native-compile-async-skip-p)
+			:around 'fixed-native-compile-async-skip-p)
+
+

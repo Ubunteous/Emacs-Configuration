@@ -18,9 +18,17 @@
   ;; :mode "\\.clj\\'")
   :mode ("\\.clj\\'" "\\.edn\\'"))
 
+(use-package spinner
+  :ensure (spinner :type git :host github :repo "Malabarba/spinner.el")
+  :defer t)
+
+(use-package queue
+  :ensure (queue :type git :host github :repo "emacs-straight/queue")
+  :defer t)
 
 ;; cider may compete for completion and eldoc with elgot
 (use-package cider
+  :after queue
   :defer t
   :config
   ;; load a dev/user.clj file (specified in deps.edn) on jack-in

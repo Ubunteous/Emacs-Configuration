@@ -92,11 +92,11 @@
 ;;;;;;;;;;;;;;;
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
-			   "align"
-			   "fix-encoding"
-			   "smart-insert"
-			   "auto-close-compilation"
-			   "dired-count-lines"))
+						   "align"
+						   "fix-encoding"
+						   "smart-insert"
+						   "auto-close-compilation"
+						   "dired-count-lines"))
 
 ;; (load-user-file "perso/break-time")
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
@@ -123,16 +123,16 @@
 ;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "workflow"
-			    '()
-			    '("notmuch")
-			    '("ace-window" ;; add rotate/transpose frame
-			      ;; "forge" ;; bring back for emacs 30 and change magit version
-			      "magit"
-			      
-			      ;; font is transparent. e.g.: ls /path/to/file is hard to see
-			      ;; "vterm" ;; vterm should be installed from NixOS configuration
-			      ;; "eat" ;; slower than vterm but written in elisp
-			      )) ;; requires notmuch package from outside emacs
+							'()
+							'("notmuch")
+							'("ace-window" ;; add rotate/transpose frame
+							  ;; "forge" ;; bring back for emacs 30 and change magit version
+							  "magit"
+							  
+							  ;; font is transparent. e.g.: ls /path/to/file is hard to see
+							  ;; "vterm" ;; vterm should be installed from NixOS configuration
+							  ;; "eat" ;; slower than vterm but written in elisp
+							  )) ;; requires notmuch package from outside emacs
 
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
 ;; (load-user-file "workflow/perspective")
@@ -159,7 +159,7 @@
 							  ;; deft
 							  "deft"
 							  "notdeft")
-							
+
 							'("org"
 							  "org-modern"
 							  ;; "ord-modern-indent"
@@ -169,57 +169,57 @@
 							  ;; more casual-packages to discover
 							  ;; "casual-agenda"
 
-							  "ob-janet"
-							  "ob-restclient"			  
+							  ;; "ob-janet"
+							  ;; "ob-restclient"			  
 							  "ob-csharp"
 							  ;; "ob-go"
-							  "ob-html"
+							  ;; "ob-html"
 							  "ob-sql"
-							  "ob-nix"
 							  ;; "ob-async"
-							  "ob-powershell"))
+							  ;; "ob-powershell"
+							  "ob-nix"))
 
-;; Ready
-;; (load-user-file "org/org-cliplink")
-;; (load-user-file "org/org-contrib")
-;; (load-user-file "org/org-download")
+;; ;; Ready
+;; ;; (load-user-file "org/org-cliplink")
+;; ;; (load-user-file "org/org-contrib")
+;; ;; (load-user-file "org/org-download")
 
-;; (load-user-file "org/org-ql") ;; check git documentation
-;; (load-user-file "org/org-transclusion")
+;; ;; (load-user-file "org/org-ql") ;; check git documentation
+;; ;; (load-user-file "org/org-transclusion")
 
-;;;;;;;;;;;;;;;;;;;
-;;   composite   ;;
-;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;
+;; ;;   composite   ;;
+;; ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "composite"
-			    '()
+							'()
 
-			    '("jinx")
-			    
-			    '("cape" ;; surprisingly useful!
-			      "corfu"
+							'("jinx")
 
-			      "embark" ;; use it with consult
-			      "marginalia"
-			      "orderless"
-			      "consult"
-			      "prescient" ;; alternative to orderless
-			      "vertico"
+							'("cape" ;; surprisingly useful!
+							  "corfu"
 
-			      "tempel"
+							  "embark" ;; use it with consult
+							  "marginalia"
+							  "orderless"
+							  "consult"
+							  "prescient" ;; alternative to orderless
+							  "vertico"
 
-			      ;; "citar"
-			      "minimal-swiper"))
+							  "tempel"
 
-;;;;;;;;;;;;;;;;;;;
-;;   utilities   ;;
-;;;;;;;;;;;;;;;;;;;
+							  ;; "citar"
+							  "minimal-swiper"))
+
+;; ;;;;;;;;;;;;;;;;;;;
+;; ;;   utilities   ;;
+;; ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "utilities"
 							'()
-							
-							'("devdocs"
-							  "expand-region"
+
+							'("expand-region"
+							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
 							  "multiple-cursors"
 							  ;; "powerthesaurus"
@@ -229,7 +229,7 @@
 							  "combobulate"
 							  ;; "restclient"
 							  "wgrep")
-							
+
 							'("crux"
 							  ;; "popper" ;; try later
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
@@ -245,7 +245,7 @@
 							  ;; choose one paredit superset to replace electric (pair) mode
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
 							  ;; "lispy" ;; vi-like bindings conflicting with meow
-							  
+
 							  "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
@@ -253,20 +253,20 @@
 
 ;; (load-user-file "utilities/quickrun")
 
-;;;;;;;;;;;;;;;;;;;;;;;
-;;   passive-utils   ;;
-;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;   passive-utils   ;;
+;; ;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "passive-utils"
 							'()
 
 							'("apheleia"
 							  "hl-todo")
-							
+
 							'("meow"
 							  ;; "which-key" ;; now built-in
 							  "rainbow-delimiters"
-							  "adaptive-wrap"
+							  ;; "adaptive-wrap"
 							  "ultra-scroll"
 							  "aggressive-indent"
 							  "auto-capitalize" ;; => LaTeX/org mode only
@@ -283,48 +283,48 @@
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode
 ;; (load-user-file "passive-utils/direnv")
 
-;;;;;;;;;;;;;;;;;;;;;
-;;   programming   ;;
-;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;;;;;;;;;;;;;;;;;;
+;; ;;   programming   ;;
+;; ;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "programming"
-			    '("c#"
-			      "ahk"
-			      "powershell"
-			      "css")
+							'("c#"
+							  "ahk"
+							  "powershell"
+							  "css")
 
-			    '("godot"
-			      "python/python"
-			      "python/anaconda"
-			      ;; "python/elpy"
-			      "python/highlight-indent-guides"
+							'("godot"
+							  "python/python"
+							  "python/anaconda"
+							  ;; "python/elpy"
+							  "python/highlight-indent-guides"
 
-			      ;; "guile"
-			      "janet"
-			      "clojure"
-			      "javascript"
-			      "typescript"
-			      "web-utils"
-			      "caddyfile"
-			      "yaml"
-			      "markdown"
-			      "scss"
+							  ;; "guile"
+							  "janet"
+							  "clojure"
+							  "javascript"
+							  "typescript"
+							  "web-utils"
+							  "caddyfile"
+							  "yaml"
+							  "markdown"
+							  "scss"
 
-			      "sql/sql"
-			      ;; "sql/pgmacs"
-			      ;; "sql/ejc"
+							  "sql/sql"
+							  ;; "sql/pgmacs"
+							  ;; "sql/ejc"
 
-			      "c"
-			      "nix"
-			      "lua"
-			      "just"
-			      "yuck"
-			      "latex"
-			      "lilypond"
-			      ;; "typst"
-			      "haskell")
-			    
-			    '())
+							  "c"
+							  "nix"
+							  "lua"
+							  "just"
+							  ;; "yuck"
+							  ;; "typst"
+							  ;; "haskell"
+							  ;; "lilypond"
+							  "latex")
+
+							'())
 
 ;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/elixir")
