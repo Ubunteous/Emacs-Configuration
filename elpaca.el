@@ -179,23 +179,23 @@
 							  ;; "ob-powershell"
 							  "ob-nix"))
 
-;; ;; Ready
-;; ;; (load-user-file "org/org-cliplink")
-;; ;; (load-user-file "org/org-contrib")
-;; ;; (load-user-file "org/org-download")
+;; Ready
+;; (load-user-file "org/org-cliplink")
+;; (load-user-file "org/org-contrib")
+;; (load-user-file "org/org-download")
 
-;; ;; (load-user-file "org/org-ql") ;; check git documentation
-;; ;; (load-user-file "org/org-transclusion")
+;; (load-user-file "org/org-ql") ;; check git documentation
+;; (load-user-file "org/org-transclusion")
 
-;; ;;;;;;;;;;;;;;;;;;;
-;; ;;   composite   ;;
-;; ;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;
+;;   composite   ;;
+;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "composite"
 							'()
 
 							'("jinx")
-
+							
 							'("cape" ;; surprisingly useful!
 							  "corfu"
 
@@ -211,9 +211,9 @@
 							  ;; "citar"
 							  "minimal-swiper"))
 
-;; ;;;;;;;;;;;;;;;;;;;
-;; ;;   utilities   ;;
-;; ;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;
+;;   utilities   ;;
+;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "utilities"
 							'()
@@ -253,9 +253,9 @@
 
 ;; (load-user-file "utilities/quickrun")
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;
-;; ;;   passive-utils   ;;
-;; ;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;
+;;   passive-utils   ;;
+;;;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "passive-utils"
 							'()
@@ -283,9 +283,9 @@
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode
 ;; (load-user-file "passive-utils/direnv")
 
-;; ;;;;;;;;;;;;;;;;;;;;;
-;; ;;   programming   ;;
-;; ;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;
+;;   programming   ;;
+;;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "programming"
 							'("c#"
