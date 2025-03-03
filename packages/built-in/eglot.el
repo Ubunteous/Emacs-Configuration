@@ -9,8 +9,8 @@
   (eglot-autoshutdown t)
   :general
   (:keymaps 'eglot-mode-map
-	    "C-c l b" 'eldoc
-	    "C-c l p" 'eldoc-box-help-at-point
+			"C-c l b" 'eldoc
+			"C-c l p" 'eldoc-box-help-at-point
             ;; "C-c C-o" 'python-sort-imports ;; requires python module (isort)
             ;; "C-c C-f" 'eglot-format-buffer)
             "C-c l r" 'eglot-rename)
@@ -133,7 +133,7 @@
     csharp-ts-mode
     
     ;; elixir-mode
-    ;; nix-ts-mode
+    nix-ts-mode
     clojure-ts-mode) . eglot-ensure))
 
 
