@@ -16,10 +16,11 @@
   "Update my cursor with COLOR when changing mode."
   (let ((mode-color (assoc major-mode major-mode-colors)))
     (if mode-color
-	;; mode color (matches github language color)
-	(set-cursor-color (cdr mode-color))
+		;; mode color (matches github language color)
+		(set-cursor-color (cdr mode-color))
       ;; default color
       (set-cursor-color "#fefff8"))))
 
-(defadvice select-window (after select-window activate) 
-  (cursor-major-color))
+
+(advice-add 'select-window :after (lambda ()
+                                    (cursor-major-color)))
