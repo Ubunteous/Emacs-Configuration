@@ -119,7 +119,7 @@
 		  ;; ("g" . "src go\n")
 		  ("h" . "src html\n")
 		  ("i" . "src js\n")
-		  ("l" . "src lilypond :file lily.png\n")
+		  ("l" . "src lua\n")
 		  ("m" . "center\n")
 		  ("n" . "src nix\n")
 		  ("p" . "src powershell\n")
@@ -128,13 +128,12 @@
 		  ("q" . "src sql\n")
 		  ("r" . "src\n")
 		  ("s" . "src shell\n")
-		  ("t" . "src janet\n")
+		  ;; ("t" . "src janet\n")
 		  ("#" . "src csharp\n")
-		  ("u" . "src lua\n")
 		  ("u" . "src jupyter-python\n")
 		  ("w" . "src css\n")
 		  ;; ("x" . "src restclient\n")
-		  ))
+		  ("y" . "src lilypond :file lily.png\n")))
 
   ;; defaults to gcc
   ;; (setq org-babel-C-compiler "clang")
@@ -156,8 +155,8 @@
      ;; (go . t)
      ;; (typescript . t)
      ;; (js . t)
-     (jupyter . t)
-     ;; (powershell . t)
+     ;; (jupyter . t)
+     (powershell . t)
      ;; (python . t)
      (sql . t)
      (sql-mode . t)
@@ -271,6 +270,9 @@
   ;;;;;;;;;;;;;;
   ;;   MISC   ;;
   ;;;;;;;;;;;;;;
+
+  ;; deactivate _, ^
+  (setq org-hide-emphasis-markers t)
 
   ;; not ideal for babel blocks
   ;; (setq org-indent-mode t)

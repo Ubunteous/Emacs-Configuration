@@ -37,6 +37,10 @@
 ;;               ELPACA               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; If you have an invalid docstring error after upgrading a package
+;; It means that the doctstring is still pointing to the old version
+;; Fix it with M-x load-library <package> and restart emacs
+;; Maybe try also unload-feature before using load-library
 (defvar elpaca-core-date '(20250103)) ;; set to the build date of Emacs
 
 (defvar elpaca-installer-version 0.10)

@@ -173,10 +173,10 @@
 							  ;; "ob-restclient"			  
 							  "ob-csharp"
 							  ;; "ob-go"
-							  ;; "ob-html"
+							  "ob-html"
 							  "ob-sql"
 							  ;; "ob-async"
-							  ;; "ob-powershell"
+							  "ob-powershell"
 							  "ob-nix"))
 
 ;; Ready
