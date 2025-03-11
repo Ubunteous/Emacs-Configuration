@@ -33,7 +33,9 @@
 
 (defun write-strings-to-file (strings filename)
   (with-temp-buffer
-    (mapc (lambda (s) (insert (concat s "\n"))) strings)
+    (mapc (lambda (s)
+			(when (not (string-empty-p s))
+			  (insert (concat s "\n")))) strings)
     (write-region (point-min) (point-max) filename nil)))
 
 
