@@ -29,6 +29,11 @@
   (setq magit-remote-add-set-remote.pushDefault nil)
   (setopt magit-format-file-function #'magit-format-file-all-the-icons)) ;; for v4.3.0+
 
+(use-package magit-blame-color-by-age
+  :ensure (magit-blame-color-by-age :type git :host github :repo "jdtsmith/magit-blame-color-by-age")
+  :after magit
+  :config (magit-blame-color-by-age-mode))
+
 ;; (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
 ;;   (setq ad-return-value
 ;; 	(concat ad-return-value

@@ -18,7 +18,7 @@ latex-mode
 (frac "\\frac{" p "}{" q "}")
 (enumerate "\\begin{enumerate}\n\\item " r> n> "\\end{enumerate}")
 (itemize "\\begin{itemize}\n\\item " r> n> "\\end{itemize}")
-
+(author "\\author{" p "}" n q)
 
 lisp-mode emacs-lisp-mode ;; Specify multiple modes
 
@@ -58,9 +58,9 @@ emacs-lisp-mode
 (loop "(cl-loop for " p " in " p " do" n> r> ")")
 (command "(defun " p " (" p ")\n  \"" p "\"" n> "(interactive" p ")" n> r> ")")
 (advice "(defun " (p "adv" name) " (&rest app)" n> p n> "(apply app))" n>
-	"(advice-add #'" (p "fun") " " (p ":around") " #'" (s name) ")")
+		"(advice-add #'" (p "fun") " " (p ":around") " #'" (s name) ")")
 (provide "(provide '" (file-name-base (or (buffer-file-name) (buffer-name))) ")" n
-	 ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name))) " ends here" n)
+		 ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name))) " ends here" n)
 
 
 eshell-mode
@@ -79,8 +79,8 @@ org-mode
 (jupyter-python "#+BEGIN_SRC jupyter-python :session py :async yes" n> r> n> "#+END_SRC" n n)
 (jupyter-javascript "#+BEGIN_SRC jupyter-javascript :session js :async yes" n> r> n> "#+END_SRC" n n)
 (jupyter-header-py "#+PROPERTY: header-args:jupyter-python :session py :async yes" n n
-		   ;; "# Local Variables:" n "# electric-indent-mode: nil" n "# End:" nn
-		   )
+				   ;; "# Local Variables:" n "# electric-indent-mode: nil" n "# End:" nn
+				   )
 (jupyter-header-js "#+PROPERTY: header-args:jupyter-javascript :session js :async yes" n n)
 (jupyter-html-preview ":display plain")
 (javascript-header "#+PROPERTY: header-args:js :results output :async yes" n n)
@@ -146,41 +146,41 @@ python-ts-mode
 
 nix-ts-mode
 (nix-direnv "# 1) save this as shell.nix" n
-	    "# run in the same directory:" n
-	    "# 2) echo \"use nix\" >> .envrc" n
-	    "# 3) direnv allow" n
-	    "echo \"use nix\" > .envrc && direnv allow" n n
-	    
-	    "{ pkgs ? import <nixpkgs> { } }:" n n
-	    "pkgs.mkShell { packages = with pkgs; [ " q  " ]; }")
+			"# run in the same directory:" n
+			"# 2) echo \"use nix\" >> .envrc" n
+			"# 3) direnv allow" n
+			"echo \"use nix\" > .envrc && direnv allow" n n
+			
+			"{ pkgs ? import <nixpkgs> { } }:" n n
+			"pkgs.mkShell { packages = with pkgs; [ " q  " ]; }")
 
 (nix-ld "with import <nixpkgs> { };" n
-	"mkShell {" n
-	"NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [ " q " ];" n
-	"NIX_LD = lib.fileContents \"${stdenv.cc}/nix-support/dynamic-linker\";" n
-	"}")
+		"mkShell {" n
+		"NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [ " q " ];" n
+		"NIX_LD = lib.fileContents \"${stdenv.cc}/nix-support/dynamic-linker\";" n
+		"}")
 
 (nix-shell "with (import <nixpkgs> { });" n
-	   "mkShell {" n>
-	   "buildInputs = [ " q " ];" n
-	   "}")
+		   "mkShell {" n>
+		   "buildInputs = [ " q " ];" n
+		   "}")
 
 (nix-devshell "{" n>
-	      "devShells.default = pkgs.mkShell {" n> >
-	      "buildInputs = with pkgs; [ " q " ];" n>
-	      "};" n
-	      "}")
+			  "devShells.default = pkgs.mkShell {" n> >
+			  "buildInputs = with pkgs; [ " q " ];" n>
+			  "};" n
+			  "}")
 
 (nix-module "{ config, lib, ... }:" n n
-	    "with lib;" n
-	    "let" n>
-	    "cfg = config.lab.module;" n>
-	    "labcfg = config.lab;" n>
-	    "in {" n n>
-	    "options.lab.module = { enable = mkEnableOption \"Enables support for module\"; };" n n>
-	    "config = mkIf (labcfg.enable && cfg.enable) {" n q n "};" n n
-	    "}"
-	    )
+			"with lib;" n
+			"let" n>
+			"cfg = config.lab.module;" n>
+			"labcfg = config.lab;" n>
+			"in {" n n>
+			"options.lab.module = { enable = mkEnableOption \"Enables support for module\"; };" n n>
+			"config = mkIf (labcfg.enable && cfg.enable) {" n q n "};" n n
+			"}"
+			)
 
 
 gdscript-mode
@@ -198,10 +198,10 @@ c-ts-mode
 
 just-mode
 (just-default "default:" n>
-	      "just --list" n n
+			  "just --list" n n
 
-	      "command var=\"default\":" n>
-	      "command {{var}}" q)
+			  "command var=\"default\":" n>
+			  "command {{var}}" q)
 
 
 ;; Local Variables:
