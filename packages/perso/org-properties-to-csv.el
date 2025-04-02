@@ -13,16 +13,17 @@
 
    (cons
 	'Sections
-	(mapcar 'car
-			(cdr (org-entry-properties nil 'standard))))
+	(delete "ID"
+			(mapcar 'car
+					(cdr (org-entry-properties nil 'standard)))))
 
    (org-map-entries
 	(lambda ()
 	  (cons
 	   (concat "Section " (org-get-heading t t))
 	   (mapcar 'cdr
-			   (cdr (org-entry-properties nil 'standard))))))))
-
+			   (let ((org-entries (cdr (org-entry-properties nil 'standard))))
+				 (delq (assoc "ID" org-entries) org-entries))))))))
 
 
 (defun alist-to-strings (list)
