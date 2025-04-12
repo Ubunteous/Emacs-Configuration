@@ -37,7 +37,7 @@
     (mapc (lambda (s)
 			(when (not (string-empty-p s))
 			  (insert (concat s "\n")))) strings)
-    (write-region (point-min) (point-max) filename nil)))
+    (write-region (point-min) (point-max) (concat "~/org/Projets/Informatique/data/" filename) nil)))
 
 
 (defun org-properties-to-csv () (interactive)
