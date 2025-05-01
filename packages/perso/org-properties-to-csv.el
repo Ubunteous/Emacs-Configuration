@@ -8,27 +8,30 @@
 ;; :prop1: "property 1"
 ;; :END:
 
+(require 'cl-lib)
+
+(defun alist-intersection-values (alist keys)
+  "Return values from ALIST for KEYS that intersect with keys in ALIST."
+  (let* ((alist-keys (mapcar 'car alist))
+         (intersection (cl-intersection keys alist-keys :test 'equal)))
+    (mapcar (lambda (key)
+              (cdr (assoc key alist)))
+            intersection)))
+
 (defun get-org-properties ()
-  (cons
-
-   (cons
-	'Sections
-	(delete "ID"
-			(mapcar 'car
-					(cdr (org-entry-properties nil 'standard)))))
-
-   (org-map-entries
-	(lambda ()
-	  (cons
-	   (concat "Section " (org-get-heading t t))
-	   (mapcar 'cdr
-			   (let ((org-entries (cdr (org-entry-properties nil 'standard))))
-				 (delq (assoc "ID" org-entries) org-entries))))))))
-
+  (let* ((columns (remove "ID" (org-buffer-property-keys)))
+		 (rcolumns (reverse columns)))
+	(cons
+	 columns
+	 (org-map-entries '(lambda ()
+						 (alist-intersection-values
+						  (org-entry-properties)
+						  (mapcar 'upcase
+							  rcolumns)))))))
 
 (defun alist-to-strings (list)
   (mapcar
-   #'(lambda (entry) (string-join (cdr entry) ", "))
+   #'(lambda (entry) (string-join entry ";"))
    list))
 
 
@@ -37,10 +40,12 @@
     (mapc (lambda (s)
 			(when (not (string-empty-p s))
 			  (insert (concat s "\n")))) strings)
-    (write-region (point-min) (point-max) (concat "~/org/Projets/Informatique/data/" filename) nil)))
+    (write-region (point-min) (point-max) (concat "~/org/Projets/Alter/csv/" filename) nil)))
 
 
 (defun org-properties-to-csv () (interactive)
 	   (write-strings-to-file
 		(alist-to-strings (get-org-properties))
-		(string-replace "org" "csv" (buffer-name))))
+		(string-replace "org" "csv"
+						(buffer-name) ;; could also be org-get-title
+						)))
