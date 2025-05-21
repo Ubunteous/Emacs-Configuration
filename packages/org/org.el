@@ -25,6 +25,7 @@
 
   ;; org-agenda-list
   (:keymaps 'org-mode-map
+			"C-c -" 'org-ctrl-c-plus			
 			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
 
 			;; removed as I need the default bindings for navigation
