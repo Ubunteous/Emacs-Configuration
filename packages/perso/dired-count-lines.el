@@ -10,13 +10,15 @@
     (dired-map-over-marks
      (let ((file (dired-file-name-at-point)))
        (when (and (file-regular-p file)
-		  (file-readable-p file))
-	 (with-temp-buffer
-	   (insert-file-contents file)
-	   (setq init (funcall
-		       #'+
-		       (count-lines (point-min) (point-max)))))))
+				  (file-readable-p file))
+		 (with-temp-buffer
+		   (insert-file-contents file)
+		   (setq init (funcall
+					   #'+
+					   (count-lines (point-min) (point-max)))))))
      nil))
+
+  (next-line)
   
   (when (called-interactively-p 'any)
     (message "Lines: %s" init))
