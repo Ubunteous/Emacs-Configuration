@@ -334,3 +334,17 @@
 ;;          (eval . (setq-local
 ;;                   org-roam-db-location (expand-file-name "org-roam.db"
 ;;                                                          org-roam-directory))))))
+
+;;;;;;;;;;;;;;;
+;; QUICKROAM ;;
+;;;;;;;;;;;;;;;
+
+;; (use-package quickroam
+;;   :ensure (quickroam :type git :host github :repo "meedstrom/quickroam")
+;;   :after org
+;;   :config (quickroam-mode)
+;;   ;; suggestion
+;;   ;; (global-set-key (kbd "<f2> f") #'quickroam-find)
+;;   ;; (global-set-key (kbd "<f2> i") #'quickroam-insert)
+;;   )
+
