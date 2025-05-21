@@ -170,15 +170,15 @@
 							  ;; more casual-packages to discover
 							  ;; "casual-agenda"
 
-							  ;; "ob-janet"
-							  ;; "ob-restclient"			  
-							  "ob-csharp"
-							  ;; "ob-go"
-							  "ob-html"
-							  "ob-sql"
-							  ;; "ob-async"
-							  "ob-powershell"
-							  "ob-nix"))
+							  ;; "ob/ob-janet"
+							  ;; "ob/ob-restclient"
+							  "ob/ob-csharp"
+							  ;; "ob/ob-go"
+							  "ob/ob-html"
+							  "ob/ob-sql"
+							  ;; "ob/ob-async"
+							  "ob/ob-powershell"
+							  "ob/ob-nix"))
 
 ;; Ready
 ;; (load-user-file "org/org-cliplink")
