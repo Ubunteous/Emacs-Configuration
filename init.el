@@ -43,7 +43,7 @@
 ;; Maybe try also unload-feature before using load-library
 (defvar elpaca-core-date '(20250103)) ;; set to the build date of Emacs
 
-(defvar elpaca-installer-version 0.10)
+(defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "files/elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
