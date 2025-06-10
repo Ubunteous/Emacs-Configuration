@@ -7,55 +7,43 @@
   ;; :straight (:type built-in)
   :config
   (repeat-mode)
+  (setq repeat-exit-key "q"))
 
-  (setopt repeat-exit-key "q"))
+;; useful but only work with char shortcuts (not <left>)
+(defmacro repeat-it (group cmds)
+  (let ((map (intern (concat (symbol-name group) "-repeat-map"))))
+    `(progn
+       (defvar ,map (make-sparse-keymap))
+       (cl-loop for (key def hint) in ,cmds do
+                (define-key ,map (kbd key) def)
+                (put def 'repeat-map ',map)
+                (when hint (put def 'repeat-hint hint))))))
+
+;; (defun add-repeat-map (new-repeat-map)
+;;   (lambda (_key cmd)
+;; 	(when (symbolp cmd)
+;;       (put cmd 'repeat-map new-repeat-map)))
+;;   `new-repeat-map)
 
 ;; ORGTODO
-(defvar todo-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "t") #'org-todo)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     ;;(put cmd 'scroll-up-command 'scroll-down-command)))
-     (put cmd 'repeat-map 'todo-repeat-map)))
- todo-repeat-map)
-
+(repeat-it
+ todo
+ '(("t" org-todo "todo")))
 
 ;; SCROLL
-(defvar scroll-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "v") #'scroll-up-command)
-    (define-key map (kbd "b") #'scroll-down-command)
-    (define-key map (kbd "j") #'next-line)
-    (define-key map (kbd "k") #'previous-line)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     ;;(put cmd 'scroll-up-command 'scroll-down-command)))
-     (put cmd 'repeat-map 'scroll-repeat-map)))
- scroll-repeat-map)
+(repeat-it
+ scroll
+ '(("v" scroll-up-command "scroll up")
+   ("b" scroll-down-command "scroll down")))
 
 ;; SWITCH BUFFER
 ;; switch easily to a nearby buffer with C-x <arrow>
-(defvar switch-buffer-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "<right>") #'next-buffer)
-    (define-key map (kbd "<left>") #'previous-buffer)
-    (define-key map (kbd "n") #'previous-buffer)
-    (define-key map (kbd "e") #'next-buffer)
-    map))
-
-;; same as above but does not need to rewrite every key => whatever was "above" does not exist anymore
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     (put cmd 'repeat-map 'switch-buffer-repeat-map)))
- switch-buffer-repeat-map)
+(repeat-it
+ switch-buffer
+ ;; '(("<right>" next-buffer "next")
+ ;; ("<left>" previous-buffer "previous")
+ '(("n" previous-buffer "previous")
+   ("e" next-buffer "next")))
 
 ;; ;; SWITCH PERSPECTIVE
 ;; (defvar switch-persp-repeat-map
@@ -70,61 +58,32 @@
 ;;      (put cmd 'repeat-map 'switch-persp-repeat-map)))
 ;;  switch-persp-repeat-map)
 
-
 ;; OTHER WINDOW
-(defvar other-window-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "o") #'other-window)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     (put cmd 'repeat-map 'other-window-repeat-map)))
- other-window-repeat-map)
+(repeat-it
+ other-window
+ ;; '(("o" other-window "other")))
+ '(("o" ace-window "other")))
 
 ;; ORG HEADING MOTION
-(defvar heading-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "n") #'org-next-visible-heading)
-    (define-key map (kbd "p") #'org-previous-visible-heading)
-    (define-key map (kbd "f") #'org-forward-heading-same-level)
-    (define-key map (kbd "b") #'org-backward-heading-same-level)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     (put cmd 'repeat-map 'heading-repeat-map)))
- heading-repeat-map)
+(repeat-it
+ heading
+ '(("n" org-next-visible-heading "next")
+   ("p" org-previous-visible-heading "previous")
+   ("f" org-forward-heading-same-level "forward same level")
+   ("b" org-backward-heading-same-level "backward same level")))
 
 ;; ORG SOURCE BLOCK MOTION
-(defvar src-block-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "c") #'org-babel-execute-src-block)
-    (define-key map (kbd "n") #'org-babel-next-src-block)
-    (define-key map (kbd "p") #'org-babel-previous-src-block)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     (put cmd 'repeat-map 'src-block-repeat-map)))
- src-block-repeat-map)
-
+(repeat-it
+ src-block
+ '(("c" org-babel-execute-src-block "execute")
+   ("n" org-babel-next-src-block "next")
+   ("p" org-babel-previous-src-block "previous")))
 
 ;; SEARCH (swiper)
-(defvar swiper-repeat-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "s") #'swiper-C-s)
-    (define-key map (kbd "r") #'swiper-isearch-C-r)
-    map))
-
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-     (put cmd 'repeat-map 'swiper-repeat-map)))
- swiper-repeat-map)
+(repeat-it
+ swiper
+ '(("s" swiper-C-s "next")
+   ("r" swiper-isearch-C-r "previous")))
 
 ;; ;; SEARCH (isearch)
 ;; (defvar isearch-repeat-map
