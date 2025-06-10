@@ -24,6 +24,9 @@
   ;; (setq auto-revert-check-vc-info t
   ;;       auto-revert-interval 10)
 
+  ;; show  all options in transient
+  (setq transient-default-level 7)
+
   ;; full screen magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-remote-add-set-remote.pushDefault nil)
