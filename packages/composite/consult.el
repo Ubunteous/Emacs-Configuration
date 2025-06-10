@@ -188,27 +188,39 @@
 
   (let* ((doc-file (concat (mode-name) ".org"))
 
-	 (dir (cond ((string-equal doc-file "clojure.org") "clojure/")
-		    (t "")))
+		 (dir (cond ((string-equal doc-file "clojure.org") "clojure/")
+					(t "")))
 
-	 (file-path (concat "~/org/Informatics/Languages/"
-			    dir
-			    doc-file)))
+		 (file-path (concat "~/org/Informatics/Languages/"
+							dir
+							doc-file)))
 
     (catch 'nofile
       (when (not (file-exists-p file-path))
-	(throw 'nofile (error (concat "File: " file-path " not found."))))
+		(throw 'nofile (error (concat "File: " file-path " not found."))))
 
       ;; needs to be chained or other-window won't work
       (progn
-	(split-window-right)
-	(other-window 1)
-	(if (get-buffer doc-file)
-	    (switch-to-buffer doc-file)
-	  (find-file (concat file-path))))))
+		(split-window-right)
+		(other-window 1)
+		(if (get-buffer doc-file)
+			(switch-to-buffer doc-file)
+		  (find-file (concat file-path))))))
 
   (org-cycle-overview)
   (consult-org-heading)
   (read-only-mode)
   (org-cycle)
   (use-local-map (copy-keymap org-mode-map)))
+
+(use-package consult-todo
+  :defer t
+  :after consult
+  :config
+  (defconst consult-todo--narrow
+	'((?t . "TODO")
+      (?f . "FIXME")
+      (?b . "DEBUG")
+      (?p . "PROGRESS")
+	  (?d . "DONE"))
+	"Default mapping of narrow and keywords."))
