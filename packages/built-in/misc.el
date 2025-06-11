@@ -167,7 +167,7 @@
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
 
   ;; auto select window when mouse moves to it (like wm)
-  ;; (setq mouse-autoselect-window t)
+  (setq mouse-autoselect-window t)
 
   ;; move auto save folder in specific directory
   ;; USED TO BE A CUSTOM SET
