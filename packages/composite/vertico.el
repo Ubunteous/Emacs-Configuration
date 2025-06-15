@@ -11,31 +11,31 @@
   (vertico-mode)
   :config
   (setq read-file-name-completion-ignore-case t
-	read-buffer-completion-ignore-case t
-	completion-ignore-case t)
+		read-buffer-completion-ignore-case t
+		completion-ignore-case t)
   
   (defun vertico-insert ()
     "Insert current candidate in minibuffer or a space if no candidate found."
     (interactive)
     (if (> vertico--total 0)
-	(let ((vertico--index (max 0 vertico--index)))
-	  (insert (prog1 (vertico--candidate) (delete-minibuffer-contents))))
+		(let ((vertico--index (max 0 vertico--index)))
+		  (insert (prog1 (vertico--candidate) (delete-minibuffer-contents))))
       (insert " ")))
 
   (defun my-minibuffer-setup ()
     (set (make-local-variable 'face-remapping-alist)
-	 '((default :height 1.25))))
+		 '((default :height 1.25))))
   :general
   (:keymaps 'vertico-map
-	    "?" 'minibuffer-completion-help
-	    "M-RET" 'minibuffer-force-complete-and-exit
-	    ;; risky but if it works it can be confortable
-	    "SPC" 'vertico-insert
-	    "C-SPC" '(lambda () (interactive) (insert " "))
-	    "M-TAB" 'minibuffer-complete)
+			"?" 'minibuffer-completion-help
+			"C-<return>" 'vertico-exit-input ;; ignore completion
+			"M-RET" 'minibuffer-force-complete-and-exit
+			;; risky but if it works it can be confortable
+			"SPC" 'vertico-insert
+			"C-SPC" '(lambda () (interactive) (insert " "))
+			"M-TAB" 'minibuffer-complete)
   :hook
   (minibuffer-setup . my-minibuffer-setup))
-
 
 ;; (use-package vertico-multiform
 ;;   :defer t
