@@ -12,6 +12,13 @@
   (setq isearch-lazy-count t
 		lazy-count-prefix-format nil
 		lazy-count-suffix-format "  (%s/%s)")
+
+  (setq isearch-allow-scroll t)
+  ;; (setq isearch-allow-motion t)
+  ;; (setq isearch-allow-prefix nil)
+  ;; (setq isearch-hide-immediately nil) ;; for invisible matches
+  ;; (setq-isearch-wrap-pause 'no-ding) ;; wrap if no match found
+  ;; (setq isearch-yank-on-move t) ;; motion keys select til occurrence
   :custom-face
   (isearch ((t (
 				:weight bold
