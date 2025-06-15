@@ -38,12 +38,20 @@
 
 ;; SWITCH BUFFER
 ;; switch easily to a nearby buffer with C-x <arrow>
-(repeat-it
- switch-buffer
- ;; '(("<right>" next-buffer "next")
- ;; ("<left>" previous-buffer "previous")
- '(("n" previous-buffer "previous")
-   ("e" next-buffer "next")))
+(defvar switch-buffer-repeat-map
+  (let ((map (make-sparse-keymap)))
+	(define-key map (kbd "<right>") #'next-buffer)
+	(define-key map (kbd "<left>") #'previous-buffer)
+	(define-key map (kbd "n") #'previous-buffer)
+	(define-key map (kbd "e") #'next-buffer)
+	map))
+
+;; same as above but does not need to rewrite every key => whatever was "above" does not exist anymore
+(map-keymap
+ (lambda (_key cmd)
+   (when (symbolp cmd)
+	 (put cmd 'repeat-map 'switch-buffer-repeat-map)))
+ switch-buffer-repeat-map)
 
 ;; ;; SWITCH PERSPECTIVE
 ;; (defvar switch-persp-repeat-map
