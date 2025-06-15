@@ -171,6 +171,7 @@
 							  ;; more casual-packages to discover
 							  ;; "casual-agenda"
 
+							  "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
@@ -301,6 +302,7 @@
 							  ;; "python/elpy"
 							  "python/highlight-indent-guides"
 
+							  "rust"
 							  ;; "guile"
 							  "janet"
 							  "clojure"
