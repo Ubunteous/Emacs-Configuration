@@ -4,7 +4,7 @@
 
 ;; (use-package lisp-mode
 ;;   ;; :straight (:type built-in)
-:ensure nil
+;; :ensure nil
 ;;   :defer t
 ;;   :mode "\\.yuck\\'"
 ;;   :config
