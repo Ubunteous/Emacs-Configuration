@@ -11,6 +11,7 @@
   :custom-face
   ;; (org-agenda-date ((t (:foreground "light sea green"))))
   (org-agenda-calendar-event ((t (:foreground "light sea green"))))
+  (org-block-begin-line ((t (:foreground "light sea green"))))
 
   (org-imminent-deadline ((t (:foreground "dark sea green" :inherit nil))))
   (org-upcoming-deadline ((t (:foreground "medium see green"))))
