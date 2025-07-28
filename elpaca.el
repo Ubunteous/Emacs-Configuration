@@ -324,7 +324,7 @@
 							  "just"
 							  ;; "yuck"
 							  ;; "typst"
-							  ;; "haskell"
+							  "haskell"
 							  ;; "lilypond"
 							  "latex")
 

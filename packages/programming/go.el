@@ -4,7 +4,7 @@
 
 ;; (use-package go-ts-mode
 ;;   :defer t
-:ensure nil
+;;   :ensure nil
 ;;   :mode "\\.go\\'")
 
 (use-package go-mode
