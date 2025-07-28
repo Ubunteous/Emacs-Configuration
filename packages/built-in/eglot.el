@@ -15,6 +15,7 @@
             ;; "C-c C-f" 'eglot-format-buffer)
             "C-c l r" 'eglot-rename)
   :config
+  (setopt eglot-server-programs '())
   ;; don't trust the docstring. nil/0 blocks anyway
   ;; (setq eglot-sync-connect nil)
 
@@ -38,8 +39,10 @@
   ;; (add-to-list 'eglot-server-programs '(python-ts-mode . ("pyright")))
 
   ;; native modes extend to their ts counterpart. maybe due to treesit-auto
-  (add-to-list 'eglot-server-programs '(c-mode . ("ccls"))) ;; also does c++
-  (add-to-list 'eglot-server-programs '(c++-mode . ("ccls"))) ;; also does c++
+  (add-to-list 'eglot-server-programs '(c-mode . ("ccls")))
+  (add-to-list 'eglot-server-programs '(c++-mode . ("ccls")))
+
+  ;; (add-to-list 'eglot-server-programs '(gdscript-mode . ("localhost" 6005)))
 
   (add-to-list 'eglot-server-programs '(python-mode . ("pyright")))
   ;; (add-to-list 'eglot-server-programs '(bash-mode . ("bash-language-server")))
@@ -73,7 +76,7 @@
   ;; (add-to-list 'eglot-server-programs '(csharp-ts-mode . ("csharp-ls")))
   
   ;; note: gdscript is currently slowed down by :completionProvider
-  ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . (""))) ;; not needed
+  ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . ("localhost" 6005))) ;; not needed
 
   ;; somehow missing documentation popup/hover. check with clojurians later
   (add-to-list 'eglot-server-programs '(clojure-ts-mode . ("clojure-lsp")))

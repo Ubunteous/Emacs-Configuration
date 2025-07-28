@@ -38,8 +38,9 @@
   ;; (setq dired-omit-files
   ;; (concat dired-omit-files "\\|.log$\\|.out$"))
 
-  (when windows-system-p
-	(setq dired-omit-files (concat dired-omit-files  "\\|.resx$\\|.Designer.cs$"))))
+  (if windows-system-p
+	  (setq dired-omit-files (concat dired-omit-files  "\\|.resx$\\|.Designer.cs$"))
+	(setq dired-omit-files (concat dired-omit-files  "\\|.gd.uid$"))))
 
 
 (use-package diredfl
