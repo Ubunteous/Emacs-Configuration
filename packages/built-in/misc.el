@@ -405,6 +405,16 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
       (error "No number at point"))
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 
+(defun replace-regexp-entire-buffer (pattern replacement)
+  "Perform regular-expression replacement throughout buffer."
+  (interactive
+   (let ((args (query-replace-read-args "Replace" t)))
+     (setcdr (cdr args) nil)    ; remove third value returned from query---args
+     args))
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward pattern nil t)
+      (replace-match replacement))))
 
 (defun my/toggle-show-trailing-whitespace ()
   "Toggle `show-trailing-whitespace'."
