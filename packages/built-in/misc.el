@@ -256,6 +256,9 @@
 
   (setq xref-search-program #'ripgrep)
 
+  ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
+  (setq set-mark-command-repeat-pop t)
+
   ;; hide lint messages on package update
   (add-to-list 'display-buffer-alist
                '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
