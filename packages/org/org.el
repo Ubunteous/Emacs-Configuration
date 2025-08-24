@@ -119,6 +119,7 @@
 		  ("e" . "src elisp\n")
 		  ("f" . "src python\n")
 		  ;; ("g" . "src go\n")
+		  ("g" . "src gdscript\n")
 		  ("h" . "src html\n")
 		  ("i" . "src js\n")
 		  ("l" . "src lua\n")
