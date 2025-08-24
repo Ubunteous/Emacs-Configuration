@@ -9,7 +9,7 @@
   :defer t
   :general
   ("C-s" 'swiper-isearch)
-  ("C-c s" 'swiper-isearch)
+  ;; ("C-c s" 'swiper-isearch)
   :custom-face
   ;;there are 4 different  background-match-face and match-face
   (swiper-background-match-face-1 ((t (:background "light sea green"))))
