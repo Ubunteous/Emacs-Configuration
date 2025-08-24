@@ -98,6 +98,7 @@
   :general
   :general (:keymaps 'flyspell-mode-map
 					 ;; shadows ispell-word
+					 ;; it can show options as a drop down list with popup package
 					 "M-$" 'flyspell-correct-wrapper))
 
 ;; error with after-load-theme-hook

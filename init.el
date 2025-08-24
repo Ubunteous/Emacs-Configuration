@@ -16,6 +16,8 @@
 ;;             OPTIMISATION           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; (server-start)
+
 ;; Adjust garbage collection thresholds during startup, and thereafter
 (setq gc-cons-threshold (* 128 1024 1024) )
 (add-hook 'emacs-startup-hook
