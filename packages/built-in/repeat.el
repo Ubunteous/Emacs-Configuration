@@ -93,6 +93,13 @@
  '(("s" swiper-C-s "next")
    ("r" swiper-isearch-C-r "previous")))
 
+
+;; CONFLICT (smerge)
+(repeat-it
+ smerge
+ '(("n" smerge-next "next")
+   ("p" smerge-prev "previous")))
+
 ;; ;; SEARCH (isearch)
 ;; (defvar isearch-repeat-map
 ;;   (let ((map (make-sparse-keymap)))
