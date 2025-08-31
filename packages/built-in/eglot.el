@@ -45,7 +45,7 @@
 
   ;; (add-to-list 'eglot-server-programs '(gdscript-mode . ("localhost" 6005)))
 
-  (add-to-list 'eglot-server-programs '(python-mode . ("pyright")))
+  (add-to-list 'eglot-server-programs '(python-mode . ("pyright"))) ;; or "basedpyright"
   ;; (add-to-list 'eglot-server-programs '(bash-mode . ("bash-language-server")))
 
   ;; (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
@@ -80,7 +80,8 @@
   ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . ("localhost" 6005))) ;; not needed
 
   ;; somehow missing documentation popup/hover. check with clojurians later
-  (add-to-list 'eglot-server-programs '(clojure-ts-mode . ("clojure-lsp")))
+  (add-to-list 'eglot-server-programs '(clojure-mode . ("clojure-lsp")))
+
   ;; (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nil")))
   (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nixd")))
 
@@ -138,7 +139,7 @@
     
     ;; elixir-mode
     nix-ts-mode
-    clojure-ts-mode) . eglot-ensure))
+	clojure-mode) . eglot-ensure))
 
 
 ;; makes eldoc info appear at point
@@ -160,3 +161,13 @@
 ;;   (add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
 ;;   (with-eval-after-load 'eglot
 ;;     (load-library "project")))
+
+
+;; ;; does not appear to do much to make flycheck errors appear
+;; (use-package flycheck-eglot
+;;   :defer t
+;;   :after (flycheck eglot)
+;;   ;; :config
+;;   ;; (global-flycheck-eglot-mode 1)
+;;   :hook
+;;   (clojure-mode . flycheck-eglot-mode))
