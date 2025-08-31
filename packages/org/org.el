@@ -9,6 +9,9 @@
   ;; :straight (:type built-in)
   :ensure nil
   :custom-face
+  ;; highlight available in hl-mode
+  (hl-line ((t (:foreground "cyan"))))
+
   ;; (org-agenda-date ((t (:foreground "light sea green"))))
   (org-agenda-calendar-event ((t (:foreground "light sea green"))))
   (org-block-begin-line ((t (:foreground "light sea green"))))
