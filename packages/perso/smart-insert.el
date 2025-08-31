@@ -34,12 +34,12 @@ a colon needs to be added before inserting a space"
       (and
        ;; current line is not a comment/selector (starts with whitespace/indent)
        (save-excursion
-	 (call-interactively 'beginning-of-line)
-	 (and
-	  (not (eobp)) ;; check char-after exists
-	  (or
-	   (= ?  (char-after))
-	   (= ?\C-i  (char-after)))))
+		 (call-interactively 'beginning-of-line)
+		 (and
+		  (not (eobp)) ;; check char-after exists
+		  (or
+		   (= ?  (char-after))
+		   (= ?\C-i  (char-after)))))
        
        ;; cursor is at the end of the line
        ;; (eolp)
@@ -49,3 +49,42 @@ a colon needs to be added before inserting a space"
 
     (insert ":"))
   (insert " "))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PYTHON/GD SMART INSERT ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq colon-word-prefixes
+	  #s(hash-table
+		 test equal
+		 data
+		 ("if" t
+		  "for" t
+		  "while" t
+		  "def" t
+		  ;; gdscript only
+		  "func" t
+		  "match" t)))
+
+(defun get-first-word-in-line ()
+  "Get the first word in the current line."
+  (interactive)
+  (let ((first-word (save-excursion
+                      (back-to-indentation)
+                      (thing-at-point 'word))))
+    (if first-word
+        first-word
+      nil)))
+
+(defun smart-insert-colon-python ()
+  "Checks the first and last char of a line to figure out if
+a colon needs to be added before inserting a space"
+  (interactive)
+  (when
+      ;; (and
+	  (gethash (get-first-word-in-line) colon-word-prefixes)
+
+	;; last character is a word. does not work as func() ends with )
+	;; (= ?w (char-syntax (char-before))))
+	(insert ":"))
+  (newline-and-indent))

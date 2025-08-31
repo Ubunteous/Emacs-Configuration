@@ -18,6 +18,9 @@
       (run-python (python-shell-calculate-command) nil t)
       ;; (python-shell-send-buffer nil)
       (ace-select-window)))
+
+  (:keymaps 'python-ts-mode-map
+			"RET" 'smart-insert-colon-python)
   :config
   ;; (setq python-indent-guess-indent-offset t) ;; already t by default
   (setq python-indent-guess-indent-offset-verbose nil) ;; no error message when guessing indentation
