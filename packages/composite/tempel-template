@@ -204,6 +204,13 @@ just-mode
 			  "command {{var}}" q)
 
 
+sql-mode
+(get-tables "SELECT table_name, table_schema FROM information_schema.tables WHERE table_schema = 'story';")
+(get-columns
+ "SELECT column_name" n>
+ "FROM information_schema.columns" n>
+ "WHERE table_name = '" q "';")
+
 ;; Local Variables:
 ;; mode: lisp-data
 ;; outline-regexp: "[a-z]"
