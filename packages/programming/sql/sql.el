@@ -8,40 +8,54 @@
   :config
   (setq sql-product 'postgres)
 
-  ;; multiple db can be setup with this variable
-  (setq sql-postgres-login-params
-	'((user :default "postgres")
-          (database :default "mydb")
-          (server :default "/var/run/postgresql") ;; no need for creds
-          (port :default 5432)))
+  ;; ;; multiple db can be setup with this variable
+  ;; (setq sql-postgres-login-params
+  ;; 		'((user :default "postgres")
+  ;;         (database :default "posttgres")
+  ;;         (server :default "/var/run/postgresql") ;; no need for creds
+  ;;         (port :default 5432)))
 
   ;; list of options for M-x sql-connect or sql-postgres
   (setq sql-connection-alist
-	'((pgsql-default (sql-product 'postgres)
-			 (sql-port 5432)
-			 (sql-server "/var/run/postgresql")
-			 (sql-user "postgres")
-			 (sql-password "")
-			 (sql-database "postgres"))
+		'((pgsql-default (sql-product 'postgres)
+						 (sql-port 5432)
+						 (sql-server "/var/run/postgresql")
+						 (sql-user "postgres")
+						 (sql-password "")
+						 (sql-database "postgres"))
 
-          (pgsql-mydb (sql-product 'postgres)
-                      (sql-port 5432)
-                      (sql-server "/var/run/postgresql")
-                      (sql-user "postgres")
-                      (sql-password "")
-                      (sql-database "mydb"))))
+		  (pgsql-alter (sql-product 'postgres)
+					   (sql-port 5432)
+					   (sql-server "/var/run/postgresql")
+					   (sql-user "cynthia")
+					   (sql-password "")
+					   (sql-database "alter"))))
 
   ;; ;; for SQLi if tables are too big
   ;; (add-hook 'sql-interactive-mode-hook
   ;;           (lambda ()
   ;;             (toggle-truncate-lines t)))
 
-  (defun sql-connect-to-pqsql-mydb ()
-    (interactive)
-    (sql-connect 'pgsql-mydb "*pgsql-mydb*"))
+  (defun sql-get-tables ()
+	(interactive)
+	(sql-send-string "\\dt"))
+
+  (defun sql-get-table-at-point-columns ()
+	(interactive)
+	(sql-send-string (concat "\\d " (thing-at-point 'word 'no-properties))))
+
+  (defun sql-get-databases ()
+	(interactive)
+	(sql-send-string "\\l"))
+
+  (defun sql-connect-to-pqsql-alter ()
+	(interactive)
+	(let ((original-window (selected-window)))
+	  (sql-connect 'pgsql-alter "*pgsql-alter*")
+      (select-window original-window)))
   :general
   (:keymaps 'sql-mode-map
-	    "\"" '(lambda () (interactive) (insert ?\'))))
+			"\"" '(lambda () (interactive) (insert ?\'))))
 
 (use-package sqlup-mode
   :defer t
