@@ -195,7 +195,7 @@
 ;;;;;;;;;;;;;;;;;;;
 
 (load-user-files-per-system "composite"
-							'()
+							'("flyspell-correct")
 
 							'("jinx")
 							
@@ -234,6 +234,7 @@
 							  "wgrep")
 
 							'("crux"
+							  ;; "avy"
 							  ;; "popper" ;; try later
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
 							  "gptel"
@@ -264,9 +265,11 @@
 							'()
 
 							'("apheleia"
+							  ;; "diff-hl"
 							  "hl-todo")
 
 							'("meow"
+							  ;; "git-gutter" ;; like diff-hl
 							  ;; "which-key" ;; now built-in
 							  "rainbow-delimiters"
 							  ;; "adaptive-wrap"
@@ -281,7 +284,6 @@
 							  ;; "symbol-overlay" ;; strong. maybe use later
 							  "no-littering"))
 
-;; (load-user-file "passive-utils/diff-hl") ;; not essential but fun
 ;; (load-user-file "passive-utils/evil")
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode
 ;; (load-user-file "passive-utils/direnv")
