@@ -4,19 +4,19 @@
 
 (use-package clojure-mode
   :defer t
-  :mode "\\.clj\\'")
-
-(use-package clojure-ts-mode
-  :defer t
-  :config
-  ;; do not install libtree-sitter-markdown_inline.so
-  (setq clojure-ts-ensure-grammars nil)
-  
-  ;; (setq clojure-ts-indent-style 'fixed)
-  ;; (setq clojure-ts-comment-macro-font-lock-body t)
-  ;; (setq clojure-ts-toplevel-inside-comment-form t)
-  ;; :mode "\\.clj\\'")
   :mode ("\\.clj\\'" "\\.edn\\'"))
+
+;; (use-package clojure-ts-mode
+;;   :defer t
+;;   :config
+;;   ;; do not install libtree-sitter-markdown_inline.so
+;;   (setq clojure-ts-ensure-grammars nil)
+
+;;   ;; (setq clojure-ts-indent-style 'fixed)
+;;   ;; (setq clojure-ts-comment-macro-font-lock-body t)
+;;   ;; (setq clojure-ts-toplevel-inside-comment-form t)
+;;   ;; :mode "\\.clj\\'")
+;;   :mode ("\\.clj\\'" "\\.edn\\'"))
 
 (use-package spinner
   :ensure (spinner :type git :host github :repo "Malabarba/spinner.el")
@@ -56,3 +56,30 @@
 ;; 		     "C-c C-c" 'inf-clojure-eval-buffer
 ;; 		     "C-x C-e" 'inf-clojure-eval-last-sexp))
 
+
+;; this gives cider-overlay to emacs-lisp-mode (a bit like eros)
+;; (autoload 'cider--make-result-overlay "cider-overlays")
+;; (defun endless/eval-overlay (value point)
+;;   (cider--make-result-overlay (format "%S" value)
+;;     :where point
+;;     :duration 'command)
+;;   ;; Preserve the return value.
+;;   value)
+
+;; (advice-add 'eval-region :around
+;;             (lambda (f beg end &rest r)
+;;               (endless/eval-overlay
+;;                (apply f beg end r)
+;;                end)))
+
+;; (advice-add 'eval-last-sexp :filter-return
+;;             (lambda (r)
+;;               (endless/eval-overlay r (point))))
+
+;; (advice-add 'eval-defun :filter-return
+;;             (lambda (r)
+;;               (endless/eval-overlay
+;;                r
+;;                (save-excursion
+;;                  (end-of-defun)
+;;                  (point)))))
