@@ -99,7 +99,8 @@
 						   "auto-close-compilation"
 						   "dired-count-lines"
 						   "org-properties-to-csv"
-						   "org-ctrl-c-plus"))
+						   "org-ctrl-c-plus"
+						   "case"))
 
 ;; (load-user-file "perso/break-time")
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
@@ -329,7 +330,8 @@
 							  ;; "typst"
 							  "haskell"
 							  ;; "lilypond"
-							  "latex")
+							  "latex"
+							  "elisp")
 
 							'())
 

@@ -152,9 +152,6 @@
   ;;(setq-default truncate-lines t)
   (global-visual-line-mode t)
 
-  ;;emacs search and buffers are case insensitive
-  (setq case-fold-search t)
-
   ;; mute bell function
   (setq ring-bell-function #'ignore)
 
@@ -192,9 +189,6 @@
   (setq kill-buffer-query-functions
 		(remq 'process-kill-buffer-query-function
 			  kill-buffer-query-functions))
-
-  ;; remove warning
-  ;; (put 'upcase-region 'disabled nil)
 
   ;; line-number
   (display-line-numbers-mode)
@@ -254,6 +248,14 @@
   ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
 
+  ;; (setq kill-do-not-save-duplicates t) ;; customize-set-variable
+  ;; (steq load-prefer-newer t)
+
+  ;; ;; Better support for files with long lines
+  ;; (setq-default bidi-paragraph-direction 'left-to-right)
+  ;; (setq-default bidi-inhibit-bpa t)
+  ;; (global-so-long-mode 1)
+
   (setq xref-search-program #'ripgrep)
 
   ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
@@ -281,9 +283,6 @@
   ;; ("C-x C-f" 'set-fill-column)
 
   ("M-z" 'zap-up-to-char)
-  ("M-u" 'upcase-word-at-point)
-  ("M-l" 'downcase-word-at-point)
-  ("M-c" 'capitalize-word-at-point)
   ("C-x k" 'kill-buffer-refocus)
 
   ;; auto balance windows upon deletion
@@ -375,23 +374,9 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
       (funcall callback $p1 $p2))
     (list $p1 $p2)))
 
-(defun capitalize-word-at-point ()
-  (interactive)
-  (word-boundary-at-point-or-region #'capitalize-region))
-
-(defun downcase-word-at-point ()
-  (interactive)
-  (word-boundary-at-point-or-region #'downcase-region))
-
-(defun upcase-word-at-point ()
-  (interactive)
-  (word-boundary-at-point-or-region #'upcase-region))
-
-;; (defun capitalize-previous-word ()
+;; (defun capitalize-word-at-point ()
 ;;   (interactive)
-;;   (unless (eq ? (char-after))
-;;     (right-word))
-;;   (capitalize-word -1))
+;;   (word-boundary-at-point-or-region #'capitalize-region))
 
 (defun save-and-backup-next ()
   ;;; Save current buffer and make a backup file.
