@@ -2,11 +2,11 @@
 ;;                HELP                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package dired
+(use-package help
   :defer t
   :ensure nil
   :general
-  (:keymaps 'helpful-mode-map
+  (:keymaps 'help-mode-map
 			"n" 'next-line
 			"C-n" 'help-goto-next-page
 			"p" 'previous-line

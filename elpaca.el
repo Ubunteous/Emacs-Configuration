@@ -77,7 +77,8 @@
 							  "repeat"
 							  "which-key"			  
 							  ;; "eglot-booster"
-							  "isearch"))
+							  "isearch"
+							  "help"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
 ;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
@@ -171,7 +172,7 @@
 							  ;; more casual-packages to discover
 							  ;; "casual-agenda"
 
-							  "ob/ob-rust"
+							  ;; "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
