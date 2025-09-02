@@ -250,12 +250,12 @@
 
 							  ;; choose one paredit superset to replace electric (pair) mode
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
-							  ;; "lispy" ;; vi-like bindings conflicting with meow
+							  "lispy" ;; vi-like bindings conflicting with meow
 
 							  "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
-;; (load-user-file "utilities/esup")
+;; (load-user-file "utilities/esup") ;; performances
 
 ;; (load-user-file "utilities/quickrun")
 
@@ -268,7 +268,8 @@
 
 							'("apheleia"
 							  ;; "diff-hl"
-							  "hl-todo")
+							  "hl-todo"
+							  "flyover")
 
 							'("meow"
 							  ;; "git-gutter" ;; like diff-hl
