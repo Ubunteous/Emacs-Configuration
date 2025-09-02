@@ -93,8 +93,45 @@
 	  ]
 	 ]
 	)
+
+  (transient-define-prefix motion-transient ()
+	["Motion"
+	 ["mark"
+	  ("C-<SPC>" "set-mark-command" set-mark-command)
+	  ("C-x C-x" "exchange-point-and-mark" exchange-point-and-mark)
+
+	  ;; pop-to-buffer
+	  ;; pop-to-mark-command
+	  ("C-x C-@" "pop-global-mark" pop-global-mark)
+	  ("M-g m" "consult-mark" consult-mark)
+	  ("C-x C-p" "mark-page" mark-page)
+	  ("C-M-@" "mark-sexp" mark-sexp)
+	  ("C-M-h" "mark-defun" mark-defun)
+
+	  ;; mark-paragraph
+	  ("C-x h" "mark-whole-buffer" mark-whole-buffer)
+	  ]
+	 ["xref"
+	  ("C-M-," "xref-go-forward" xref-go-forward)
+	  ("M-;" "xref-find-definition" xref-find-definitions)
+	  ("M-?" "xref-find-ref" xref-find-references)
+	  ("C-M-." "xref-find-apropos" xref-find-apropos)
+	  ]
+	 ["hideshow"
+	  ("C-c @ C-t" "hs-hide-all" hs-hide-all)
+	  ("C-c @ C-a" "hs-show-all" hs-show-all)
+	  ("C-c @ C-e" "hs-toggle-hiding" hs-toggle-hiding)
+	  ("C-c @ C-d" "hs-hide-block" hs-hide-block)
+	  ("C-c @ C-l" "hs-hide-level" hs-hide-level)
+	  ("C-c @ C-s" "hs-show-block" hs-show-block)
+	  ]
+	 ]
+	)
   :general
-  ("C-S-h" 'hrm-help-transient))
+  ("C-o" 'motion-transient) ;; shadows open-line
+  ("C-S-h" 'hrm-help-transient)
+  :hook
+  (prog-mode . hs-minor-mode))
 
 (use-package magit
   ;; fixes emacs 29 issue with old transient package (dependency)
