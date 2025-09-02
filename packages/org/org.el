@@ -395,6 +395,22 @@
 
       (delete-other-windows))))
 
+;; ;; Close only unless top level
+;; (defun org-open-next-heading-2 ()
+;;   "Close the current heading, move to the next visible heading at the
+;;    current level, and show the children of that heading."
+;;   (interactive)
+;;   (outline-hide-sublevels (org-outline-level))
+;;   (org-next-visible-heading 1)
+;;   (outline-show-children))
+
+;; Close and systematically open next level
+(defun org-open-next-heading ()
+  (interactive)
+  (outline-hide-sublevels (org-outline-level))
+  (org-next-visible-heading 1)
+  (outline-show-subtree))
+
 ;; (defun org-latex-compile ()
 ;;   "Export to LaTeX and open pdf."
 ;;   (interactive)
