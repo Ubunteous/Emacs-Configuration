@@ -33,6 +33,7 @@
   :config
   ;; load a dev/user.clj file (specified in deps.edn) on jack-in
   (setq cider-clojure-cli-global-options "-A:server:client:dev")
+  (setq cider-repl-pop-to-buffer-on-connect 'display-only)
   :hook ((clojure-mode clojure-ts-mode) . cider-mode))
 
 
