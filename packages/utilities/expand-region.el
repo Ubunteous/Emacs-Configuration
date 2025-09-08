@@ -7,4 +7,7 @@
 
 (use-package expand-region
   :defer t
+  :config
+  (setq expand-region-smart-cursor t)
+  ;; (setq expand-region-subword-enabled nil)
   :general ("C-=" 'er/expand-region))
