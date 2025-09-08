@@ -129,11 +129,11 @@
 (load-user-files-per-system "workflow"
 							'()
 							'("notmuch"
-							  "hyperbole")
+							  ;; "hyperbole"
+							  )
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
 							  "magit"
-							  
 							  ;; font is transparent. e.g.: ls /path/to/file is hard to see
 							  ;; "vterm" ;; vterm should be installed from NixOS configuration
 							  ;; "eat" ;; slower than vterm but written in elisp
