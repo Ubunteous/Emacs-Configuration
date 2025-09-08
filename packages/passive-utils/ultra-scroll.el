@@ -8,5 +8,5 @@
   :config
   (ultra-scroll-mode 1)
   :hook
-  (elpaca-after-init . (lambda () ((setq scroll-conservatively 101 ; important!
-					 scroll-margin 0)))))
+  (elpaca-after-init . (lambda () (setq scroll-conservatively 101 ; important!
+										scroll-margin 0))))

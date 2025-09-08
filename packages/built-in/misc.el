@@ -173,7 +173,7 @@
 
   ;; move bookmarks in specific directory
   (custom-set-variables
-   '(bookmark-default-file "~/.emacs.d/files/bookmark/bookmarks"))
+   '(bookmark-default-file "~/.emacs.d/files/bookmark-default.el"))
 
   ;; need to install a dict and setup a daemon first
   ;; (setq dictionary-server "localhost")
