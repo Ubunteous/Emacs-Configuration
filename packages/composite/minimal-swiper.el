@@ -7,6 +7,8 @@
 
 (use-package swiper
   :defer t
+  ;; :config
+  ;; (setq swiper-action-recenter t)
   :general
   ("C-s" 'swiper-isearch)
   ;; ("C-c s" 'swiper-isearch)

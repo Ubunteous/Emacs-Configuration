@@ -9,13 +9,14 @@
   ;; (add-hook 'writeroom-mode-disable-hook (lambda () (centaur-tabs-mode 1) (display-line-numbers-mode 1)))
   :general
   (:keymaps 'writeroom-mode-map
-	    "C-M-<" #'writeroom-decrease-width
-	    "C-M->" #'writeroom-increase-width
-	    "C-M-=" #'writeroom-adjust-width)
+			"C-M-<" #'writeroom-decrease-width
+			"C-M->" #'writeroom-increase-width
+			"C-M-=" #'writeroom-adjust-width)
   :config
   (setq writeroom-width 60
-	writeroom-fullscreen-effect "maximized")
+		writeroom-fullscreen-effect "maximized")
   ;; writeroom-added-width-left -10)
+  (setq writeroom-restore-window-config t)
 
   ;; (add-to-list writeroom-global-effects my-writeroom-theme)
   :hook
@@ -25,8 +26,8 @@
    
    ;; switch to writeroom if there is only one window open
    (org-mode . (lambda ()
-		 (when (= (count-windows) 1)
-		   (writeroom-mode))))
+				 (when (= (count-windows) 1)
+				   (writeroom-mode))))
    
    ;; (writeroom-mode-enable . (lambda ()
    ;; 			      (display-line-numbers-mode -1)

@@ -152,7 +152,9 @@
 (elpaca-wait)
 
 (load-user-files-per-system "org"
-							'("htmlize")
+							'(
+							  ;; "htmlize"
+							  )
 
 							'("jupyter" ;; convert org -> ipynb with ox-ipynb
 							  "org-fragtog"
@@ -277,10 +279,10 @@
 							  ;; "which-key" ;; now built-in
 							  "rainbow-delimiters"
 							  ;; "adaptive-wrap"
-							  "ultra-scroll"
+							  ;; "ultra-scroll"
 							  "aggressive-indent"
 							  "auto-capitalize" ;; => LaTeX/org mode only
-							  "beacon"
+							  ;; "beacon"
 							  "browse-kill-ring"
 							  "diminish"
 							  "dimmer" ;; DONE

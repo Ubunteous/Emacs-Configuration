@@ -17,6 +17,7 @@
   ;; 		`((avy-goto-char . ,(number-sequence ?a ?f))
   ;;         (avy-goto-word-1 . (?f ?g ?h ?j))))
 
+  (setq avy-indent-line-overlay t)
   (setq avy-keys '(?a ?r ?s ?t ?g ?m ?n ?e ?i))
   (setq avy-style 'de-bruijn) ;; defaults to at/at-full
   (setq avy-background t))

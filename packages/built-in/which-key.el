@@ -14,6 +14,13 @@
   :init
   (which-key-mode)
   :config
+  ;; echo (default), left, top, nil
+  ;; (setq which-key-show-prefix 'echo)
+
+  ;; (setq which-key-show-docstrings nil)
+  ;; (setq which-key-show-remaining-keys nil)
+  (setq which-key-show-transient-maps t)
+  
   ;; Allow C-h to trigger which-key before it is done automatically
   (setq which-key-show-early-on-C-h t)
   

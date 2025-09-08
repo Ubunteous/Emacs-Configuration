@@ -13,6 +13,11 @@
   ;; fix incorrect kill ring order
   (setq meow-use-clipboard t)
 
+  ;; (setq meow-word-thing 'word) ;; word, symbol and sexp
+  ;; (setq meow-symbol-thing 'symbol) ;; word, symbol and sexp
+  ;; (setq meow-goto-line-function nil) ;; func
+  ;; (setq meow-replace nil) ;; func
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; meow org speed keys ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,9 +70,9 @@
   ;;   '("N" .  org-narrow-to-subtree)
   ;;   '("W" .  widen))
 
-  ;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;
   ;; buffer mode ;;
-  ;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;
   
   ;; magit text-mode only needs insert mode
   (setf (alist-get 'text-mode meow-mode-state-list) 'insert)
@@ -78,9 +83,9 @@
   (setf (alist-get 'LaTeX-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'markdown-mode meow-mode-state-list) 'normal)
 
-  ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
   ;; bindings ;;
-  ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
 
   (meow-motion-overwrite-define-key
    ;; Use e to move up, n to move down.
@@ -209,19 +214,19 @@
   ;; :config
   ;; (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-iso)
 
-  ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;
   ;; appearance ;;
-  ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;
 
   (setq meow-cursor-type-insert 'box)
   (custom-set-faces '(meow-insert-cursor ((t (:background "light sea green"))))
-		    '(meow-normal-cursor ((t (:background "#fefff8")))))
+					'(meow-normal-cursor ((t (:background "#fefff8")))))
   ;; :custom-face
   ;; does not work because of inherit
   ;; (meow-insert-cursor ((t (:background "light sea green"))))
   ;; (meow-normal-cursor ((t (:background "#fefff8"))))
   :general (:keymaps 'meow-insert-state-keymap
-		     "<DEL>" 'meow-backward-char))
+					 "<DEL>" 'meow-backward-char))
 
 (use-package key-chord
   :defer t

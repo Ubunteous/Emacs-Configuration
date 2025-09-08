@@ -10,7 +10,7 @@
   ;; (setq outline-indent-shift-width 4)
   ;; (setq outline-blank-line t)
   ;; (setq-default search-invisible nil)
-
+  ;; (setq outline-indent-insert-heading-add-blank-line t)
   
   ;; indent depending on last non white line level
   ;; This ensures that pressing Enter will insert a new line and indent it.
