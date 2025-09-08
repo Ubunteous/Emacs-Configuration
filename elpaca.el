@@ -128,7 +128,8 @@
 
 (load-user-files-per-system "workflow"
 							'()
-							'("notmuch")
+							'("notmuch"
+							  "hyperbole")
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
 							  "magit"
