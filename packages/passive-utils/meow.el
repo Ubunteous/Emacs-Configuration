@@ -70,9 +70,9 @@
   ;;   '("N" .  org-narrow-to-subtree)
   ;;   '("W" .  widen))
 
-;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;
   ;; buffer mode ;;
-;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;
   
   ;; magit text-mode only needs insert mode
   (setf (alist-get 'text-mode meow-mode-state-list) 'insert)
@@ -83,9 +83,9 @@
   (setf (alist-get 'LaTeX-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'markdown-mode meow-mode-state-list) 'normal)
 
-;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;
   ;; bindings ;;
-;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;
 
   (meow-motion-overwrite-define-key
    ;; Use e to move up, n to move down.
@@ -214,9 +214,9 @@
   ;; :config
   ;; (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-iso)
 
-;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;
   ;; appearance ;;
-;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;
 
   (setq meow-cursor-type-insert 'box)
   (custom-set-faces '(meow-insert-cursor ((t (:background "light sea green"))))
