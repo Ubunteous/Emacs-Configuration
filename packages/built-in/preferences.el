@@ -100,9 +100,6 @@
   (setq show-paren-delay 0)
   ;; (setq show-paren-when-point-in-periphery t) ;; interesting
   
-  ;; go to help window (move cursor)
-  ;;(setq help-window-select t)
-
   ;; no startup message (probably already at the end of init.el)
   ;;(setq inhibit-startup-message t)
   ;;(setq inhibit-startup-echo-area-message t)
@@ -129,11 +126,14 @@
   ;; automatic linebreak
   ;;(auto-fill-mode)
 
-  ;; show trailing white spaces
-  (setq show-trailing-whitespace t)
+  ;; show trailing white spaces (ignored. maybe use setopt)
+  ;; (setq show-trailing-whitespace t)
 
   ;;go to help window
   (setq help-window-select t)
+
+  ;; emacs search and buffers are case insensitive
+  ;;(setq case-fold-search t)
 
   ;; jump to compilation window
   ;; (defadvice compilation-start (after compilation-start-maximize activate)
@@ -190,10 +190,6 @@
 		(remq 'process-kill-buffer-query-function
 			  kill-buffer-query-functions))
 
-  ;; line-number
-  (display-line-numbers-mode)
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
   ;; move elpa dir
   (setq package-user-dir "~/.emacs.d/files/elpa")
 
@@ -221,9 +217,9 @@
   ;; (grep-apply-setting 'grep-find-command '("fd . ")) ;; ("find . -type f -exec grep --color=auto -nH --null -e  \\{\\} +" . 54)
   ;; (grep-apply-setting 'grep-find-template '("fd . "))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; emacs bedrock settings ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   
   ;; (setopt completions-detailed t)
   ;; (setopt completions-group t)
@@ -293,7 +289,8 @@
 			  ;; balance windows if more than 1
 			  (unless (= 1 (length (window-list)))
 				(balance-windows))))
-  ;; :hook
+  :hook
+  (prog-mode . display-line-numbers-mode)
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
   )

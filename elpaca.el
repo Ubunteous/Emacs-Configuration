@@ -72,7 +72,7 @@
 							  "fly"
 							  "ibuffer"
 							  ;; "icomplete" ;; competes with vertico
-							  "misc"
+							  "preferences"
 							  "recentf"
 							  "repeat"
 							  "which-key"			  
