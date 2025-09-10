@@ -2,24 +2,26 @@
 ;;                DAPE                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package jsonrpc
-  ;; temporary fork
-  :defer t
-  :ensure (jsonrpc :type git :host github :repo "svaante/jsonrpc"))
+;; (use-package jsonrpc
+;;   ;; temporary fork
+;;   :defer t
+;;   :ensure (jsonrpc :type git :host github :repo "svaante/jsonrpc"))
 
 (use-package dape
   :defer t
-  :after jsonrpc
+  ;; :after jsonrpc
   :ensure (dape :type git :host github :repo "svaante/dape")
-  
-  ;; To use window configuration like gud (gdb-mi)
   ;; :init
+  ;; To use window configuration like gud (gdb-mi)
   ;; (setq dape-buffer-window-arrangement 'gud)
 
   :config
   ;; Info buffers to the right
   (setq dape-buffer-window-arrangement 'right)
 
+  ;; (setq dape-debug t) ;; debug log. adds delay
+  ;; (setq dape-many-windows nil) ;; simpler layout
+  
   ;; To not display info and/or buffers on startup
   ;; (remove-hook 'dape-on-start-hooks 'dape-info)
   ;; (remove-hook 'dape-on-start-hooks 'dape-repl)
@@ -42,8 +44,6 @@
 
   ;; Projectile users
   ;; (setq dape-cwd-fn 'projectile-project-root)
-
-  ;; (add-to-list 'dape-configs
   
   ;; (add-to-list 'dape-configs
   ;;              `(debugpy

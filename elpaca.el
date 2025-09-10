@@ -82,11 +82,6 @@
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
 ;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
-;; (load-user-file "workflow/dape")
-
-;; lsp / debug alternatives:
-;; (load-user-file "workflow/lsp-mode")
-;; (load-user-file "workflow/realgud")
 
 ;;;;;;;;;;;;;;;
 ;;   perso   ;;
@@ -130,6 +125,7 @@
 							'()
 							'("notmuch"
 							  ;; "hyperbole"
+							  ;; "dape"
 							  )
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
@@ -139,6 +135,9 @@
 							  ;; "eat" ;; slower than vterm but written in elisp
 							  )) ;; requires notmuch package from outside emacs
 
+;; lsp / debug alternatives:
+;; (load-user-file "workflow/lsp-mode")
+;; (load-user-file "workflow/realgud")
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
 ;; (load-user-file "workflow/perspective")
 ;; (load-user-file "workflow/elfeed") ;; alt: newsticker built-in
@@ -253,7 +252,7 @@
 
 							  ;; choose one paredit superset to replace electric (pair) mode
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
-							  "lispy" ;; vi-like bindings conflicting with meow
+							  ;; "lispy" ;; vi-like bindings conflicting with meow
 
 							  "writeroom"))
 
