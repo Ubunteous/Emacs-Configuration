@@ -28,7 +28,7 @@
   ;; Options: 'sendmail-query-once, 'smtpmail-send-it
 
   ;; send mail
-  (setq send-mail-function 'smtpmail-send-it)
+  (setq send-mail-function 'smtpmail-send-it) ;; 'sendmail-send-it
 
   ;; fix message send error
   ;; (setq smtpmail-stream-type 'starttls) ;; did not serve
@@ -47,13 +47,13 @@
 
   ;; A few commonly used saved searches.
   (setq notmuch-saved-searches
-	(quote
-	 ((:name "inbox" :query "tag:inbox AND -tag:work" :key "i" :sort-order newest-first) ;; oldest-first
-	  (:name "flagged" :query "tag:flagged" :key "f") ;; flagged messages
-	  (:name "sent" :query "tag:sent -tag:work" :key "t" :sort-order newest-first)
-	  (:name "drafts" :query "tag:draft" :key "d")
-	  (:name "mailinglist" :query "tag:lists/mailinglistID" :key "c")
-	  (:name "all mail" :query "*" :key "a" :sort-order newest-first)))))
+		(quote
+		 ((:name "inbox" :query "tag:inbox AND -tag:work" :key "i" :sort-order newest-first) ;; oldest-first
+		  (:name "flagged" :query "tag:flagged" :key "f") ;; flagged messages
+		  (:name "sent" :query "tag:sent -tag:work" :key "t" :sort-order newest-first)
+		  (:name "drafts" :query "tag:draft" :key "d")
+		  (:name "mailinglist" :query "tag:lists/mailinglistID" :key "c")
+		  (:name "all mail" :query "*" :key "a" :sort-order newest-first)))))
 
 ;; Setup User-Agent header
 ;; (setq mail-specify-envelope-from t) ;; Settings to work with msmtp

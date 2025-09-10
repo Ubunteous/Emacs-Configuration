@@ -17,6 +17,13 @@
   (org-roam-directory (file-truename "~/org/Alter/roam"))
   ;; (org-roam-db (file-truename "~/org/org-roam/database/org-roam.db"))
   ;; (org-roam-completion-everywhere t)
+
+  ;; ;; to save db locally
+  ;; (setq-local org-roam-directory
+  ;; 			  (expand-file-name
+  ;; 			   (concat
+  ;; 				(locate-dominating-file default-directory ".dir-locals.el")
+  ;; 				"org-roam")))
   :general
   ("C-c r g" 'org-roam-buffer-toggle
    ;; "C-c r d" 'org-roam-buffer-display-dedicated

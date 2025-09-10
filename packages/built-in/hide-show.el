@@ -8,6 +8,8 @@
   :defer t
   ;; :config
   ;; (setq hs-headline nil)
+  ;; (setq hs-hide-comments-when-hiding-all t)
+  ;; (setq hs-allow-nesting nil)
   :general
   ;; code folding
   ("C-c f" 'hs-toggle-hiding)

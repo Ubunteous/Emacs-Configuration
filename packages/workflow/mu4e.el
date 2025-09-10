@@ -53,11 +53,13 @@
   ;; then, when you want archive some messages, move them to
   ;; the 'All Mail' folder by pressing ``ma''.
 
+  ;; (setq send-mail-function 'sendmail-send-it)
+  
   (setq mu4e-maildir-shortcuts
-	'( (:maildir "/INBOX"              :key ?i)
-	   (:maildir "/[Gmail].Sent Mail"  :key ?s)
-	   (:maildir "/[Gmail].Trash"      :key ?t)
-	   (:maildir "/[Gmail].All Mail"   :key ?a)))
+		'( (:maildir "/INBOX"              :key ?i)
+		   (:maildir "/[Gmail].Sent Mail"  :key ?s)
+		   (:maildir "/[Gmail].Trash"      :key ?t)
+		   (:maildir "/[Gmail].All Mail"   :key ?a)))
 
   ;; allow for updating mail using 'U' in the main view:
   ;; (setq mu4e-get-mail-command "offlineimap")

@@ -85,6 +85,7 @@
 		  ;;("T1" "fontenc" t
 		  ;; ("pdflatex"))
 		  ("" "graphicx" t)
+		  ;; ("" "lmodern" nil)
 		  ;; ("" "longtable" nil)
 		  ;; ("" "wrapfig" nil)
 		  ;; ("" "rotating" nil)
@@ -92,8 +93,7 @@
 		  ("" "amsmath" t)
 		  ("" "amssymb" t)
 		  ;; ("" "capt-of" nil)
-		  ("" "hyperref" nil)
-		  ))
+		  ("" "hyperref" nil)))
 
   ;; latex export other packages
   (setq org-latex-packages-alist
