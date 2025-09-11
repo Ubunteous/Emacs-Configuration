@@ -39,17 +39,18 @@
   (let ((start
          (car
           (save-excursion
-            (backward-word)
-            (bounds-of-thing-at-point 'symbol)))))
-    (if start
-        (save-excursion
-          (goto-char start)
-          (funcall
-           (if (char-upcasep (char-after))
-               'downcase-region
-             'upcase-region)
-           start (1+ start)))
-      (capitalize-word -1))))
+			(beginning-of-thing 'word)
+			(bounds-of-thing-at-point 'symbol)))))
+	(if start
+		(save-excursion
+		  (goto-char start)
+		  (funcall
+		   (if (char-upcasep (char-after))
+			   'downcase-region
+			 'upcase-region)
+		   start (1+ start)))
+	  (capitalize-word -1))))
+
 
 (defun upcase-word-toggle ()
   (interactive)
