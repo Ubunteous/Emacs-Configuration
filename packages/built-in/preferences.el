@@ -268,7 +268,7 @@
 				 (allow-no-window . t)))
   :custom-face
   ;; change color for search bar in M-x customize
-  (widget-field ((t (:background "#272821"))))
+  (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
   :general
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
