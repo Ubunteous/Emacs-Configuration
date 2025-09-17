@@ -44,9 +44,9 @@
 			;; overrides persp-list-buffers in org buffers
 			"C-c b" 'org-switchb)
   :config
-  ;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
-  ;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;
 
   ;; preserve line breaks in exports
   (setq org-export-preserve-breaks t)
@@ -106,9 +106,9 @@
   ;; pdf export will open in evince (with C-c C-e l o)
   (add-to-list 'org-file-apps '("\\.pdf" . "evince %s"))
 
-  ;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
   ;;   BABEL   ;;
-  ;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
 
   ;; no wacky auto indent in org source blocks
   ;; alternative: (setq org-src-preserve-indentation t)
@@ -183,9 +183,9 @@
   ;; (:session . "jl")
   ;; (:kernel . "julia-1.0")))
 
-  ;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;
   ;;   CAPTURE   ;;
-  ;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;
 
   ;; (setq org-directory "~/org") ;; default
   (setq org-default-notes-file (concat org-directory "~/.notes"))
@@ -220,9 +220,9 @@
   ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
   ;;  "* %?\nEntered on %U\n  %i\n  %a")))
 
-  ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;
   ;;   AGENDA   ;;
-  ;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;
 
   ;; Note: see agenda files with this variable: org-agenda-files
 
@@ -235,8 +235,8 @@
   ;; show the previous day
   ;; span of 'day, 'week, 'month, 'year, or any number of days (int)
   (setq org-agenda-start-on-weekday nil
-		org-agenda-start-day "-3d"
-		org-agenda-span 14)
+		;; org-agenda-span 14
+		org-agenda-start-day "-3d")
 
   ;; org agenda align entries content
   ;; (setq org-agenda-prefix-format
@@ -248,8 +248,6 @@
   ;;         (search . "%-12c")))
   ;; 	org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " ""))
   ;; 	org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
-  ;; (setq org-agenda-tags-column -80)
-
 
   ;; deactivate agenda if it slows down startup time too much
   (setq org-agenda-inhibit-startup t)
@@ -258,26 +256,37 @@
   (setq org-agenda-window-setup 'only-window
 		org-agenda-restore-windows-after-quit t)
 
-  ;;;;;;;;;;;;;;;
+  (setq org-agenda-tags-column -89)
+  ;; (setq org-agenda-dim-blocked-tasks t)
+  (setq org-agenda-skip-scheduled-if-done t)
+  ;; (setq org-agenda-hide-tags-regexp "project\\|work\\|home\\|@.*")
+
+  ;;;;;;;;;;
+  ;; TAGS ;;
+  ;;;;;;;;;;
+
+  ;; (setq org-fast-tag-selection-single-key nil)
+  ;; (setq org-fast-tag-selection-select-todo nil)
+  ;; (setq org-fast-tag-selection-maximum-tags 56)
+
+;;;;;;;;;;;;;;;
   ;;   DIARY   ;;
-  ;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;
 
   ;; I dislike the diary
   ;; (setq diary-file "~/Desktop/Org/diary.org")
 
-  ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
   ;;   CALENDAR   ;;
-  ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
 
   ;; I dislike the calendar
   ;; (setq calendar-setup 'calendar-only)
   ;; (setq org-agenda-include-diary t)
 
-  ;; org-agenda-span => number of days displayed (day, week, month, year, or n days)
-
-  ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
   ;;   MISC   ;;
-  ;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
 
   ;; deactivate _, ^
   (setq org-hide-emphasis-markers t)
@@ -330,9 +339,9 @@
   ;; might be risky if it cancels normal image display
   ;; (org-babel-after-execute . org-redisplay-inline-images)
 
-  ;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;
   ;;   HTML EXPORT   ;;
-  ;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-html-postamble nil
 		org-html-head-include-default-style nil
