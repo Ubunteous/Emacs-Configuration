@@ -220,11 +220,16 @@
   ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
   ;;  "* %?\nEntered on %U\n  %i\n  %a")))
 
-;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;
   ;;   AGENDA   ;;
-;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;
 
-  ;; Note: see agenda files with this variable: org-agenda-files
+  (setq org-agenda-files
+		(list
+		 (file-name-directory
+		  (cdr
+		   (nth 1
+				(bookmark-get-bookmark "Inbox"))))))
 
   (defun org-agenda-show-mix (&optional arg)
     (interactive "P")
