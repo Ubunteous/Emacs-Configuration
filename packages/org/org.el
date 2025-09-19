@@ -224,16 +224,16 @@
   ;;   AGENDA   ;;
   ;;;;;;;;;;;;;;;;
 
-  (setq org-agenda-files
-		(list
-		 (file-name-directory
-		  (cdr
-		   (nth 1
-				(bookmark-get-bookmark "Inbox"))))))
-
+  (let ((inbox-path (file-name-directory
+					 (cdr
+					  (nth 1
+						   (bookmark-get-bookmark "Inbox"))))))
+	(setq org-agenda-files
+		  (mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox"))))
+  
   (defun org-agenda-show-mix (&optional arg)
-    (interactive "P")
-    (org-agenda arg "n"))
+	(interactive "P")
+	(org-agenda arg "n"))
 
   ;; change the days shown in the agenda with the following tweaks
   ;; avoid starting the agenda on monday
@@ -332,8 +332,8 @@
   (setq org-image-actual-width 300)
 
   (defun org-summary-todo (n-done n-not-done)
-    "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-log-states) ;; turn off logging
+	"Switch entry to DONE when all subentries are done, to TODO otherwise."
+	(let (org-log-done org-log-states) ;; turn off logging
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
