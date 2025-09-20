@@ -73,12 +73,16 @@
 
   ;; insert matching pair of parenthesis
   (electric-pair-mode t)
-  (setq electric-pair-preserve-balance t) ;; add " if another behind
+
+  ;; add " if another behind
+  ;; but may cause issue in some modes (gdscript) if line 1 "<point> and line 2 ""
+  (setq electric-pair-preserve-balance t)
 
   ;; smarter electric insert
   (setq-default electric-pair-inhibit-predicate
 				'(lambda (CHAR)
 				   (or (electric-pair-conservative-inhibit CHAR)
+					   ;; (eq (point) (line-end-position))
 					   ;; also inhibit when using char " after a word
 					   (and (eq (char-before) ?\")
 							(eq (char-syntax (char-before (1- (point)))) ?w)))))

@@ -224,13 +224,18 @@
   ;;   AGENDA   ;;
   ;;;;;;;;;;;;;;;;
 
-  (let ((inbox-path (file-name-directory
-					 (cdr
-					  (nth 1
-						   (bookmark-get-bookmark "Inbox"))))))
-	(setq org-agenda-files
-		  (mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox"))))
-  
+  (when windows-system-p
+	  (let ((inbox-path (file-name-directory
+						 (cdr
+						  (nth 1
+							   (bookmark-get-bookmark "Inbox"))))))
+		(setq org-agenda-files
+			  (mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox")))))
+
+  (setq org-log-done 'time) ;; add timestamp on done
+
+  ;; use this separator with writeroom
+  (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))  
   (defun org-agenda-show-mix (&optional arg)
 	(interactive "P")
 	(org-agenda arg "n"))

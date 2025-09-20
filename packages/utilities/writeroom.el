@@ -23,6 +23,7 @@
   ((writeroom-mode . centaur-tabs-local-mode)
    (magit-status-mode . writeroom-mode)
    (dired-mode . writeroom-mode)
+   (org-agenda-mode . writeroom-mode)
    
    ;; switch to writeroom if there is only one window open
    (org-mode . (lambda ()
