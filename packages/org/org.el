@@ -29,7 +29,7 @@
 
   ;; org-agenda-list
   (:keymaps 'org-mode-map
-			"C-c -" 'org-ctrl-c-plus			
+			"C-c -" 'org-ctrl-c-plus
 			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
 
 			;; removed as I need the default bindings for navigation
@@ -40,7 +40,7 @@
 
 			"C-c C-n" 'org-babel-next-block-end
 			"C-c C-p" 'org-babel-previous-block-end
-			
+
 			;; overrides persp-list-buffers in org buffers
 			"C-c b" 'org-switchb)
   :config
@@ -225,17 +225,19 @@
   ;;;;;;;;;;;;;;;;
 
   (when windows-system-p
-	  (let ((inbox-path (file-name-directory
-						 (cdr
-						  (nth 1
-							   (bookmark-get-bookmark "Inbox"))))))
-		(setq org-agenda-files
-			  (mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox")))))
+	(let ((inbox-path (file-name-directory
+					   (cdr
+						(nth 1
+							 (bookmark-get-bookmark "Inbox"))))))
+	  (setq org-agenda-files
+			(mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox")))))
 
-  (setq org-log-done 'time) ;; add timestamp on done
+  ;; the following can be set on a per file/subtree basis with:
+  ;; #+STARTUP: nologdone /  logdone /  lognotedone
+  ;; (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
 
   ;; use this separator with writeroom
-  (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))  
+  (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))
   (defun org-agenda-show-mix (&optional arg)
 	(interactive "P")
 	(org-agenda arg "n"))
@@ -339,7 +341,7 @@
   (defun org-summary-todo (n-done n-not-done)
 	"Switch entry to DONE when all subentries are done, to TODO otherwise."
 	(let (org-log-done org-log-states) ;; turn off logging
-      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+	  (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
   ;; (setq org-support-shift-select 1)) ;; heresy
@@ -396,10 +398,10 @@
   (interactive)
   ;; go to main header if not within it (too deep)
   (let ((start-level (funcall outline-level)))
-    (when (> start-level 1)
-      (outline-up-heading 1))
-    ;; fold
-    (org-fold-hide-subtree)))
+	(when (> start-level 1)
+	  (outline-up-heading 1))
+	;; fold
+	(org-fold-hide-subtree)))
 
 
 (defun org-babel-eval-wipe-error-buffer ()
