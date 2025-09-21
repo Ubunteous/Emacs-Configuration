@@ -48,16 +48,15 @@
    "M-s u" 'consult-focus-lines
    ;; Isearch integration
    "M-s e" 'consult-isearch-history)
-
   (:keymaps 'isearch-mode-map
-	    "M-e" 'consult-isearch-history ;; orig. isearch-edit-string
-	    "M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
-	    "M-s l" 'consult-line ;; needed by consult-line to detect isearch
-	    "M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
+			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
+			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
+			"M-s l" 'consult-line ;; needed by consult-line to detect isearch
+			"M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
   ;; Minibuffer history
   (:keymaps 'minibuffer-local-map
-	    "M-s" 'consult-history ;; orig. next-matching-history-element
-	    "M-r" 'consult-history) ;; orig. previous-matching-history-element
+			"M-s" 'consult-history ;; orig. next-matching-history-element
+			"M-r" 'consult-history) ;; orig. previous-matching-history-element
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -68,7 +67,7 @@
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
   (setq register-preview-delay 0.5
-	register-preview-function #'consult-register-format)
+		register-preview-function #'consult-register-format)
 
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
@@ -76,7 +75,7 @@
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
-	xref-show-definitions-function #'consult-xref)
+		xref-show-definitions-function #'consult-xref)
 
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
@@ -179,8 +178,9 @@
     mode))
 
 
-(defun consult-doc ()
+(defun consult-doc () ;; (start end)
   "Open the org doc of the appropriate language."
+  ;; (interactive "r")
   (interactive)
   ;; only show 2 windows after function call
   (when (not (eq (length (window-list)) 1))
@@ -193,25 +193,31 @@
 
 		 (file-path (concat "~/org/Informatics/Languages/"
 							dir
-							doc-file)))
+							doc-file))
 
-    (catch 'nofile
+		 ;; (region-text (when (region-active-p)
+		 ;; 				(buffer-substring start end)))
+		 )
+
+	(catch 'nofile
       (when (not (file-exists-p file-path))
 		(throw 'nofile (error (concat "File: " file-path " not found."))))
 
-      ;; needs to be chained or other-window won't work
-      (progn
+	  ;; needs to be chained or other-window won't work
+	  (progn
 		(split-window-right)
 		(other-window 1)
 		(if (get-buffer doc-file)
 			(switch-to-buffer doc-file)
-		  (find-file (concat file-path))))))
-
-  (org-cycle-overview)
-  (consult-org-heading)
-  (read-only-mode)
-  (org-cycle)
-  (use-local-map (copy-keymap org-mode-map)))
+		  (find-file (concat file-path)))))
+	
+	(org-cycle-overview)
+	(consult-org-heading)
+	;; (insert region-text)
+	(read-only-mode)
+	;; (org-cycle)
+	;; (use-local-map (copy-keymap org-mode-map))
+	))
 
 (use-package consult-todo
   :defer t

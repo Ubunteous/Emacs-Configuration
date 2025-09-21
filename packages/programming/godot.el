@@ -26,6 +26,8 @@
   ;; (setq gdscript-gdformat-save-and-format t)
   ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . ("localhost" 6005)))
 
+  ;; (setq gdscript-docs-local-path "~/Documents/Godot Doc")
+
   ;; overrides default gdscript-mode behaviour
   (with-eval-after-load 'eglot
 	(defvar eglot-server-programs)

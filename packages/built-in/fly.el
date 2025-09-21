@@ -2,13 +2,25 @@
 ;;            SPELL CHECK             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; syntax checking
-(use-package flycheck
+;; ;; syntax checking. alternative to the built in flymake
+;; (use-package flycheck
+;;   :defer t
+;;   :diminish flycheck-mode "check"
+;;   :config
+;;   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+;;   :hook emacs-lisp)
+
+(use-package flymake
+  :ensure nil
   :defer t
-  :diminish flycheck-mode "check"
   :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-  :hook (prog-mode . flycheck-mode))
+  ;; (setq flymake-indicator-type) ;; fringes (default), margins or nil
+  (setq flymake-show-diagnostics-at-end-of-line 'short) ;; defaults to nil. use either 'short or t
+  :custom-face
+  (flymake-end-of-line-diagnostics-face ((t (:height 1.0))))
+  :hook
+  (prog-mode . flymake-mode)
+  (flymake-mode . (lambda () (delete 'elisp-flymake-checkdoc flymake-diagnostic-functions))))
 
 ;; spell checking
 (use-package flyspell
@@ -26,7 +38,7 @@
   :config
   ;; use aspell instead on ispell (requires aspell installation)
   (if windows-system-p
-      (progn
+	  (progn
 		(setenv "LANG" "en_GB.UTF-8")
 		(setenv "DICPATH" "C:/Hunspell/dictionaries/") ;; dic/aff files
 		(setq ispell-program-name "C:/Hunspell/hunspell/bin/hunspell.exe"))
