@@ -40,7 +40,9 @@
          (car
           (save-excursion
 			(beginning-of-thing 'word)
-			(bounds-of-thing-at-point 'symbol)))))
+			(bounds-of-thing-at-point 'symbol)
+			(when (eq ?' (char-after))
+			  (forward-char))))))
 	(if start
 		(save-excursion
 		  (goto-char start)
