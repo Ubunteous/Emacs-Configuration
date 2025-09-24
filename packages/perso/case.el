@@ -40,9 +40,7 @@
          (car
           (save-excursion
 			(beginning-of-thing 'word)
-			(bounds-of-thing-at-point 'symbol)
-			(when (eq ?' (char-after))
-			  (forward-char))))))
+			(bounds-of-thing-at-point 'symbol)))))
 	(if start
 		(save-excursion
 		  (goto-char start)
@@ -52,7 +50,6 @@
 			 'upcase-region)
 		   start (1+ start)))
 	  (capitalize-word -1))))
-
 
 (defun upcase-word-toggle ()
   (interactive)
