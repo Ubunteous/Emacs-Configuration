@@ -67,20 +67,21 @@
   ;;;;;;;;;;;;;;;;
   ;;   CONFIG   ;;
   ;;;;;;;;;;;;;;;;
+
   ;; do not open the master with an incorrect encoding (fr characters)
   (setq latexenc-dont-use-TeX-master-flag t)
 
   ;; (latex-preview-pane-enable) ;;requires pdf-tools
   (setq TeX-PDF-mode t
-	;;bibtex-dialect 'biblatex ;; prefer biblatex to default
-	TeX-save-query nil
-	reftex-plug-into-AUCTeX t
-	TeX-auto-save t
-	TeX-parse-self t
-	TeX-show-compilation nil
-	;;TeX-view-program-selection '((output-pdf "PDF Tools"))
-	TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
-	TeX-source-correlate-start-server t)
+		;;bibtex-dialect 'biblatex ;; prefer biblatex to default
+		TeX-save-query nil
+		reftex-plug-into-AUCTeX t
+		TeX-auto-save t
+		TeX-parse-self t
+		TeX-show-compilation nil
+		;;TeX-view-program-selection '((output-pdf "PDF Tools"))
+		TeX-view-program-list '(("Evince" "evince --page-index=%(outpage) %o"))
+		TeX-source-correlate-start-server t)
   (setq-default TeX-master nil)
   :hook
   ;;:hook ((visual-line-mode math-mode) . LaTeX-mode)
