@@ -138,6 +138,7 @@
 		  ;; ("t" . "src janet\n")
 		  ("u" . "src jupyter-python\n")
 		  ("w" . "src css\n")
+		  ("x" . "src xml\n")
 		  ;; ("x" . "src restclient\n")
 		  ("y" . "src lilypond :file lily.png\n")
 		  ("#" . "src csharp\n")))
