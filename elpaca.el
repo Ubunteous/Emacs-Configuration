@@ -67,6 +67,7 @@
 							  "eglot")
 							
 							'("auto-insert"
+							  "abbrev"
 							  "completion"
 							  "dired" ;; => add git compatibility
 							  "fly"
