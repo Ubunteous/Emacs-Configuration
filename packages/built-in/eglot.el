@@ -52,8 +52,8 @@
   (add-to-list 'eglot-server-programs '(sql-mode . ("postgres_lsp")))
   ;; (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
   ;; (add-to-list 'eglot-server-programs '(java-mode . ("jdt-language-server")))
-  (add-to-list 'eglot-server-programs '(js-ts-mode . ("typescript-language-server")))
-  ;; (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server")))
+  (add-to-list 'eglot-server-programs '(js-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
 
   ;; ;; missing HEX package manager
   ;; (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
@@ -125,7 +125,7 @@
     ;; rust-ts-mode
     ;; java-ts-mode
     js-ts-mode
-    ;; typescript-ts-mode
+    typescript-ts-mode
 
     lua-mode
     ;; typst--markup-mode
