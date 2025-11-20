@@ -236,6 +236,7 @@
 							  "docker"
 							  "combobulate"
 							  ;; "restclient"
+							  ;; "minuet"
 							  "wgrep")
 
 							'("crux"
