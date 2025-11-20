@@ -221,28 +221,27 @@
   ;; (grep-apply-setting 'grep-find-command '("fd . ")) ;; ("find . -type f -exec grep --color=auto -nH --null -e  \\{\\} +" . 54)
   ;; (grep-apply-setting 'grep-find-template '("fd . "))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; emacs bedrock settings ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
   ;; (setopt completions-detailed t)
-  ;; (setopt completions-group t)
   ;; (setopt completions-group t)
   ;; (setopt completion-auto-select 'second-tab)
   ;; (setopt completion-auto-select t)
-  ;; (setopt x-underline-at-descent-line nil)           ; Prettier underlines
-  ;; (setopt switch-to-buffer-obey-display-actions t)   ; Make switching buffers more consistent
-  ;; (setopt show-trailing-whitespace t)        ; By default, underline trailing spaces
+  ;; (setopt x-underline-at-descent-line nil) ; Prettier underlines
+  (setopt switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
+  ;; (setopt show-trailing-whitespace t) ; By default, underline trailing spaces
   ;; (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
-  ;; (setopt display-line-numbers-width 3)           ; Set a minimum width
+  ;; (setopt display-line-numbers-width 3) ; Set a minimum width
 
   ;; Enable horizontal scrolling
   ;; (setopt mouse-wheel-tilt-scroll t)
   ;; (setopt mouse-wheel-flip-direction t)
 
   ;; cursor
-  ;; (blink-cursor-mode -1)                                ; Steady cursor
-  ;; (pixel-scroll-precision-mode)                         ; Smooth scrolling
+  ;; (blink-cursor-mode -1) ; Steady cursor
+  ;; (pixel-scroll-precision-mode) ; Smooth scrolling
 
   ;; Modes to highlight the current line with
   ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
