@@ -16,5 +16,16 @@
 
 ;; Place your api-key in ~/.authinfo
 ;; machine api.openai.com login apikey password TOKEN (where TOKEN is the key)
+;; machine googleapis.com login apikey password TOKEN (where TOKEN is the key)
 (use-package gptel
-  :defer t)
+  :defer t
+  :config
+  (setq gptel-model 'gemini-2.5-flash-lite
+		gptel-backend
+		(gptel-make-gemini "Gemini"
+		  :key
+		  (plist-get (car (auth-source-search
+						   :host "googleapis.com"
+						   :user "apikey"))
+					 :secret)
+		  :stream t)))
