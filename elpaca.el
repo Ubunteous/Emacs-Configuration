@@ -256,6 +256,7 @@
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
 							  ;; "lispy" ;; vi-like bindings conflicting with meow
 
+							  "xkcd"
 							  "disproject"
 							  "writeroom"))
 
