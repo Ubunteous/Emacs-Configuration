@@ -26,20 +26,20 @@
   ;; :straight auctex ;; get from melpa
   :ensure nil
   ;; :ensure (auctex :pre-build (("./autogen.sh")
-  ;; 			      ("./configure"
-  ;; 			       "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
-  ;; 			      ("make")))
+  ;;				  ("./configure"
+  ;;				   "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
+  ;;				  ("make")))
 
   ;; :ensure (auctex :pre-build (("./autogen.sh")
-  ;; 			      ("./configure"
-  ;; 			       "--without-texmf-dir"
-  ;; 			       "--with-packagelispdir=./"
-  ;; 			       "--with-packagedatadir=./")
-  ;; 			      ("make"))
-  ;; 		  :build (:not elpaca--compile-info) ;; Make will take care of this step
-  ;; 		  :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
-  ;; 		  :version (lambda (_) (require 'tex-site) AUCTeX-version))
-  
+  ;;				  ("./configure"
+  ;;				   "--without-texmf-dir"
+  ;;				   "--with-packagelispdir=./"
+  ;;				   "--with-packagedatadir=./")
+  ;;				  ("make"))
+  ;;		  :build (:not elpaca--compile-info) ;; Make will take care of this step
+  ;;		  :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
+  ;;		  :version (lambda (_) (require 'tex-site) AUCTeX-version))
+
   ;; :mode ("\\.tex\\'" . LaTeX-mode)
 
   ;; activates latex-mode in the end
@@ -56,7 +56,7 @@
   ;;;;;;;;;;;;;;;;
   ;;   ELPACA   ;;
   ;;;;;;;;;;;;;;;;
-  
+
   ;; (load "latex.el" nil t t)
   ;; (load "preview-latex.el" nil t t)
   ;; (setq-default preview-scale 1.4

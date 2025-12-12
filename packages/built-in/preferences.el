@@ -23,11 +23,11 @@
 
   ;; ;; add project name in modeline
   ;; (setq project-mode-line t)
-  
+
   ;; Remember and restore the last cursor location of opened files
   (save-place-mode 1)
   (setq save-place-file "~/.emacs.d/files/save-place.el")
-  
+
   ;; Don't pop up UI dialogs when prompting
   (setq use-dialog-box nil)
 
@@ -59,6 +59,11 @@
   ;; suspend-frame is useless in window mode. I am thus replacing it
   (put 'suspend-frame' disabled t)
 
+  ;; (setq-default
+  ;;  display-line-numbers-grow-only t
+  ;;  ;; display-line-numbers-type t ;; defaults to t
+  ;;  display-line-numbers-width 2)
+
   ;;(defun safe-find-library (library)
   ;;  "Find LIBRARY and enter view mode."
   ;;  (interactive "Library name: ")
@@ -86,10 +91,10 @@
 					   ;; also inhibit when using char " after a word
 					   (and (eq (char-before) ?\")
 							(eq (char-syntax (char-before (1- (point)))) ?w)))))
-  
+
   ;; ;; prevent insertion of double "
   ;; (setq electric-pair-inhibit-predicate
-  ;; 	(lambda (c)
+  ;;	(lambda (c)
   ;;         (if (char-equal c ?\") t (electric-pair-default-inhibit c))))
 
   ;; ;; remove
@@ -103,7 +108,7 @@
   (show-paren-mode t)
   (setq show-paren-delay 0)
   ;; (setq show-paren-when-point-in-periphery t) ;; interesting
-  
+
   ;; no startup message (probably already at the end of init.el)
   ;;(setq inhibit-startup-message t)
   ;;(setq inhibit-startup-echo-area-message t)
@@ -131,7 +136,7 @@
   ;;(auto-fill-mode)
 
   ;; show trailing white spaces (ignored. maybe use setopt)
-  ;; (setq show-trailing-whitespace t)
+  ;; (setq show-trailing-whitespace t) ;; use with whitespace-style/-action
 
   ;;go to help window
   (setq help-window-select t)
@@ -203,13 +208,13 @@
 		compilation-auto-jump-to-first-error t
 		;; compilation-max-output-line-length nil
 		compilation-always-kill t)
-  
 
-  (advice-add 'find-file :before (lambda (filename &optional wildcards) 
-                                   (unless (file-exists-p filename)
-                                     (let ((dir (file-name-directory filename)))
-                                       (unless (file-exists-p dir)
-                                         (make-directory dir t))))))
+
+  (advice-add 'find-file :before (lambda (filename &optional wildcards)
+								   (unless (file-exists-p filename)
+									 (let ((dir (file-name-directory filename)))
+									   (unless (file-exists-p dir)
+										 (make-directory dir t))))))
 
   (advice-add 'customize :after (lambda ()
 								  (search-forward "search")
@@ -235,6 +240,14 @@
   ;; (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
   ;; (setopt display-line-numbers-width 3) ; Set a minimum width
 
+  ;;;;;;;;;;;;
+  ;; SCROLL ;;
+  ;;;;;;;;;;;;
+
+  ;; (customize-set-variable 'fast-but-imprecise-scrolling t)
+  ;; (customize-set-variable 'scroll-conservatively 101)
+  ;; (customize-set-variable 'scroll-preserve-screen-position t)
+
   ;; Enable horizontal scrolling
   ;; (setopt mouse-wheel-tilt-scroll t)
   ;; (setopt mouse-wheel-flip-direction t)
@@ -242,6 +255,8 @@
   ;; cursor
   ;; (blink-cursor-mode -1) ; Steady cursor
   ;; (pixel-scroll-precision-mode) ; Smooth scrolling
+
+  ;;;;;
 
   ;; Modes to highlight the current line with
   ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
@@ -266,11 +281,45 @@
 
   ;; (put 'downcase-region 'disabled nil)
 
+  ;;;;;;;;;;;;;;;;;;;;;;
+  ;; WINDOW POSITIONS ;;
+  ;;;;;;;;;;;;;;;;;;;;;;
+
   ;; hide lint messages on package update
   (add-to-list 'display-buffer-alist
-               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+			   '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
 				 (display-buffer-no-window)
 				 (allow-no-window . t)))
+  ;; ;; example: (display-buffer-in-side-window) (side . left) (window-width . 70)
+  ;; (add-to-list 'display-buffer-alist
+  ;;			   '("\\*Help\\*"
+  ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)))
+  ;; (add-to-list 'display-buffer-alist
+  ;;			   '("\\*Completions\\*"
+  ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)
+  ;;				 (inhibit-same-window . t)
+  ;;				 (window-height . 10)))
+
+  ;; also see function toggle-window-dedicated
+
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;; SYSTEM CRAFTERS ;;
+  ;;;;;;;;;;;;;;;;;;;;;
+
+  ;; (setq 'dired-auto-revert-buffer t)
+  ;; (setq 'switch-to-buffer-in-dedicated-window 'pop)
+  ;; (setq 'switch-to-buffer-obey-display-actions t)
+  ;; (setq 'kill-do-not-save-duplicates t)
+
+  ;; ;; Better support for files with long lines
+  ;; (setq-default bidi-paragraph-direction 'left-to-right)
+  ;; (setq-default bidi-inhibit-bpa t)
+  ;; (global-so-long-mode 1)
+
+  ;; Load source (.el) or the compiled (.elc or .eln) file whichever is newest
+  ;; (setq 'load-prefer-newer t)
+
+  ;; (setq auto-window-vscroll nil)
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
@@ -300,7 +349,7 @@
   ("C-x 0" '(lambda ()
 			  (interactive)
 			  (delete-window)
-			  
+
 			  ;; balance windows if more than 1
 			  (unless (= 1 (length (window-list)))
 				(balance-windows))))
@@ -316,7 +365,7 @@
   (kill-buffer)
 
   (unless (eq 1 (length (cl-delete-duplicates (mapcar #'window-buffer (window-list)))))
-    (delete-window)))
+	(delete-window)))
 
 (defun keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
@@ -334,13 +383,13 @@ The DWIM behaviour of this command is as follows:
   (interactive)
   (cond
    ((region-active-p)
-    (keyboard-quit))
+	(keyboard-quit))
    ((derived-mode-p 'completion-list-mode)
-    (delete-completion-window))
+	(delete-completion-window))
    ((> (minibuffer-depth) 0)
-    (abort-recursive-edit))
+	(abort-recursive-edit))
    (t
-    (keyboard-quit))))
+	(keyboard-quit))))
 
 
 (defun server-restart ()
@@ -353,7 +402,6 @@ The DWIM behaviour of this command is as follows:
   "Custom startup message."
   (message "Let the hacking begin!"))
 
-
 ;; remove overwrite-mode to avoid activating it by mistake
 (defun overwrite-mode ()) ;; used to break evil. hope it works with meow
 
@@ -363,18 +411,18 @@ The DWIM behaviour of this command is as follows:
   Forwards the points to CALLBACK as (CALLBACK p1 p2), if present.
 URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
   (let ((deactivate-mark nil)
-        $p1 $p2)
-    (if (use-region-p)
-        (setq $p1 (region-beginning)
-              $p2 (region-end))
-      (save-excursion
-        (skip-chars-backward "[:alpha:]")
-        (setq $p1 (point))
-        (skip-chars-forward "[:alpha:]")
-        (setq $p2 (point))))
-    (when callback
-      (funcall callback $p1 $p2))
-    (list $p1 $p2)))
+		$p1 $p2)
+	(if (use-region-p)
+		(setq $p1 (region-beginning)
+			  $p2 (region-end))
+	  (save-excursion
+		(skip-chars-backward "[:alpha:]")
+		(setq $p1 (point))
+		(skip-chars-forward "[:alpha:]")
+		(setq $p2 (point))))
+	(when callback
+	  (funcall callback $p1 $p2))
+	(list $p1 $p2)))
 
 ;; (defun capitalize-word-at-point ()
 ;;   (interactive)
@@ -384,26 +432,26 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
   ;;; Save current buffer and make a backup file.
   (interactive)
   (let ((current-prefix-arg 4)) ;; emulate C-u
-    (save-buffer)))
+	(save-buffer)))
 
 (defun increment-number-at-point ()
   ;; Increase the value of the integer under the point
   (interactive)
   (skip-chars-backward "0-9")
   (or (looking-at "[0-9]+")
-      (error "No number at point"))
+	  (error "No number at point"))
   (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
 
 (defun replace-regexp-entire-buffer (pattern replacement)
   "Perform regular-expression replacement throughout buffer."
   (interactive
    (let ((args (query-replace-read-args "Replace" t)))
-     (setcdr (cdr args) nil)    ; remove third value returned from query---args
-     args))
+	 (setcdr (cdr args) nil)    ; remove third value returned from query---args
+	 args))
   (save-excursion
-    (goto-char (point-min))
-    (while (re-search-forward pattern nil t)
-      (replace-match replacement))))
+	(goto-char (point-min))
+	(while (re-search-forward pattern nil t)
+	  (replace-match replacement))))
 
 (defun my/toggle-show-trailing-whitespace ()
   "Toggle `show-trailing-whitespace'."
@@ -422,3 +470,10 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
   (interactive "P")
   (set-selective-display
    (* 4 (prefix-numeric-value arg))))
+
+(defun ediff-buffers-dwim ()
+  (interactive)
+  (if (= 2 (length (window-list)))
+      (ediff-buffers (window-buffer (nth 1 (window-list)))
+					 (current-buffer))
+    (call-interactively 'ediff-buffers)))

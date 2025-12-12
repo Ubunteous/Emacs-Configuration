@@ -81,10 +81,10 @@ a colon needs to be added before inserting a space"
 a colon needs to be added before inserting a space"
   (interactive)
   (when
-      ;; (and
-	  (gethash (get-first-word-in-line) colon-word-prefixes)
-
-	;; last character is a word. does not work as func() ends with )
-	;; (= ?w (char-syntax (char-before))))
+      (and
+	   (gethash (get-first-word-in-line) colon-word-prefixes)
+	   ;; last character is a word. does not work as func() ends with )
+	   ;; (= ?w (char-syntax (char-before))))
+	   (not (= ?. (char-syntax (char-before))))) ;; for colon :
 	(insert ":"))
   (newline-and-indent))

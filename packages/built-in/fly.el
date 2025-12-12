@@ -2,14 +2,6 @@
 ;;            SPELL CHECK             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; ;; syntax checking. alternative to the built in flymake
-;; (use-package flycheck
-;;   :defer t
-;;   :diminish flycheck-mode "check"
-;;   :config
-;;   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-;;   :hook emacs-lisp)
-
 (use-package flymake
   :ensure nil
   :defer t
@@ -51,6 +43,42 @@
   (setq ispell-dictionary "en_GB")
   ;; Sets flyspell correction to use two-finger mouse click
   (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word))
+
+;;;;;;;;;;;;;;
+;; FLYCHECK ;;
+;;;;;;;;;;;;;;
+
+;; ;; syntax checking. alternative to the built in flymake
+;; (use-package flycheck
+;;   :defer t
+;;   :diminish flycheck-mode "check"
+;;   :config
+;;   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+;;   :hook emacs-lisp)
+
+;; (setq flycheck-mode-line-prefix "")
+;; (setq flycheck-mode-line-color nil)
+;; (setq flycheck-mode-success-indicator "0")
+
+;; (setq tabulated-list-format
+;; 	  '[("File" 15)
+;; 		("Line"
+;; 		 5
+;; 		 flycheck-error-list-entry-<
+;; 		 :right-align t)
+;; 		("Col" 3 nil :right-align t)
+;; 		("Level"
+;; 		 7
+;; 		 flycheck-error-list-entry-level-<)
+;; 		("ID" 16 t)
+;; 		(#("Message (Checker)"
+;; 		   0 7 (face
+;; 				flycheck-error-list-error-message)
+;; 		   9 16 (face
+;; 				 flycheck-error-list-checker-name))
+;; 		 0
+;; 		 t)])
+;; (tabulated-list-init-header)
 
 ;; ;; MyPy Integration
 ;; (flycheck-define-checker

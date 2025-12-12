@@ -17,6 +17,8 @@
 ;; Place your api-key in ~/.authinfo
 ;; machine api.openai.com login apikey password TOKEN (where TOKEN is the key)
 ;; machine googleapis.com login apikey password TOKEN (where TOKEN is the key)
+
+;; Use minuet.el for auto-suggestions
 (use-package gptel
   :defer t
   :config
