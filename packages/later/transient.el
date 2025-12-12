@@ -2,7 +2,6 @@
 ;;             TRANSIENT              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 (use-package cl-lib
   ;; :straight (:type built-in)
   :ensure nil

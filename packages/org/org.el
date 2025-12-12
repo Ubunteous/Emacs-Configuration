@@ -203,8 +203,7 @@
            "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
 		  ("s" "Slipbox"
 		   entry (file "~/org/Alter/inbox.org")
-		   "* %?\n")
-		  ))
+		   "* %?\n")))
 
   ;; shift org capture default date to tomorrow
   (advice-add 'org-capture :around
@@ -238,7 +237,7 @@
 
   ;; the following can be set on a per file/subtree basis with:
   ;; #+STARTUP: nologdone /  logdone /  lognotedone
-  ;; (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
+  (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
 
   ;; use this separator with writeroom
   (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))
@@ -303,6 +302,14 @@
   ;;;;;;;;;;;;;;
   ;;   MISC   ;;
   ;;;;;;;;;;;;;;
+
+  ;; never add whiteline between org sections
+  ;; (setq org-cycle-separator-lines 0)
+
+  ;; not needed but good to know
+  ;; (setf (cdr (assq 'file org-link-frame-setup)) 'find-file) ;; open links in the same window
+  ;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  ;; (setq org-enforce-todo-dependencies t)
 
   ;; deactivate _, ^
   (setq org-hide-emphasis-markers t)

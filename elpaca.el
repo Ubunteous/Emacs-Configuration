@@ -80,7 +80,8 @@
 							  ;; "eglot-booster"
 							  "isearch"
 							  "eshell"
-							  "help"))
+							  "help"
+							  "pulse"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
 ;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
@@ -174,10 +175,6 @@
 							  ;; "ord-modern-indent"
 							  "org-appear"
 
-							  ;; not ready yet
-							  ;; more casual-packages to discover
-							  ;; "casual-agenda"
-
 							  ;; "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
@@ -239,7 +236,8 @@
 							  "combobulate"
 							  ;; "restclient"
 							  ;; "minuet"
-							  "wgrep")
+							  "wgrep"
+							  "casual")
 
 							'("crux"
 							  ;; "avy"
@@ -287,7 +285,6 @@
 							  ;; "ultra-scroll"
 							  "aggressive-indent"
 							  "auto-capitalize" ;; => LaTeX/org mode only
-							  ;; "beacon"
 							  "browse-kill-ring"
 							  "diminish"
 							  "dimmer" ;; DONE
@@ -315,6 +312,7 @@
 							  ;; "python/elpy"
 							  "python/highlight-indent-guides"
 
+							  "sh"
 							  "rust"
 							  ;; "guile"
 							  "janet"
@@ -452,6 +450,7 @@
 ;; (load-user-file "utilities/auto-compile")
 ;; (load-user-file "utilities/clippy") ;; what a nightmare
 ;; (load-user-file "passive-utils/indent-bars")
+;; "beacon" ;; replaced by pulse
 
 ;; (load-user-files "discarded/passive-utils" '("happy-margins"))
 
