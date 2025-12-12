@@ -83,7 +83,12 @@
   (add-to-list 'eglot-server-programs '(clojure-mode . ("clojure-lsp")))
 
   ;; (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nil")))
-  (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nixd")))
+  ;; (add-to-list 'eglot-server-programs '(nix-ts-mode . ("nixd")))
+
+  ;; Prefer nixd to nil, and enable in nix-ts-mode too
+  (add-to-list 'eglot-server-programs
+			   `((nix-mode nix-ts-mode) . ,(eglot-alternatives '("nixd" "nil"))))
+
 
   ;;;;;;;;;;;;;
   ;; HASKELL ;;
