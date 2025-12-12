@@ -5,8 +5,10 @@
 ;; Example configuration for Consult
 (use-package consult
   :defer t
+  :custom-face
+  (consult-preview-match ((t (:foreground "#272821" :background "light sea green"))))
+  (consult-preview-line ((t (:background "unspecified"))))
   :general
-  ;; C-c bindings (mode-specific-map)
   ;; ("C-c h" 'consult-history)
   ;; ("C-c m" 'consult-mode-command)
   ;; ("C-c k" 'consult-kmacro)
