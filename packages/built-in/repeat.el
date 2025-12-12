@@ -9,7 +9,11 @@
   (repeat-mode)
   (setq repeat-exit-key "q"))
 
-;; useful but only work with char shortcuts (not <left>)
+;;;;;;;;;;;;;;;;;;
+;; MACRO SYNTAX ;;
+;;;;;;;;;;;;;;;;;;
+
+;; useful but only work with char shortcuts (not <left>). See switch buffer for the regular syntax
 (defmacro repeat-it (group cmds)
   (let ((map (intern (concat (symbol-name group) "-repeat-map"))))
     `(progn
@@ -19,11 +23,9 @@
                 (put def 'repeat-map ',map)
                 (when hint (put def 'repeat-hint hint))))))
 
-;; (defun add-repeat-map (new-repeat-map)
-;;   (lambda (_key cmd)
-;; 	(when (symbolp cmd)
-;;       (put cmd 'repeat-map new-repeat-map)))
-;;   `new-repeat-map)
+;;;;;;;;;;;;
+;; REPEAT ;;
+;;;;;;;;;;;;
 
 ;; ORGTODO
 (repeat-it
@@ -36,35 +38,14 @@
  '(("v" scroll-up-command "scroll up")
    ("b" scroll-down-command "scroll down")))
 
-;; SWITCH BUFFER
-;; switch easily to a nearby buffer with C-x <arrow>
-(defvar switch-buffer-repeat-map
-  (let ((map (make-sparse-keymap)))
-	(define-key map (kbd "<right>") #'next-buffer)
-	(define-key map (kbd "<left>") #'previous-buffer)
-	(define-key map (kbd "n") #'previous-buffer)
-	(define-key map (kbd "e") #'next-buffer)
-	map))
-
-;; same as above but does not need to rewrite every key => whatever was "above" does not exist anymore
-(map-keymap
- (lambda (_key cmd)
-   (when (symbolp cmd)
-	 (put cmd 'repeat-map 'switch-buffer-repeat-map)))
- switch-buffer-repeat-map)
-
-;; ;; SWITCH PERSPECTIVE
-;; (defvar switch-persp-repeat-map
-;;   (let ((map (make-sparse-keymap)))
-;;     (define-key map (kbd "<right>") #'persp-next)
-;;     (define-key map (kbd "<left>") #'persp-prev)
-;;     map))
-
-;; (map-keymap
-;;  (lambda (_key cmd)
-;;    (when (symbolp cmd)
-;;      (put cmd 'repeat-map 'switch-persp-repeat-map)))
-;;  switch-persp-repeat-map)
+;; SWITCH-BUFFER
+(defvar-keymap switch-buffer-repeat-map
+  :repeat t
+  ;; :repeat (:enter (hl-todo-insert) :exit (hl-todo-occur))
+  "<right>" #'next-buffer
+  "<left>" #'previous-buffer
+  "n" #'previous-buffer
+  "e" #'next-buffer)
 
 ;; OTHER WINDOW
 (repeat-it
@@ -93,25 +74,16 @@
  '(("s" swiper-C-s "next")
    ("r" swiper-isearch-C-r "previous")))
 
+(repeat-it
+ isearch
+ '(("s" isearch-repeat-forward "next")
+   ("r" isearch-repeat-backward "previous")))
 
 ;; CONFLICT (smerge)
 (repeat-it
  smerge
  '(("n" smerge-next "next")
    ("p" smerge-prev "previous")))
-
-;; ;; SEARCH (isearch)
-;; (defvar isearch-repeat-map
-;;   (let ((map (make-sparse-keymap)))
-;;     (define-key map (kbd "s") #'isearch-repeat-forward)
-;;     (define-key map (kbd "r") #'isearch-repeat-backward)
-;;     map))
-
-;; (map-keymap
-;;  (lambda (_key cmd)
-;;    (when (symbolp cmd)
-;;      (put cmd 'repeat-map 'isearch-repeat-map)))
-;;  isearch-repeat-map)
 
 ;; MINI VIM
 
