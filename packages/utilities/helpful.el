@@ -7,7 +7,7 @@
   :config
   ;; always open help in the same space/window
   (add-to-list 'display-buffer-alist
-	       '("*Help*" display-buffer-reuse-mode-window))
+			   '("*Help*" display-buffer-reuse-mode-window))
   :general
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -26,8 +26,7 @@
   ;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
   ;; already links to the manual, if a function is referenced there.
   ("C-h F" #'helpful-function)
-
-  ;; Look up *C*ommands.
+  ("C-h C-S-k" #'describe-keymap)
 
   ;; By default, C-h C is bound to describe `describe-coding-system'. I
   ;; don't find this very useful, but it's frequently useful to only
@@ -36,4 +35,5 @@
 
   ;; isearch within helpful
   (:keymaps 'helpful-mode-map
-	    "s" 'swiper-isearch))
+			"s" 'swiper-isearch
+			[remap revert-buffer] 'helpful-update))
