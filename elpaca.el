@@ -339,10 +339,9 @@
 							  ;; "typst"
 							  "haskell"
 							  ;; "lilypond"
-							  "latex"
-							  "elisp")
+							  "latex")
 
-							'())
+							'("elisp"))
 
 ;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/elixir")
