@@ -264,6 +264,8 @@
   ;; (setq mark-ring-max 16)
   ;; (setq global-mark-ring-max 16)
 
+  ;; (put 'downcase-region 'disabled nil)
+
   ;; hide lint messages on package update
   (add-to-list 'display-buffer-alist
                '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
@@ -273,6 +275,8 @@
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
   :general
+  ([remap suspend-frame] 'undo)
+
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
   ("C-c k" 'kill-buffer-refocus)
@@ -349,20 +353,10 @@ The DWIM behaviour of this command is as follows:
   "Custom startup message."
   (message "Let the hacking begin!"))
 
-(defun eval-region-or-buffer ()
-  (interactive)
-  (cond
-   (mark-active
-    (call-interactively 'eval-region)
-    (message "Region evaluated!")
-    (setq deactivate-mark t))
-   (t
-    (save-buffer)
-    (eval-buffer)
-    (message "Buffer evaluated!"))))
 
 ;; remove overwrite-mode to avoid activating it by mistake
 (defun overwrite-mode ()) ;; used to break evil. hope it works with meow
+
 
 (defun word-boundary-at-point-or-region (&optional callback)
   "Return the boundary (beginning and end) of the word at point, or region, if any.
