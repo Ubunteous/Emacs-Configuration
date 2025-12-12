@@ -50,4 +50,41 @@
   :diminish all-the-icons-dired-mode
   :config
   (setq all-the-icons-dired-monochrome nil)
+
+  (defface all-the-icons-dired-todo-dir-face
+	'((t (:foreground "red")))
+	"Face for todo dir."
+	:group 'all-the-icons-dired)
+
+  (defface all-the-icons-dired-src-dir-face
+	'((t (:foreground "coral")))
+	"Face for src dir."
+	:group 'all-the-icons-dired)
+
+  (defface all-the-icons-dired-test-dir-face
+	'((t (:foreground "dark cyan")))
+	"Face for test dir."
+	:group 'all-the-icons-dired)
+
+  (setq all-the-icons-dired-dir-colors
+		#s(hash-table
+		   size 3 ;; hint for nb associations expectedtable. Speed gain is rarely significant
+		   test equal
+		   data("todo" 'all-the-icons-dired-todo-dir-face
+				"src"  'all-the-icons-dired-src-dir-face
+				"test" 'all-the-icons-dired-test-dir-face)))
+
+  (defun all-the-icons-dired--icon (file)
+	"Return the icon for FILE."
+	(if (file-directory-p file)
+		(all-the-icons-icon-for-dir file
+									:face (gethash file
+												   all-the-icons-dired-dir-colors
+												   'all-the-icons-dired-dir-face)
+									:v-adjust all-the-icons-dired-v-adjust)
+      (apply 'all-the-icons-icon-for-file file
+			 (append
+              `(:v-adjust ,all-the-icons-dired-v-adjust)
+              (when all-the-icons-dired-monochrome
+				`(:face ,(face-at-point)))))))
   :custom-face (all-the-icons-dired-dir-face ((t (:foreground "SteelBlue3")))))
