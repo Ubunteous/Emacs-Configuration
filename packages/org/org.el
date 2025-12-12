@@ -44,9 +44,9 @@
 			;; overrides persp-list-buffers in org buffers
 			"C-c b" 'org-switchb)
   :config
-;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
-;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;
 
   ;; preserve line breaks in exports
   (setq org-export-preserve-breaks t)
@@ -106,9 +106,9 @@
   ;; pdf export will open in evince (with C-c C-e l o)
   (add-to-list 'org-file-apps '("\\.pdf" . "evince %s"))
 
-;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;
   ;;   BABEL   ;;
-;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;
 
   ;; no wacky auto indent in org source blocks
   ;; alternative: (setq org-src-preserve-indentation t)
@@ -152,40 +152,44 @@
   (setq org-babel-clojure-backend 'cider)
 
   ;; language support
+  ;; (with-eval-after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
+   ;; (seq-filter
+   ;;  (lambda (pair)
+   ;; 	  (locate-library (concat "ob-" (symbol-name (car pair)))))...)
    '((emacs-lisp . t)
-     (shell . t)
-     ;; (latex . t)
-     (clojure . t)
-     ;; (C . t)
-     ;; (go . t)
-     ;; (typescript . t)
-     ;; (js . t)
-     ;; (jupyter . t)
-     (powershell . t)
-     ;; (python . t)
-	 ;; (rust . t)
-	 (sql . t)
-     (sql-mode . t)
-     ;; (nix . t)
-     ;; (janet . t)
-     (csharp . t)
-     ;; (html . t)
-     ;; (lua . t)
-     ;; (org . t)
-     ;; (lilypond . t)
-	 ;; (restclient . t)
-     ))
+  	 (shell . t)
+  	 ;; (latex . t)
+  	 (clojure . t)
+  	 ;; (C . t)
+  	 ;; (go . t)
+  	 ;; (typescript . t)
+  	 ;; (js . t)
+  	 ;; (jupyter . t)
+  	 (powershell . t)
+  	 ;; (python . t)
+  	 ;; (rust . t)
+  	 (sql . t)
+  	 (sql-mode . t)
+  	 ;; (nix . t)
+  	 ;; (janet . t)
+  	 (csharp . t)
+  	 ;; (html . t)
+  	 ;; (lua . t)
+  	 ;; (org . t)
+  	 ;; (lilypond . t)
+  	 ;; (restclient . t)
+  	 ))
 
   ;; This can be used to customise headers
   ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
   ;; (:session . "jl")
   ;; (:kernel . "julia-1.0")))
 
-;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;
   ;;   CAPTURE   ;;
-;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;
 
   ;; (setq org-directory "~/org") ;; default
   (setq org-default-notes-file (concat org-directory "~/.notes"))
@@ -281,24 +285,24 @@
   ;; (setq org-fast-tag-selection-select-todo nil)
   ;; (setq org-fast-tag-selection-maximum-tags 56)
 
-;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;
   ;;   DIARY   ;;
-;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;
 
   ;; I dislike the diary
   ;; (setq diary-file "~/Desktop/Org/diary.org")
 
-;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;
   ;;   CALENDAR   ;;
-;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;
 
   ;; I dislike the calendar
   ;; (setq calendar-setup 'calendar-only)
   ;; (setq org-agenda-include-diary t)
 
-;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;
   ;;   MISC   ;;
-;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;
 
   ;; deactivate _, ^
   (setq org-hide-emphasis-markers t)
@@ -351,9 +355,9 @@
   ;; might be risky if it cancels normal image display
   ;; (org-babel-after-execute . org-redisplay-inline-images)
 
-;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;
   ;;   HTML EXPORT   ;;
-;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;
 
   (setq org-html-postamble nil
 		org-html-head-include-default-style nil
