@@ -79,6 +79,7 @@
 							  "which-key"			  
 							  ;; "eglot-booster"
 							  "isearch"
+							  "eshell"
 							  "help"))
 
 ;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
@@ -273,7 +274,7 @@
 							'()
 
 							'("apheleia"
-							  ;; "diff-hl"
+							  ;; "diff-hl" ;; unmaintained and more invasive
 							  "hl-todo"
 							  "flyover")
 

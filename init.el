@@ -146,20 +146,6 @@
   (pop-to-buffer "*General Keybindings*")
   (delete-other-windows))
 
-(general-define-key
- ;; undo
- [remap suspend-frame] 'undo)
-
-;; Shortcuts
-(general-define-key
- ;; eval buffer quickly
- ;; note: # can be used before a lambda which may be byte compiled
- ;; "C-c x" #'(lambda () (interactive) (save-buffer) (eval-buffer) (message "buffer evaluation complete"))
- :keymaps 'emacs-lisp-mode-map
- "C-c x" 'eval-region-or-buffer)
-
-;; (put 'downcase-region 'disabled nil)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -9,6 +9,7 @@
 (use-package jinx
   :defer  t
   ;; :after vertico
+  :diminish "Jx"
   :general
   ("M-$" 'jinx-correct
    "C-M-$" 'jinx-languages)

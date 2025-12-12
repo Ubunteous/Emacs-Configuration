@@ -288,6 +288,10 @@
   ("M-z" 'zap-up-to-char)
   ("C-x k" 'kill-buffer-refocus)
 
+  ([remap suspend-frame] 'undo)
+  ([remap eval-last-sexp] 'pp-eval-last-sexp)
+
+  ("C-x $" 'set-quad-selective-display)
   ;; auto balance windows upon deletion
   ("C-x 0" '(lambda ()
 			  (interactive)
@@ -418,3 +422,9 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
 								(search-forward "search")
 								(move-beginning-of-line 0)
 								(forward-line)))
+
+(defun set-quad-selective-display (arg)
+  "Hide code levels (tab indent assumed to be 4)."
+  (interactive "P")
+  (set-selective-display
+   (* 4 (prefix-numeric-value arg))))

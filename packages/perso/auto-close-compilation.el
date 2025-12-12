@@ -15,7 +15,8 @@
                             (delete-window window)))))
     (message "Compilation %s" string)))
 
-(setq compilation-finish-functions (list #'compile-cache-env #'compile-autoclose))
+;; compile cache env undefined
+;; (setq compilation-finish-functions (list #'compile-cache-env #'compile-autoclose))
 
 ;; same as one-liner below
 ;; (defun colorize-compilation-buffer ()

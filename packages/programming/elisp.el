@@ -2,6 +2,15 @@
 ;;                ELISP               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package elisp
+  :ensure nil
+  :defer t
+  :general
+  (:keymaps 'emacs-lisp-mode-map
+			;; note: # can be used before a lambda which may be byte compiled
+			;; "C-c x" #'(lambda () (interactive) (save-buffer) (eval-buffer) (message "buffer eval complete"))
+			"C-c x" 'eval-region-or-buffer))
+
 (defun elisp-find-definition (name)
   "Jump to the definition of the function (or variable) at point."
   (interactive (list (thing-at-point 'symbol)))
