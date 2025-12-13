@@ -12,8 +12,10 @@
 (use-package transient
   :defer t
   :ensure (transient :type git :host github :repo "magit/transient")
+  :custom-face
+  (smerge-markers ((t (:background "deep sky blue"))))
+  (smerge-lower ((t (:background "brown"))))
   :config
-
   (transient-define-prefix hrm-help-transient ()
 	"Help commands."
 	["Help Commands"
