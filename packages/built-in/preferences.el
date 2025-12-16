@@ -9,9 +9,6 @@
   ;; keeps a server running (not necessary>use emacs-client directly)
   ;;(server-start)
 
-  ;; winner mode (window history)
-  ;; (winner-mode 1)
-
   ;; default is set to 300 characters
   ;; (setq auto-save-interval 20)
 
@@ -30,10 +27,6 @@
 
   ;; Don't pop up UI dialogs when prompting
   (setq use-dialog-box nil)
-
-  ;; auto split windows side by side
-  ;; (setq split-height-threshold nil)
-  ;; (setq split-width-threshold 80)
 
   ;; hide minibuffer scroll bar
   ;; (set-window-scroll-bars (minibuffer-window) nil nil)
@@ -69,6 +62,7 @@
   ;;  (interactive "Library name: ")
   ;;  (find-library library)
   ;;  (view-mode))
+  (setq view-read-only t) ;; enable view-mode on read only files
 
   ;; save last session
   ;; (desktop-save-mode 1)
@@ -138,22 +132,8 @@
   ;; show trailing white spaces (ignored. maybe use setopt)
   ;; (setq show-trailing-whitespace t) ;; use with whitespace-style/-action
 
-  ;;go to help window
-  (setq help-window-select t)
-
   ;; emacs search and buffers are case insensitive
   ;;(setq case-fold-search t)
-
-  ;; jump to compilation window
-  ;; (defadvice compilation-start (after compilation-start-maximize activate)
-  ;;   (when (equal mode 'grep-mode)
-  ;;     (switch-to-buffer "*grep*")
-  ;;     ;; you may want to maximize the buffer
-  ;;     (delete-other-windows)))
-
-  ;; ;;jump to occur window
-  ;; (defadvice occur-1 (after occur-maximize activate)
-  ;;   (other-window 1))
 
   (setopt tab-width 4)
 
@@ -171,9 +151,6 @@
 
   ;; use minibuffer in minibuffer. useful to search in minibuffer with swiper
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
-
-  ;; auto select window when mouse moves to it (like wm)
-  (setq mouse-autoselect-window t)
 
   ;; move auto save folder in specific directory
   ;; USED TO BE A CUSTOM SET
@@ -235,7 +212,7 @@
   ;; (setopt completion-auto-select 'second-tab)
   ;; (setopt completion-auto-select t)
   ;; (setopt x-underline-at-descent-line nil) ; Prettier underlines
-  (setopt switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
+  (setq switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
   ;; (setopt show-trailing-whitespace t) ; By default, underline trailing spaces
   ;; (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
   ;; (setopt display-line-numbers-width 3) ; Set a minimum width
@@ -255,7 +232,7 @@
   ;; cursor
   ;; (blink-cursor-mode -1) ; Steady cursor
   ;; (pixel-scroll-precision-mode) ; Smooth scrolling
-
+  
   ;;;;;
 
   ;; Modes to highlight the current line with
@@ -281,27 +258,6 @@
 
   ;; (put 'downcase-region 'disabled nil)
 
-  ;;;;;;;;;;;;;;;;;;;;;;
-  ;; WINDOW POSITIONS ;;
-  ;;;;;;;;;;;;;;;;;;;;;;
-
-  ;; hide lint messages on package update
-  (add-to-list 'display-buffer-alist
-			   '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-				 (display-buffer-no-window)
-				 (allow-no-window . t)))
-  ;; ;; example: (display-buffer-in-side-window) (side . left) (window-width . 70)
-  ;; (add-to-list 'display-buffer-alist
-  ;;			   '("\\*Help\\*"
-  ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)))
-  ;; (add-to-list 'display-buffer-alist
-  ;;			   '("\\*Completions\\*"
-  ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)
-  ;;				 (inhibit-same-window . t)
-  ;;				 (window-height . 10)))
-
-  ;; also see function toggle-window-dedicated
-
   ;;;;;;;;;;;;;;;;;;;;;
   ;; SYSTEM CRAFTERS ;;
   ;;;;;;;;;;;;;;;;;;;;;
@@ -318,14 +274,14 @@
 
   ;; Load source (.el) or the compiled (.elc or .eln) file whichever is newest
   ;; (setq 'load-prefer-newer t)
-
-  ;; (setq auto-window-vscroll nil)
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
   :general
   ([remap suspend-frame] 'undo)
 
+  ("RET" 'newline-and-indent)
+  
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
   ("C-c k" 'kill-buffer-refocus)
@@ -345,27 +301,11 @@
   ([remap eval-last-sexp] 'pp-eval-last-sexp)
 
   ("C-x $" 'set-quad-selective-display)
-  ;; auto balance windows upon deletion
-  ("C-x 0" '(lambda ()
-			  (interactive)
-			  (delete-window)
-
-			  ;; balance windows if more than 1
-			  (unless (= 1 (length (window-list)))
-				(balance-windows))))
   :hook
   (prog-mode . display-line-numbers-mode)
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
   )
-
-(defun kill-buffer-refocus ()
-  "Not only kill current buffer but also remove its window."
-  (interactive)
-  (kill-buffer)
-
-  (unless (eq 1 (length (cl-delete-duplicates (mapcar #'window-buffer (window-list)))))
-	(delete-window)))
 
 (defun keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
@@ -398,13 +338,13 @@ The DWIM behaviour of this command is as follows:
   (server-force-delete)
   (server-start))
 
+
 (defun display-startup-echo-area-message ()
   "Custom startup message."
   (message "Let the hacking begin!"))
 
 ;; remove overwrite-mode to avoid activating it by mistake
 (defun overwrite-mode ()) ;; used to break evil. hope it works with meow
-
 
 (defun word-boundary-at-point-or-region (&optional callback)
   "Return the boundary (beginning and end) of the word at point, or region, if any.

@@ -40,6 +40,15 @@ This is useful when followed by an immediate kill."
   ;; 		(ding)))
   ;; 	(isearch-search-and-update))
 
+  ;;   (defun isearch-other-window (regexp-p)
+  ;;     "Function to isearch-forward in the next window.
+
+  ;; With prefix arg REGEXP-P, perform a regular expression search."
+  ;;     (interactive "P")
+  ;;     (unless (one-window-p)
+  ;;       (with-selected-window (other-window-for-scrolling)
+  ;;         (isearch-forward regexp-p))))
+
   (defun isearch-consult ()
     "Invoke `consult-line' from isearch."
     (interactive)
