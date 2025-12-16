@@ -47,6 +47,12 @@
   "n" #'previous-buffer
   "e" #'next-buffer)
 
+;; ERRORS
+(defvar-keymap get-to-error-repeat-map
+  :repeat t
+  "p" #'previous-error
+  "n" #'next-error)
+
 ;; OTHER WINDOW
 (repeat-it
  other-window
