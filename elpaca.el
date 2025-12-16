@@ -79,6 +79,7 @@
 							  "which-key"			  
 							  ;; "eglot-booster"
 							  "isearch"
+							  "windows"
 							  "eshell"
 							  "help"
 							  "pulse"))
@@ -244,7 +245,7 @@
 							  ;; "popper" ;; try later
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
 							  "gptel"
-							  "outline-indent" ;; does not work well with python
+							  ;; "outline-indent" ;; compare to outline
 							  "evil-nerd-commenter"
 							  "helpful"
 							  "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
@@ -257,7 +258,7 @@
 							  ;; "lispy" ;; vi-like bindings conflicting with meow
 
 							  "xkcd"
-							  "disproject"
+							  ;; "disproject"
 							  "writeroom"))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
