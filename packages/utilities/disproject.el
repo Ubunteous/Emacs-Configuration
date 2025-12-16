@@ -4,5 +4,5 @@
 
 (use-package disproject
   :defer t
-  :bind (:map ctl-x-map
-			  ("p" . disproject-dispatch)))
+  :general (:keymap ctl-x-map
+					("p" . disproject-dispatch)))

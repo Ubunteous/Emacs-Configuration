@@ -3,6 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eshell
+  :ensure nil
   :defer t
   :config
   ;; simply type z in eshell to use it

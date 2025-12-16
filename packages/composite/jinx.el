@@ -31,13 +31,10 @@
 (defun jinx-toggle-language ()
   "Switch from english to french."
   (interactive)
-  
   (if (string= jinx-languages "fr")
-
       (progn
-	(jinx-languages "en")
-	(ispell-change-dictionary "en"))
-
+		(jinx-languages "en")
+		(ispell-change-dictionary "en"))
     (progn
       (jinx-languages "fr")
       (ispell-change-dictionary "fr"))))

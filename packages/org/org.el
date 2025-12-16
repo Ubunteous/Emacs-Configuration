@@ -237,7 +237,7 @@
 
   ;; the following can be set on a per file/subtree basis with:
   ;; #+STARTUP: nologdone /  logdone /  lognotedone
-  (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
+  ;; (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
 
   ;; use this separator with writeroom
   (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))

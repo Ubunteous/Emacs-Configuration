@@ -25,6 +25,13 @@
 		(eval-region (min (point) (mark)) (max (point) (mark)))
       (pp-eval-last-sexp prefix)))
 
+  ;; :config
+  ;; (define-short-documentation-group list
+  ;; 	"Making Lists"
+  ;; 	(make-list
+  ;; 	 :eval (make-list 5 'a))
+  ;; 	(cons
+  ;; 	 :eval (cons 1 '(2 3 4))))
   :general (
 			;; "C-c x" 'eval-region-or-buffer
 			[remap eval-last-sexp] 'eval-last-sexp-or-region)
@@ -50,6 +57,7 @@
 								  (error "Found no definition for %s in %s"
 										 name buffer))
 								 (t
+								  ;; better practice to use a non-user facing function as display-buffer
 								  (switch-to-buffer buffer)
 								  (goto-char point)
 								  (recenter 1)))))))
