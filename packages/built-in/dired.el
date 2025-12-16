@@ -21,7 +21,6 @@
   (setq delete-by-moving-to-trash t) ;; pairs well with trash package
   (setq dired-listing-switches "--group-directories-first -al"))
 
-
 ;; create dir if does not exist when renaming/moving
 (defadvice dired-mark-read-file-name (after rv:dired-create-dir-when-needed (prompt dir op-symbol arg files &optional default) activate)
   (when (member op-symbol '(copy move))
@@ -76,10 +75,62 @@
   :config
   (setq dired-subtree-use-backgrounds nil)
   :general (:keymaps 'dired-mode-map
-		     "i" 'dired-subtree-insert
-		     ";" 'dired-subtree-remove
-		     "TAB" 'dired-subtree-toggle
-		     "S-TAB" 'dired-subtree-remove))
+					 "i" 'dired-subtree-insert
+					 ";" 'dired-subtree-remove
+					 "TAB" 'dired-subtree-toggle
+					 "S-TAB" 'dired-subtree-remove))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; OREMACS DIRED RSYNC ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (defcustom ora-dired-rsync-limit nil
+;;   "Limit rsync transfer rate."
+;;   :type
+;;   '(choice
+;;     (const :tag "None" nil)
+;;     (integer :tag "500kbps" 500)))
+
+;; (defun ora-dired-rsync (dest)
+;;   (interactive
+;;    (list (expand-file-name
+;; 		  (read-file-name "Rsync to:" (dired-dwim-target-directory)))))
+;;   ;; store all selected files into "files" list
+;;   (let ((files (dired-get-marked-files nil current-prefix-arg))
+;; 		(rsync-command
+;; 		 (concat
+;; 		  "rsync"
+;; 		  (if ora-dired-rsync-limit
+;; 			  (format " --bwlimit=%s" ora-dired-rsync-limit)
+;; 			"")
+;; 		  " -arvzut"
+;; 		  (and current-prefix-arg " --delete")
+;; 		  " --progress ")))
+;;     ;; add all selected file names as arguments to the rsync command
+;;     (dolist (file files)
+;;       (setq rsync-command
+;; 			(concat rsync-command
+;; 					(if (string-match "^/ssh:\\(.*:\\)\\(.*\\)$" file)
+;; 						(format " -e ssh \"%s%s\""
+;; 								(match-string 1 file)
+;; 								(shell-quote-argument (match-string 2 file)))
+;; 					  (shell-quote-argument file)) " ")))
+;;     ;; append the destination
+;;     (setq rsync-command
+;; 		  (concat rsync-command
+;; 				  (if (string-match "^/ssh:\\(.*?\\)\\([^:]+\\)$" dest)
+;; 					  (format " -e ssh %s%s"
+;; 							  (match-string 1 dest)
+;; 							  (match-string 2 dest))
+;; 					(shell-quote-argument dest))))
+;;     ;; run the async shell command
+;;     (let ((default-directory (expand-file-name "~")))
+;;       (async-shell-command rsync-command
+;; 						   (format "rsync to %s" dest)))
+;;     (message rsync-command)
+;;     ;; finally, switch to that window
+;;     (other-window 1)))
+
 
 ;; ;; danger. rapport selon lequel tout a été détruit hors corbeille
 ;; (use-package trashed
