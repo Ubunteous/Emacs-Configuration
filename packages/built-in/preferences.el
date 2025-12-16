@@ -274,6 +274,38 @@
 
   ;; Load source (.el) or the compiled (.elc or .eln) file whichever is newest
   ;; (setq 'load-prefer-newer t)
+  ;; hide lint messages on package update
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+				 (display-buffer-no-window)
+				 (allow-no-window . t)))
+  ;; hide lint messages on package update
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+				 (display-buffer-no-window)
+				 (allow-no-window . t)))
+
+  ;; ;; for latex (greek chars as unicode) \delta \Delta
+  ;; ;; use with => for instance
+  ;; (prettify-symbols-mode)
+
+  ;; ;; add your pretty symbols
+  ;; (mapc (lambda (pair) (push pair prettify-symbols-alist))
+  ;; 		'(;; Syntax
+  ;;         ("def" . #x2131)
+  ;;         ("not" . #x2757)
+  ;;         ("in"  . #x2208)
+
+  ;; 			  ;; numbers
+  ;; 			  ("1" . #x2780)
+  ;; 			  ("2" . #x2781)
+  ;; 			  ("3" . #x2782)
+  ;; 			  ("4" . #x2783)
+  ;; 			  ("5" . #x2784)
+  ;; 			  ("6" . #x2785)
+  ;; 			  ("7" . #x2786)
+  ;; 			  ("8" . #x2787)
+  ;; 			  ("9" . #x2788)))
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))

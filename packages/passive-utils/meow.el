@@ -204,6 +204,7 @@
    '("x" . meow-delete)
    '("X" . meow-backward-delete)
    '("y" . meow-save)
+   '("Y" . meow-comment-and-duplicate)
    '("z" . meow-pop-selection)
    
    '("<escape>" . ignore))
@@ -282,3 +283,26 @@
     (delete-region (region-end) (region-beginning)))
   
   (meow-yank))
+
+(defun meow-comment-and-duplicate ()
+  "Save > Comment > Yank"
+  (interactive)
+  (when (not (region-active-p))
+	;; (thing-at-point 'line t)
+	(meow-line 1))
+
+  (let ((beg (region-beginning))
+		(end (region-end)))
+
+	(newline)
+	(copy-region-as-kill beg end)	
+	(comment-region beg end)
+	(yank)
+
+	(if (eq (count-lines (point-min) (point-max))
+			(line-number-at-pos))
+		(newline)
+	  (previous-line))
+
+	(next-line)
+	(end-of-line)))

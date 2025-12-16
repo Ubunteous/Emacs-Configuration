@@ -17,3 +17,4 @@ eln-cache/*
 elpa/*
 elpaca/*
 server/*
+*.elc
