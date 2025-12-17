@@ -74,6 +74,14 @@
    ("n" org-babel-next-src-block "next")
    ("p" org-babel-previous-src-block "previous")))
 
+;; ;; ORG TABLE MOVE CELL
+;; (repeat-it
+;;  org-table-move-cell
+;;  '(("m" org-table-move-cell-left "left")
+;;    ("e" org-table-move-cell-down "down")
+;;    ("n" org-table-move-cell-up "up")
+;;    ("i" org-table-move-cell-right "right")))
+
 ;; SEARCH (swiper)
 (repeat-it
  swiper

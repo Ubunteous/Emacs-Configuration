@@ -38,6 +38,11 @@
 			;; "C-f" 'org-forward-heading-same-level
 			;; "C-b" 'org-backward-heading-same-level
 
+			"C-M-S m" 'org-table-move-cell-left
+			"C-M-S n" 'org-table-move-cell-down
+			"C-M-S e" 'org-table-move-cell-up
+			"C-M-S i" 'org-table-move-cell-right
+
 			"C-c C-n" 'org-babel-next-block-end
 			"C-c C-p" 'org-babel-previous-block-end
 
@@ -275,6 +280,22 @@
   ;; (setq org-agenda-dim-blocked-tasks t)
   (setq org-agenda-skip-scheduled-if-done t)
   ;; (setq org-agenda-hide-tags-regexp "project\\|work\\|home\\|@.*")
+
+  ;;;;;;;;;;;;
+  ;; REFILE ;;
+  ;;;;;;;;;;;;
+
+  ;; (setq org-refile-use-outline-path 'file)
+
+  ;; ;; These files must exist
+  ;; (setq org-refile-targets
+  ;; 																				'(("Inbox.org" :maxlevel . 1)
+  ;;     ("done.org" :level . 1)
+  ;;     ("Test.org" :level 1)))
+
+  ;; (setq org-refile-targets
+  ;; 		'((nil :maxlevel . 3)
+  ;;         (org-agenda-files :maxlevel . 3)))
 
   ;;;;;;;;;;
   ;; TAGS ;;
