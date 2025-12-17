@@ -263,8 +263,6 @@
   ;;;;;;;;;;;;;;;;;;;;;
 
   ;; (setq 'dired-auto-revert-buffer t)
-  ;; (setq 'switch-to-buffer-in-dedicated-window 'pop)
-  ;; (setq 'switch-to-buffer-obey-display-actions t)
   ;; (setq 'kill-do-not-save-duplicates t)
 
   ;; ;; Better support for files with long lines
@@ -317,7 +315,7 @@
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
   ("C-c k" 'kill-buffer-refocus)
-  ("C-c u" 'mode-line-other-buffer)
+  ;; ("C-c u" 'mode-line-other-buffer)
   ("C-g" 'keyboard-quit-dwim)
 
   ("C-c n" 'previous-buffer)

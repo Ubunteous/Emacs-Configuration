@@ -27,29 +27,28 @@
    "M-y" 'consult-yank-pop ;; orig. yank-pop
    "<help> a" 'consult-apropos ;; orig. apropos-command
    ;; M-g bindings (goto-map)
-   "M-g e" 'consult-compile-error
-   "M-g f" 'consult-flymake ;; Alternative: consult-flycheck
-   "M-g g" 'consult-goto-line ;; orig. goto-line
-   "M-g M-g" 'consult-goto-line ;; orig. goto-line
-   "M-g o" 'consult-outline ;; Alternative: consult-org-heading
-   "M-g m" 'consult-mark
-   "M-g k" 'consult-global-mark
-   "M-g i" 'consult-imenu
-   "M-g I" 'consult-imenu-multi
+   "C-c y e" 'consult-compile-error
+   "C-c y f" 'consult-flymake ;; Alternative: consult-flycheck
+   "C-c y g" 'consult-goto-line ;; orig. goto-line
+   "C-c y i" 'consult-imenu
+   "C-c y I" 'consult-imenu-multi
+   "C-c y k" 'consult-global-mark
+   "C-c y G" 'consult-goto-line ;; orig. goto-line
+   "C-c y m" 'consult-mark
+   "C-c y o" 'consult-outline ;; Alternative: consult-org-heading
    ;; M-s bindings (search-map)
-   "M-s d" 'consult-find
-   "C-c o" '(lambda () (interactive) (consult-find "~/org/"))
-   "M-s D" 'consult-locate
-   "M-s g" 'consult-grep
-   "M-s G" 'consult-git-grep
-   "M-s r" 'consult-ripgrep
-   "M-s l" 'consult-line
-   "M-s L" 'consult-line-multi
-   "M-s m" 'consult-multi-occur
-   "M-s k" 'consult-keep-lines
-   "M-s u" 'consult-focus-lines
-   ;; Isearch integration
-   "M-s e" 'consult-isearch-history)
+   "C-c u e" 'consult-isearch-history
+   "C-c u d" 'consult-find
+   "C-c u D" 'consult-locate
+   "C-c u g" 'consult-grep
+   "C-c u G" 'consult-git-grep
+   "C-c u k" 'consult-keep-lines
+   "C-c u l" 'consult-line
+   "C-c u L" 'consult-line-multi
+   "C-c u m" 'consult-multi-occur
+   "C-c u o" '(lambda () (interactive) (consult-find "~/org/"))
+   "C-c u r" 'consult-ripgrep
+   "C-c u u" 'consult-focus-lines)
   (:keymaps 'isearch-mode-map
 			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
 			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
