@@ -4,6 +4,7 @@
 
 (use-package windows
   :ensure nil
+  :defer t
   :init
   ;; winner mode (window history)
   ;; (winner-mode 1)
@@ -38,6 +39,9 @@
   ;; auto select window when mouse moves to it (like wm)
   (setq mouse-autoselect-window t)
 
+  (setq switch-to-buffer-in-dedicated-window 'pop)
+  (setq switch-to-buffer-obey-display-actions t)
+
   (defun kill-buffer-refocus ()
 	"Not only kill current buffer but also remove its window."
 	(interactive)
@@ -54,10 +58,17 @@
 			   '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
 				 (display-buffer-no-window)
 				 (allow-no-window . t)))
-  ;; ;; example: (display-buffer-in-side-window) (side . left) (window-width . 70)
-  ;; (add-to-list 'display-buffer-alist
-  ;;			   '("\\*Help\\*"
-  ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)))
+  ;; example: (display-buffer-in-side-window) (side . left) (window-width . 70)
+  (add-to-list 'display-buffer-alist
+			   '("\\*Help\\*"
+				 (display-buffer-reuse-window display-buffer-pop-up-window)
+				 (inhibit-same-window . t)))
+  (add-to-list 'display-buffer-alist
+			   `(,(rx (| "*xref*"
+						 "*grep*"
+						 "*Occur*"))
+				 display-buffer-reuse-window
+				 (inhibit-same-window . nil)))
   ;; (add-to-list 'display-buffer-alist
   ;;			   '("\\*Completions\\*"
   ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)
