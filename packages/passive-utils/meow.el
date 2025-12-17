@@ -18,6 +18,32 @@
   ;; (setq meow-goto-line-function nil) ;; func
   ;; (setq meow-replace nil) ;; func
 
+  ;;;;;;;;;;;;;;;;;;;;;;;
+  ;; meow replace mode ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;
+
+  (setq meow-vimreplace-keymap (make-keymap))
+  (meow-define-state vimreplace
+	"meow state quick insertion"
+	:lighter " [R]"
+	:keymap meow-vimreplace-keymap
+	:face meow-vimreplace-cursor)
+
+  (defface meow-vimreplace-cursor
+	'((((class color) (background dark))
+       (:inherit cursor))
+      (((class color) (background light))
+       (:inherit cursor)))
+	"Insert replace cursor."
+	:group 'meow)
+
+  ;; meow-define-state creates the variable
+  (setq meow-cursor-type-vimreplace 'box)
+
+  (meow-define-keys 'vimreplace
+	'("<escape>" . meow-normal-mode)
+	'("RET" . meow-normal-mode))
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; meow org speed keys ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -30,7 +56,7 @@
   ;;     )
   ;;   "Insert org motion cursor."
   ;;   :group 'meow)
-  
+
   ;; (setq meow-org-motion-keymap (make-keymap))
   ;; (meow-define-state org-motion
   ;;   "Org-mode structural motion"
@@ -73,7 +99,7 @@
   ;;;;;;;;;;;;;;;;;
   ;; buffer mode ;;
   ;;;;;;;;;;;;;;;;;
-  
+
   ;; magit text-mode only needs insert mode
   (setf (alist-get 'text-mode meow-mode-state-list) 'insert)
   (setf (alist-get 'Custom-mode meow-mode-state-list) 'insert)
@@ -145,23 +171,10 @@
    '("]" . meow-end-of-thing)
    '("/" . meow-visit)
 
-   ;; vim style open above/below
    '("a" . meow-append)
-   '("s" . meow-insert)
-
+   '("A" . meow-block)
    ;; '("A" . meow-open-below)
    ;; '("A" . meow-append-at-end)
-   ;; '("S" . meow-open-above)
-   ;; '("S" . meow-insert-at-begin)
-
-   ;; '("o" . meow-block)
-   ;; '("O" . meow-to-block)
-   
-   '("A" . meow-block)
-   '("S" . meow-to-block)
-   '("o" . meow-open-below)
-   '("O" . meow-open-above)
-   
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
@@ -188,12 +201,22 @@
    '("M" . meow-left-expand)
    '("n" . meow-next)
    '("N" . meow-next-expand)
+   ;; vim style open above/below
+   '("o" . meow-open-below)
+   '("O" . meow-open-above)
+   ;; '("o" . meow-block)
+   ;; '("O" . meow-to-block)
    ;; '("p" . meow-yank)
    '("p" . meow-yank-delete-selection)
    ;; '("q" . meow-quit)
    '("q" . kill-buffer-and-window)
-   '("r" . meow-replace)
+   '("r" . meow-vimreplace)
+   '("R" . meow-replace)
    ;; '("R" . meow-org-motion-mode) ;; custom mode
+   '("s" . meow-insert)
+   '("S" . meow-to-block)
+   ;; '("S" . meow-open-above)
+   ;; '("S" . meow-insert-at-begin)
    '("t" . meow-till)
    '("T" . nt-negative-till)
    '("u" . meow-undo)
@@ -220,8 +243,10 @@
   ;;;;;;;;;;;;;;;;
 
   (setq meow-cursor-type-insert 'box)
-  (custom-set-faces '(meow-insert-cursor ((t (:background "light sea green"))))
-					'(meow-normal-cursor ((t (:background "#fefff8")))))
+  (custom-set-faces
+   '(meow-insert-cursor ((t (:background "light sea green"))))
+   '(meow-vimreplace-cursor ((t (:background "#ffff00"))))
+   '(meow-normal-cursor ((t (:background "#fefff8")))))
   ;; :custom-face
   ;; does not work because of inherit
   ;; (meow-insert-cursor ((t (:background "light sea green"))))
@@ -251,6 +276,12 @@
      (put cmd 'repeat-map 'meow-block-repeat-map)))
  meow-block-repeat-map)
 
+
+(defun meow-vimreplace ()
+  (interactive)
+  (when (region-active-p)
+	(kill-region (region-beginning) (region-end)))
+  (meow-vimreplace-mode))
 
 (defun meow-backward-char ()
   "Backward should go for the kill if a selection is active."
