@@ -40,6 +40,27 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+;; (defmacro embark-ace-action (fn)
+;;   `(defun ,(intern (concat "embark-ace-" (symbol-name fn))) ()
+;;      (interactive)
+;;      (with-demoted-errors "%s"
+;;        (require 'ace-window)
+;;        (aw-switch-to-window (aw-select nil))
+;;        (call-interactively (symbol-function ',fn)))))
+;; (embark-ace-action find-file)
+
+;; (defmacro embark-split-action (fn split-type)
+;;   `(defun ,(intern (concat "embark-"
+;;                            (symbol-name fn)
+;;                            "-"
+;;                            (car (last  (split-string
+;; 										(symbol-name split-type) "-"))))) ()
+;; 	 (interactive)
+;; 	 (funcall #',split-type)
+;; 	 (call-interactively #',fn)))
+;; (embark-split-action find-file split-window-right)
+
+
 ;; ;; found on reddit
 ;; (use-package sudo-edit
 ;;   :after embark
