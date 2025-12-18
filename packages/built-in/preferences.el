@@ -335,7 +335,7 @@
   ("C-x k" 'kill-buffer-refocus)
 
   ([remap suspend-frame] 'undo)
-  ([remap eval-last-sexp] 'pp-eval-last-sexp)
+  ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)
   ("C-x $" 'set-quad-selective-display)
   ("C-c k" personal-misc-bindings-keymap) ;; no quote for a prefix map
   (:keymaps 'personal

@@ -17,21 +17,21 @@
   ;; debug issues with authinfo
   (setq auth-source-debug t)
 
-  (setq user-mail-address "pierredemetz999@gmail.com"
-	user-full-name  "Pierre")
+  ;; (setq user-mail-address ""
+  ;; 		user-full-name  "")
 
   ;; report problems with the smtp server
   (setq smtpmail-debug-info t)
 
   ;; (setq message-send-mail-function 'message-smtpmail-send-it)
   (setq message-send-mail-function 'smtpmail-send-it
-	starttls-use-gnutls t
-	smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-	smtpmail-authx-credentials
-	'(("smtp.gmail.com" 587 "pierredemetz999@gmail.com" nil))
-	smtpmail-default-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-server "smtp.gmail.com"
-	smtpmail-smtp-service 587)
+		starttls-use-gnutls t
+		smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+		smtpmail-authx-credentials
+		'(("smtp.gmail.com" 587 user-mail-address nil))
+		smtpmail-default-smtp-server "smtp.gmail.com"
+		smtpmail-smtp-server "smtp.gmail.com"
+		smtpmail-smtp-service 587)
 
   ;; tell message-mode how to send mail
   (setq message-send-mail-function 'smtpmail-send-it)
