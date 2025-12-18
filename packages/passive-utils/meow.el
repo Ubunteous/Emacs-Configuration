@@ -208,6 +208,7 @@
    ;; '("O" . meow-to-block)
    ;; '("p" . meow-yank)
    '("p" . meow-yank-delete-selection)
+   '("P" . yank-after)
    ;; '("q" . meow-quit)
    '("q" . kill-buffer-and-window)
    '("r" . meow-vimreplace)
@@ -312,8 +313,21 @@
   (interactive)
   (when (use-region-p)
     (delete-region (region-end) (region-beginning)))
-  
   (meow-yank))
+
+
+(defun yank-after ()
+  "Reinsert the last stretch of killed text after point."
+  (interactive)
+  (save-excursion
+	(yank)))
+
+;; (defun yank-after-in-context ()
+;;   "Reinsert the last stretch of killed text after point in context."
+;;   (interactive)
+;;   (save-excursion
+;; 	(yank-in-context))
+;;   (forward-whitespace))
 
 (defun meow-comment-and-duplicate ()
   "Save > Comment > Yank"
