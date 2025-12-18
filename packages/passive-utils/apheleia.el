@@ -4,10 +4,9 @@
 
 (use-package apheleia
   :defer t
-  :hook prog-mode
   :config
   ;; (setq apheleia-global-mode 1)
-
+  (setq apheleia-mode-lighter " Format")
   (setf apheleia-mode-alist '((nix-ts-mode . nixfmt)
 							  ;; (c-ts-mode . clang-format)
 							  ;; (bash-ts-mode . shfmt)
@@ -45,4 +44,5 @@
 
   ;; (add-to-list 'apheleia-formatters '(typstfmt "typstfmt" "--stdout"))
   (add-to-list 'apheleia-formatters '(gdformat "gdformat" "-"))
-  (add-to-list 'apheleia-formatters '(csharpier "dotnet" "csharpier" "--write-stdout")))
+  (add-to-list 'apheleia-formatters '(csharpier "dotnet" "csharpier" "--write-stdout"))
+  :hook prog-mode)

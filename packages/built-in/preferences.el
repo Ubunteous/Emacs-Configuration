@@ -4,7 +4,6 @@
 
 (use-package misc
   :ensure nil
-  ;; :straight (:type built-in)
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
