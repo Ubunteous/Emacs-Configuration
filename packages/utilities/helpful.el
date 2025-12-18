@@ -7,7 +7,9 @@
   :config
   ;; always open help in the same space/window
   (add-to-list 'display-buffer-alist
-			   '("*Help*" display-buffer-reuse-mode-window))
+			   ;; ori: display-buffer-reuse-mode-window))
+			   ;; alt: (display-buffer-reuse-window display-buffer-pop-up-window) (inhibit-same-window . t))
+			   '("*Help*" display-buffer-same-window))
   :general
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide

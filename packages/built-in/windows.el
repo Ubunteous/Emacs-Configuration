@@ -53,29 +53,27 @@
   ;; WINDOW POSITIONS ;;
   ;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; hide lint messages on package update
-  (add-to-list 'display-buffer-alist
-			   '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-				 (display-buffer-no-window)
-				 (allow-no-window . t)))
   ;; example: (display-buffer-in-side-window) (side . left) (window-width . 70)
-  (add-to-list 'display-buffer-alist
-			   '("\\*Help\\*"
-				 (display-buffer-reuse-window display-buffer-pop-up-window)
-				 (inhibit-same-window . t)))
+  (setq display-buffer-alist
+		'(("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
+		   (display-buffer-no-window)
+		   (allow-no-window . t))
+		  ("*Apropos*" (display-buffer-same-window)) ))
+
   (add-to-list 'display-buffer-alist
 			   `(,(rx (| "*xref*"
 						 "*grep*"
 						 "*Occur*"))
 				 display-buffer-reuse-window
 				 (inhibit-same-window . nil)))
+
   ;; (add-to-list 'display-buffer-alist
   ;;			   '("\\*Completions\\*"
   ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)
   ;;				 (inhibit-same-window . t)
   ;;				 (window-height . 10)))
   ;; also see function toggle-window-dedicated
-
+  
   ;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; MACROS AND FUNCTIONS ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;

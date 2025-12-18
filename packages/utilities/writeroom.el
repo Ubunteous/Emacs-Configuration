@@ -22,6 +22,8 @@
   :hook
   ((writeroom-mode . centaur-tabs-local-mode)
    (magit-status-mode . writeroom-mode)
+   (apropos-mode . writeroom-mode)
+   (helpful-mode . writeroom-mode)
    (dired-mode . writeroom-mode)
    (org-agenda-mode . writeroom-mode)
    
@@ -37,7 +39,6 @@
    ;; (writeroom-mode-disable . (lambda ()
    ;; 			       (display-line-numbers-mode 1)
    ;; 			       (flycheck-mode 1)))
-
    ))
 
 ;; (defun my-writeroom-theme (arg)
