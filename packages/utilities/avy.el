@@ -3,7 +3,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package avy
+  :ensure nil ;; already requested by ace
   :defer t
+  :init
+  (defvar-keymap avy-keymap
+	:doc "Keymap for avy.")
   :config
   ;; ;; shorter paths if close to cursor
   ;; (setq avy-orders-alist
@@ -99,4 +103,24 @@
       (goto-char pt)
       (eval-last-sexp nil))
 	t)
-  (setf (alist-get ?E avy-dispatch-alist) 'avy-eval-last-sexp))
+  (setf (alist-get ?E avy-dispatch-alist) 'avy-eval-last-sexp)
+
+  ;; AVY
+  (repeat-it
+   avy
+   '(("p" avy-prev "previous")
+	 ("n" avy-next "next")
+	 ("m" avy-pop-mark)))
+  :general
+  ("C-c c" avy-keymap)
+  ("C-/" 'avy-goto-char-timer) ;; shadows undo
+  (:keymaps 'avy-keymap
+			"c" 'avy-goto-char
+			"d" 'avy-goto-char2
+			"e" 'avy-goto-end-of-line
+			"i" 'avy-isearch
+			"l" 'avy-goto-line
+			"m" 'avy-pop-mark
+			"n" 'avy-next
+			"p" 'avy-prev
+			"t" 'avy-goto-char-timer))

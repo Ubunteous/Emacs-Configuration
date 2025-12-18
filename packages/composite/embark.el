@@ -31,8 +31,10 @@
    "C-§" 'embark-dwim        ;; good alternative: M-.
    "C-h B" 'embark-bindings) ;; alternative for `describe-bindings'
   (:keymaps 'embark-file-map
-			"S" 'sudo-find-file))
-
+			"S" 'sudo-find-file)
+  (:keymaps 'personal
+			"c" 'embark-collect
+			"e" 'embark-export))
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult

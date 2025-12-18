@@ -5,6 +5,9 @@
 (use-package misc
   :ensure nil
   ;; :straight (:type built-in)
+  :custom-face
+  ;; change color for search bar in M-x customize
+  (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
   :init
   ;; keeps a server running (not necessary>use emacs-client directly)
   ;;(server-start)
@@ -304,9 +307,12 @@
   ;; 			  ("7" . #x2786)
   ;; 			  ("8" . #x2787)
   ;; 			  ("9" . #x2788)))
-  :custom-face
-  ;; change color for search bar in M-x customize
-  (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
+
+  (defvar-keymap personal-misc-bindings-keymap
+	;; :parent text-mode-map
+	:doc "Keymap for miscellaneous bindings to keep around.")
+  ;; ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
+  (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
   :general
   ([remap suspend-frame] 'undo)
 
@@ -314,12 +320,13 @@
   
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
-  ("C-c k" 'kill-buffer-refocus)
-  ;; ("C-c u" 'mode-line-other-buffer)
   ("C-g" 'keyboard-quit-dwim)
 
   ("C-c n" 'previous-buffer)
   ("C-c e" 'next-buffer)
+
+  ("C-c g" 'pop-global-mark)
+  ("C-c G" 'pop-to-mark-command)
 
   ;; ("C-x f" 'find-file)
   ;; ("C-x C-f" 'set-fill-column)
@@ -329,13 +336,15 @@
 
   ([remap suspend-frame] 'undo)
   ([remap eval-last-sexp] 'pp-eval-last-sexp)
-
   ("C-x $" 'set-quad-selective-display)
+  ("C-c k" personal-misc-bindings-keymap) ;; no quote for a prefix map
+  (:keymaps 'personal
+			;; "C-c u" 'mode-line-other-buffer
+			"k" 'kill-buffer-refocus)
   :hook
-  (prog-mode . display-line-numbers-mode)
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
-  )
+  (prog-mode . display-line-numbers-mode))
 
 (defun keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.

@@ -5,7 +5,7 @@
 (use-package docker
   :defer t
   :general
-  ("C-c p" 'docker)
+  ("C-c d" 'docker)
   :config
   (setq docker-command "podman"
 	docker-compose-command "podman-compose"))

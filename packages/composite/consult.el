@@ -8,62 +8,12 @@
   :custom-face
   (consult-preview-match ((t (:foreground "#272821" :background "light sea green"))))
   (consult-preview-line ((t (:background "unspecified"))))
-  :general
-  ;; ("C-c h" 'consult-history)
-  ;; ("C-c m" 'consult-mode-command)
-  ;; ("C-c k" 'consult-kmacro)
-  ;; C-x bindings (ctl-x-map)
-  ("C-x M-:" 'consult-complex-command ;; orig. repeat-complex-command
-   "C-x b" 'consult-buffer ;; orig. switch-to-buffer
-   "C-x 4 b" 'consult-buffer-other-window ;; orig. switch-to-buffer-other-window
-   "C-x 5 b" 'consult-buffer-other-frame ;; orig. switch-to-buffer-other-frame
-   ;; "C-x r b" 'consult-bookmark ;; orig. bookmark-jump. adds a preview. create bookmark if missing
-   "C-x p b" 'consult-project-buffer ;; orig. project-switch-to-buffer
-   ;; Custom M-# bindings for fast register access
-   "M-#" 'consult-register-load
-   "M-'" 'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-   "C-M-#" 'consult-register
-   ;; Other custom bindings
-   "M-y" 'consult-yank-pop ;; orig. yank-pop
-   "<help> a" 'consult-apropos ;; orig. apropos-command
-   ;; M-g bindings (goto-map)
-   "C-c y e" 'consult-compile-error
-   "C-c y f" 'consult-flymake ;; Alternative: consult-flycheck
-   "C-c y g" 'consult-goto-line ;; orig. goto-line
-   "C-c y i" 'consult-imenu
-   "C-c y I" 'consult-imenu-multi
-   "C-c y k" 'consult-global-mark
-   "C-c y G" 'consult-goto-line ;; orig. goto-line
-   "C-c y m" 'consult-mark
-   "C-c y o" 'consult-outline ;; Alternative: consult-org-heading
-   ;; M-s bindings (search-map)
-   "C-c u e" 'consult-isearch-history
-   "C-c u d" 'consult-find
-   "C-c u D" 'consult-locate
-   "C-c u g" 'consult-grep
-   "C-c u G" 'consult-git-grep
-   "C-c u k" 'consult-keep-lines
-   "C-c u l" 'consult-line
-   "C-c u L" 'consult-line-multi
-   "C-c u m" 'consult-multi-occur
-   "C-c u o" '(lambda () (interactive) (consult-find "~/org/"))
-   "C-c u r" 'consult-ripgrep
-   "C-c u u" 'consult-focus-lines)
-  (:keymaps 'isearch-mode-map
-			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
-			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
-			"M-s l" 'consult-line ;; needed by consult-line to detect isearch
-			"M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
-  ;; Minibuffer history
-  (:keymaps 'minibuffer-local-map
-			"M-s" 'consult-history ;; orig. next-matching-history-element
-			"M-r" 'consult-history) ;; orig. previous-matching-history-element
-
-  ;; Enable automatic preview at point in the *Completions* buffer. This is
-  ;; relevant when you use the default completion UI.
-  :hook (completion-list-mode . consult-preview-at-point-mode)
-  ;; The :init configuration is always executed (Not lazy)
   :init
+  (defvar-keymap consult-search-keymap
+	:doc "Keymap for search functions in consult.")
+  (defvar-keymap consult-goto-keymap
+	:doc "Keymap for motion functions in consult.")
+
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
   ;; `consult-register-store' and the Emacs built-ins.
@@ -102,7 +52,68 @@
   (setq consult-narrow-key "<") ;; (kbd "C-+")
 
   ;; influences consult-line and consult-grep
-  (setq consult-point-placement 'match-end))
+  (setq consult-point-placement 'match-end)
+  :general
+  ;; ("C-c h" 'consult-history)
+  ;; ("C-c m" 'consult-mode-command)
+  ;; ("C-c k" 'consult-kmacro)
+  ;; C-x bindings (ctl-x-map)
+  ("C-x M-:" 'consult-complex-command ;; orig. repeat-complex-command
+   "C-x b" 'consult-buffer ;; orig. switch-to-buffer
+   "C-x 4 b" 'consult-buffer-other-window ;; orig. switch-to-buffer-other-window
+   "C-x 5 b" 'consult-buffer-other-frame ;; orig. switch-to-buffer-other-frame
+   ;; "C-x r b" 'consult-bookmark ;; orig. bookmark-jump. adds a preview. create bookmark if missing
+   "C-x p b" 'consult-project-buffer ;; orig. project-switch-to-buffer
+   ;; Custom M-# bindings for fast register access
+   "M-#" 'consult-register-load
+   "M-'" 'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
+   "C-M-#" 'consult-register
+   ;; Other custom bindings
+   "M-y" 'consult-yank-pop ;; orig. yank-pop
+   "<help> a" 'consult-apropos ;; orig. apropos-command
+   ;; M-g bindings (goto-map)
+
+   "C-c y" consult-goto-keymap
+   "C-c u" consult-search-keymap)
+
+  (:keymaps 'consult-goto-keymap
+			"e" 'consult-compile-error
+			"f" 'consult-flymake ;; Alternative: consult-flycheck
+			"g" 'consult-goto-line ;; orig. goto-line
+			"i" 'consult-imenu
+			"I" 'consult-imenu-multi
+			"k" 'consult-global-mark
+			"G" 'consult-goto-line ;; orig. goto-line
+			"m" 'consult-mark
+			"o" 'consult-outline) ;; Alternative: consult-org-heading
+
+  (:keymaps 'consult-search-keymap
+			;; M-s bindings (search-map)
+			"e" 'consult-isearch-history
+			"d" 'consult-find
+			"D" 'consult-locate
+			"g" 'consult-grep
+			"G" 'consult-git-grep
+			"k" 'consult-keep-lines
+			"l" 'consult-line
+			"L" 'consult-line-multi
+			"m" 'consult-multi-occur
+			"o" '(lambda () (interactive) (consult-find "~/org/"))
+			"r" 'consult-ripgrep
+			"u" 'consult-focus-lines)
+  (:keymaps 'isearch-mode-map
+			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
+			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
+			"M-s l" 'consult-line ;; needed by consult-line to detect isearch
+			"M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
+  ;; Minibuffer history
+  (:keymaps 'minibuffer-local-map
+			"M-s" 'consult-history ;; orig. next-matching-history-element
+			"M-r" 'consult-history) ;; orig. previous-matching-history-element
+  :hook
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  (completion-list-mode . consult-preview-at-point-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          CONSULT-UTILITIES         ;;

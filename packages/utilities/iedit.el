@@ -8,9 +8,7 @@
   :config
   (setq iedit-auto-save-occurrence-in-kill-ring nil)
   :general
-  ("C-c i" 'iedit-replace))
-
-
+  (:keymaps 'personal "i" 'iedit-replace))
 
 (defun iedit-replace ()
   ;; quickly enter iedit mode to replace string at point

@@ -75,6 +75,7 @@
 							  ;; "icomplete" ;; competes with vertico
 							  "preferences"
 							  "recentf"
+							  "hide-show" ;; check ts-fold
 							  "repeat"
 							  "which-key"			  
 							  ;; "eglot-booster"
@@ -82,10 +83,8 @@
 							  "windows"
 							  "eshell"
 							  "help"
+							  ;; "newsticker" ;; alt: elfeed
 							  "pulse"))
-
-;; (load-user-file "built-in/hide-show") ;; not perfect but serviceable => ts-fold
-;; (load-user-file "built-in/newsticker") ;; alt: see elfeed
 
 ;;;;;;;;;;;;;;;
 ;;   perso   ;;
@@ -241,7 +240,7 @@
 							  "casual")
 
 							'("crux"
-							  ;; "avy"
+							  "avy"
 							  ;; "popper" ;; try later
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
 							  "gptel"

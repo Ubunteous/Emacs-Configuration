@@ -21,7 +21,7 @@
   (org-upcoming-distant-deadline ((t (:foreground "light sea green"))))
   :general
   ("C-c a" 'org-agenda-show-mix
-   "C-c d" '(lambda () (interactive) (org-capture nil "d")))
+   "C-c o" 'org-capture-deadline)
 
   ;; a bit redundant with C-c C-d (org-deadline)
   (:keymaps 'org-capture-mode-map
@@ -44,10 +44,10 @@
 			"C-M-S i" 'org-table-move-cell-right
 
 			"C-c C-n" 'org-babel-next-block-end
-			"C-c C-p" 'org-babel-previous-block-end
-
+			"C-c C-p" 'org-babel-previous-block-end)
+  (:keymaps 'personal
 			;; overrides persp-list-buffers in org buffers
-			"C-c b" 'org-switchb)
+			"b" 'org-switchb)
   :config
   ;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
@@ -196,6 +196,10 @@
   ;;   CAPTURE   ;;
   ;;;;;;;;;;;;;;;;;
 
+  (defun org-capture-deadline ()
+	(interactive)
+	(org-capture nil "d"))
+  
   ;; (setq org-directory "~/org") ;; default
   (setq org-default-notes-file (concat org-directory "~/.notes"))
 

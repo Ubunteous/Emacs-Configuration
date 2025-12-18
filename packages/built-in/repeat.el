@@ -99,6 +99,12 @@
  '(("n" smerge-next "next")
    ("p" smerge-prev "previous")))
 
+;; MARK
+(repeat-it
+ mark
+ '(("g" pop-global-mark "global mark")
+   ("G" pop-to-mark-command "mark")))
+
 ;; MINI VIM
 
 ;; basic vim motions with emacs bindings

@@ -5,4 +5,5 @@
 (use-package multiple-cursors
   :defer t
   :general
-  ("C-c c" 'mc/edit-beginnings-of-lines))
+  ;; poor interactions with meow
+  ("C-c v c" 'mc/edit-lines))
