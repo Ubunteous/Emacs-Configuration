@@ -5,17 +5,8 @@
 (use-package eglot
   :ensure nil
   :defer t
-  :custom
-  (eglot-autoshutdown t)
-  :general
-  (:keymaps 'eglot-mode-map
-			"C-c s b" 'eldoc
-			"C-c s d" 'eglot-find-declaration
-			"C-c s p" 'eldoc-box-help-at-point
-            ;; "C-c C-o" 'python-sort-imports ;; requires python module (isort)
-            ;; "C-c C-f" 'eglot-format-buffer)
-            "C-c s r" 'eglot-rename)
   :config
+  (setq eglot-autoshutdown t)
   (setopt eglot-server-programs '())
   ;; don't trust the docstring. nil/0 blocks anyway
   ;; (setq eglot-sync-connect nil)
@@ -119,6 +110,14 @@
   ;; (eglot-extend-to-xref nil)
 
   (setq eglot-stay-out-of '(yasnippet))
+  :general
+  (:keymaps 'eglot-mode-map
+			"C-c s b" 'eldoc
+			"C-c s d" 'eglot-find-declaration
+			"C-c s p" 'eldoc-box-help-at-point
+            ;; "C-c C-o" 'python-sort-imports ;; requires python module (isort)
+            ;; "C-c C-f" 'eglot-format-buffer)
+            "C-c s r" 'eglot-rename)
   :hook
   ((
     c-ts-mode

@@ -46,8 +46,8 @@
 (use-package all-the-icons-dired
   :defer t
   :after (all-the-icons dired)
-  :hook (dired-mode . all-the-icons-dired-mode)
   :diminish all-the-icons-dired-mode
+  :custom-face (all-the-icons-dired-dir-face ((t (:foreground "SteelBlue3"))))
   :config
   (setq all-the-icons-dired-monochrome nil)
 
@@ -87,4 +87,4 @@
               `(:v-adjust ,all-the-icons-dired-v-adjust)
               (when all-the-icons-dired-monochrome
 				`(:face ,(face-at-point)))))))
-  :custom-face (all-the-icons-dired-dir-face ((t (:foreground "SteelBlue3")))))
+  :hook (dired-mode . all-the-icons-dired-mode))

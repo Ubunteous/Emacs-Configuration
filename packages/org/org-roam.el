@@ -13,8 +13,7 @@
   :custom-face
   (org-roam-link-current ((nil (:background "#e24888" :underline t))))
   (org-roam-link ((nil (:background "#e24888" :underline t))))
-  :custom
-  (org-roam-directory (file-truename "~/org/Alter/roam"))
+  ;; :custom
   ;; (org-roam-db (file-truename "~/org/org-roam/database/org-roam.db"))
   ;; (org-roam-completion-everywhere t)
 
@@ -24,31 +23,8 @@
   ;; 			   (concat
   ;; 				(locate-dominating-file default-directory ".dir-locals.el")
   ;; 				"org-roam")))
-  :general
-  ("C-c r g" 'org-roam-buffer-toggle
-   ;; "C-c r d" 'org-roam-buffer-display-dedicated
-
-   ;; if a new file has a name similar to another one, use ido-select-text
-   "C-c r i" 'org-roam-node-insert
-   "C-c r c" 'org-roam-capture
-   "C-c r f" 'org-roam-node-find
-   "C-c l" 'org-roam-node-find
-
-   ;; "C-c r o" 'org-id-get-create
-   "C-c r t" 'org-roam-tag-add
-   ;; "C-c r a" 'org-roam-alias-add
-
-   ;; "C-c r r" 'org-roam-node-random
-   ;; "C-c r g" 'org-roam-graph
-
-   ;; "C-c r y" 'org-id-get-create
-   "C-c r n" 'capture-slipbox
-
-   "C-c r d" 'delve-index
-
-   "C-c r s" 'org-roam-db-sync
-   )
   :config
+  (setq org-roam-directory (file-truename "~/org/Alter/roam"))
   ;; exclude headlines with the "ATTACH" tag
   ;; (setq org-roam-db-node-include-function
   ;; 	(lambda ()
@@ -236,9 +212,7 @@
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
 		   ;; :immediate-finish t
 		   :empty-lines 1
-		   :unnarrowed t)
-
-		  ))
+		   :unnarrowed t)))
 
   (cl-defmethod org-roam-node-type ((node org-roam-node))
     "Return the TYPE of NODE."
@@ -259,6 +233,29 @@
 		 ))
 
   ;; (setq org-roam-db-update-on-save t)
+  :general
+  ("C-c r g" 'org-roam-buffer-toggle
+   ;; "C-c r d" 'org-roam-buffer-display-dedicated
+
+   ;; if a new file has a name similar to another one, use ido-select-text
+   "C-c r i" 'org-roam-node-insert
+   "C-c r c" 'org-roam-capture
+   "C-c r f" 'org-roam-node-find
+   "C-c l" 'org-roam-node-find
+
+   ;; "C-c r o" 'org-id-get-create
+   "C-c r t" 'org-roam-tag-add
+   ;; "C-c r a" 'org-roam-alias-add
+
+   ;; "C-c r r" 'org-roam-node-random
+   ;; "C-c r g" 'org-roam-graph
+
+   ;; "C-c r y" 'org-id-get-create
+   "C-c r n" 'capture-slipbox
+
+   "C-c r d" 'delve-index
+
+   "C-c r s" 'org-roam-db-sync)
   :hook
   ((org-roam-mode . org-roam-db-autosync-mode)))
 

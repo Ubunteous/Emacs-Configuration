@@ -11,7 +11,7 @@
   ;; :mode ("\\.py\\'" . python-ts-mode) ;; to fix python-ts-mode error in org files => failure
   :config
   ;; (global-tree-sitter-mode)
-  (customize-set-variable 'treesit-font-lock-level 4)
+  (setq treesit-font-lock-level 4)
   ;; (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
   )
 

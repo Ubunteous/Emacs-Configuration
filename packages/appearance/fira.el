@@ -10,7 +10,6 @@
 ;; Retina
 ;; SemiBold
 
-(set-face-attribute 'default nil :height 160 :font "Fira Code Medium")
 ;; These characters should look different than usual: => != ...<=
 
 ;; Fonts: Code, Mono
@@ -23,6 +22,8 @@
 ;; ExtraLight
 
 (use-package ligature
+  :custom-face
+  (default ((nil (:height 160 :font "Fira Code Medium"))))
   :config
   ;; Enable the www ligature in every possible major mode
   (ligature-set-ligatures 't '("www"))

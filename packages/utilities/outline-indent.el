@@ -4,8 +4,8 @@
 
 (use-package outline-indent
   :ensure t
-  :custom (outline-indent-ellipsis " ▼ ")
   :config
+  (setq outline-indent-ellipsis " ▼ ")
   ;; (setq outline-indent-default-offset 4)
   ;; (setq outline-indent-shift-width 4)
   ;; (setq outline-blank-line t)

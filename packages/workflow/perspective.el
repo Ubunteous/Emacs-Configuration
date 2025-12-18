@@ -4,18 +4,17 @@
 
 (use-package perspective
   :defer t
-  :general
-  ("C-c b" 'persp-list-buffers)
-  ;;("C-x b" 'persp-switch-to-buffer*)
-  ;;("C-x k" 'persp-kill-buffer*)
+  :init (persp-mode)
   :custom
   (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
 
   ;; for perspective + consult mode
   (consult-customize consult--source-buffer :hidden t :default nil)
   (add-to-list 'consult-buffer-sources persp-consult-source)
-  :init
-  (persp-mode))
+  :general
+  ;;("C-x b" 'persp-switch-to-buffer*)
+  ;;("C-x k" 'persp-kill-buffer*)
+  ("C-c b" 'persp-list-buffers))
 
 ;; avoid intrusive window splits
 ;; (customize-set-variable 'display-buffer-base-action
