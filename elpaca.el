@@ -342,7 +342,6 @@
 
 							'("elisp"))
 
-;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/elixir")
 ;; (load-user-file "programming/common-lisp")
 ;; (load-user-file "programming/fountain") ;; use with wrap
@@ -456,6 +455,7 @@
 ;; (load-user-files "discarded/passive-utils" '("happy-margins"))
 
 ;; programming
+;; (load-user-file "programming/kbd")
 ;; (load-user-file "programming/python/ein")
 ;; (load-user-file "programming/python/highlight-indentation")
 
