@@ -88,6 +88,7 @@
  '(("s" swiper-C-s "next")
    ("r" swiper-isearch-C-r "previous")))
 
+;; ISEARCH
 (repeat-it
  isearch
  '(("s" isearch-repeat-forward "next")
@@ -104,6 +105,13 @@
  mark
  '(("g" pop-global-mark "global mark")
    ("G" pop-to-mark-command "mark")))
+
+;; AVY
+(repeat-it
+ avy
+ '(("n" avy-next "next")
+   ("p" avy-prev "previous")
+   ("u" avy-pop-mark "pop mark")))
 
 ;; MINI VIM
 
