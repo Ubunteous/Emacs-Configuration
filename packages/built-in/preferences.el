@@ -8,6 +8,16 @@
   :custom-face
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
+
+  (apropos-symbol ((t (:foreground "#a6e12d")))) ; green
+
+  (apropos-keybinding ((t (:foreground "#66d9ee")))) ; blue
+  (apropos-user-option-button ((t (:foreground "#ae81ff")))) ; purple
+
+  (apropos-button ((t (:foreground "#fefff8")))) ; white
+  (apropos-function-button ((t (:foreground "#fc961f")))) ; orange
+  (apropos-variable-button ((t (:foreground "#a6e12d")))) ; green
+  (apropos-misc-button ((t (:foreground "#fefff8")))) ; white
   :init
   ;; keeps a server running (not necessary>use emacs-client directly)
   ;;(server-start)
@@ -44,6 +54,7 @@
 
   ;; set apropos results by relevancy
   (setq apropos-sort-by-scores t)
+  (setq apropos-compact-layout t)
 
   ;; disable the menu bar (it's useful but currently broken)
   (menu-bar-mode -1)

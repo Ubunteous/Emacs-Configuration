@@ -47,11 +47,9 @@
     ;; that it will be tried first.
     (setq-local completion-at-point-functions
                 ;; (cons #'tempel-expand completion-at-point-functions))
-	        (cons #'tempel-expand
-		      (cons #'tempel-complete
-			    completion-at-point-functions))))
-
-
+				(cons #'tempel-expand
+					  (cons #'tempel-complete
+							completion-at-point-functions))))
   :hook
   (prog-mode . tempel-setup-capf)
   ;; dirty but it works. find later a way to auto include eglot managed modes

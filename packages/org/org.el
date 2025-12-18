@@ -38,10 +38,10 @@
 			;; "C-f" 'org-forward-heading-same-level
 			;; "C-b" 'org-backward-heading-same-level
 
-			"C-M-S m" 'org-table-move-cell-left
-			"C-M-S n" 'org-table-move-cell-down
-			"C-M-S e" 'org-table-move-cell-up
-			"C-M-S i" 'org-table-move-cell-right
+			"C-c C-h m" 'org-table-move-cell-left
+			"C-c C-h n" 'org-table-move-cell-down
+			"C-c C-h e" 'org-table-move-cell-up
+			"C-c C-h i" 'org-table-move-cell-right
 
 			"C-c C-n" 'org-babel-next-block-end
 			"C-c C-p" 'org-babel-previous-block-end)
