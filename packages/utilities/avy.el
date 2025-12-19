@@ -113,7 +113,7 @@
 	 ("m" avy-pop-mark)))
   :general
   ("C-c c" avy-keymap)
-  ("C-/" 'avy-goto-char-timer) ;; shadows undo
+  ("C-'" 'avy-goto-char-timer)
   (:keymaps 'avy-keymap
 			"c" 'avy-goto-char
 			"d" 'avy-goto-char2
