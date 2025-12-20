@@ -33,6 +33,8 @@
   (:keymaps 'embark-file-map
 			"S" 'sudo-find-file)
   (:keymaps 'personal
+			"a" 'embark-act
+			"A" 'embark-act-all
 			"c" 'embark-collect
 			"e" 'embark-export))
 
