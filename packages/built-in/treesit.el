@@ -71,7 +71,7 @@
   ;; note: elisp and latex do not have a ts module
   ;; note: nix, gdscript and clojure ts are not built into emacs
   ;; javascript and python removed for org compat
-  (setq treesit-auto-langs '(c cpp c-sharp css bash javascript haskell python)) ;; also: rust java go and maybe Haskell
+  (setq treesit-auto-langs '(c cpp c-sharp css bash javascript typescript haskell python)) ;; also: rust java go and maybe Haskell
 
   ;; (setq treesit-auto-recipe-list
   ;; 	`(,(make-treesit-auto-recipe

@@ -180,6 +180,7 @@
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
 							  ;; "ob/ob-go"
+							  "ob/ob-typescript"
 							  "ob/ob-html"
 							  "ob/ob-sql"
 							  ;; "ob/ob-async"
