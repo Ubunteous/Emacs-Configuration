@@ -168,6 +168,7 @@
 							  "org-roam-ui"
 							  ;; deft
 							  "deft"
+							  "ob/ob-typescript"
 							  "notdeft")
 
 							'("org"

@@ -21,15 +21,15 @@
   ;; 		("node" . js2-jsx-mode))
   :config
   (setq org-babel-js-cmd "bun")
-  :hook (((js-mode js-ts-mode) . js2-minor-mode)
-
-		 ((js-mode js-ts-mode) . (lambda ()
-								   (setq-local compile-command
-											   ;; (concat "node "
-											   (concat "bun "
-													   (if buffer-file-name
-														   (shell-quote-argument
-															(file-name-sans-extension buffer-file-name)))))))))
+  (defun set-js-compile-command ()
+	(setq-local compile-command
+				;; (concat "node "
+				(concat "bun "
+						(if buffer-file-name
+							(shell-quote-argument
+							 (file-name-sans-extension buffer-file-name))))))
+  :hook (((js-mode js-ts-mode typescript-ts-mode) . js2-minor-mode)
+		 ((js-mode js-ts-mode typescript-ts-mode) . set-js-compile-command)))
 ;; ;; cannot be lazy loaded easily
 ;; (use-package js-comint
 ;;   :defer t

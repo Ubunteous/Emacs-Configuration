@@ -17,7 +17,7 @@
 	["Vim"
 	 ["g"
 	  ("g0" "1st char in line" set-mark-command)
-	  ("g C-x C-x" "exchange-point-and-mark" exchange-point-and-mark)
+	  ("g C-x C-x" "Swap point/mark" exchange-point-and-mark)
 	  ("G" "Go to line" consult-goto-line) ;; default: beginning-of-buffer
 	  ("gg" "Go to line" consult-goto-line) ;; default: end-of-buffer
 	  ("ge" "Backward (n) word" backward-word) ;; finds nth
@@ -40,13 +40,13 @@
 	  ("zC" "Close all folds at point" hs-hide-block)
 	  ;; ("zm" "Fold more")
 	  ("zM" "Close all folds" hs-hide-all)
-	  ("za" "Toggle fold" hs-toggle-block)
+	  ("za" "Toggle fold" hs-toggle-hiding)
 	  ]
 
 	 ["Bracket"
 	  ("]]" "Sections forward (at start)" forward-paragraph)
 	  ("[[" "Sections backward (at start)" backward-paragraph)
-	  ("][" "sections forward (at end)" forward-paragraph)
+	  ("][" "Sections forward (at end)" forward-paragraph)
 	  ("[]" "Sections backward (at end)" backward-paragraph)
 	  ;; ("[(" "Back to unclosed '('"  (lambda () (search-backward "(")))
 	  ;; ("[{" "Back to unclosed '{'" (lambda () (search-backward "{")))
@@ -54,7 +54,7 @@
 	  ;; ("]}" "Forward to unclosed '}'" (lambda () (search-forward "(")))
 	  ;; ("[*" "Back to start of comment" (lambda () (search-backward (comment-start))))
 	  ;; ("]*" "Forward to end of comment" (lambda () (beginning-to-defun-comment) (forward-whitespace) (end-of-line)))
-	  ("]p" "Paste and indent" yank-after-in-context)
+	  ;; ("]p" "Paste and indent" yank-after-in-context)
 	  ("[p" "Paste after and indent" yank-in-context)
 	  ;; (comment-search-forward (point-min) t)
 	  ;; (comment-search-forward (point-max) t)
@@ -158,7 +158,7 @@
 	["Motion"
 	 ["mark"
 	  ("C-<SPC>" "set-mark-command" set-mark-command)
-	  ("C-x C-x" "exchange-point-and-mark" exchange-point-and-mark)
+	  ("C-x C-x" "Swap point/mark" exchange-point-and-mark)
 
 	  ;; pop-to-buffer
 	  ;; pop-to-mark-command
@@ -213,6 +213,8 @@
 
   ;; full screen magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (setq magit-bury-buffer-function 'magit-restore-window-configuration)
+  
   (setq magit-remote-add-set-remote.pushDefault nil)
   (setopt magit-format-file-function #'magit-format-file-all-the-icons)
 
