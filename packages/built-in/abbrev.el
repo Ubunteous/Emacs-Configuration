@@ -8,13 +8,9 @@
 (use-package abbrev
   :ensure nil
   ;; Use C-x a <...> to find abbrev functions
-  :general
-  ;; Swap M-/ and C-M-/
-  ("M-:" 'hippie-expand
-   ;; "C-M-:" 'dabbrev-expand
-   "M-/" 'eval-expression
-   [remap dabbrev-expand] 'hippie-expand) ;; like (global-set-key [...] '...)
   :config
+  ;; (setq abbrev-suggest t)
+
   (define-abbrev-table 'global-abbrev-table
 	'(
 	  ;; Progress
@@ -161,6 +157,12 @@
 
   ;; (setq save-abbrevs nil) ;; save word abbrevs when file saved
   ;; (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'"))
+  :general
+  ;; Swap M-/ and C-M-/
+  ("M-:" 'hippie-expand
+   ;; "C-M-:" 'dabbrev-expand
+   "M-/" 'eval-expression
+   [remap dabbrev-expand] 'hippie-expand) ;; like (global-set-key [...] '...)
   :hook (prog-mode org-mode))
 
 ;; ;; Notes: alternative to tempel which leverages built-in tools
