@@ -185,6 +185,17 @@
 	  ("C-c @ C-l" "hs-hide-level" hs-hide-level)
 	  ("C-c @ C-s" "hs-show-block" hs-show-block)
 	  ]
+	 ["avy"
+	  ("c" "Go to char" avy-goto-char)
+	  ("d" "Go to char 2" avy-goto-char2)
+	  ("e" "Go to end of line" avy-goto-end-of-line)
+	  ("i" "isearch" avy-isearch)
+	  ("l" "Go to line" avy-goto-line)
+	  ("m" "Pop mark" avy-pop-mark)
+	  ("n" "Next" avy-next)
+	  ("p" "Previous" avy-prev)
+	  ("t" "Timer" avy-goto-char-timer)
+	  ]
 	 ]
 	)
   :general
