@@ -62,7 +62,8 @@
 (load-user-files-per-system "built-in"
 							'()
 
-							'("smtpmail"
+							'(
+							  ;; "smtpmail"
 							  "treesit"
 							  "eglot")
 							
@@ -109,15 +110,16 @@
 ;; ;;   appearance   ;;
 ;; ;;;;;;;;;;;;;;;;;;;;
 
-(load-user-files "appearance" '("monokaolin"
-				"all-the-icons"
-				"dashboard"
-				"centaur-tabs"
-				"fira"
-				;; "nova"
-				"moody"
-				"spacious-padding"
-				"kind-icon"))
+(load-user-files "appearance"
+				 '("monokaolin"
+				   "all-the-icons"
+				   "dashboard"
+				   "centaur-tabs"
+				   "fira"
+				   ;; "nova"
+				   "moody"
+				   "spacious-padding"
+				   "kind-icon"))
 
 ;; (load-user-file "appearance/nerd-icons")
 
@@ -285,13 +287,13 @@
 							  "rainbow-delimiters"
 							  ;; "adaptive-wrap"
 							  ;; "ultra-scroll"
-							  "aggressive-indent"
+							  "aggressive-indent" ;; check dont-indent-if/stop-here-hook
 							  "auto-capitalize" ;; => LaTeX/org mode only
 							  "browse-kill-ring"
 							  "compile-angel"
 							  "diminish"
 							  "dimmer" ;; DONE
-							  "undo-hl" ;; => not in melpa yet
+							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
 							  ;; "symbol-overlay" ;; strong. maybe use later
 							  "no-littering"))
 
@@ -439,7 +441,6 @@
 
 ;; utilities
 ;; (load-user-file "discarded/utilities/yasnippet") ;; replaced by tempel
-;; (load-user-file "utilities/avy")
 ;; (load-user-file "fix-word")
 
 ;; passive-utils
