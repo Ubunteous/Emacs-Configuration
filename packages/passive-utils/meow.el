@@ -104,6 +104,7 @@
   (setf (alist-get 'text-mode meow-mode-state-list) 'insert)
   (setf (alist-get 'Custom-mode meow-mode-state-list) 'insert)
   ;; (setf (alist-get 'org-mode meow-mode-state-list) 'org-motion)
+  (setf (alist-get 'nxml-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'org-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'latex-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'LaTeX-mode meow-mode-state-list) 'normal)
@@ -161,8 +162,8 @@
    '("ç" . meow-expand-9)
    '("à" . meow-expand-0)
    
-   '("6" . negative-argument)
    '("4" . repeat)
+   '("6" . negative-argument)
    
    '(";" . meow-reverse)
    '("," . meow-inner-of-thing)
@@ -171,6 +172,9 @@
    '("]" . meow-end-of-thing)
    '("/" . meow-visit)
 
+   '("$" . meow-select-until-eol)
+   '("^" . meow-select-until-bol)
+   
    '("a" . meow-append)
    '("A" . meow-block)
    ;; '("A" . meow-open-below)
@@ -351,3 +355,15 @@
 
 	(next-line)
 	(end-of-line)))
+
+
+(defun meow-select-until-eol (arg)
+  (interactive "P")
+  (set-mark-command arg)
+  (end-of-visual-line))
+
+
+(defun meow-select-until-bol (arg)
+  (interactive "P")
+  (set-mark-command arg)
+  (crux-move-beginning-of-line arg))
