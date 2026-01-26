@@ -229,6 +229,14 @@
   (setq magit-remote-add-set-remote.pushDefault nil)
   (setopt magit-format-file-function #'magit-format-file-all-the-icons)
 
+  ;; Friendly reminder that your message is too long.
+  ;; If you need more text use Tim Pope's recommendation:
+  ;; + Consider first line as email text subject (summary)
+  ;; + Then insert blank line (plays well with git log/rebase --interactive)
+  ;; + Use optionally the following lines as an email body (you can use bullets)
+  ;; + Try to not go over 72 chars (for 80 chars terms/pagers + 4*2 chars margin)
+  (setq git-commit-summary-max-length 50)
+
   ;; (defun ora-nextmagit-simple-commit ()
   ;; 	;; commit file at point with message containing file+suffix
   ;; 	(interactive)
