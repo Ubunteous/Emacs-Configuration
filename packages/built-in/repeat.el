@@ -9,6 +9,11 @@
   (repeat-mode)
   (setq repeat-exit-key "q"))
 
+(use-package repeat-help
+  :config
+  (setq repeat-help-popup-type 'which-key)
+  (repeat-help-mode 1))
+
 ;;;;;;;;;;;;;;;;;;
 ;; MACRO SYNTAX ;;
 ;;;;;;;;;;;;;;;;;;

@@ -131,8 +131,7 @@
 							'()
 							'("notmuch"
 							  ;; "hyperbole"
-							  ;; "dape"
-							  )
+							  "dape")
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
 							  "magit"
