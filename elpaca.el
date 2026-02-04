@@ -351,7 +351,7 @@
 ;; (load-user-file "programming/go")
 ;; (load-user-file "programming/lisp")
 ;; (load-user-file "programming/json")
-;; (load-user-file "built-in/java-mode")
+;; (load-user-file "built-in/java")
 ;; (load-user-file "programming/meghanada")
 
 ;; replaced by eglot
