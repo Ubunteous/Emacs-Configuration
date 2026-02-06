@@ -220,34 +220,34 @@
   (defun dape-repl-help ()
    	;; Show dape-repl welcome message with available commands
    	(insert
-   	 (format
-   	  "* Welcome to the Dape REPL *
+   	 (format "
+* Welcome to the Dape REPL *
 
-   Available Dape commands:
-   %s
+Available Dape commands:
+%s
 
-   Any other input or input starting with a space is sent directly to the
-   debugger.  An empty line will repeat the last command.\n\n"
-   	  (with-temp-buffer
-   		(insert  "  "
-   				 (mapconcat (pcase-lambda (`(,str . ,command))
-   							  (setq str (concat str))
-   							  (when dape-repl-use-shorthand
-   								(set-text-properties
-   								 0 (thread-last (dape--repl-shorthand-alist)
-   												(rassoc command)
-   												(car)
-   												(length))
-   								 '(font-lock-face help-key-binding)
-   								 str))
-   							  str)
-   							dape-repl-commands
-   							", "))
+Any other input or input starting with a space is sent directly to the
+debugger.  An empty line will repeat the last command.\n\n"
+   			 (with-temp-buffer
+   			   (insert  "  "
+   						(mapconcat (pcase-lambda (`(,str . ,command))
+   									 (setq str (concat str))
+   									 (when dape-repl-use-shorthand
+   									   (set-text-properties
+   										0 (thread-last (dape--repl-shorthand-alist)
+   													   (rassoc command)
+   													   (car)
+   													   (length))
+   										'(font-lock-face help-key-binding)
+   										str))
+   									 str)
+   								   dape-repl-commands
+   								   ", "))
 
-   		(let ((fill-column 72)
-   			  (adaptive-fill-mode t))
-   		  (fill-region (point-min) (point-max)))
-   		(buffer-string))))
+   			   (let ((fill-column 72)
+   					 (adaptive-fill-mode t))
+   				 (fill-region (point-min) (point-max)))
+   			   (buffer-string))))
 
     (set-marker (process-mark (get-buffer-process (current-buffer))) (point))
     (comint-output-filter (get-buffer-process (current-buffer))
