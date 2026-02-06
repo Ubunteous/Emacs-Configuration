@@ -171,6 +171,11 @@
 	  ("m" "Edit memory hexdump" dape-memory)
 	  ("M" "Disassemble" dape-disassemble)
 	  ]
+
+	 ["Custom"
+	  ("N" "Next breakpoint" dape-breakpoint-goto-next)
+	  ("P" "Prev breakpoint" dape-breakpoint-goto-prev)
+	  ]
 	 ]
 	)
 
@@ -183,16 +188,24 @@
   (defun dape--breakpoint-goto (direction)
 	;; DIRECTION positive for next breakpoint, negative for previous
 	(let* ((breakpoints-pos (dape--breakpoints-get-pos))
+		   (abovep (cl-minusp direction))
+		   (belowp (cl-plusp direction))
 		   (next-pos (when breakpoints-pos
-					   (cond ((cl-minusp direction)
-							  (seq-find '(lambda (bp) (< bp (point)))
-										(sort breakpoints-pos '>)))
-							 ((cl-plusp direction)
+					   (cond (belowp
 							  (seq-find '(lambda (bp) (> bp (point)))
 										(sort breakpoints-pos '<)))
+							 (abovep
+							  (seq-find '(lambda (bp) (< bp (point)))
+										(sort breakpoints-pos '>)))
 							 (t nil)))))
-	  (when next-pos
-		(goto-char next-pos))))
+	  (if breakpoints-pos
+		  (if next-pos
+			  (goto-char next-pos)
+			;; behaviour below could be tweaked to loop back to first/last bp
+			(message (concat "No more breakpoint " (cond (belowp "below")
+														 (abovep "above")
+														 (t nil)))))
+		(message "No breakpoint found in this file"))))
 
   (defun dape-breakpoint-goto-prev ()
 	;; Go to the previous breakpoint in the current buffer
@@ -203,10 +216,14 @@
 	;; Go to the next breakpoint in the current buffer
 	(interactive)
 	(dape--breakpoint-goto 1))
-  :general (:keymaps 'dape-global-map "H" 'dape-transient)
+  :custom-face
+  (dape-breakpoint-face ((t (:foreground "#f82570" :height 2))))
+  (dape-inlay-hint-face ((t (:height 2))))
+  :general (:keymaps 'dape-global-map
+					 "H" 'dape-transient
+					 "N" 'dape-breakpoint-goto-next
+					 "P" 'dape-breakpoint-goto-prev)
   ;; :hook
   ;; (kill-emacs . dape-breakpoint-save)
   ;; (after-init . dape-breakpoint-load)
-  :custom-face
-  (dape-breakpoint-face ((t (:foreground "#f82570" :height 2))))
-  (dape-inlay-hint-face ((t (:height 2)))))
+  )
