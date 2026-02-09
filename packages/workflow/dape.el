@@ -87,16 +87,21 @@
 								(when-let* ((runtime-executable
 											 (dape-config-get config :runtimeExecutable)))
 								  (dape--ensure-executable runtime-executable))
-								(let ((dap-debug-server-path
-									   (car (plist-get config 'command-args))))
-								  (unless (file-exists-p dap-debug-server-path)
-									(user-error "File %S does not exist" dap-debug-server-path))))
+
+								;; (let ((dap-debug-server-path
+								;; 	   (car (plist-get config 'command-args))))
+								;;   (unless (file-exists-p dap-debug-server-path)
+								;; 	(user-error "File %S does not exist" dap-debug-server-path)))
+
+								(unless (commandp "js-debug")
+								  (user-error "Command js-debug unavailable on system"))
+								
+								)
 					  command "node"
-					  command-args (,(expand-file-name
-									  (file-name-concat dape-adapter-dir
-														"js-debug"
-														"src"
-														"dapDebugServer.js"))
+
+					  command-args (,(with-temp-buffer
+									   (insert-file-contents "/etc/profiles/per-user/nix/bin/js-debug")
+									   (nth 5 (split-string (buffer-string))))
 									:autoport)
 					  port :autoport)))
 
