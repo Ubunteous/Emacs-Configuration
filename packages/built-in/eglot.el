@@ -112,12 +112,12 @@
   (setq eglot-stay-out-of '(yasnippet))
   :general
   (:keymaps 'eglot-mode-map
-			"C-c s b" 'eldoc
-			"C-c s d" 'eglot-find-declaration
-			"C-c s p" 'eldoc-box-help-at-point
-            ;; "C-c C-o" 'python-sort-imports ;; requires python module (isort)
-            ;; "C-c C-f" 'eglot-format-buffer)
-            "C-c s r" 'eglot-rename)
+			"C-c i b" 'eldoc
+			"C-c i d" 'eglot-find-declaration
+			"C-c i p" 'eldoc-box-help-at-point
+            ;; "C-i C-o" 'python-sort-imports ;; requires python module (isort)
+            ;; "C-i C-f" 'eglot-format-buffer)
+            "C-c i r" 'eglot-rename)
   :hook
   ((
     c-ts-mode
