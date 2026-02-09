@@ -13,67 +13,6 @@
   :defer t
   :ensure (transient :type git :host github :repo "magit/transient")
   :config
-  (transient-define-prefix vim-transient ()
-	["Vim"
-	 ["g"
-	  ("g0" "1st char in line" set-mark-command)
-	  ("g C-x C-x" "Swap point/mark" exchange-point-and-mark)
-	  ("G" "Go to line" consult-goto-line) ;; default: beginning-of-buffer
-	  ("gg" "Go to line" consult-goto-line) ;; default: end-of-buffer
-	  ("ge" "Backward (n) word" backward-word) ;; finds nth
-	  ("gE" "Backward (n) word" backward-word) ;; finds nth word separated by blank
-	  ("g*" "Find word at point" isearch-forward-thing-at-point) ;; also finds partial matches
-	  ("g#" "Find backward word at point" isearch-forward-thing-at-point) ;; also finds partial matches. Note: back does not exist
-	  ("gD" "Find definition" xref-find-definitions)
-	  ("gp" "Yank" yank)
-	  ;; ("gP" "Yank after" yank-after)
-	  ("gu" "Lowercase" downcase-word)
-	  ("gU" "Uppercase" upcase-word)]
-
-	 ["z"
-	  ;; ("zf"{motion} "Define a fold manually")
-	  ;; ("zd" "Delete one fold at point")
-	  ;; ("zD" "Delete all folds at point")
-	  ("zo" "Open one fold at point" hs-show-block)
-	  ("zO" "Open all folds at point" hs-show-block)
-	  ("zc" "Close one fold at point" hs-hide-level)
-	  ("zC" "Close all folds at point" hs-hide-block)
-	  ;; ("zm" "Fold more")
-	  ("zM" "Close all folds" hs-hide-all)
-	  ("za" "Toggle fold" hs-toggle-hiding)
-	  ]
-
-	 ["Bracket"
-	  ("]]" "Sections forward (at start)" forward-paragraph)
-	  ("[[" "Sections backward (at start)" backward-paragraph)
-	  ("][" "Sections forward (at end)" forward-paragraph)
-	  ("[]" "Sections backward (at end)" backward-paragraph)
-	  ;; ("[(" "Back to unclosed '('"  (lambda () (search-backward "(")))
-	  ;; ("[{" "Back to unclosed '{'" (lambda () (search-backward "{")))
-	  ;; ("])" "Forward to unclosed ')'" (lambda () (search-forward "(")))
-	  ;; ("]}" "Forward to unclosed '}'" (lambda () (search-forward "(")))
-	  ;; ("[*" "Back to start of comment" (lambda () (search-backward (comment-start))))
-	  ;; ("]*" "Forward to end of comment" (lambda () (beginning-to-defun-comment) (forward-whitespace) (end-of-line)))
-	  ;; ("]p" "Paste and indent" yank-after-in-context)
-	  ("[p" "Paste after and indent" yank-in-context)
-	  ;; (comment-search-forward (point-min) t)
-	  ;; (comment-search-forward (point-max) t)
-	  ]
-
-	 ["Special"
-	  (")" "Sentences forward" forward-sentence)
-	  ("(" "Sentences Backward" backward-sentence)
-	  ("}" "Paragraphs forward" forward-paragraph)
-	  ("{" "Paragraphs backward" backward-paragraph)
-	  ("*" "Find word at point" isearch-forward-thing-at-point) ;; also finds partial matches
-	  ("#" "Find word at point" isearch-forward-thing-at-point) ;; also finds partial matches
-	  ;; "r" "Replace N characters with {char}"
-	  ;; "R" "Replace mode"
-	  ;; ("<<" "Shift lines lines left" indent-for-tab-command)
-	  (">>" "Shift lines right" indent-for-tab-command)
-	  ]
-	 ])
-
   (transient-define-prefix hrm-help-transient ()
 	"Help commands."
 	["Help Commands"
@@ -201,7 +140,7 @@
   :general
   ("C-o" 'motion-transient) ;; shadows open-line
   ("C-S-h" 'hrm-help-transient)
-  ("C-c i" 'vim-transient)
+  ("C-c i v" 'vim-transient)
   :hook
   (prog-mode . hs-minor-mode))
 
