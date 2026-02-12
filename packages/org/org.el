@@ -125,7 +125,7 @@
 		  ("C" . "comment\n")
 		  ("c" . "src clojure\n")
 		  ("e" . "src elisp\n")
-		  ("f" . "src python\n")
+		  ("f" . "src python :results output\n") ;; defaults to :results value
 		  ;; ("g" . "src go\n")
 		  ("g" . "src gdscript\n")
 		  ("h" . "src html\n")
@@ -174,7 +174,7 @@
   	 ;; (js . t)
   	 ;; (jupyter . t)
   	 (powershell . t)
-  	 ;; (python . t)
+  	 (python . t)
   	 ;; (rust . t)
   	 (sql . t)
   	 (sql-mode . t)
