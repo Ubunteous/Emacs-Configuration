@@ -266,7 +266,36 @@ debugger.  An empty line will repeat the last command.\n\n"
     (comint-output-filter (get-buffer-process (current-buffer))
                           dape--repl-prompt))
 
-  (add-to-list 'dape-repl-commands '("help" . dape-repl-help))
+  (defun dape-repl-eval (&rest expression)
+	"Evaluate EXPRESSION in REPL buffer."
+	(dape-evaluate-expression (dape--live-connection 'last)
+                              (string-join expression " ")
+                              "watch"))
+
+  (defun dape-repl-js-entries (&rest expression)
+	(dape-evaluate-expression
+	 (dape--live-connection 'last)
+	 (concat
+	  "console.log('');"
+	  "function displayObject(obj, indent = 0) {
+         for (const [key, value] of Object.entries(obj)) {
+           const prefix = ' '.repeat(indent * 2) + (indent > 0 ? '> ' : '');
+           if (typeof value === 'object' && value !== null) {
+             console.log(`${prefix}${key}:`);
+             displayObject(value, indent + 1);
+           } else {
+             console.log(`${prefix}${key}: ${value}`);
+           }
+         }
+       }"
+	  "displayObject(" (string-join expression " ") ");"
+	  "console.log('');"))
+	"watch")
+
+  (mapcar (lambda (pair) (add-to-list 'dape-repl-commands pair))
+		  '(("js-entries" . dape-repl-js-entries)
+			("fresh (clear)" . comint-clear-buffer)
+			("help" . dape-repl-help)))
   :custom-face
   (dape-breakpoint-face ((t (:foreground "#f82570" :height 2))))
   (dape-inlay-hint-face ((t (:height 2))))
