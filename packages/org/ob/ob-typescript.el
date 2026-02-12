@@ -14,8 +14,8 @@
 (defvar org-babel-command-runner:typescript-ts "bun")
 (defun ob-typescript--build-script-run-command (path)
   "Create run command according to the PATH."
-  (format "%s run %s" org-babel-command-runner:typescript-ts path))
-
+  ;; (format "%s run %s" org-babel-command-runner:typescript-ts path))
+  (format "%s %s" org-babel-command-runner:typescript-ts path))
 (defun org-babel-execute:typescript-ts (body params)
   (let* ((processed-params (org-babel-process-params params))
          (src-temp (org-babel-temp-file "typescript-src-" ".tsx")))

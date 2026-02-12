@@ -33,7 +33,7 @@
 					  (filename . "OrgMode")))
            ;; ("code" (filename . "code"))
 		   ("JS" (or
-				  (mode . javascript-ts-mode)
+				  (mode . js-ts-mode)
 				  (mode . typescript-ts-mode)
 				  (mode . html-mode)
 				  (mode . css-mode)))

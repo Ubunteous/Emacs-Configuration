@@ -73,6 +73,12 @@
 				 (window-width . 0.4)
 				 (direction . right)))
 
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*\\dape-info .*\\*\\'"
+				 (display-buffer-reuse-mode-window
+				  display-buffer-in-direction)
+				 (window-width . 0.4)))
+
   (setq dape-configs
 		`(
 		  ;; (godot
@@ -180,6 +186,8 @@
 	 ["Custom"
 	  ("N" "Next breakpoint" dape-breakpoint-goto-next)
 	  ("P" "Prev breakpoint" dape-breakpoint-goto-prev)
+	  ("=" "Save breakpoints" dape-breakpoint-save)
+	  ("S-=" "Save breakpoints" dape-breakpoint-load)
 	  ]
 	 ]
 	)

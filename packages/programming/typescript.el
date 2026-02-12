@@ -15,9 +15,10 @@
   (typescript-ts-mode . (lambda ()
 						  (unless (file-exists-p "package.json")
 							(set (make-local-variable 'compile-command)
-								 (concat "bun run "
-										 (file-name-sans-extension buffer-file-name)))))))
 
+								 (if (commandp "bun ")
+									 (concat "bun run " (file-name-sans-extension buffer-file-name))
+								   (concat "node " (buffer-file-name))))))))
 
 ;; needs a tsconfig file in root dir
 ;; generate it with: tsc --init
@@ -25,7 +26,7 @@
   :defer t
   ;; :after (company flycheck)
   :config
-  (setq tide-node-executable "bun")
+  (setq tide-node-executable "node")
   :hook ((typescript-ts-mode . tide-setup)
 		 (tsx-ts-mode . tide-setup)
 		 ;; (typescript-ts-mode . tide-hl-identifier-mode)

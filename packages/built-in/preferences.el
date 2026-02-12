@@ -290,11 +290,6 @@
                '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
 				 (display-buffer-no-window)
 				 (allow-no-window . t)))
-  ;; hide lint messages on package update
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-				 (display-buffer-no-window)
-				 (allow-no-window . t)))
 
   ;; ;; for latex (greek chars as unicode) \delta \Delta
   ;; ;; use with => for instance
