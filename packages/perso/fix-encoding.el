@@ -2,27 +2,22 @@
 ;;            FIX-ENCODING            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun fix-encoding ()
-  "Replaces incorrect characters by their UTF-8 equivalent."
+(defun convert-ansi-encoding-to-utf8 ()
+  ;; windows-1252-dos/iso-latin-1-dos > utf-8
   (interactive)
-  (let ((pmin (point-min))
-	(pmax (point-max)))
-    (replace-string "Ã¢" "â" nil pmin pmax)
-    (replace-string "�" "â" nil pmin pmax)
-    (replace-string "Ã " "à" nil pmin pmax)
-    (replace-string "�" "à" nil pmin pmax)
-    (replace-string "Ã§" "ç" nil pmin pmax)
-    (replace-string "�" "ç" nil pmin pmax)
-    (replace-string "Ã©" "é" nil pmin pmax)
-    (replace-string "�" "é" nil pmin pmax)
-    (replace-string "Ãª" "ê" nil pmin pmax)
-    (replace-string "�" "ê" nil pmin pmax)
-    (replace-string "Ã¨" "è" nil pmin pmax)
-    (replace-string "�" "è" nil pmin pmax)
-    (replace-string "Ã®" "î" nil pmin pmax)
-    (replace-string "�" "î" nil pmin pmax)
-    (replace-string "Ã´" "ô" nil pmin pmax)
-    (replace-string "�" "ô" nil pmin pmax)
-    (replace-string "Ã¹" "ù" nil pmin pmax)
-    (replace-string "�" "ù" nil pmin pmax)
-    (replace-string "û" "û" nil pmin pmax)))
+  (let ((ansi-to-unix-encoding '(
+								 ("�" "É") ;; 311 E aigu
+								 ("�" "à") ;; 340 a grave
+								 ("�" "è") ;; 350 e grave
+								 ("�" "é") ;; 351 e aigu
+								 ("�" "ê") ;; 352 e circonflexe
+								 ("�" "î") ;; 356 i circonflexe
+								 ("�" "ô") ;; 364 o circonflexe
+								 ("�" "ù") ;; 371 u grave
+								 ("�" "'") ;; 222 apostrophe
+								 ("�" "–") ;; 226 dash
+								 ("�" "°") ;; 260 numéro
+								 )))
+	(mapcar
+	 (lambda (pair) (funcall #'replace-string (car pair) (cdr pair) nil (point-min) (point-max)))
+	 ansi-to-unix-encoding)))

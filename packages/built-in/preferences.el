@@ -158,9 +158,12 @@
   (setq ring-bell-function #'ignore)
 
   ;; correct accents in filenames
-  (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (setq file-name-coding-system 'utf-8)
+  (when windows-system-p
+	(prefer-coding-system 'utf-8)
+	(set-default-coding-systems 'utf-8)
+	(setq coding-system-for-read 'utf-8)
+	(setq coding-system-for-write 'utf-8)
+	(setq file-name-coding-system 'utf-8))
 
   ;; use minibuffer in minibuffer. useful to search in minibuffer with swiper
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
