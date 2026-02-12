@@ -22,13 +22,13 @@
 (use-package gptel
   :defer t
   :config
-  ;; (setq gptel-model 'gemini-2.5-flash-lite
-  ;; 		gptel-backend
-  ;; 		(gptel-make-gemini "Gemini"
-  ;; 		  :key
-  ;; 		  (plist-get (car (auth-source-search
-  ;; 						   :host "googleapis.com"
-  ;; 						   :user "apikey"))
-  ;; 					 :secret)
-  ;; 		  :stream t))
-  )
+  (setq gptel--system-message "Respond concisely.")
+  (setq gptel-model 'gemini-2.5-flash-lite
+		gptel-backend
+		(gptel-make-gemini "Gemini"
+		  :key
+		  (plist-get (car (auth-source-search
+						   :host "googleapis.com"
+						   :user "apikey"))
+					 :secret)
+		  :stream t)))
