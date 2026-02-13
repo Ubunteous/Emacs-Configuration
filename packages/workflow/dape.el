@@ -275,21 +275,27 @@ debugger.  An empty line will repeat the last command.\n\n"
   (defun dape-repl-js-entries (&rest expression)
 	(dape-evaluate-expression
 	 (dape--live-connection 'last)
-	 (concat
-	  "console.log('');"
-	  "function displayObject(obj, indent = 0) {
-         for (const [key, value] of Object.entries(obj)) {
-           const prefix = ' '.repeat(indent * 2) + (indent > 0 ? '> ' : '');
-           if (typeof value === 'object' && value !== null) {
-             console.log(`${prefix}${key}:`);
-             displayObject(value, indent + 1);
-           } else {
-             console.log(`${prefix}${key}: ${value}`);
-           }
-         }
-       }"
-	  "displayObject(" (string-join expression " ") ");"
-	  "console.log('');"))
+
+	 (let ((formatted-expressions (string-join expression "")))
+		 (concat
+"if (typeof(displayObject) == 'undefined')
+{
+	console.log('Creating displayObject function\\n');
+	var displayObject = (obj, indent = 0) => {
+		for (const [key, value] of Object.entries(obj)) {
+			const prefix = ' '.repeat(indent * 2) + (indent > 0 ? '> ' : '');
+ 			if (typeof value === 'object' && value !== null) {
+ 				console.log(`${prefix}${key}:`);
+ 				displayObject(value, indent + 1);
+ 			} else {
+ 				console.log(`${prefix}${key}: ${value}`);
+ 			}
+		}
+	}
+}"
+"console.log(`Type: ${typeof(" formatted-expressions ")}\\n`);"
+"displayObject(" formatted-expressions ");"
+"console.log('');")))
 	"watch")
 
   (mapcar (lambda (pair) (add-to-list 'dape-repl-commands pair))
