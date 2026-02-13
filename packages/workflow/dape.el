@@ -64,6 +64,20 @@
   ;; (setq dape-repl-use-shorthand nil) ;; use first char of command
   ;; (setq dape-default-config-functions '(dape-config-autoport dape-config-tramp))
 
+  (setq dape-global-map nil)
+  (repeat-it
+   dape
+   '(
+	 ;; ("d" dape "dape")
+	 ("c" dape-continue "continue")
+	 ("f" dape-restart-frame "restart frame")
+	 ("n" dape-next "next")
+	 ("o" dape-step-out "step out")
+	 ("p" dape-pause "pause")
+	 ("r" dape-restart "restart")
+	 ("s" dape-step-in "step in")
+	 ("u" dape-until "until")))
+
   (add-to-list 'display-buffer-alist
 			   `((derived-mode . dape-repl-mode)
 				 (display-buffer-reuse-mode-window
@@ -277,19 +291,20 @@ debugger.  An empty line will repeat the last command.\n\n"
 	 (dape--live-connection 'last)
 
 	 (let ((formatted-expressions (string-join expression "")))
-		 (concat
-"if (typeof(displayObject) == 'undefined')
+	   (concat
+		"
+if (typeof(displayObject) == 'undefined')
 {
 	console.log('Creating displayObject function\\n');
 	var displayObject = (obj, indent = 0) => {
 		for (const [key, value] of Object.entries(obj)) {
 			const prefix = ' '.repeat(indent * 2) + (indent > 0 ? '> ' : '');
- 			if (typeof value === 'object' && value !== null) {
- 				console.log(`${prefix}${key}:`);
- 				displayObject(value, indent + 1);
- 			} else {
- 				console.log(`${prefix}${key}: ${value}`);
- 			}
+			if (typeof value === 'object' && value !== null) {
+				console.log(`${prefix}${key}:`);
+				displayObject(value, indent + 1);
+		   	} else {
+				console.log(`${prefix}${key}: ${value}`);
+			}
 		}
 	}
 }"
@@ -302,6 +317,9 @@ debugger.  An empty line will repeat the last command.\n\n"
 		  '(("js-entries" . dape-repl-js-entries)
 			("fresh (clear)" . comint-clear-buffer)
 			("help" . dape-repl-help)))
+
+  ;; shadows meow. replaced by Tab
+  (keymap-unset dape-info-scope-mode-line-map "e")
   :custom-face
   (dape-breakpoint-face ((t (:foreground "#f82570" :height 2))))
   (dape-inlay-hint-face ((t (:height 2))))
@@ -309,6 +327,8 @@ debugger.  An empty line will repeat the last command.\n\n"
 					 "H" 'dape-transient
 					 "N" 'dape-breakpoint-goto-next
 					 "P" 'dape-breakpoint-goto-prev)
+  (:keymaps 'dape-info-scope-mode-line-map
+			"TAB" 'dape-info-scope-toggle)
   ;; :hook
   ;; (kill-emacs . dape-breakpoint-save)
   ;; (after-init . dape-breakpoint-load)
