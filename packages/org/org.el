@@ -340,6 +340,9 @@
   ;; deactivate _, ^
   (setq org-hide-emphasis-markers t)
 
+  ;; this method can only change existing chars
+  ;; (add-to-list 'org-emphasis-alist '("~" (:foreground "red")))
+
   ;; not ideal for babel blocks
   ;; (setq org-indent-mode t)
   ;; (setq org-startup-indented t)

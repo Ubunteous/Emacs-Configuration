@@ -33,6 +33,7 @@
 					)))))
   :hook (((js-mode js-ts-mode typescript-ts-mode) . js2-minor-mode)
 		 ((js-mode js-ts-mode typescript-ts-mode) . set-js-compile-command)))
+
 ;; ;; cannot be lazy loaded easily
 ;; (use-package js-comint
 ;;   :defer t
@@ -40,7 +41,6 @@
 ;;   ;; (setq js-comint-program-command "node")
 ;;   ;; (setq js-comint-program-arguments '("--interactive"))
 ;;   )
-
 
 (use-package flymake-jsts
   :defer t
