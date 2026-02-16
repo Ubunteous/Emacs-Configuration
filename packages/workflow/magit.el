@@ -9,10 +9,13 @@
 ;;   :defer t
 ;;   :ensure (compat :type git :host github :repo "emacs-compat/compat"))
 
+;; Transients need magit/require. I prefer to put them alongside magit
 (use-package transient
   :defer t
   :ensure (transient :type git :host github :repo "magit/transient")
   :config
+  (setq transient-history-file "/home/nix/.emacs.d/files/transient/history.el")
+
   (transient-define-prefix hrm-help-transient ()
 	"Help commands."
 	["Help Commands"
