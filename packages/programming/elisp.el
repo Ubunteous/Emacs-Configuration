@@ -23,7 +23,8 @@
 	(interactive "P")
 	(if (and (mark) (use-region-p))
 		(eval-region (min (point) (mark)) (max (point) (mark)))
-      (pp-eval-last-sexp prefix)))
+      ;; (pp-eval-last-sexp prefix)
+      (eval-last-sexp prefix)))
 
   ;; :config
   ;; (define-short-documentation-group list
