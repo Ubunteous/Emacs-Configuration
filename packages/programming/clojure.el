@@ -22,11 +22,11 @@
   :ensure (spinner :type git :host github :repo "Malabarba/spinner.el")
   :defer t)
 
-(use-package queue
-  :ensure (queue :type git :host github :repo "emacs-straight/queue")
-  :defer t)
+;; somehow not found by elpaca and cider installs it on its own now
+;; (use-package queue
+;;   :ensure (queue :type git :host github :repo "emacs-straight/queue")
+;;   :defer t)
 
-;; cider may compete for completion and eldoc with elgot
 (use-package cider
   :after queue
   :defer t
