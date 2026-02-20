@@ -133,8 +133,9 @@
 		  ("l" . "src lua\n")
 		  ("m" . "center\n")
 		  ("n" . "src nix\n")
-		  ("p" . "src powershell\n")
-		  ;; ("p" . "src python\n")
+		  ("p" . (if windows-system-p
+					 "src powershell\n"
+				   "src python\n"))
 		  ;; ("Q" . "src sql-mode\n")
 		  ("q" . "src sql\n")
 		  ;; ("r" . "src\n")
