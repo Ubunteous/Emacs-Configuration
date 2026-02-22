@@ -27,6 +27,12 @@
 ;;   :ensure (queue :type git :host github :repo "emacs-straight/queue")
 ;;   :defer t)
 
+;; somehow not found by elpaca and cider installs it on its own now
+;; and yet, if I comment it, something breaks
+(use-package queue
+  :ensure (queue :type git :host github :repo "emacs-straight/queue")
+  :defer t)
+
 (use-package cider
   :after queue
   :defer t
