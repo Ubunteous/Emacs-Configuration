@@ -20,9 +20,12 @@
   :init
   ;; keeps a server running (not necessary>use emacs-client directly)
   ;;(server-start)
-
   ;; default is set to 300 characters
   ;; (setq auto-save-interval 20)
+
+  ;; to avoid triggering prompts every time a file is opened
+  (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
+  (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
 
   ;; show both the row and column of the point in the modeline
   (setq column-number-mode t)
