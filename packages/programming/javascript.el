@@ -42,7 +42,7 @@
 ;;   ;; (setq js-comint-program-arguments '("--interactive"))
 ;;   )
 
-(use-package flymake-jsts
-  :defer t
-  :ensure (flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts")
-  :hook eglot-managed-mode-hook . (flymake-jsts-eslint-enable))
+;; (use-package flymake-jsts
+;;   :defer t
+;;   :ensure (flymake-jsts :type git :host github :repo "orzechowskid/flymake-jsts")
+;;   :hook eglot-managed-mode-hook . (flymake-jsts-eslint-enable))
