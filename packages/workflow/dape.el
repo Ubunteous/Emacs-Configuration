@@ -11,6 +11,7 @@
   :defer t
   ;; :after jsonrpc
   :ensure (dape :type git :host github :repo "svaante/dape")
+  :commands (dape-breakpoint-toggle)
   ;; :init
   ;; To use window configuration like gud (gdb-mi)
   ;; (setq dape-buffer-window-arrangement 'gud)
@@ -308,9 +309,9 @@ if (typeof(displayObject) == 'undefined')
 		}
 	}
 }"
-"console.log(`Type: ${typeof(" formatted-expressions ")}\\n`);"
-"displayObject(" formatted-expressions ");"
-"console.log('');")))
+		"console.log(`Type: ${typeof(" formatted-expressions ")}\\n`);"
+		"displayObject(" formatted-expressions ");"
+		"console.log('');")))
 	"watch")
 
   (mapcar (lambda (pair) (add-to-list 'dape-repl-commands pair))
