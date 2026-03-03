@@ -177,7 +177,7 @@
 							  ;; "ord-modern-indent"
 							  "org-appear"
 
-							  ;; "ob/ob-rust"
+							  "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
@@ -340,6 +340,7 @@
 							  ;; "yuck"
 							  ;; "typst"
 							  "haskell"
+							  "csv"
 							  ;; "lilypond"
 							  "latex")
 
