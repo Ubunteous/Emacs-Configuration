@@ -97,6 +97,7 @@
 						   "smart-insert"
 						   "auto-close-compilation"
 						   "dired-count-lines"
+						   "org-tables-to-json"
 						   "org-properties-to-csv"
 						   "replace-in-buffer"
 						   "org-ctrl-c-plus"
