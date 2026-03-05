@@ -67,7 +67,7 @@
 				 display-buffer-reuse-window
 				 (inhibit-same-window . nil)))
 
-  (add-to-list 'display-buffer-alist '("*Eldoc*" display-buffer-same-window))
+  (add-to-list 'display-buffer-alist '("\\*Eldoc.*" display-buffer-same-window))
 
   ;; (add-to-list 'display-buffer-alist
   ;;			   '("\\*Completions\\*"
