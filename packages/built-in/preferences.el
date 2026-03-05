@@ -343,14 +343,15 @@
   ;; ("C-x C-f" 'set-fill-column)
 
   ("M-z" 'zap-up-to-char)
-  ("C-x k" 'kill-buffer-refocus)
+  ("C-d" 'kill-buffer-refocus) ;; shadows delete-char
 
   ([remap suspend-frame] 'undo)
   ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)
   ("C-x $" 'set-quad-selective-display)
-  ("C-c k" personal-misc-bindings-keymap) ;; no quote for a prefix map
+  ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
   (:keymaps 'personal
 			;; "C-c u" 'mode-line-other-buffer
+			"d" 'delete-char
 			"k" 'kill-buffer-refocus)
   :hook
   ;; superword-mode counts my_short_ex as a single word
