@@ -260,9 +260,9 @@
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
 							  ;; "lispy" ;; vi-like bindings conflicting with meow
 
-							  "xkcd"
+							  ;; "xkcd"
 							  ;; "disproject"
-							  "writeroom"))
+							  ))
 
 ;; (load-user-file "utilities/dumb-jump") ;; very cool but xref is broken in python
 ;; (load-user-file "utilities/esup") ;; performances
@@ -294,7 +294,8 @@
 							  "dimmer" ;; DONE
 							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
 							  ;; "symbol-overlay" ;; strong. maybe use later
-							  "no-littering"))
+							  "no-littering"
+							  "writeroom"))
 
 ;; (load-user-file "passive-utils/evil")
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode
