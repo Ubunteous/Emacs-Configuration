@@ -282,7 +282,6 @@
 
 							'("meow"
 							  "diff-hl"
-							  ;; "git-gutter" ;; like diff-hl but unmaintained and more invasive
 							  ;; "which-key" ;; now built-in
 							  "rainbow-delimiters"
 							  ;; "adaptive-wrap"
@@ -455,6 +454,7 @@
 ;; (load-user-file "utilities/clippy") ;; what a nightmare
 ;; (load-user-file "passive-utils/indent-bars")
 ;; "beacon" ;; replaced by pulse
+;; "git-gutter" ;; like diff-hl but unmaintained and more invasive
 
 ;; (load-user-files "discarded/passive-utils" '("happy-margins"))
 
