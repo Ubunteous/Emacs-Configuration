@@ -112,9 +112,10 @@
   (setq eglot-stay-out-of '(yasnippet))
   :general
   (:keymaps 'eglot-mode-map
-			"C-c i b" 'eldoc
+			;; use instead C-h . for display-local-help
+			;; "C-c i b" 'eldoc
+			;; "C-c i p" 'eldoc-box-help-at-point
 			"C-c i d" 'eglot-find-declaration
-			"C-c i p" 'eldoc-box-help-at-point
             ;; "C-i C-o" 'python-sort-imports ;; requires python module (isort)
             ;; "C-i C-f" 'eglot-format-buffer)
             "C-c i r" 'eglot-rename)

@@ -20,18 +20,23 @@
 
   ;; (add-to-list writeroom-global-effects my-writeroom-theme)
   :hook
-  ((writeroom-mode . centaur-tabs-local-mode)
-   (magit-status-mode . writeroom-mode)
-   (apropos-mode . writeroom-mode)
-   (helpful-mode . writeroom-mode)
-   (dired-mode . writeroom-mode)
-   (org-agenda-mode . writeroom-mode)
-   
+  ((magit-status-mode
+	apropos-mode
+	helpful-mode
+	dired-mode
+	org-agenda-mode)
+
+   ;; special-mode is used by Eldoc
+   (special-mode . (lambda ()
+					 (progn
+					   (setq-local writeroom-width 90)
+					   (writeroom-mode))))
+
    ;; switch to writeroom if there is only one window open
    (org-mode . (lambda ()
 				 (when (= (count-windows) 1)
 				   (writeroom-mode))))
-   
+
    ;; (writeroom-mode-enable . (lambda ()
    ;; 			      (display-line-numbers-mode -1)
    ;; 			      (flycheck-mode -1)))
@@ -39,7 +44,8 @@
    ;; (writeroom-mode-disable . (lambda ()
    ;; 			       (display-line-numbers-mode 1)
    ;; 			       (flycheck-mode 1)))
-   ))
+
+   (writeroom-mode . centaur-tabs-local-mode)))
 
 ;; (defun my-writeroom-theme (arg)
 ;;   (cond
