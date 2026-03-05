@@ -348,11 +348,11 @@
   ([remap suspend-frame] 'undo)
   ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)
   ("C-x $" 'set-quad-selective-display)
+  ("C-x k" 'kill-buffer-refocus)
   ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
   (:keymaps 'personal
 			;; "C-c u" 'mode-line-other-buffer
-			"d" 'delete-char
-			"k" 'kill-buffer-refocus)
+			"d" 'delete-char)
   :hook
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
