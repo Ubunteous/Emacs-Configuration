@@ -286,142 +286,190 @@
   (setq org-agenda-skip-scheduled-if-done t)
   ;; (setq org-agenda-hide-tags-regexp "project\\|work\\|home\\|@.*")
 
+  ;; (setq org-agenda-show-future-repeats nil) ;; t, nil, 'next
+
+  ;; (setq org-agenda-skip-function
+  ;; 		 (lambda ()
+  ;; 		   (when (member (org-get-todo-state)
+  ;; 						 '("PROJ" "SOMEDAY"))
+  ;; 			 (or (outline-next-heading) (point-max)))))
+
+  ;; (setq org-agenda-scheduled-leaders '("" "-%2d"))
+  ;; (setq org-agenda-todo-keyword-format "%.1s")
+  ;; (setq org-agenda-remove-tags t)
+
+  ;; (defun my/org-agenda-late-extra (orig-fn extra txt &rest args)
+  ;; 	 (let* ((marker (or extra ""))
+  ;; 			(agenda-extra
+  ;; 			 (let ((d (when (stringp extra)
+  ;; 						(abs (string-to-number extra)))))
+  ;;             (cond
+  ;; 				((not d) "")
+  ;; 				((= d 0) "")
+  ;; 				((< d 3) " •")
+  ;; 				((< d 7) " !")
+  ;; 				((< d 14) " ‼")
+  ;; 				(t " ✖")))))
+  ;;     (apply orig-fn agenda-extra txt args)))
+  ;; (advice-add 'org-agenda-format-item :around #'my/org-agenda-late-extra)
+
+  ;; (setq org-agenda-block-separator "")
+
+  ;; (add-hook 'org-agenda-mode-hook
+  ;; 			 (lambda ()
+  ;;             (setq-local line-spacing 0.5)
+  ;;             (buffer-face-set '(:family "Lato"))))
+
+  ;; ;;; single blank line between blocks
+  ;; (defun my/org-agenda-fix-block-spacing ()
+  ;; 	 (goto-char (point-min))
+  ;; 	 (while (re-search-forward "\n\n\n+" nil t)
+  ;;     (replace-match "\n\n")))
+
+  ;; (add-hook 'org-agenda-finalize-hook
+  ;; 			 #'my/org-agenda-fix-block-spacing)
+
+  ;; (customize-set-value
+  ;; 	'org-agenda-category-icon-alist
+  ;; 	`(("work" "~/.config/icons/work.svg" nil nil :ascent center :mask heuristic)
+  ;; 	  ("project" "~/.config/icons/project.svg" nil nil :ascent center :mask heuristic)))
+
   ;;;;;;;;;;;;
   ;; REFILE ;;
   ;;;;;;;;;;;;
 
-  ;; (setq org-refile-use-outline-path 'file)
+   ;; (setq org-refile-use-outline-path 'file)
 
-  ;; ;; These files must exist
-  ;; (setq org-refile-targets
-  ;; 																				'(("Inbox.org" :maxlevel . 1)
-  ;;     ("done.org" :level . 1)
-  ;;     ("Test.org" :level 1)))
+   ;; ;; These files must exist
+   ;; (setq org-refile-targets
+   ;; 																				'(("Inbox.org" :maxlevel . 1)
+   ;;     ("done.org" :level . 1)
+   ;;     ("Test.org" :level 1)))
 
-  ;; (setq org-refile-targets
-  ;; 		'((nil :maxlevel . 3)
-  ;;         (org-agenda-files :maxlevel . 3)))
+   ;; (setq org-refile-targets
+   ;; 		'((nil :maxlevel . 3)
+   ;;         (org-agenda-files :maxlevel . 3)))
 
   ;;;;;;;;;;
-  ;; TAGS ;;
+   ;; TAGS ;;
   ;;;;;;;;;;
 
-  ;; (setq org-fast-tag-selection-single-key nil)
-  ;; (setq org-fast-tag-selection-select-todo nil)
-  ;; (setq org-fast-tag-selection-maximum-tags 56)
+   ;; (setq org-fast-tag-selection-single-key nil)
+   ;; (setq org-fast-tag-selection-select-todo nil)
+   ;; (setq org-fast-tag-selection-maximum-tags 56)
 
   ;;;;;;;;;;;;;;;
-  ;;   DIARY   ;;
+   ;;   DIARY   ;;
   ;;;;;;;;;;;;;;;
 
-  ;; I dislike the diary
-  ;; (setq diary-file "~/Desktop/Org/diary.org")
+   ;; I dislike the diary
+   ;; (setq diary-file "~/Desktop/Org/diary.org")
 
   ;;;;;;;;;;;;;;;;;;
-  ;;   CALENDAR   ;;
+   ;;   CALENDAR   ;;
   ;;;;;;;;;;;;;;;;;;
 
-  ;; I dislike the calendar
-  ;; (setq calendar-setup 'calendar-only)
-  ;; (setq org-agenda-include-diary t)
+   ;; I dislike the calendar
+   ;; (setq calendar-setup 'calendar-only)
+   ;; (setq org-agenda-include-diary t)
 
   ;;;;;;;;;;;;;;
-  ;;   MISC   ;;
+   ;;   MISC   ;;
   ;;;;;;;;;;;;;;
 
-  ;; never add whiteline between org sections
-  ;; (setq org-cycle-separator-lines 0)
+   ;; never add whiteline between org sections
+   ;; (setq org-cycle-separator-lines 0)
 
-  ;; not needed but good to know
-  ;; (setf (cdr (assq 'file org-link-frame-setup)) 'find-file) ;; open links in the same window
-  ;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-  ;; (setq org-enforce-todo-dependencies t)
+   ;; not needed but good to know
+   ;; (setf (cdr (assq 'file org-link-frame-setup)) 'find-file) ;; open links in the same window
+   ;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+   ;; (setq org-enforce-todo-dependencies t)
 
-  ;; deactivate _, ^
-  (setq org-hide-emphasis-markers t)
+   ;; deactivate _, ^
+   (setq org-hide-emphasis-markers t)
 
-  ;; this method can only change existing chars
-  ;; (add-to-list 'org-emphasis-alist '("~" (:foreground "red")))
+   ;; this method can only change existing chars
+   ;; (add-to-list 'org-emphasis-alist '("~" (:foreground "red")))
 
-  ;; not ideal for babel blocks
-  ;; (setq org-indent-mode t)
-  ;; (setq org-startup-indented t)
+   ;; not ideal for babel blocks
+   ;; (setq org-indent-mode t)
+   ;; (setq org-startup-indented t)
 
-  ;; set everywhere #+STARTUP: overview
-  (setq org-startup-folded t)
+   ;; set everywhere #+STARTUP: overview
+   (setq org-startup-folded t)
 
-  ;; space after section. no space after list on alt+enter
-  (setq org-blank-before-new-entry '((heading . t) (plain-list-item)))
+   ;; space after section. no space after list on alt+enter
+   (setq org-blank-before-new-entry '((heading . t) (plain-list-item)))
 
-  ;; 29.2 bug: emacs always edit in dedicated buffer
-  ;; => This is due to the treesit auto package or major-mode-remap-alist
-  ;; Disable editing source code in dedicated buffer
-  ;; => Too intrusive. (electric-indent-mode 0) should suffice
-  ;; (defun org-edit-src-code nil)
+   ;; 29.2 bug: emacs always edit in dedicated buffer
+   ;; => This is due to the treesit auto package or major-mode-remap-alist
+   ;; Disable editing source code in dedicated buffer
+   ;; => Too intrusive. (electric-indent-mode 0) should suffice
+   ;; (defun org-edit-src-code nil)
 
-  ;; follow org link on enter (like left click or C-c C-o)
-  (setq org-return-follows-link  t)
+   ;; follow org link on enter (like left click or C-c C-o)
+   (setq org-return-follows-link  t)
 
-  ;; collapse some sections when opening an org file
-  ;; (setq org-startup-folded 'show2levels)
+   ;; collapse some sections when opening an org file
+   ;; (setq org-startup-folded 'show2levels)
 
-  ;; open #+Include: file in same window with C-c ' (org-edit-special)
-  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+   ;; open #+Include: file in same window with C-c ' (org-edit-special)
+   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
-  (setq org-src-preserve-indentation t)
+   (setq org-src-preserve-indentation t)
 
-  (setq org-startup-truncated nil) ;; risky with tables and links
+   (setq org-startup-truncated nil) ;; risky with tables and links
 
-  (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
+   (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
 
-  ;; do not use image real size in org (as it may be too big)
-  ;; (setq org-image-actual-width nil)
-  (setq org-image-actual-width 300)
+   ;; do not use image real size in org (as it may be too big)
+   ;; (setq org-image-actual-width nil)
+   (setq org-image-actual-width 300)
 
-  (defun org-summary-todo (n-done n-not-done)
-	"Switch entry to DONE when all subentries are done, to TODO otherwise."
-	(let (org-log-done org-log-states) ;; turn off logging
-	  (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+   (defun org-summary-todo (n-done n-not-done)
+	 "Switch entry to DONE when all subentries are done, to TODO otherwise."
+	 (let (org-log-done org-log-states) ;; turn off logging
+	   (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
-  ;; (setq org-support-shift-select 1)) ;; heresy
+   ;; (setq org-support-shift-select 1)) ;; heresy
 
-  (setq org-use-speed-commands t)
-  ;; :hook
-  ;; might be risky if it cancels normal image display
-  ;; (org-babel-after-execute . org-redisplay-inline-images)
+   (setq org-use-speed-commands t)
+   ;; :hook
+   ;; might be risky if it cancels normal image display
+   ;; (org-babel-after-execute . org-redisplay-inline-images)
 
   ;;;;;;;;;;;;;;;;;;;;;
-  ;;   HTML EXPORT   ;;
+   ;;   HTML EXPORT   ;;
   ;;;;;;;;;;;;;;;;;;;;;
 
-  (setq org-html-postamble nil
-		org-html-head-include-default-style nil
-		org-html-meta-tags nil
-		org-html-xml-declaration nil)
+   (setq org-html-postamble nil
+		 org-html-head-include-default-style nil
+		 org-html-meta-tags nil
+		 org-html-xml-declaration nil)
 
-  ;; don't touch those
-  ;; (setq org-html-doctype-alist nil)
-  ;; (setq org-html-doctype "")
+   ;; don't touch those
+   ;; (setq org-html-doctype-alist nil)
+   ;; (setq org-html-doctype "")
 
-  )
+   )
 
 
-;; export org citations to latex
-;; (require 'oc-biblatex)
-;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
+  ;; export org citations to latex
+  ;; (require 'oc-biblatex)
+  ;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
 
 ;;;;;;;;;;;;;;;;;;;
-;;   FUNCTIONS   ;;
+  ;;   FUNCTIONS   ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(defun org-babel-previous-block-end ()
-  "Go to the last line of code of the previous source block."
-  (interactive)
-  (org-babel-previous-src-block)
-  (search-forward "#+end\_src")
-  (previous-line)
-  (org-end-of-line))
+  (defun org-babel-previous-block-end ()
+	"Go to the last line of code of the previous source block."
+	(interactive)
+	(org-babel-previous-src-block)
+	(search-forward "#+end\_src")
+	(previous-line)
+	(org-end-of-line))
 
 
 (defun org-babel-next-block-end ()
