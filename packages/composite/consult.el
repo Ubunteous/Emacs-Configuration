@@ -13,6 +13,8 @@
 	:doc "Keymap for search functions in consult.")
   (defvar-keymap consult-goto-keymap
 	:doc "Keymap for motion functions in consult.")
+  (defvar-keymap consult-keymap
+	:doc "Keymap for general functions in consult.")
 
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -76,17 +78,49 @@
    "C-c y" consult-goto-keymap
    "C-c u" consult-search-keymap)
 
+  (:keymaps 'consult-keymap
+			"a" 'consult-org-agenda
+			"b" 'consult-bookmark
+			"d" 'consult-find
+			"D" 'consult-locate
+			"e" 'consult-compile-error
+			"f" 'consult-flymake ;; Alternative: consult-flycheck
+			"F" 'consult-recent-file
+			"g" 'consult-goto-line ;; orig. goto-line
+			"G" 'consult-goto-line ;; orig. goto-line
+			"h" 'consult-doc
+			"H" 'consult-man
+			"C-h" 'consult-info
+			"S-h" 'consult-info-emacs
+			"i" 'consult-imenu
+			"I" 'consult-imenu-multi
+			"C-i" 'consult-isearch-history
+			"k" 'consult-keep-lines
+			"K" 'consult-kmacro
+			"l" 'consult-line
+			"L" 'consult-line-multi
+			"m" 'consult-mark
+			"M" 'consult-global-mark
+			"o" 'consult-outline ;; Alternative: consult-org-heading
+			"O" 'consult-multi-occur
+			;; "r" 'consult-grep
+			"r" 'consult-ripgrep
+			;; "R" 'consult-git-grep
+			"R" 'consult-org-dir
+			"s" 'consult-register-load
+			"S" 'consult-register-store
+			"u" 'consult-focus-lines)
+
   (:keymaps 'consult-goto-keymap
 			"e" 'consult-compile-error
 			"f" 'consult-flymake ;; Alternative: consult-flycheck
 			"g" 'consult-goto-line ;; orig. goto-line
+			"G" 'consult-goto-line ;; orig. goto-line
 			"i" 'consult-imenu
 			"I" 'consult-imenu-multi
 			"k" 'consult-global-mark
-			"G" 'consult-goto-line ;; orig. goto-line
 			"m" 'consult-mark
 			"o" 'consult-outline) ;; Alternative: consult-org-heading
-
   (:keymaps 'consult-search-keymap
 			;; M-s bindings (search-map)
 			"e" 'consult-isearch-history
@@ -98,7 +132,7 @@
 			"l" 'consult-line
 			"L" 'consult-line-multi
 			"m" 'consult-multi-occur
-			"o" '(lambda () (interactive) (consult-find "~/org/"))
+			"o" 'consult-org-dir
 			"r" 'consult-ripgrep
 			"u" 'consult-focus-lines)
   (:keymaps 'isearch-mode-map
@@ -110,6 +144,9 @@
   (:keymaps 'minibuffer-local-map
 			"M-s" 'consult-history ;; orig. next-matching-history-element
 			"M-r" 'consult-history) ;; orig. previous-matching-history-element
+  (:keymaps 'personal
+			"c" consult-keymap
+			"m" 'consult-doc)
   :hook
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -182,13 +219,16 @@
   "Get the language associated to the current major-mode."
   (let ((mode (symbol-name major-mode)))
     (if (and (> (length mode) 6)
-	     (equal (substring mode -7) "ts-mode"))
-	(setq suffix-pos -8) ;; ts-mode
+			 (equal (substring mode -7) "ts-mode"))
+		(setq suffix-pos -8) ;; ts-mode
       (setq suffix-pos -5))
 
     (setq mode (substring (symbol-name major-mode) 0 suffix-pos))
     mode))
 
+(defun consult-org-dir ()
+  (interactive)
+  (consult-fd "~/org/"))
 
 (defun consult-doc () ;; (start end)
   "Open the org doc of the appropriate language."

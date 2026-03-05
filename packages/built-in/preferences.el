@@ -343,7 +343,6 @@
   ;; ("C-x C-f" 'set-fill-column)
 
   ("M-z" 'zap-up-to-char)
-  ("C-d" 'kill-buffer-refocus) ;; shadows delete-char
 
   ([remap suspend-frame] 'undo)
   ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)

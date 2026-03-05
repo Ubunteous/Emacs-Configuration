@@ -205,9 +205,9 @@
   :general
   ;; shadows open-line. Note: C-j already does return+indent
   ("C-o" 'motion-transient)
-
   ("C-S-h" 'hrm-help-transient)
-  ("C-c i v" 'vim-transient)
+  (:keymaps 'personal
+			"v" 'vim-transient)
   :hook
   (prog-mode . hs-minor-mode))
 

@@ -5,6 +5,9 @@
 (use-package eglot
   :ensure nil
   :defer t
+  :init
+  (defvar-keymap xref-keymap
+	:doc "Keymap for xref bindings.")
   :config
   (setq eglot-autoshutdown t)
   (setopt eglot-server-programs '())
@@ -119,6 +122,16 @@
             ;; "C-i C-o" 'python-sort-imports ;; requires python module (isort)
             ;; "C-i C-f" 'eglot-format-buffer)
             "C-c i r" 'eglot-rename)
+  (:keymaps 'xref-keymap
+			"," 'xref-go-back
+			"C-," 'xref-go-forward
+			"C-." 'xref-find-apropos
+			"?" 'xref-find-references
+			";" 'xref-find-definitions
+			"q" 'xref-query-replace-in-results
+			"f" 'xref-find-references-and-replace)
+  (:keymaps 'personal
+			"x" 'xref-keymap)
   :hook
   ((
     c-ts-mode

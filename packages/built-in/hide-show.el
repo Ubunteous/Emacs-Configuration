@@ -13,14 +13,17 @@
   ;; (setq hs-hide-comments-when-hiding-all t)
   ;; (setq hs-allow-nesting nil)
   :general
-  ("C-c h" hideshow-keymap)
   (:keymaps 'hideshow-keymap
-			"b" 'hs-show-block
-			"d" 'hs-hide-block
-			"h" 'hs-hide-all
-			"a" 'hs-show-all
+			"h" 'hs-hide-block
+			"H" 'hs-hide-all
+			"i" 'hs-hide-initial-comment-block
 			"l" 'hs-hide-level
-			"t" 'hs-toggle-hiding
-			"i" 'hs-hide-initial-comment-block)
+			"s" 'hs-show-block
+			"S" 'hs-show-all
+			"t" 'hs-toggle-hiding)
+
+  (:keymaps 'personal
+			"h" hideshow-keymap
+			"C-h" 'hs-toggle-hiding)
   :hook
   (prog-mode . hs-minor-mode))

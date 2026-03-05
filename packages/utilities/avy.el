@@ -112,7 +112,6 @@
 	 ("n" avy-next "next")
 	 ("m" avy-pop-mark)))
   :general
-  ("C-c c" avy-keymap)
   ("C-'" 'avy-goto-char-timer)
   (:keymaps 'avy-keymap
 			"c" 'avy-goto-char
@@ -123,4 +122,6 @@
 			"m" 'avy-pop-mark
 			"n" 'avy-next
 			"p" 'avy-prev
-			"t" 'avy-goto-char-timer))
+			"t" 'avy-goto-char-timer)
+  (:keymaps 'personal
+			"i" avy-keymap))

@@ -7,6 +7,8 @@
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
+  (defvar-keymap embark-keymap
+	:doc "Keymap for embark.")
   :config
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
@@ -33,11 +35,20 @@
    "C-h B" 'embark-bindings) ;; alternative for `describe-bindings'
   (:keymaps 'embark-file-map
 			"S" 'sudo-find-file)
-  (:keymaps 'personal
-			"a" 'embark-act
+  (:keymaps 'embark-keymap
 			"A" 'embark-act-all
+			"a" 'embark-act
+			"b" 'embark-become
 			"c" 'embark-collect
-			"e" 'embark-export))
+			"d" 'embark-dwim
+			"e" 'embark-export
+			"h" 'embark-bindings
+			"l" 'embark-live
+			"s" 'embark-select
+			"k" 'embark-bindings-in-keymap)
+  (:keymaps 'personal
+			"E" 'embark-collect
+			"e" embark-keymap))
 
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
