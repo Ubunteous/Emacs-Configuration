@@ -203,7 +203,9 @@
 	 ]
 	)
   :general
-  ("C-o" 'motion-transient) ;; shadows open-line
+  ;; shadows open-line. Note: C-j already does return+indent
+  ("C-o" 'motion-transient)
+
   ("C-S-h" 'hrm-help-transient)
   ("C-c i v" 'vim-transient)
   :hook
