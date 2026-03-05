@@ -23,7 +23,7 @@
   :defer t
   :config
   (setq gptel--system-message "Respond concisely.")
-  (setq gptel-model 'gemini-2.5-flash-lite
+  (setq gptel-model 'gemini-flash-latest
 		gptel-backend
 		(gptel-make-gemini "Gemini"
 		  :key
