@@ -7,7 +7,7 @@
   :custom-face
   (diff-hl-insert ((t (:foreground "lime green" :background "lime green")))) ;; #a6e12d
   (diff-hl-change ((t (:foreground "orange" :background "orange"))))
-  (diff-hl-delete ((t (:foreground "light coral" :background "light coral"))))
+  (diff-hl-delete ((t (:foreground "firebrick2" :background "firebrick2"))))
   ;; :init
   ;; (global-diff-hl-mode)
   ;; (diff-hl-dired-mode)
