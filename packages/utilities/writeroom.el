@@ -20,17 +20,12 @@
 
   ;; (add-to-list writeroom-global-effects my-writeroom-theme)
   :hook
-  ((magit-status-mode
-	apropos-mode
-	helpful-mode
-	dired-mode
-	org-agenda-mode)
-
-   ;; special-mode is used by Eldoc
-   (special-mode . (lambda ()
-					 (progn
-					   (setq-local writeroom-width 90)
-					   (writeroom-mode))))
+  (((magit-status-mode
+	 apropos-mode
+	 helpful-mode
+	 dired-mode
+	 org-agenda-mode)
+	. writeroom-mode)
 
    ;; switch to writeroom if there is only one window open
    (org-mode . (lambda ()
