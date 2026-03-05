@@ -4,37 +4,43 @@
 
 (require 'cl-lib)
 
-(defun org-collect-table-names ()
+(defun orgtbl--collect-table-names ()
   "Return all #+name: values in current buffer."
   (org-element-map (org-element-parse-buffer)
       'table
     (lambda (tbl)
       (plist-get (cadr tbl) :name))))
 
-(defun orgtbl-to-json (table)
+(defun orgtbl--to-json (table)
   "Convert org TABLE to JSON."
-  (orgtbl-to-generic
+  (setq orgtbl-index -1)
 
-   (let ((formatted-header (mapcar (-rpartial 'concat "\": \"") (car table)))
-         (content (cdr table)))
-     (mapcar (lambda (row)
-               (cl-mapcar #'concat formatted-header row))
-             content))
+  (let ((make-bracket-with-id
+		 (lambda ()
+		   (progn
+			 (setq orgtbl-index (+ 1 orgtbl-index))
+			 (concat "\t\"" (number-to-string orgtbl-index) "\": {\n")))))
 
-   (org-combine-plists
-    '(:sep ",\n"
-           :tstart "{" :tend "}"
-           :lstart "\t{\n" :lend "\n\t},"
-           :llstart "\t{\n" :llend "\n\t}"
-           :fmt (lambda (cell) (format "  \t\t\"%s\"" cell))))))
+	(orgtbl-to-generic
 
-(defun write-to-file (filename data)
-  (with-temp-file filename (insert data)))
+	 (let ((formatted-header (mapcar (-rpartial 'concat "\": \"") (car table)))
+           (content (cdr table)))
+       (mapcar (lambda (row)
+				 (cl-mapcar #'concat formatted-header row))
+               content))
 
-(defun write-org-table-to-file (filepath table)
-  (write-to-file filepath (orgtbl-to-json table)))
+	 (org-combine-plists
+      '(
+		:sep ",\n"
+		:tstart "{" :tend "}"
+		:lstart (lambda () (funcall make-bracket-with-id)) :lend "\n\t},"
+		:llstart (lambda () (funcall make-bracket-with-id)) :llend "\n\t}"
+		:fmt (lambda (cell) (format "  \t\t\"%s\"" cell)))))))
 
-(defun org-get-table-content-by-name (name)
+(defun orgtbl--write-to-file (filepath table)
+  (with-temp-file filepath (insert (orgtbl--to-json table))))
+
+(defun orgtbl--get-content-by-name (name)
   (let ((pos (catch 'pos
 			   (cl-loop for table in  (org-element-map (org-element-parse-buffer) 'table 'identity)
 						do
@@ -49,7 +55,7 @@
   (interactive)
   (mapcar
    (lambda (table-name)
-	 (write-org-table-to-file
+	 (orgtbl--write-to-file
 	  (concat "~/Desktop/json/" table-name ".json")
-	  (org-get-table-content-by-name table-name)))
-   (org-collect-table-names)))
+	  (orgtbl--get-content-by-name table-name)))
+   (orgtbl--collect-table-names)))
