@@ -240,8 +240,8 @@
 							  "combobulate"
 							  ;; "restclient"
 							  ;; "minuet"
-							  "wgrep"
-							  "casual")
+							  ;; "casual"
+							  "wgrep")
 
 							'("crux"
 							  "avy"
