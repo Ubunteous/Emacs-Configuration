@@ -277,12 +277,12 @@
 							'()
 
 							'("apheleia"
-							  ;; "diff-hl" ;; unmaintained and more invasive
 							  "hl-todo"
 							  "flyover")
 
 							'("meow"
-							  ;; "git-gutter" ;; like diff-hl
+							  "diff-hl"
+							  ;; "git-gutter" ;; like diff-hl but unmaintained and more invasive
 							  ;; "which-key" ;; now built-in
 							  "rainbow-delimiters"
 							  ;; "adaptive-wrap"
