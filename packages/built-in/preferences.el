@@ -123,12 +123,6 @@
   ;;(setq inhibit-startup-message t)
   ;;(setq inhibit-startup-echo-area-message t)
 
-  ;; Make M-x compile silent
-  ;; Shut up compile saves
-  ;;(setq compilation-ask-about-save nil)
-  ;; Don't save *anything*
-  ;;(setq compilation-save-buffers-predicate '(lambda () nil))
-
   ;; highlight the current line
   ;;(setq global-hl-line-mode t)
 
@@ -201,10 +195,31 @@
   ;; save automatically before M-x compile
   (setq compilation-ask-about-save nil
 		compilation-scroll-output t
-		compilation-auto-jump-to-first-error t
+
+		;; DEBUGGING
+		;; if file not found, opens minibuffer (not a bug)
+		;; values: t (go to first unconditionally), if-location-known, first-known
+		compilation-auto-jump-to-first-error 'if-location-known
+		;;
+		;; compilation-skip-threshold ;; jump to warning/error/any in prioriy (see doc)
+		;; compilation-auto-jump-to-next t ;; next error
+		;; compilation-debug t ;; add a debug text property to error lines
+
+		;; PROCESS
+		;; compilation-environment ;; list of strings ENVVARNAME=VALUE
+		;; compilation-save-buffers-predicate '(lambda () nil) ;; do not save anything
+		;; compilation-read-command nil ;; nil to use compile-command without prompt
+		;; compilation-process-setup-function
+		;; compilation-finish-functions
+		;; compilation-search-path ;; dirs with files mentioned in error message
+		;; compilation-directory ;; dir to restore when using recompile
+
+		;; FILTER
+		;; compilation-filter-start
+		;; compilation-hidden-output ;; regexp
+
 		;; compilation-max-output-line-length nil
 		compilation-always-kill t)
-
 
   (advice-add 'find-file :before (lambda (filename &optional wildcards)
 								   (unless (file-exists-p filename)
@@ -324,6 +339,12 @@
 	:doc "Keymap for miscellaneous bindings to keep around.")
   ;; ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
   (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
+  :config
+  (add-to-list 'compilation-error-regexp-alist 'node)
+
+  ;; 1-file, 2-line, 3-column (groups delimited by \\(...\\))
+  (add-to-list 'compilation-error-regexp-alist-alist
+			   '(node "\\(/[[:alpha:]/\s]+.js\\):\\([[:digit:]]+\\)" 1 2))
   :general
   ([remap suspend-frame] 'undo)
 
