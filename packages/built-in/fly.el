@@ -5,11 +5,22 @@
 (use-package flymake
   :ensure nil
   :defer t
+  :init
+  (defvar-keymap flymake-keymap
+	:doc "Keymap for flymake bindings.")
   :config
   ;; (setq flymake-indicator-type) ;; fringes (default), margins or nil
   (setq flymake-show-diagnostics-at-end-of-line 'short) ;; defaults to nil. use either 'short or t
   :custom-face
   (flymake-end-of-line-diagnostics-face ((t (:height 1.0))))
+  :general
+  (:keymaps 'flymake-keymap
+			"b" 'flymake-running-backends
+			"d" 'flymake-show-project-diagnostics
+			"n" 'flymake-goto-next-error
+			"p" 'flymake-goto-prev-error)
+  (:keymaps 'personal
+			"f" flymake-keymap)
   :hook
   (prog-mode . flymake-mode)
   (flymake-mode . (lambda () (delete 'elisp-flymake-checkdoc flymake-diagnostic-functions))))

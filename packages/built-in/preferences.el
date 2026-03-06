@@ -329,12 +329,6 @@
   ;; 			  ("7" . #x2786)
   ;; 			  ("8" . #x2787)
   ;; 			  ("9" . #x2788)))
-
-  (defvar-keymap personal-misc-bindings-keymap
-	;; :parent text-mode-map
-	:doc "Keymap for miscellaneous bindings to keep around.")
-  ;; ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
-  (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
   :general
   ([remap suspend-frame] 'undo)
 

@@ -75,6 +75,9 @@
    "<help> a" 'consult-apropos ;; orig. apropos-command
    ;; M-g bindings (goto-map)
 
+   "C-x r s" 'consult-register-store ;; shadows copy-to-register
+   "C-x r i" 'consult-register ;; shadows insert-register
+
    "C-c y" consult-goto-keymap
    "C-c u" consult-search-keymap)
 
@@ -107,7 +110,7 @@
 			"r" 'consult-ripgrep
 			;; "R" 'consult-git-grep
 			"R" 'consult-org-dir
-			"s" 'consult-register-load
+			"s" 'consult-register ;; better interface than -load
 			"S" 'consult-register-store
 			"u" 'consult-focus-lines)
 
