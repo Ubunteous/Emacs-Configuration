@@ -281,10 +281,6 @@
   ;; (setq-default bidi-inhibit-bpa t)
   ;; (global-so-long-mode 1)
 
-  (setq xref-search-program #'ripgrep)
-  ;; (setq xref-marker-ring-length 16)
-  ;; (setq xref-auto-jump-to-first-xref nil)
-
   ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
   (setq set-mark-command-repeat-pop t)
   ;; (setq mark-ring-max 16)

@@ -9,6 +9,10 @@
   (defvar-keymap xref-keymap
 	:doc "Keymap for xref bindings.")
   :config
+  (setq xref-search-program #'ripgrep)
+  ;; (setq xref-marker-ring-length 16)
+  ;; (setq xref-auto-jump-to-first-xref nil)
+
   (setq eglot-autoshutdown t)
   (setopt eglot-server-programs '())
   ;; don't trust the docstring. nil/0 blocks anyway
@@ -131,7 +135,7 @@
 			"q" 'xref-query-replace-in-results
 			"f" 'xref-find-references-and-replace)
   (:keymaps 'personal
-			"x" 'xref-keymap)
+			"x" xref-keymap)
   :hook
   ((
     c-ts-mode
