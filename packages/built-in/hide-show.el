@@ -14,12 +14,13 @@
   ;; (setq hs-allow-nesting nil)
   :general
   (:keymaps 'hideshow-keymap
-			"h" 'hs-hide-block
-			"H" 'hs-hide-all
+			"a" 'hs-hide-all
+			"A" 'hs-show-all
+			"b" 'hs-hide-block
+			"B" 'hs-show-block
+			"h" 'hs-toggle-hiding
 			"i" 'hs-hide-initial-comment-block
 			"l" 'hs-hide-level
-			"s" 'hs-show-block
-			"S" 'hs-show-all
 			"t" 'hs-toggle-hiding)
 
   (:keymaps 'personal
