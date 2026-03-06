@@ -31,4 +31,6 @@
 						   :host "googleapis.com"
 						   :user "apikey"))
 					 :secret)
-		  :stream t)))
+		  :stream t))
+  :general (:keymaps 'gptel-mode-map
+					 "C-c C-h" 'gptel-menu))
