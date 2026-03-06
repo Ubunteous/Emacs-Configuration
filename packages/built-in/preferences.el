@@ -339,12 +339,6 @@
 	:doc "Keymap for miscellaneous bindings to keep around.")
   ;; ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
   (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
-  :config
-  (add-to-list 'compilation-error-regexp-alist 'node)
-
-  ;; 1-file, 2-line, 3-column (groups delimited by \\(...\\))
-  (add-to-list 'compilation-error-regexp-alist-alist
-			   '(node "\\(/[[:alpha:]/\s]+.js\\):\\([[:digit:]]+\\)" 1 2))
   :general
   ([remap suspend-frame] 'undo)
 

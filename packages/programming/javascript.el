@@ -31,6 +31,12 @@
 					buffer-file-name
 					;; (file-name-sans-extension buffer-file-name)
 					)))))
+
+  (add-to-list 'compilation-error-regexp-alist 'node)
+
+  ;; 1-file, 2-line, 3-column (groups delimited by \\(...\\))
+  (add-to-list 'compilation-error-regexp-alist-alist
+			   '(node "\\(/[[:alpha:]/\s]+.js\\):\\([[:digit:]]+\\)" 1 2))
   :hook (((js-mode js-ts-mode typescript-ts-mode) . js2-minor-mode)
 		 ((js-mode js-ts-mode typescript-ts-mode) . set-js-compile-command)))
 
