@@ -386,13 +386,11 @@ The DWIM behaviour of this command is as follows:
    (t
 	(keyboard-quit))))
 
-
 (defun server-restart ()
   "Kill and start server"
   (interactive)
   (server-force-delete)
   (server-start))
-
 
 (defun display-startup-echo-area-message ()
   "Custom startup message."
@@ -465,10 +463,3 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
   (interactive "P")
   (set-selective-display
    (* 4 (prefix-numeric-value arg))))
-
-(defun ediff-buffers-dwim ()
-  (interactive)
-  (if (= 2 (length (window-list)))
-      (ediff-buffers (window-buffer (nth 1 (window-list)))
-					 (current-buffer))
-    (call-interactively 'ediff-buffers)))
