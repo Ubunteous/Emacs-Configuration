@@ -8,6 +8,19 @@
   :init
   (defvar-keymap xref-keymap
 	:doc "Keymap for xref bindings.")
+
+  (defun peek-eldoc ()
+	(interactive)
+	(setq peek--initial-window-configuration (current-window-configuration))
+	(call-interactively #'eldoc-print-current-symbol-info)
+
+	;; make up for delay before buffer shows up
+	(run-with-timer .1 nil (lambda ()
+							 (when (string= "special-mode" major-mode)
+							   (delete-other-windows (get-buffer-window (current-buffer)))
+							   (local-set-key (kbd "q") (lambda () (interactive)
+														  (kill-buffer (current-buffer))
+	   													  (set-window-configuration peek--initial-window-configuration)))))))
   :config
   (setq xref-search-program #'ripgrep)
   ;; (setq xref-marker-ring-length 16)
