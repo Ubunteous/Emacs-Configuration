@@ -354,6 +354,10 @@
   ("C-x $" 'set-quad-selective-display)
   ("C-x k" 'kill-buffer-refocus)
   ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
+
+  (:keymaps 'ctl-x-r-map
+			"a" 'append-to-register)
+
   (:keymaps 'personal
 			;; "C-c u" 'mode-line-other-buffer
 			"d" 'delete-char)

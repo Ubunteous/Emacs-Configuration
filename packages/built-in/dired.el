@@ -16,6 +16,7 @@
   :config
   (setq dired-dwim-target t)
   (setq dired-free-space nil)
+  (setq dired-kill-when-opening-new-dired-buffer t)
   ;; (setq dired-recursive-copies 'always)
   ;; (setq dired-recursive-deletes 'always)
   (setq delete-by-moving-to-trash t) ;; pairs well with trash package

@@ -177,10 +177,10 @@
 	clojure-mode) . eglot-ensure))
 
 
-;; makes eldoc info appear at point
-(use-package eldoc-box
-  ;; :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
-  :defer t)
+;; ;; makes eldoc info appear at point
+;; (use-package eldoc-box
+;;   ;; :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
+;;   :defer t)
 
 ;; (use-package eglot
 ;;   :commands eglot

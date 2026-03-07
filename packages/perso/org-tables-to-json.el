@@ -7,12 +7,17 @@
 (defun orgtbl--collect-table-names ()
   "Return all #+name: values in current buffer."
   (org-element-map (org-element-parse-buffer)
-      'table
-    (lambda (tbl)
-      (plist-get (cadr tbl) :name))))
+				   'table
+				   (lambda (tbl)
+					 (plist-get (cadr tbl) :name))))
 
 (defun orgtbl--to-json (table)
   "Convert org TABLE to JSON."
+
+  ;; Improve later with local variable and inc
+  ;; (set (make-local-variable 'orgtbl-index) -1)
+  ;; (cl-incf orgtbl-index)
+
   (setq orgtbl-index -1)
 
   (let ((make-bracket-with-id
@@ -24,13 +29,13 @@
 	(orgtbl-to-generic
 
 	 (let ((formatted-header (mapcar (-rpartial 'concat "\": \"") (car table)))
-           (content (cdr table)))
-       (mapcar (lambda (row)
+		   (content (cdr table)))
+	   (mapcar (lambda (row)
 				 (cl-mapcar #'concat formatted-header row))
-               content))
+			   content))
 
 	 (org-combine-plists
-      '(
+	  '(
 		:sep ",\n"
 		:tstart "{" :tend "}"
 		:lstart (lambda () (funcall make-bracket-with-id)) :lend "\n\t},"
