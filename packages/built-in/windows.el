@@ -70,13 +70,15 @@
 
   (add-to-list 'display-buffer-alist '("\\*Eldoc.*" display-buffer-same-window))
 
+  (add-to-list 'display-buffer-alist '("\\*General Keybindings\\*" display-buffer-full-frame))
+
   ;; (add-to-list 'display-buffer-alist
   ;;			   '("\\*Completions\\*"
   ;;				 (display-buffer-reuse-window display-buffer-pop-up-window)
   ;;				 (inhibit-same-window . t)
   ;;				 (window-height . 10)))
   ;; also see function toggle-window-dedicated
-  
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; MACROS AND FUNCTIONS ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;

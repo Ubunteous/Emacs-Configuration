@@ -139,12 +139,11 @@
   :ensure (:wait t)
   :demand t)
 
-;; switch to bindings list when opened
-(defun general-list-keybindings ()
-  (interactive)
-  (general-describe-keybindings)
-  (pop-to-buffer "*General Keybindings*")
-  (delete-other-windows))
+(defvar-keymap personal-misc-bindings-keymap
+  :doc "Keymap for miscellaneous bindings to keep around.")
+
+;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
+(setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;
