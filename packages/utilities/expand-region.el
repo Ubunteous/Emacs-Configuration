@@ -10,4 +10,11 @@
   :config
   (setq expand-region-smart-cursor t)
   ;; (setq expand-region-subword-enabled nil)
-  :general ("C-=" 'er/expand-region))
+
+  (repeat-it
+   expand-region
+   '(("=" er/expand-region "expand")
+	 ("+" er/contract-region "contract")))
+  :general
+  ("C-=" 'er/expand-region
+   "C-+" 'er/contract-region))

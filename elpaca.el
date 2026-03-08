@@ -229,7 +229,8 @@
 (load-user-files-per-system "utilities"
 							'()
 
-							'("expand-region"
+							'("expreg"
+							  ;; "expand-region" ;; superseded by expreg
 							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
 							  "multiple-cursors"
