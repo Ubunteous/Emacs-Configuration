@@ -355,6 +355,9 @@
   ("C-x k" 'kill-buffer-refocus)
   ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
 
+  (:keymaps 'ctl-x-map
+			"C-k" 'eval-defun)
+
   (:keymaps 'ctl-x-r-map
 			"a" 'append-to-register)
 

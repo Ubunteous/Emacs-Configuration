@@ -35,7 +35,7 @@
    "C-h B" 'embark-bindings) ;; alternative for `describe-bindings'
   (:keymaps 'embark-file-map
 			"S" 'sudo-find-file)
-  (:keymaps 'embark-keymap
+  (:keymaps 'embark-keymap ;; custom keymap (not from embark.el)
 			"A" 'embark-act-all
 			"a" 'embark-act
 			"b" 'embark-become
@@ -46,6 +46,14 @@
 			"l" 'embark-live
 			"s" 'embark-select
 			"k" 'embark-bindings-in-keymap)
+  (:keymaps 'minibuffer-local-map
+			"C-c C-c" 'embark-collect
+			"C-c C-e" 'embark-export)
+  ;; (:keymaps 'embark-variable-map
+  ;; 			"h" 'helpful-variable)
+  ;; (:keymaps 'embark-command-map
+  ;; 			"d" 'helpful-callable
+  ;; 			"h" 'helpful-callable)
   (:keymaps 'personal
 			"E" 'embark-collect
 			"e" embark-keymap))

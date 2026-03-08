@@ -126,10 +126,24 @@
   ;; (setq eglot-ignored-server-capabilities '(:hoverProvider)) ;; also deactivate commands
   (setq eglot-ignored-server-capabilites '(:documentHighlightProvider))
 
-  ;; (eglot-autoshutdown t)
-  ;; (eglot-extend-to-xref nil)
-
   (setq eglot-stay-out-of '(yasnippet))
+
+  ;; (eglot-autoshutdown t)
+
+  ;;;;;;;;;;
+  ;; XREF ;;
+  ;;;;;;;;;;
+
+  ;; (eglot-extend-to-xref nil)
+  (setq xref-search-program #'ripgrep)
+  ;; (setq xref-marker-ring-length 16)
+  ;; (setq xref-auto-jump-to-first-xref nil)
+
+  ;; example to add elements to xref marker stack to use xref-go-back. useful with consult-ripgrep/line
+  ;; (defun add-point-to-find-tag-marker-ring (&rest r)
+  ;; 	"Advising function to use `find-tag-marker-ring' (R ignored)."
+  ;; 	(xref-push-marker-stack))
+  ;; (advice-add 'find-function :before 'add-point-to-find-tag-marker-ring)
   :general
   (:keymaps 'eglot-mode-map
 			;; use instead C-h . for display-local-help
