@@ -22,7 +22,17 @@
 
   ;;go to help window
   (setq help-window-select t)
-  
+
+  ;; uncomment if you start using windmove
+  ;; (setq windmove-wrap-around t)
+  ;; (setq windmove-allow-all-windows <add exceptions here>)
+
+  ;; counter clockwise rotation. use repeat-it for convenience
+  ;; (defun other-window-backward ()
+  ;; 	"Goto previous window"
+  ;; 	(interactive)
+  ;; 	(other-window -1))
+
   ;; jump to compilation window
   ;; (defadvice compilation-start (after compilation-start-maximize activate)
   ;;   (when (equal mode 'grep-mode)
