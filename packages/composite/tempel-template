@@ -29,7 +29,8 @@ emacs-lisp-mode
 
 (header (insert-header))
 (use-package "use-package " q n> ":defer t")
-(recipe ":ensure (name :type git :host github :repo \"/\"")
+(ensure ":ensure (name :type git :host github :repo \"author/name\")")
+(recipe ":ensure (" p " :type git :host github :repo \"" q "\")")
 
 (autoload ";;;###autoload")
 (pt "(point)")
