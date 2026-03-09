@@ -28,6 +28,19 @@
                 (put def 'repeat-map ',map)
                 (when hint (put def 'repeat-hint hint))))))
 
+;;;;;;;;;;;;;;;;;;;;;;;
+;; KEYMAP REPETITION ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+;; ;; useful but hard to pair with general. maybe load it last
+;; (defun repeatize (keymap)
+;;   "Add 'repeat-mode' support to a KEYMAP."
+;;   (map-keymap
+;;    (lambda (_key cmd)
+;; 	 (when (symbolp cmd)
+;; 	   (put cmd 'repeat-map keymap)))
+;;    (symbol-value keymap)))
+
 ;;;;;;;;;;;;
 ;; REPEAT ;;
 ;;;;;;;;;;;;
