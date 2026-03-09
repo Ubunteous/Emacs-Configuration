@@ -17,17 +17,33 @@
   ;;  '(vundo-stem ((t (:foreground "#808080"))))
   ;;  '(vundo-highlight ((t (:foreground "#FFFF00")))))
 
-  ;; ;; Use `HJKL` VIM-like motion, also Home/End to jump around.
-  (define-key vundo-mode-map (kbd "l") #'vundo-forward)
-  (define-key vundo-mode-map (kbd "<right>") #'vundo-forward)
-  (define-key vundo-mode-map (kbd "h") #'vundo-backward)
-  (define-key vundo-mode-map (kbd "<left>") #'vundo-backward)
-  (define-key vundo-mode-map (kbd "j") #'vundo-next)
-  (define-key vundo-mode-map (kbd "<down>") #'vundo-next)
-  (define-key vundo-mode-map (kbd "k") #'vundo-previous)
-  (define-key vundo-mode-map (kbd "<up>") #'vundo-previous)
-  (define-key vundo-mode-map (kbd "a") #'vundo-stem-root)
-  (define-key vundo-mode-map (kbd "e") #'vundo-stem-end)
-  (define-key vundo-mode-map (kbd "q") #'vundo-quit)
-  (define-key vundo-mode-map (kbd "C-g") #'vundo-quit)
-  (define-key vundo-mode-map (kbd "RET") #'vundo-confirm))
+  :general
+  (:keymaps 'vundo-mode-map
+			;; Use `HJKL` VIM-like motion, also Home/End to jump around.
+
+			"d d" 'vundo-diff
+			"d u" 'vundo-diff-unmark
+			"d m" 'vundo-diff-mark
+
+			"m" 'vundo-backward
+			"<left>" 'vundo-backward
+			"n" 'vundo-next
+			"<down>" 'vundo-next
+			"e" 'vundo-previous
+			"<up>" 'vundo-previous
+			"i" 'vundo-forward
+			"<right>" 'vundo-forward
+
+			"q" 'vundo-quit
+
+			"s r" 'vundo-stem-root
+			"s e" 'vundo-stem-end
+			"s m" 'vundo-next-root
+
+			"s s" 'vundo-save
+			"s l" 'vundo-goto-last-saved
+			"s n" 'vundo-goto-next-saved
+
+			"C-g" 'vundo-quit
+			"RET" 'vundo-confirm)
+  ("C-c k" 'vundo))

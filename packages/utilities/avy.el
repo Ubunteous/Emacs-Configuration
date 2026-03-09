@@ -124,4 +124,4 @@
 			"p" 'avy-prev
 			"t" 'avy-goto-char-timer)
   (:keymaps 'personal
-			"i" avy-keymap))
+			"a" avy-keymap))

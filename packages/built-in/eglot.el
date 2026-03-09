@@ -6,6 +6,9 @@
   :ensure nil
   :defer t
   :init
+  (defvar-keymap eglot-keymap
+	:doc "Keymap for eglot bindings.")
+
   (defvar-keymap xref-keymap
 	:doc "Keymap for xref bindings.")
 
@@ -145,14 +148,35 @@
   ;; 	(xref-push-marker-stack))
   ;; (advice-add 'find-function :before 'add-point-to-find-tag-marker-ring)
   :general
-  (:keymaps 'eglot-mode-map
+  (:keymaps 'eglot-keymap
 			;; use instead C-h . for display-local-help
-			;; "C-c i b" 'eldoc
-			;; "C-c i p" 'eldoc-box-help-at-point
-			"C-c i d" 'eglot-find-declaration
-            ;; "C-i C-o" 'python-sort-imports ;; requires python module (isort)
-            ;; "C-i C-f" 'eglot-format-buffer)
-            "C-c i r" 'eglot-rename)
+			"a a" 'eglot-code-actions
+			"a o" 'eglot-code-action-organize-imports
+			"a q" 'eglot-code-action-quickfix
+			"a i" 'eglot-code-action-inline
+			"a e" 'eglot-code-action-extract
+			"a r" 'eglot-code-action-rewrite
+			
+			"b e" 'eglot-events-buffer
+			"b f" 'eglot-format-buffer
+			"b l" 'eglot-list-connections
+			"b r" 'eglot-stderr-buffer
+			
+			"d" 'eglot-find-declaration
+			"e" 'eldoc
+
+			"f" 'eglot-format
+			"C-f" 'eglot-format-buffer
+
+			"i" 'eglot-find-implementation
+			;; "C-o" 'python-sort-imports ;; requires python module (isort)
+			"p" 'eldoc-box-help-at-point
+			"r" 'eglot-rename
+			"R" 'eglot-reconnect
+			"s" 'eglot-shutdown
+			"S" 'eglot-shutdown-all
+			"t" 'eglot-find-typeDefinition)
+
   (:keymaps 'xref-keymap
 			"," 'xref-go-back
 			"C-," 'xref-go-forward
@@ -162,10 +186,10 @@
 			"q" 'xref-query-replace-in-results
 			"f" 'xref-find-references-and-replace)
   (:keymaps 'personal
+			"g" eglot-keymap
 			"x" xref-keymap)
   :hook
-  ((
-    c-ts-mode
+  ((c-ts-mode
     c++-ts-mode ;; somehow, needs normal mode for ts-mode
     ;; bash-ts-mode
 
