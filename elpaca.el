@@ -236,7 +236,7 @@
 							  "multiple-cursors"
 							  ;; "powerthesaurus"
 							  ;; "outli"
-							  "symbol-overlay-mc"
+							  "symbol-overlay-mc" ;; includes symbol-overlay
 							  "docker"
 							  "combobulate"
 							  ;; "restclient"
@@ -294,7 +294,6 @@
 							  "diminish"
 							  "dimmer" ;; DONE
 							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
-							  ;; "symbol-overlay" ;; strong. maybe use later
 							  "no-littering"
 							  "writeroom"))
 
