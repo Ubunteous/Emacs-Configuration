@@ -20,7 +20,33 @@
   ;; (setq dired-recursive-copies 'always)
   ;; (setq dired-recursive-deletes 'always)
   (setq delete-by-moving-to-trash t) ;; pairs well with trash package
-  (setq dired-listing-switches "--group-directories-first -al"))
+  (setq dired-listing-switches "--group-directories-first -al")
+
+  (defun dired-count-lines ()
+	"Count the line number of each marked readable regular file in the dired buffer."
+	(interactive)
+
+	(save-excursion
+      (dired-map-over-marks
+       (let ((file (dired-file-name-at-point)))
+		 (when (and file
+					(file-regular-p file)
+					(file-readable-p file))
+		   (with-temp-buffer
+			 (insert-file-contents file)
+			 (setf init (funcall
+						 #'+
+						 (count-lines (point-min) (point-max)))))))
+       nil))
+
+	(next-line)
+	
+	(when (called-interactively-p 'any)
+      (message "Lines: %s" init))
+	init)
+  :general
+  (:keymaps 'dired-mode-map
+			"<" 'dired-count-lines))
 
 ;; create dir if does not exist when renaming/moving
 (defadvice dired-mark-read-file-name (after rv:dired-create-dir-when-needed (prompt dir op-symbol arg files &optional default) activate)
@@ -31,7 +57,6 @@
       (when (and (not (file-directory-p directory-name))
                  (y-or-n-p (format "directory %s doesn't exist, create it?" directory-name)))
         (make-directory directory-name t)))))
-
 
 (use-package dired-x
   :defer t
