@@ -46,4 +46,4 @@
 
 			"C-g" 'vundo-quit
 			"RET" 'vundo-confirm)
-  ("C-c k" 'vundo))
+  ("C-d u" 'vundo))

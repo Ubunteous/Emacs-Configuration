@@ -30,6 +30,10 @@
   ("M-n" 'tempel-complete)
   ("M-*" 'tempel-insert)
 
+  (personal
+   "t e" 'tempel-expand
+   "t c" 'tempel-complete
+   "t i" 'tempel-insert)
   (tempel-map
    "C-n" 'tempel-next
    "RET" 'tempel-next ;; risky. but C-o may replace it

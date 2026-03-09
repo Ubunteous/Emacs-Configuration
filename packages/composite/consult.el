@@ -149,7 +149,7 @@
 			"M-r" 'consult-history) ;; orig. previous-matching-history-element
   (:keymaps 'personal
 			"c" consult-keymap
-			"m" 'consult-doc)
+			"r" 'consult-doc)
   :hook
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.

@@ -34,6 +34,8 @@
   (peek-command helpful-callable "helpful-mode")
   (peek-command helpful-function "helpful-mode")
   (peek-command helpful-variable "helpful-mode")
+  ;; (peek-command helpful-symbol "helpful-mode")
+  ;; (peek-command helpful-macro "helpful-mode")
   :general
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -41,6 +43,8 @@
   ("C-h f" #'peek-helpful-callable)
   ("C-h v" #'peek-helpful-variable)
   ("C-h k" #'peek-helpful-key)
+  ;; ("C-h S" #'peek-helpful-symbol)
+  ;; ("C-h M" #'peek-helpful-macro)
 
   ;; Lookup the current symbol at point. C-c C-d is a common keybinding
   ;; for this in lisp modes.
