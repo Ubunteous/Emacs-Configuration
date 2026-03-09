@@ -45,15 +45,15 @@
 ;; Maybe try also unload-feature before using load-library
 (defvar elpaca-core-date '(20250103)) ;; set to the build date of Emacs
 
-(defvar elpaca-installer-version 0.11)
-(defvar elpaca-directory (expand-file-name "files/elpaca/" user-emacs-directory))
+(defvar elpaca-installer-version 0.12)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
                               :ref nil :depth 1 :inherit ignore
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                              :build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+                              :build (:not elpaca-activate)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
        (default-directory repo))
@@ -80,13 +80,12 @@
   (unless (require 'elpaca-autoloads nil t)
 	;; required by windows with its different path system
     (when windows-system-p
-      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))	
+      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
-
 
 ;; Disable package.el in favour of elpaca.el
 (setq package-enable-at-startup nil)
@@ -137,13 +136,13 @@
 ;; Block until current queue processed. replaces (elpaca-wait)
 (use-package general
   :ensure (:wait t)
+  :config
+  (defvar-keymap personal-misc-bindings-keymap
+	:doc "Keymap for miscellaneous bindings to keep around.")
+
+  ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
+  (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
   :demand t)
-
-(defvar-keymap personal-misc-bindings-keymap
-  :doc "Keymap for miscellaneous bindings to keep around.")
-
-;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
-(setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;
