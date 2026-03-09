@@ -232,7 +232,7 @@
 							  ;; "expand-region" ;; superseded by expreg
 							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
-							  "ovpn-mode"
+							  "ovpn"
 							  "multiple-cursors"
 							  ;; "powerthesaurus"
 							  ;; "outli"
