@@ -204,7 +204,8 @@
 							  ;; "ob/ob-go"
 							  "ob/ob-typescript"
 							  "ob/ob-html"
-							  "ob/ob-sql"
+							  ;; "ob/ob-sql" ; broken 3/2026. elpaca issue with monorepos
+							  "ob/ob-sql-mode"
 							  ;; "ob/ob-async"
 							  "ob/ob-powershell"
 							  "ob/ob-nix"))

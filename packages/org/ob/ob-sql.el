@@ -4,6 +4,7 @@
 
 (use-package ob-sql-mode
   :defer t
+  :ensure (:type git :host github :repo "nikclayton/ob-sql-mode")
   ;; :config
   ;; (require 'ob-sql-mode)
   ;; ;; no prompt to evaluate sql block
