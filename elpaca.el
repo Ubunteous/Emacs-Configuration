@@ -109,6 +109,7 @@
 
 (load-user-files "perso" '("calendar" ;; year-calendar function
 						   "align"
+						   ;; "ws"
 						   "fix-encoding"
 						   "smart-insert"
 						   "auto-close-compilation"
@@ -256,6 +257,7 @@
 							  "symbol-overlay-mc" ;; includes symbol-overlay
 							  "docker"
 							  "combobulate"
+							  ;; "suggest"
 							  ;; "restclient"
 							  ;; "minuet"
 							  ;; "casual"
@@ -276,7 +278,7 @@
 
 							  ;; choose one paredit superset to replace electric (pair) mode
 							  ;; "smartparens" ;; currently missing electric-pairs smart predicate
-							  ;; "lispy" ;; vi-like bindings conflicting with meow
+							  ;; "lispy" ;; vi-like bindings conflicting with meow without lispy-cat
 
 							  ;; "xkcd"
 							  ;; "disproject"
