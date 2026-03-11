@@ -2,7 +2,7 @@
 ;;             ORG-AGENDA             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package org
+(use-package org-agenda
   :defer t
   :ensure nil
   :custom-face
@@ -13,13 +13,16 @@
   ;;   AGENDA   ;;
   ;;;;;;;;;;;;;;;;
 
+  ;; Note: #+Category can be set on any entry (by default, refers to filename)
+  ;; Note: agendas can be exported/extracted (see documentation Extracting Agenda Information)
+
   ;;;;;;;;;;;
   ;; FILES ;;
   ;;;;;;;;;;;
 
   ;; see also org-agenda-file-regexp
-  (let ((inbox-path (if windows-system-p "~/Documents/org/" "~/org/")))
-	(setq org-agenda-files (concat inbox-path "Inbox.org")))
+  (let ((inbox-path (if windows-system-p "~/../../Documents/org/" "~/org/")))
+	(setq org-agenda-files (list (concat inbox-path "inbox.org"))))
 
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
@@ -63,7 +66,7 @@
 
   (setq org-agenda-tags-column -89)
 
-  ;; (setq org-agenda-dim-blocked-tasks t)
+  ;; (setq org-agenda-dim-blocked-tasks t) ; performance penalty when t
 
   ;; (defun my/org-agenda-late-extra (orig-fn extra txt &rest args)
   ;;	 (let* ((marker (or extra ""))
@@ -122,23 +125,71 @@
   ;;   CUSTOM   ;;
   ;;;;;;;;;;;;;;;;
 
-  ;; ;; list of :timestamp, :sexp, :deadline/:deadline*, :scheduled/:scheduled*
-  ;; org-agenda-entry-types ; do not use with setq (see doc)
-  ;; org-agenda-sorting-strategy
   ;; org-agenda-overriding-header
   ;; org-agenda-search-view-always-boolean
 
-  ;; ;; see documentation
+  ;; defaults to: (("n" "Agenda and all TODOs" ((agenda "") (alltodo ""))))
+  ;; can combine multiple elements per group (see Block agenda documentation)
+  ;; 1) key binding
+  ;; 2) description
+  ;; 3) type     The command type, any of the following symbols:
+  ;; - agenda      The daily/weekly agenda.
+  ;; - agenda*     Appointments for current week/day.
+  ;; - todo        Entries with a specific TODO keyword, in all agenda files.
+  ;; - search      Entries containing search words entry or headline.
+  ;; - tags        Tags/Property/TODO match in all agenda files.
+  ;; - tags-todo   Tags/P/T match in all agenda files, TODO entries only.
+  ;; - todo-tree   Sparse tree of specific TODO keyword in *current* file.
+  ;; - tags-tree   Sparse tree with all tags matches in *current* file.
+  ;; - occur-tree  Occur sparse tree for *current* file.
+  ;; - alltodo     The global TODO list.
+  ;; - stuck       Stuck projects.
+  ;; ...         A user-defined function.
+  ;; 4) match (search)
+  ;; - a single keyword for TODO keyword searches
+  ;; - a tags/property/todo match expression for searches
+  ;; - a word search expression for text searches.
+  ;; - a regular expression for occur searches
+  ;; - empty string otherwise
+  ;; 5) files list: where write agenda buffer with org-store-agenda-views (html/ps or plain)
+  ;; Alt: set of commands, to create a composite agenda buffer:
+  ;; (key desc (cmd1 cmd2 ...) general-settings-for-whole-set files)
+  ;; Valid commands:
+  ;; - (agenda "" settings)
+  ;; - (agenda* "" settings)
+  ;; - (alltodo "" settings)
+  ;; - (stuck "" settings)
+  ;; - (todo "match" settings files)
+  ;; - (search "match" settings files)
+  ;; - (tags "match" settings files)
+  ;; - (tags-todo "match" settings files)
   ;; org-agenda-custom-commands
   ;; org-agenda-custom-commands-local-options
+
+  ;; either a single list or multiple each starting with these:
+  ;; CATEGORIES: agenda, todo, tags, search
+  ;; FILTER BY:
+  ;; - time-up/time-down
+  ;; - timestamp-up/down (any timestamp)
+  ;; - scheduled-up/down
+  ;; - deadline-up/down
+  ;; - ts-up/down (active timestamp)
+  ;; - tsia-up/down (inactive timestamp)
+  ;; - category-keep (default categories order - see sequence in org-agenda-files)
+  ;; - category-up/down (alphabetically sorted)
+  ;; - tag-up/down (alphabetically sorted)
+  ;; - priority-up/down
+  ;; - urgency-up/down (calculated using priotity+deadline proximity)
+  ;; - todo-state-up/down
+  ;; - effort-up/down
+  ;; - user-defined-up/down (sort according to org-agenda-cmp-user-defined)
+  ;; - habit-up/down
+  ;; - alpha-up/down (sort headlines alphabetically)
+  ;; org-agenda-sorting-strategy
 
   (defun org-agenda-show-mix (&optional arg)
 	(interactive "P")
 	(org-agenda arg "n"))
-  ;; :hook
-  ;; (org-agenda-mode . (lambda ()
-  ;;					   (setq-local line-spacing 0.5)
-  ;;					   (buffer-face-set '(:family "Lato"))))
 
   ;;;;;;;;;;
   ;; MISC ;;
@@ -146,6 +197,8 @@
 
   ;; t, nil, 'start-level
   ;; (setq org-agenda-loop-over-headlines-in-active-region 'start-level)
+
+  ;; (setq org-agenda-use-tag-inheritance nil) ; performance boost
 
   (setq org-agenda-show-outline-path 'title)
 
