@@ -28,26 +28,31 @@
   ;; APPEARANCE ;;
   ;;;;;;;;;;;;;;;;
 
-  ;; (setq org-agenda-view-columns-initially t)
-  ;; org-columns-default-format-for-agenda ; for column view
-
-  ;; (setq org-agenda-use-time-grid t)
-  ;; (setq org-agenda-format-date 'org-agenda-format-date-aligned)
+  ;; (setq org-agenda-view-columns-initially nil) ; columns for entries
+  ;; (setq org-columns-default-format-for-agenda ...) ; for column view
 
   ;; ;; 1) daily/weekly/today/require-timed/remove-match
   ;; ;; 2) times that should have a grid line (integers list)
   ;; ;; 3) string placed right after the times that have a grid line
   ;; ;; 4) string placed after the grid times. aligns with agenda items
-  ;; org-agenda-time-grid ; display
+  ;; (setq org-agenda-use-time-grid t
+  ;;		org-agenda-time-grid
+  ;;		'((weekly today require-timed)
+  ;;		  (800 1000 1200 1400 1600 1800 2000)
+  ;;		  " ┄┄┄┄┄ "
+  ;;		  "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+
+  ;; (setq org-agenda-format-date 'org-agenda-format-date-aligned)
 
   ;; use this separator with writeroom
   (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))
-  ;; (setq org-agenda-compact-blocks t)
+  ;; (setq org-agenda-compact-blocks nil) ; removes block-separator line
 
+  ;; ;; active with org-agenda-entry-text-mode or org-agenda-entry-text-show(-here)
   ;; (setq org-agenda-entry-text-leaders "    > ")
 
-  ;; ;; alist of %c (category)
-  ;; ;; %e (effort), %l (level), %i (icon category org-agenda-category-icon-alist),
+  ;; ;; 1) agenda type between: agenda, todo, search and tags
+  ;; ;; alist of %c (category), %e (effort), %l (level), %i (icon category org-agenda-category-icon-alist),
   ;; ;; %T (last non-inherited tag), %t (time), %s (deadline), %b (breadcrumbs), %(expression)
   ;; (setq org-agenda-prefix-format
   ;;		(quote
@@ -55,10 +60,12 @@
   ;;		  (timeline . "% s")
   ;;		  (todo . "%-12c")
   ;;		  (tags . "%-12c")
-  ;;		  (search . "%-12c")))
-  ;;		org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " ""))
+  ;;		  (search . "%-12c"))))
 
   (setq org-agenda-time-leading-zero t)
+
+  ;; text for current, future, past deadline
+  (setq org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
 
   ;; Window: current, other, only | Frame: reorganize, other | Tab: other
   (setq org-agenda-window-setup 'only-window
@@ -86,11 +93,11 @@
   ;; (setq org-agenda-scheduled-leaders '("" "-%2d")) ; '("" "S%3d: "))
 
   ;; (setq org-agenda-todo-keyword-format "%.1s")
-  ;; (setq org-agenda-remove-tags t)
+  ;; (setq org-agenda-remove-tags t) ; t, nil or 'prefix (see org-agenda-prefix-format with %T)
 
   ;; ;; set org-agenda-menu-show-matcher to nil when using it
-  ;; (setq org-agenda-menu-show-matcher nil)
-  ;; (setq org-agenda-menu-two-columns (not org-agenda-menu-show-matcher))
+  ;; (setq org-agenda-menu-show-matcher nil
+  ;;		org-agenda-menu-two-columns (not org-agenda-menu-show-matcher))
 
   ;;;;;;;;;;;;;
   ;; FILTERS ;;
@@ -100,13 +107,12 @@
 		org-agenda-start-day "-3d" ; see org-read-date for format
 		org-agenda-span 'month) ; 'day, 'week, 'month, 'year, or number
 
-  (setq org-agenda-show-future-repeats 'next)
+  (setq org-agenda-show-future-repeats 'next) ; t, nil, 'next
 
-  ;; (setq org-agenda-add-entry-text-maxlines 1)
-  ;; (setq org-agenda-add-entry-text-descriptive-links t)
+  (setq org-agenda-add-entry-text-maxlines 5)
+  ;; (setq org-agenda-add-entry-text-descriptive-links nil)
 
   ;; (setq org-agenda-hide-tags-regexp "project\\|work\\|home\\|@.*")
-  ;; (setq org-agenda-show-future-repeats nil) ;; t, nil, 'next
 
   ;; (setq org-agenda-skip-function
   ;;		 (lambda ()
@@ -114,25 +120,22 @@
   ;;						 '("PROJ" "SOMEDAY"))
   ;;			 (or (outline-next-heading) (point-max)))))
 
-  ;; (setq org-agenda-sort-notime-is-late t) ; defaults to t. Items without time are sorted as late
+  ;; (setq org-agenda-sort-notime-is-late nil) ; defaults to t. Items without time are sorted as late
 
-  ;; org-agenda-skip-regexp/deadline/scheduled/timestamp-if-done
+  ;; org-agenda-<skip/ignore>-<regexp/deadline/scheduled/timestamp-if-done>
   (setq org-agenda-skip-scheduled-if-done t)
-
-  ;; org-agenda-todo-ignore-deadlines/scheduled/timestamp/with-date
 
   ;;;;;;;;;;;;;;;;
   ;;   CUSTOM   ;;
   ;;;;;;;;;;;;;;;;
 
   ;; org-agenda-overriding-header
-  ;; org-agenda-search-view-always-boolean
 
   ;; defaults to: (("n" "Agenda and all TODOs" ((agenda "") (alltodo ""))))
   ;; can combine multiple elements per group (see Block agenda documentation)
   ;; 1) key binding
   ;; 2) description
-  ;; 3) type     The command type, any of the following symbols:
+  ;; 3) type
   ;; - agenda      The daily/weekly agenda.
   ;; - agenda*     Appointments for current week/day.
   ;; - todo        Entries with a specific TODO keyword, in all agenda files.
@@ -168,8 +171,8 @@
 
   ;; either a single list or multiple each starting with these:
   ;; CATEGORIES: agenda, todo, tags, search
-  ;; FILTER BY:
-  ;; - time-up/time-down
+  ;; FILTER BY (pick multiple. order matters):
+  ;; - time-up/time-down (time of day)
   ;; - timestamp-up/down (any timestamp)
   ;; - scheduled-up/down
   ;; - deadline-up/down
@@ -185,15 +188,15 @@
   ;; - user-defined-up/down (sort according to org-agenda-cmp-user-defined)
   ;; - habit-up/down
   ;; - alpha-up/down (sort headlines alphabetically)
-  ;; org-agenda-sorting-strategy
-
-  (defun org-agenda-show-mix (&optional arg)
-	(interactive "P")
-	(org-agenda arg "n"))
 
   ;;;;;;;;;;
   ;; MISC ;;
   ;;;;;;;;;;
+
+  (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
+  (setq org-deadline-warning-days 0)
+
+  ;; (setq org-agenda-search-view-always-boolean t)
 
   ;; t, nil, 'start-level
   ;; (setq org-agenda-loop-over-headlines-in-active-region 'start-level)
@@ -210,7 +213,6 @@
   ;;	 (goto-char (point-min))
   ;;	 (while (re-search-forward "\n\n\n+" nil t)
   ;;     (replace-match "\n\n")))
-
   ;; (add-hook 'org-agenda-finalize-hook
   ;;			 #'my/org-agenda-fix-block-spacing)
 
@@ -219,30 +221,33 @@
   ;;	`(("work" "~/.config/icons/work.svg" nil nil :ascent center :mask heuristic)
   ;;	  ("project" "~/.config/icons/project.svg" nil nil :ascent center :mask heuristic)))
 
+  (defun org-agenda-show-mix (&optional arg)
+	(interactive "P")
+	(org-agenda arg "n"))
+
   ;;;;;;;;;;;;
   ;; REFILE ;;
   ;;;;;;;;;;;;
 
-  ;; (setq org-refile-use-outline-path 'file)
+  (setq org-log-refile 'time) ; nil, time, note (prompt)
 
-  ;; ;; These files must exist
-  ;; (setq org-refile-targets
-  ;;		'(("Inbox.org" :maxlevel . 1)
-  ;;		  ("done.org" :level . 1)
-  ;;		  ("Test.org" :level 1)))
+  ;; (setq org-refile-keep t)
 
-  ;; (setq org-refile-targets
-  ;;		'((nil :maxlevel . 3)
-  ;;         (org-agenda-files :maxlevel . 3)))
+  (setq org-refile-use-outline-path 'file)
+
+  ;; These files must exist
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
+							 ;; (nil :maxlevel . 3) ; agenda-files
+							 ("done.org" :maxlevel . 3)))
 
   ;;;;;;;;;;;;;;;
   ;;   DIARY   ;;
   ;;;;;;;;;;;;;;;
 
-  ;; (setq diary-file "~/Desktop/Org/diary.org")
+  (setq diary-file "~/org/diary.org")
 
   ;; options: date-tree (first child of date), date-tree-last (last child of date), top-level (eof)
-  ;; (setq org-agenda-insert-diary-strategy 'date-tree) ; where insert
+  (setq org-agenda-insert-diary-strategy 'date-tree) ; where insert
 
   ;; (setq org-agenda-include-diary t)
   ;; (setq org-agenda-insert-diary-extract-time t)
@@ -251,8 +256,8 @@
   ;;   CALENDAR   ;;
   ;;;;;;;;;;;;;;;;;;
 
-  ;; (setq calendar-setup 'calendar-only)
-  ;; (setq org-agenda-include-diary t)
+  ;; 'one-frame for calendar+diary, 'two-frames or 'calendar-only
+  (setq calendar-setup 'calendar-only)
 
   ;; defaults to c if available. Uses org-calendar-goto-agenda
   ;; (setq org-calendar-to-agenda-key 'default)
@@ -270,14 +275,18 @@
 
   (setq org-capture-templates
 		'(("t" "New task for the agenda"
-		   entry (file "~/org/agenda.org")
+		   entry (file "~/org/inbox.org")
 		   "* %?%i %t" :empty-lines-before 1)
 		  ("d" "New deadline for the agenda"
-		   entry (file "~/org/agenda.org")
+		   entry (file "~/org/inbox.org")
 		   "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
 		  ("s" "Slipbox"
 		   entry (file "~/org/Alter/inbox.org")
-		   "* %?\n")))
+		   "* %?\n")
+		  ;; ("j" "Journal"
+		  ;;  entry (file+datetree "~/org/journal.org")
+		  ;;  "* %?\nEntered on %U\n  %i\n  %a")
+		  ))
 
   ;; shift org capture default date to tomorrow
   (advice-add 'org-capture :around
@@ -290,12 +299,6 @@
 								(year (string-to-number (format-time-string "%Y"))))
 							(encode-time 1 1 0 (1+ day) month year))))))
 				  (apply oldfun args))))
-
-  (setq org-deadline-warning-days 0
-		org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
-
-  ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
-  ;;  "* %?\nEntered on %U\n  %i\n  %a")))
   :general
   ("C-c a" 'org-agenda-show-mix
    "C-c o" 'org-capture-deadline)

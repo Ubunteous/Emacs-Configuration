@@ -193,8 +193,6 @@
 
   ;; the following can be set on a per file/subtree basis with:
   ;; #+STARTUP: nologdone /  logdone /  lognotedone
-  ;; (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
-
   ;; never add whiteline between org sections
   ;; (setq org-cycle-separator-lines 0)
 
@@ -262,87 +260,89 @@
   (setq org-html-postamble nil
 		org-html-head-include-default-style nil
 		org-html-meta-tags nil
-		org-html-xml-declaration nil))
+		org-html-xml-declaration nil)
 
-;; export org citations to latex
-;; (require 'oc-biblatex)
-;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
+  ;;;;;;;;;;;;;;;
+  ;; FUNCTIONS ;;
+  ;;;;;;;;;;;;;;;
+
+  (defun org-summary-todo (n-done n-not-done)
+	"Switch entry to DONE when all subentries are done, to TODO otherwise."
+	(let (org-log-done org-log-states) ;; turn off logging
+	  (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+
 
 ;;;;;;;;;;;;;;;;;;;
-;;   FUNCTIONS   ;;
+  ;;   FUNCTIONS   ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(defun org-summary-todo (n-done n-not-done)
-  "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  (let (org-log-done org-log-states) ;; turn off logging
-	(org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
-(defun org-babel-previous-block-end ()
-  "Go to the last line of code of the previous source block."
-  (interactive)
-  (org-babel-previous-src-block)
-  (search-forward "#+end\_src")
-  (previous-line)
-  (org-end-of-line))
+  (defun org-babel-previous-block-end ()
+	"Go to the last line of code of the previous source block."
+	(interactive)
+	(org-babel-previous-src-block)
+	(search-forward "#+end\_src")
+	(previous-line)
+	(org-end-of-line))
 
 
-(defun org-babel-next-block-end ()
-  "Go to the last line of code of the next source block."
-  (interactive)
-  (org-babel-next-src-block)
-  (search-forward "#+end\_src")
-  (previous-line)
-  (org-end-of-line))
+  (defun org-babel-next-block-end ()
+	"Go to the last line of code of the next source block."
+	(interactive)
+	(org-babel-next-src-block)
+	(search-forward "#+end\_src")
+	(previous-line)
+	(org-end-of-line))
 
 
-(defun org-collapse-top-level-heading ()
-  "Go to top * heading and close it."
-  (interactive)
-  ;; go to main header if not within it (too deep)
-  (let ((start-level (funcall outline-level)))
-	(when (> start-level 1)
-	  (outline-up-heading 1))
-	;; fold
-	(org-fold-hide-subtree)))
+  (defun org-collapse-top-level-heading ()
+	"Go to top * heading and close it."
+	(interactive)
+	;; go to main header if not within it (too deep)
+	(let ((start-level (funcall outline-level)))
+	  (when (> start-level 1)
+		(outline-up-heading 1))
+	  ;; fold
+	  (org-fold-hide-subtree)))
 
 
-(defun org-babel-eval-wipe-error-buffer ()
-  "Redefine this function to delete the Org Babel buffer."
-  (let ((ob-buffer (get-buffer org-babel-error-buffer-name)))
-	(when ob-buffer
-	  ;;   (progn
-	  ;;    (other-window 1)
-	  ;;    (kill-buffer-refocus)
-	  ;;    ;; (delete-window ob-buffer)
-	  ;;    )
+  (defun org-babel-eval-wipe-error-buffer ()
+	"Redefine this function to delete the Org Babel buffer."
+	(let ((ob-buffer (get-buffer org-babel-error-buffer-name)))
+	  (when ob-buffer
+		;;   (progn
+		;;    (other-window 1)
+		;;    (kill-buffer-refocus)
+		;;    ;; (delete-window ob-buffer)
+		;;    )
 
-	  (delete-other-windows))))
+		(delete-other-windows))))
 
-;; ;; Close only unless top level
-;; (defun org-open-next-heading-2 ()
-;;   "Close the current heading, move to the next visible heading at the
-;;    current level, and show the children of that heading."
-;;   (interactive)
-;;   (outline-hide-sublevels (org-outline-level))
-;;   (org-next-visible-heading 1)
-;;   (outline-show-children))
+  ;; ;; Close only unless top level
+  ;; (defun org-open-next-heading-2 ()
+  ;;   "Close the current heading, move to the next visible heading at the
+  ;;    current level, and show the children of that heading."
+  ;;   (interactive)
+  ;;   (outline-hide-sublevels (org-outline-level))
+  ;;   (org-next-visible-heading 1)
+  ;;   (outline-show-children))
 
-;; Close and systematically open next level
-(defun org-open-next-heading ()
-  (interactive)
-  (outline-hide-sublevels (org-outline-level))
-  (org-next-visible-heading 1)
-  (outline-show-subtree))
+  ;; Close and systematically open next level
+  (defun org-open-next-heading ()
+	(interactive)
+	(outline-hide-sublevels (org-outline-level))
+	(org-next-visible-heading 1)
+	(outline-show-subtree))
 
-;; (defun org-latex-compile ()
-;;   "Export to LaTeX and open pdf."
-;;   (interactive)
-;;   (save-buffer)
-;;   (org-export-dispatch "lo"))
+  ;; (defun org-latex-compile ()
+  ;;   "Export to LaTeX and open pdf."
+  ;;   (interactive)
+  ;;   (save-buffer)
+  ;;   (org-export-dispatch "lo"))
 
-;; (defun org-beamer-compile ()
-;;   "Export to Beamer LaTeX and open pdf."
-;;   (interactive)
-;;   (save-buffer)
-;;   (org-export-dispatch "lO"))
+  ;; (defun org-beamer-compile ()
+  ;;   "Export to Beamer LaTeX and open pdf."
+  ;;   (interactive)
+  ;;   (save-buffer)
+  ;;   (org-export-dispatch "lO"))
+  )
