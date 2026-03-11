@@ -33,7 +33,7 @@
 					 "f" 'symbol-overlay-jump-to-definition ; was "d"
 					 "c" 'symbol-overlay-count
 					 "m" 'symbol-overlay-mc-mark-all
-					 
+
 					 ;; default
 					 "e" 'symbol-overlay-echo-mark
 					 "h" 'symbol-overlay-map-help
@@ -46,7 +46,7 @@
 					 "t" 'symbol-overlay-toggle-in-scope
 					 "w" 'symbol-overlay-save-symbol)
   (:keymaps 'personal
-			"s" symbol-overlay-map)
+			"s" (cons "overlay" symbol-overlay-map))
   :hook (prog-mode . symbol-overlay-mode))
 
 ;; ;; bug: add cursor on current overlay

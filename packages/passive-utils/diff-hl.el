@@ -41,7 +41,7 @@
 			"c" 'diff-hl-stage-current-hunk
 			"R" 'diff-hl-reset-reference-rev)
   (:keymaps 'personal
-			"l" diff-hl-keymap)
+			"l" (cons "diff" diff-hl-keymap))
   :hook
   ;; note: diff-hl-dir(ed)-mode provides integrations with vc/dired
   ((magit-pre-refresh . diff-hl-magit-pre-refresh)

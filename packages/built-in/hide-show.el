@@ -24,7 +24,7 @@
 			"t" 'hs-toggle-hiding)
 
   (:keymaps 'personal
-			"h" hideshow-keymap
+			"h" (cons "hs" hideshow-keymap)
 			"C-h" 'hs-toggle-hiding)
   :hook
   (prog-mode . hs-minor-mode))

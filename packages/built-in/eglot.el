@@ -156,12 +156,12 @@
 			"a i" 'eglot-code-action-inline
 			"a e" 'eglot-code-action-extract
 			"a r" 'eglot-code-action-rewrite
-			
+
 			"b e" 'eglot-events-buffer
 			"b f" 'eglot-format-buffer
 			"b l" 'eglot-list-connections
 			"b r" 'eglot-stderr-buffer
-			
+
 			"d" 'eglot-find-declaration
 			"e" 'eldoc
 
@@ -186,32 +186,32 @@
 			"q" 'xref-query-replace-in-results
 			"f" 'xref-find-references-and-replace)
   (:keymaps 'personal
-			"g" eglot-keymap
-			"x" xref-keymap)
+			"g" (cons "eglot" eglot-keymap)
+			"x" (cons "xref" xref-keymap)))
   :hook
   ((c-ts-mode
-    c++-ts-mode ;; somehow, needs normal mode for ts-mode
-    ;; bash-ts-mode
+	c++-ts-mode ;; somehow, needs normal mode for ts-mode
+	;; bash-ts-mode
 
-    ;; go-mode
-    ;; sql-mode
-    ;; rust-ts-mode
-    ;; java-ts-mode
-    js-ts-mode
-    typescript-ts-mode
+	;; go-mode
+	;; sql-mode
+	;; rust-ts-mode
+	;; java-ts-mode
+	js-ts-mode
+	typescript-ts-mode
 
-    lua-mode
-    ;; typst--markup-mode
-    ;; typst-ts-mode
-    ;; LaTeX-mode
-    ;; haskell-mode / haskell-ts-mode
+	lua-mode
+	;; typst--markup-mode
+	;; typst-ts-mode
+	;; LaTeX-mode
+	;; haskell-mode / haskell-ts-mode
 
-    ;; python-ts-mode
-    gdscript-ts-mode
-    csharp-ts-mode
-    
-    ;; elixir-mode
-    nix-ts-mode
+	;; python-ts-mode
+	gdscript-ts-mode
+	csharp-ts-mode
+
+	;; elixir-mode
+	nix-ts-mode
 	clojure-mode) . eglot-ensure))
 
 

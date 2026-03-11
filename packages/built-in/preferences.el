@@ -18,6 +18,9 @@
   (apropos-variable-button ((t (:foreground "#a6e12d")))) ; green
   (apropos-misc-button ((t (:foreground "#fefff8")))) ; white
   :init
+  (defvar-keymap mark-keymap
+	:doc "Keymap for embark bindings.")
+
   ;; keeps a server running (not necessary>use emacs-client directly)
   ;;(server-start)
   ;; default is set to 300 characters
@@ -362,12 +365,26 @@
   (:keymaps 'ctl-x-r-map
 			"a" 'append-to-register)
 
+  (:keymaps 'mark-keymap
+			"<" 'mark-beginning-of-buffer
+			">" 'mark-end-of-buffer
+			"P" 'mark-page
+			"b" 'mark-whole-buffer
+			"d" 'mark-defun
+			"e" 'mark-end-of-sentence
+			"p" 'mark-paragraph
+			"s" 'mark-sexp
+			"w" 'mark-word)
+
   (:keymaps 'personal
 			;; "C-c u" 'mode-line-other-buffer
-			"d" 'delete-char)
+			"d" 'delete-char
+			"k" (cons "mark" mark-keymap))
   :hook
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
+  ;; (before-save . whitespace-cleanup)
+  (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'whitespace-cleanup nil 'make-it-local)))
   (prog-mode . display-line-numbers-mode))
 
 (defun keyboard-quit-dwim ()
@@ -471,3 +488,11 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
   (interactive "P")
   (set-selective-display
    (* 4 (prefix-numeric-value arg))))
+
+(defun toggle-compilation-window ()
+  "Show/Hide the window containing the '*compilation*' buffer."
+  (interactive)
+  (when-let ((buffer compilation-last-buffer))
+	(if (get-buffer-window buffer 'visible)
+		(delete-windows-on buffer)
+	  (display-buffer buffer))))

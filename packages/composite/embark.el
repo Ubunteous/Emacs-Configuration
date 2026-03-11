@@ -50,19 +50,19 @@
 			"C-c C-c" 'embark-collect
 			"C-c C-e" 'embark-export)
   ;; (:keymaps 'embark-variable-map
-  ;; 			"h" 'helpful-variable)
+  ;;			"h" 'helpful-variable)
   ;; (:keymaps 'embark-command-map
-  ;; 			"d" 'helpful-callable
-  ;; 			"h" 'helpful-callable)
+  ;;			"d" 'helpful-callable
+  ;;			"h" 'helpful-callable)
   (:keymaps 'personal
 			"E" 'embark-collect
-			"e" embark-keymap))
+			"e" (cons "embark" embark-keymap)))
 
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+;; ;; Consult users will also want the embark-consult package.
+;; (use-package embark-consult
+;;   :ensure t ; only need to install it, embark loads it after consult if found
+;;   :hook
+;;   (embark-collect-mode . consult-preview-at-point-mode))
 
 ;; (defmacro embark-ace-action (fn)
 ;;   `(defun ,(intern (concat "embark-ace-" (symbol-name fn))) ()

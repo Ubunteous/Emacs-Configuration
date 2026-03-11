@@ -20,7 +20,7 @@
 			"n" 'flymake-goto-next-error
 			"p" 'flymake-goto-prev-error)
   (:keymaps 'personal
-			"f" flymake-keymap)
+			"f" (cons "flymake" flymake-keymap))
   :hook
   (prog-mode . flymake-mode)
   (flymake-mode . (lambda () (delete 'elisp-flymake-checkdoc flymake-diagnostic-functions))))
