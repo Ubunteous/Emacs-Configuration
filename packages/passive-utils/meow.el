@@ -161,10 +161,10 @@
    '("_" . meow-expand-8)
    '("ç" . meow-expand-9)
    '("à" . meow-expand-0)
-   
+
    '("4" . repeat)
    '("6" . negative-argument)
-   
+
    '(";" . meow-reverse)
    '("," . meow-inner-of-thing)
    '("." . meow-bounds-of-thing)
@@ -174,7 +174,7 @@
 
    '("$" . meow-select-until-eol)
    '("^" . meow-select-until-bol)
-   
+
    '("a" . meow-append)
    '("A" . meow-block)
    ;; '("A" . meow-open-below)
@@ -235,7 +235,7 @@
    '("Y" . meow-comment-and-duplicate)
    ;; '("z" . meow-pop-selection)
    '("z" . vim-transient)
-   
+
    '("<escape>" . ignore))
 
   ;; SPACE will be bound to C-x rather than C-c in normal mode
@@ -248,7 +248,7 @@
   ;; appearance ;;
   ;;;;;;;;;;;;;;;;
 
-  (setq meow-cursor-type-insert 'box)
+  (setq meow-cursor-type-insert 'box) ;; box, hollow, bar
   (custom-set-faces
    '(meow-insert-cursor ((t (:background "light sea green"))))
    '(meow-vimreplace-cursor ((t (:background "#ffff00"))))
@@ -362,12 +362,10 @@
 	(next-line)
 	(end-of-line)))
 
-
 (defun meow-select-until-eol (arg)
   (interactive "P")
   (set-mark-command arg)
   (end-of-visual-line))
-
 
 (defun meow-select-until-bol (arg)
   (interactive "P")
