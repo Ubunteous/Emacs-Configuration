@@ -6,6 +6,13 @@
   :ensure nil
   :defer t
   :init
+  ;; ;; avoid intrusive window splits
+  ;; (setq display-buffer-base-action
+  ;; 		'((display-buffer-reuse-window display-buffer-same-window)
+  ;; 		  (reusable-frames . t)))
+
+  ;; (setq even-window-sizes nil) ; avoid resizing
+
   ;; winner mode (window history)
   ;; (winner-mode 1)
   

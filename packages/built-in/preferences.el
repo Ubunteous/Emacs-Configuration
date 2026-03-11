@@ -331,6 +331,7 @@
   ;; 			  ("9" . #x2788)))
   :general
   ([remap suspend-frame] 'undo)
+  ([remap ibuffer] 'ibuffer-jump)
 
   ("RET" 'newline-and-indent)
   
