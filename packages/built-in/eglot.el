@@ -23,7 +23,7 @@
 							   (delete-other-windows (get-buffer-window (current-buffer)))
 							   (local-set-key (kbd "q") (lambda () (interactive)
 														  (kill-buffer (current-buffer))
-	   													  (set-window-configuration peek--initial-window-configuration)))))))
+														  (set-window-configuration peek--initial-window-configuration)))))))
   :config
   (setq xref-search-program #'ripgrep)
   ;; (setq xref-marker-ring-length 16)
@@ -89,7 +89,7 @@
   ;; built-in
   (add-to-list 'eglot-server-programs '(csharp-ts-mode . ("OmniSharp" "-lsp")))
   ;; (add-to-list 'eglot-server-programs '(csharp-ts-mode . ("csharp-ls")))
-  
+
   ;; note: gdscript is currently slowed down by :completionProvider
   ;; (add-to-list 'eglot-server-programs '(gdscript-ts-mode . ("localhost" 6005))) ;; not needed
 
@@ -144,8 +144,8 @@
 
   ;; example to add elements to xref marker stack to use xref-go-back. useful with consult-ripgrep/line
   ;; (defun add-point-to-find-tag-marker-ring (&rest r)
-  ;; 	"Advising function to use `find-tag-marker-ring' (R ignored)."
-  ;; 	(xref-push-marker-stack))
+  ;;	"Advising function to use `find-tag-marker-ring' (R ignored)."
+  ;;	(xref-push-marker-stack))
   ;; (advice-add 'find-function :before 'add-point-to-find-tag-marker-ring)
   :general
   (:keymaps 'eglot-keymap
@@ -187,7 +187,7 @@
 			"f" 'xref-find-references-and-replace)
   (:keymaps 'personal
 			"g" (cons "eglot" eglot-keymap)
-			"x" (cons "xref" xref-keymap)))
+			"x" (cons "xref" xref-keymap))
   :hook
   ((c-ts-mode
 	c++-ts-mode ;; somehow, needs normal mode for ts-mode
