@@ -5,6 +5,9 @@
 (use-package misc
   :ensure nil
   :custom-face
+  ;; highlight available in hl-mode
+  (hl-line ((t (:foreground "cyan"))))
+
   ;; change color for search bar in M-x customize
   (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
 

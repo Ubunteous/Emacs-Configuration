@@ -146,7 +146,8 @@
 
 (load-user-files-per-system "workflow"
 							'()
-							'("notmuch"
+							'(
+							  ;; "notmuch"
 							  ;; "hyperbole"
 							  "dape")
 							'("ace-window" ;; add rotate/transpose frame
@@ -191,6 +192,7 @@
 							  "notdeft")
 
 							'("org"
+							  "org-agenda"
 							  "org-modern"
 							  ;; "ord-modern-indent"
 							  "org-appear"

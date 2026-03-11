@@ -9,25 +9,11 @@
   ;; :straight (:type built-in)
   :ensure nil
   :custom-face
-  ;; highlight available in hl-mode
-  (hl-line ((t (:foreground "cyan"))))
-
-  ;; (org-agenda-date ((t (:foreground "light sea green"))))
-  (org-agenda-calendar-event ((t (:foreground "light sea green"))))
   (org-block-begin-line ((t (:foreground "light sea green"))))
-
   (org-imminent-deadline ((t (:foreground "dark sea green" :inherit nil))))
   (org-upcoming-deadline ((t (:foreground "medium see green"))))
   (org-upcoming-distant-deadline ((t (:foreground "light sea green"))))
   :general
-  ("C-c a" 'org-agenda-show-mix
-   "C-c o" 'org-capture-deadline)
-
-  ;; a bit redundant with C-c C-d (org-deadline)
-  (:keymaps 'org-capture-mode-map
-			"C-c d" 'org-timestamp-up-day)
-
-  ;; org-agenda-list
   (:keymaps 'org-mode-map
 			"C-c -" 'org-ctrl-c-plus
 			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
@@ -163,313 +149,142 @@
    'org-babel-load-languages
    ;; (seq-filter
    ;;  (lambda (pair)
-   ;; 	  (locate-library (concat "ob-" (symbol-name (car pair)))))...)
+   ;;	  (locate-library (concat "ob-" (symbol-name (car pair)))))...)
    '((emacs-lisp . t)
-  	 (shell . t)
-  	 ;; (latex . t)
-  	 (clojure . t)
-  	 ;; (C . t)
-  	 ;; (go . t)
-  	 (typescript . t)
-  	 ;; (js . t)
-  	 ;; (jupyter . t)
-  	 (powershell . t)
-  	 (python . t)
-  	 (rust . t)
-  	 (sql . t)
-  	 (sql-mode . t)
-  	 ;; (nix . t)
-  	 ;; (janet . t)
-  	 (csharp . t)
-  	 ;; (html . t)
-  	 ;; (lua . t)
-  	 ;; (org . t)
-  	 ;; (lilypond . t)
-  	 ;; (restclient . t)
-  	 ))
+	 (shell . t)
+	 ;; (latex . t)
+	 (clojure . t)
+	 ;; (C . t)
+	 ;; (go . t)
+	 (typescript . t)
+	 ;; (js . t)
+	 ;; (jupyter . t)
+	 (powershell . t)
+	 (python . t)
+	 (rust . t)
+	 (sql . t)
+	 (sql-mode . t)
+	 ;; (nix . t)
+	 ;; (janet . t)
+	 (csharp . t)
+	 ;; (html . t)
+	 ;; (lua . t)
+	 ;; (org . t)
+	 ;; (lilypond . t)
+	 ;; (restclient . t)
+	 ))
 
   ;; This can be used to customise headers
   ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
   ;; (:session . "jl")
   ;; (:kernel . "julia-1.0")))
 
-  ;;;;;;;;;;;;;;;;;
-  ;;   CAPTURE   ;;
-  ;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;
+  ;; TAGS ;;
+  ;;;;;;;;;;
 
-  (defun org-capture-deadline ()
-	(interactive)
-	(org-capture nil "d"))
-  
-  ;; (setq org-directory "~/org") ;; default
-  (setq org-default-notes-file (concat org-directory "~/.notes"))
+  ;; (setq org-fast-tag-selection-single-key nil)
+  ;; (setq org-fast-tag-selection-select-todo nil)
+  ;; (setq org-fast-tag-selection-maximum-tags 56)
 
-  (setq org-capture-templates
-		'(("t" "New task for the agenda"
-		   entry (file "~/org/agenda.org")
-           "* %?%i %t" :empty-lines-before 1)
-		  ("d" "New deadline for the agenda"
-		   entry (file "~/org/agenda.org")
-           "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
-		  ("s" "Slipbox"
-		   entry (file "~/org/Alter/inbox.org")
-		   "* %?\n")))
-
-  ;; shift org capture default date to tomorrow
-  (advice-add 'org-capture :around
-              (lambda (oldfun &rest args)
-				(let ((org-overriding-default-time
-                       (funcall
-						(lambda ()
-                          (let ((day (string-to-number (format-time-string "%d")))
-								(month (string-to-number (format-time-string "%m")))
-								(year (string-to-number (format-time-string "%Y"))))
-                            (encode-time 1 1 0 (1+ day) month year))))))
-                  (apply oldfun args))))
-
-  (setq org-deadline-warning-days 0
-		org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
-
-  ;; ("j" "Journal" entry (file+datetree "~/org/journal.org")
-  ;;  "* %?\nEntered on %U\n  %i\n  %a")))
-
-  ;;;;;;;;;;;;;;;;
-  ;;   AGENDA   ;;
-  ;;;;;;;;;;;;;;;;
-
-  (when windows-system-p
-	(let ((inbox-path (file-name-directory
-					   (cdr
-						(nth 1
-							 (bookmark-get-bookmark "Inbox"))))))
-	  (setq org-agenda-files
-			(mapcar (apply-partially 'concat inbox-path) '("Inbox" "Outbox")))))
+  ;;;;;;;;;;;;;;
+  ;;   MISC   ;;
+  ;;;;;;;;;;;;;;
 
   ;; the following can be set on a per file/subtree basis with:
   ;; #+STARTUP: nologdone /  logdone /  lognotedone
   ;; (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
 
-  ;; use this separator with writeroom
-  (setq org-agenda-block-separator (concat (make-string 40 ?-) "\n"))
-  (defun org-agenda-show-mix (&optional arg)
-	(interactive "P")
-	(org-agenda arg "n"))
+  ;; never add whiteline between org sections
+  ;; (setq org-cycle-separator-lines 0)
 
-  ;; change the days shown in the agenda with the following tweaks
-  ;; avoid starting the agenda on monday
-  ;; show the previous day
-  ;; span of 'day, 'week, 'month, 'year, or any number of days (int)
-  (setq org-agenda-start-on-weekday nil
-		;; org-agenda-span 14
-		org-agenda-start-day "-3d")
+  ;; not needed but good to know
+  ;; (setf (cdr (assq 'file org-link-frame-setup)) 'find-file) ;; open links in the same window
+  ;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  ;; (setq org-enforce-todo-dependencies t)
 
-  ;; org agenda align entries content
-  ;; (setq org-agenda-prefix-format
-  ;; 	(quote
-  ;; 	 ((agenda . "%-12c%?-12t% s")
-  ;;         (timeline . "% s")
-  ;;         (todo . "%-12c")
-  ;;         (tags . "%-12c")
-  ;;         (search . "%-12c")))
-  ;; 	org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " ""))
-  ;; 	org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+  ;; deactivate _, ^
+  (setq org-hide-emphasis-markers t)
 
-  ;; deactivate agenda if it slows down startup time too much
-  (setq org-agenda-inhibit-startup t)
+  ;; this method can only change existing chars
+  ;; (add-to-list 'org-emphasis-alist '("~" (:foreground "red")))
 
-  ;; Window: current, other, only | Frame: reorganize, other | Tab: other
-  (setq org-agenda-window-setup 'only-window
-		org-agenda-restore-windows-after-quit t)
+  ;; not ideal for babel blocks
+  ;; (setq org-indent-mode t)
+  ;; (setq org-startup-indented t)
 
-  (setq org-agenda-tags-column -89)
-  ;; (setq org-agenda-dim-blocked-tasks t)
-  (setq org-agenda-skip-scheduled-if-done t)
-  ;; (setq org-agenda-hide-tags-regexp "project\\|work\\|home\\|@.*")
+  ;; set everywhere #+STARTUP: overview
+  (setq org-startup-folded t)
 
-  ;; (setq org-agenda-show-future-repeats nil) ;; t, nil, 'next
+  ;; space after section. no space after list on alt+enter
+  (setq org-blank-before-new-entry '((heading . t) (plain-list-item)))
 
-  ;; (setq org-agenda-skip-function
-  ;; 		 (lambda ()
-  ;; 		   (when (member (org-get-todo-state)
-  ;; 						 '("PROJ" "SOMEDAY"))
-  ;; 			 (or (outline-next-heading) (point-max)))))
+  ;; 29.2 bug: emacs always edit in dedicated buffer
+  ;; => This is due to the treesit auto package or major-mode-remap-alist
+  ;; Disable editing source code in dedicated buffer
+  ;; => Too intrusive. (electric-indent-mode 0) should suffice
+  ;; (defun org-edit-src-code nil)
 
-  ;; (setq org-agenda-scheduled-leaders '("" "-%2d"))
-  ;; (setq org-agenda-todo-keyword-format "%.1s")
-  ;; (setq org-agenda-remove-tags t)
+  ;; follow org link on enter (like left click or C-c C-o)
+  (setq org-return-follows-link  t)
 
-  ;; (defun my/org-agenda-late-extra (orig-fn extra txt &rest args)
-  ;; 	 (let* ((marker (or extra ""))
-  ;; 			(agenda-extra
-  ;; 			 (let ((d (when (stringp extra)
-  ;; 						(abs (string-to-number extra)))))
-  ;;             (cond
-  ;; 				((not d) "")
-  ;; 				((= d 0) "")
-  ;; 				((< d 3) " •")
-  ;; 				((< d 7) " !")
-  ;; 				((< d 14) " ‼")
-  ;; 				(t " ✖")))))
-  ;;     (apply orig-fn agenda-extra txt args)))
-  ;; (advice-add 'org-agenda-format-item :around #'my/org-agenda-late-extra)
+  ;; collapse some sections when opening an org file
+  ;; (setq org-startup-folded 'show2levels)
 
-  ;; (setq org-agenda-block-separator "")
+  ;; open #+Include: file in same window with C-c ' (org-edit-special)
+  (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
-  ;; (add-hook 'org-agenda-mode-hook
-  ;; 			 (lambda ()
-  ;;             (setq-local line-spacing 0.5)
-  ;;             (buffer-face-set '(:family "Lato"))))
+  (setq org-src-preserve-indentation t)
 
-  ;; ;;; single blank line between blocks
-  ;; (defun my/org-agenda-fix-block-spacing ()
-  ;; 	 (goto-char (point-min))
-  ;; 	 (while (re-search-forward "\n\n\n+" nil t)
-  ;;     (replace-match "\n\n")))
+  (setq org-startup-truncated nil) ;; risky with tables and links
 
-  ;; (add-hook 'org-agenda-finalize-hook
-  ;; 			 #'my/org-agenda-fix-block-spacing)
+  (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
 
-  ;; (customize-set-value
-  ;; 	'org-agenda-category-icon-alist
-  ;; 	`(("work" "~/.config/icons/work.svg" nil nil :ascent center :mask heuristic)
-  ;; 	  ("project" "~/.config/icons/project.svg" nil nil :ascent center :mask heuristic)))
+  ;; do not use image real size in org (as it may be too big)
+  ;; (setq org-image-actual-width nil)
+  (setq org-image-actual-width 300)
 
-  ;;;;;;;;;;;;
-  ;; REFILE ;;
-  ;;;;;;;;;;;;
+  ;; (setq org-support-shift-select 1)) ;; heresy
 
-   ;; (setq org-refile-use-outline-path 'file)
-
-   ;; ;; These files must exist
-   ;; (setq org-refile-targets
-   ;; 																				'(("Inbox.org" :maxlevel . 1)
-   ;;     ("done.org" :level . 1)
-   ;;     ("Test.org" :level 1)))
-
-   ;; (setq org-refile-targets
-   ;; 		'((nil :maxlevel . 3)
-   ;;         (org-agenda-files :maxlevel . 3)))
-
-  ;;;;;;;;;;
-   ;; TAGS ;;
-  ;;;;;;;;;;
-
-   ;; (setq org-fast-tag-selection-single-key nil)
-   ;; (setq org-fast-tag-selection-select-todo nil)
-   ;; (setq org-fast-tag-selection-maximum-tags 56)
-
-  ;;;;;;;;;;;;;;;
-   ;;   DIARY   ;;
-  ;;;;;;;;;;;;;;;
-
-   ;; I dislike the diary
-   ;; (setq diary-file "~/Desktop/Org/diary.org")
-
-  ;;;;;;;;;;;;;;;;;;
-   ;;   CALENDAR   ;;
-  ;;;;;;;;;;;;;;;;;;
-
-   ;; I dislike the calendar
-   ;; (setq calendar-setup 'calendar-only)
-   ;; (setq org-agenda-include-diary t)
-
-  ;;;;;;;;;;;;;;
-   ;;   MISC   ;;
-  ;;;;;;;;;;;;;;
-
-   ;; never add whiteline between org sections
-   ;; (setq org-cycle-separator-lines 0)
-
-   ;; not needed but good to know
-   ;; (setf (cdr (assq 'file org-link-frame-setup)) 'find-file) ;; open links in the same window
-   ;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-   ;; (setq org-enforce-todo-dependencies t)
-
-   ;; deactivate _, ^
-   (setq org-hide-emphasis-markers t)
-
-   ;; this method can only change existing chars
-   ;; (add-to-list 'org-emphasis-alist '("~" (:foreground "red")))
-
-   ;; not ideal for babel blocks
-   ;; (setq org-indent-mode t)
-   ;; (setq org-startup-indented t)
-
-   ;; set everywhere #+STARTUP: overview
-   (setq org-startup-folded t)
-
-   ;; space after section. no space after list on alt+enter
-   (setq org-blank-before-new-entry '((heading . t) (plain-list-item)))
-
-   ;; 29.2 bug: emacs always edit in dedicated buffer
-   ;; => This is due to the treesit auto package or major-mode-remap-alist
-   ;; Disable editing source code in dedicated buffer
-   ;; => Too intrusive. (electric-indent-mode 0) should suffice
-   ;; (defun org-edit-src-code nil)
-
-   ;; follow org link on enter (like left click or C-c C-o)
-   (setq org-return-follows-link  t)
-
-   ;; collapse some sections when opening an org file
-   ;; (setq org-startup-folded 'show2levels)
-
-   ;; open #+Include: file in same window with C-c ' (org-edit-special)
-   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
-
-   (setq org-src-preserve-indentation t)
-
-   (setq org-startup-truncated nil) ;; risky with tables and links
-
-   (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
-
-   ;; do not use image real size in org (as it may be too big)
-   ;; (setq org-image-actual-width nil)
-   (setq org-image-actual-width 300)
-
-   (defun org-summary-todo (n-done n-not-done)
-	 "Switch entry to DONE when all subentries are done, to TODO otherwise."
-	 (let (org-log-done org-log-states) ;; turn off logging
-	   (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
-   ;; (setq org-support-shift-select 1)) ;; heresy
-
-   (setq org-use-speed-commands t)
-   ;; :hook
-   ;; might be risky if it cancels normal image display
-   ;; (org-babel-after-execute . org-redisplay-inline-images)
+  (setq org-use-speed-commands t)
+  ;; :hook
+  ;; might be risky if it cancels normal image display
+  ;; (org-babel-after-execute . org-redisplay-inline-images)
 
   ;;;;;;;;;;;;;;;;;;;;;
-   ;;   HTML EXPORT   ;;
+  ;;   HTML EXPORT   ;;
   ;;;;;;;;;;;;;;;;;;;;;
 
-   (setq org-html-postamble nil
-		 org-html-head-include-default-style nil
-		 org-html-meta-tags nil
-		 org-html-xml-declaration nil)
+  ;; don't touch those
+  ;; (setq org-html-doctype-alist nil)
+  ;; (setq org-html-doctype "")
 
-   ;; don't touch those
-   ;; (setq org-html-doctype-alist nil)
-   ;; (setq org-html-doctype "")
+  (setq org-html-postamble nil
+		org-html-head-include-default-style nil
+		org-html-meta-tags nil
+		org-html-xml-declaration nil))
 
-   )
-
-
-  ;; export org citations to latex
-  ;; (require 'oc-biblatex)
-  ;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
+;; export org citations to latex
+;; (require 'oc-biblatex)
+;; (setq org-cite-export-processors '((latex biblatex) (t basic)))
 
 ;;;;;;;;;;;;;;;;;;;
-  ;;   FUNCTIONS   ;;
+;;   FUNCTIONS   ;;
 ;;;;;;;;;;;;;;;;;;;
 
-  (defun org-babel-previous-block-end ()
-	"Go to the last line of code of the previous source block."
-	(interactive)
-	(org-babel-previous-src-block)
-	(search-forward "#+end\_src")
-	(previous-line)
-	(org-end-of-line))
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states) ;; turn off logging
+	(org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+
+(defun org-babel-previous-block-end ()
+  "Go to the last line of code of the previous source block."
+  (interactive)
+  (org-babel-previous-src-block)
+  (search-forward "#+end\_src")
+  (previous-line)
+  (org-end-of-line))
 
 
 (defun org-babel-next-block-end ()
@@ -495,14 +310,14 @@
 (defun org-babel-eval-wipe-error-buffer ()
   "Redefine this function to delete the Org Babel buffer."
   (let ((ob-buffer (get-buffer org-babel-error-buffer-name)))
-    (when ob-buffer
-      ;;   (progn
-      ;;    (other-window 1)
-      ;;    (kill-buffer-refocus)
-      ;;    ;; (delete-window ob-buffer)
-      ;;    )
+	(when ob-buffer
+	  ;;   (progn
+	  ;;    (other-window 1)
+	  ;;    (kill-buffer-refocus)
+	  ;;    ;; (delete-window ob-buffer)
+	  ;;    )
 
-      (delete-other-windows))))
+	  (delete-other-windows))))
 
 ;; ;; Close only unless top level
 ;; (defun org-open-next-heading-2 ()
