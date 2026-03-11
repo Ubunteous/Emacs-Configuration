@@ -76,7 +76,10 @@
 		'(("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
 		   (display-buffer-no-window)
 		   (allow-no-window . t))
-		  ("*Apropos*" (display-buffer-same-window)) ))
+		  ("*Apropos*" display-buffer-full-frame)
+		  ("\\*Eldoc.*" display-buffer-full-frame)
+		  ("\\*General Keybindings\\*" display-buffer-full-frame)
+		  ("\\*Agenda Commands\\*" display-buffer-full-frame)))
 
   (add-to-list 'display-buffer-alist
 			   `(,(rx (| "*xref*"
@@ -84,10 +87,6 @@
 						 "*Occur*"))
 				 display-buffer-reuse-window
 				 (inhibit-same-window . nil)))
-
-  (add-to-list 'display-buffer-alist '("\\*Eldoc.*" display-buffer-same-window))
-
-  (add-to-list 'display-buffer-alist '("\\*General Keybindings\\*" display-buffer-full-frame))
 
   ;; (add-to-list 'display-buffer-alist
   ;;			   '("\\*Completions\\*"
