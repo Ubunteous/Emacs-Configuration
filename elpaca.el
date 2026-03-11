@@ -27,7 +27,6 @@
       ;; (file-name-directory buffer-file-name)
       (concat "~/.emacs.d/packages/" dir "/" file ".el")))))
 
-
 (defun load-user-files-per-system (dir windows linux both)
   "Load config files depending on the operating system."
   ;; (fset #'partial-load-user-files `(lambda (_list) (load-user-files ,dir _list)))
@@ -50,6 +49,23 @@
 ;;   (if omit-heavy
 ;;       ()
 ;;     'function))
+
+;; (defun load-user-files-per-os (dir &rest args)
+;;   (let (os
+;; 		(windows-p (eq system-type 'windows-nt))
+;; 		;; use copy-tree as '() are mutable literals which keep there value between function calls
+;; 		;; (list ...) could also be used but is less clean because of the sublists
+;; 		(groups (copy-tree '((:windows) (:linux) (:any)))))
+
+;; 	(dolist (x args)
+;; 	  (if (keywordp x)
+;; 		  (setq os x)
+;; 		(push x (cdr (assoc os groups)))))
+
+;; 	(let ((file-group (mapcar (lambda (x) (nreverse (cdr x))) groups)))
+;; 	  (load-user-files dir (append
+;; 							(if windows-p (nth 0 file-group) (nth 1 file-group))
+;; 							(nth 2 file-group))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               PACKAGES             ;;
@@ -135,6 +151,8 @@
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
 							  "magit"
+							  ;; "activities"
+							  ;; "perspective"
 							  ;; font is transparent. e.g.: ls /path/to/file is hard to see
 							  ;; "vterm" ;; vterm should be installed from NixOS configuration
 							  ;; "eat" ;; slower than vterm but written in elisp
@@ -144,7 +162,6 @@
 ;; (load-user-file "workflow/lsp-mode")
 ;; (load-user-file "workflow/realgud")
 ;; (load-user-file "workflow/mu4e") ;; requires mu package from outside emacs and must be installed from Nix rather than straight
-;; (load-user-file "workflow/perspective")
 ;; (load-user-file "workflow/elfeed") ;; alt: newsticker built-in
 ;; (load-user-file "workflow/hydra")
 ;; (load-user-file "workflow/mu4e-alert") ;; slightly slow startup. maybe use a hook
@@ -246,7 +263,7 @@
 
 							'("crux"
 							  "avy"
-							  ;; "popper" ;; try later
+							  ;; "popper" ;; missing popup width configuration
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
 							  "gptel"
 							  ;; "outline-indent" ;; compare to outline

@@ -10,7 +10,10 @@
   ("C-`" 'popper-toggle)
   ("M-`" 'popper-cycle)
   ("C-M-`" 'popper-toggle-type)
-  :config ;; init
+  ;; popper-cycle-backwards
+  ;; popper-kill-latest-popup
+  :config
+  ;; buffer regexp, names against, major-mode (symbol), predicate of one argument (buffer)
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "Output\\*$"
@@ -18,19 +21,29 @@
           help-mode
           compilation-mode))
 
-  ;; project.el, project root or fall back to  default-directory
-  (setq popper-group-function #'popper-group-by-directory)
-  ;; (setq popper-group-function #'popper-group-by-project)
+  (defun popper-display-popup-at-right (buffer &optional alist)
+	"Display popup-buffer BUFFER at the right of the screen."
+	(display-buffer-in-side-window
+	 buffer
+	 (append alist
+			 `((window-height . ,popper-window-height)
+               (side . right)
+               (slot . 0)))))
 
-  ;; ;; modify position of pop ups (defaults to bottom of the screen)
-  ;; (setq popper-display-function #'display-buffer-in-child-frame)
+  (defun popper-select-popup-at-right (buffer &optional alist)
+	"Display and switch to popup-buffer BUFFER at the right of the screen."
+	(let ((window (popper-display-popup-at-right buffer alist)))
+      (select-window window)))
 
-  ;; ;; hide popup without showing it (notifies in the echo area)
-  ;; (setq popper-reference-buffers
-  ;; 	'(("Output\\*$" . hide)
-  ;; 	  (completion-list-mode . hide)
-  ;; 	  occur-mode
-  ;; 	  "\\*Messages\\*"))
+  ;; modify position of pop ups (defaults to bottom of the screen)
+  (setq popper-display-function #'popper-select-popup-at-right) ; #'display-buffer-in-child-frame
+
+  ;; ;; project.el, project root or fall back to  default-directory
+  ;; ;; popper-group-by-directory/project/projectile/perspective
+  ;; (setq popper-group-function #'popper-group-by-directory) ; #'popper-group-by-project)
+
+  ;; (setq popper-mode-line ...)
+  ;; (setq popper-display-control t) ; user, nil, t
   :hook
   ;; For echo area hints
-  (elpaca-after-init (popper-mode popper-echo-mode)))
+  (elpaca-after-init . (lambda () (popper-mode) (popper-echo-mode))))
