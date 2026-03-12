@@ -21,7 +21,8 @@
   ;;;;;;;;;;;
 
   ;; see also org-agenda-file-regexp
-  (setq org-agenda-files '("inbox.org" "agenda.org"))
+  (setopt org-agenda-files (mapcar (-partial 'concat "agenda/")
+								   '("inbox.org" "agenda.org")))
 
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
@@ -334,10 +335,10 @@
   ;;   CAPTURE   ;;
   ;;;;;;;;;;;;;;;;;
 
-  (setq org-directory (if windows-system-p
-						  "~/../../Documents/org/"
-						"~/org/"))
-  (setopt org-default-notes-file (concat org-directory ".notes.org")) ; fallback for captures
+  (setopt org-directory (if windows-system-p
+							"~/../../Documents/org/"
+						  "~/org/"))
+  (setopt org-default-notes-file (concat org-directory "agenda/.notes.org")) ; fallback for captures
 
   ;; ;; alternative syntax to use functions
   ;; (setq org-capture-templates
@@ -352,17 +353,17 @@
   ;;				  "<%<%Y-%m-%d %a %H:00>>"))))
   (setq org-capture-templates
 		'(("i" "Inbox"
-		   entry (file "~/org/inbox.org")
+		   entry (file "agenda/inbox.org")
 		   "* %?%i %t"
 		   :empty-lines-before 1)
 		  ("d" "New deadline for the agenda"
-		   entry (file "~/org/inbox.org")
+		   entry (file "agenda/inbox.org")
 		   "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
 		  ;; ("j" "Journal"
 		  ;;  entry (file+datetree "~/org/journal.org")
 		  ;;  "* %?\nEntered on %U\n  %i\n  %a")
 		  ("s" "Slipbox"
-		   entry (file "~/org/Alter/inbox.org")
+		   entry (file "Alter/inbox.org")
 		   "* %?\n")))
 
   ;; shift org capture default date to tomorrow
