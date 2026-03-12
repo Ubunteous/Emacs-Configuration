@@ -172,57 +172,36 @@
 ;;   "Replace placeholders ###1###, ###2###, ... with minibuffer input.
 ;; If ###@### is found, remove it and place point there at the end."
 ;;   (let ((cursor-pos nil))
-;; 	(save-excursion
-;; 	  (goto-char (point-min))
-;; 	  (let ((loop 0)
-;; 			(values (make-hash-table :test 'equal)))
-;; 		(while (re-search-forward "###\\([0-9]+\\|@\\)###" nil t)
-;; 		  (setq loop (1+ loop))
-;; 		  (let* ((index (match-string 1))
-;; 				 (start (match-beginning 0))
-;; 				 (end (match-end 0)))
-;; 			(cond
-;; 			 ((string= index "@")
-;; 			  (setq cursor-pos start)
-;; 			  (delete-region start end))
-;; 			 (t
-;; 			  (let* ((key (format "###%s###" index))
-;; 					 (val (or (gethash key values)
-;; 							  (let ((input (read-string (format "Value for %s: " key))))
-;; 								(puthash key input values)
-;; 								input))))
-;; 				(goto-char start)
-;; 				(delete-region start end)
-;; 				(insert val)
-;; 				(goto-char (+ start (length val))))))))))
-;; 	(when cursor-pos
-;; 	  (goto-char cursor-pos))))
+;;	(save-excursion
+;;	  (goto-char (point-min))
+;;	  (let ((loop 0)
+;;			(values (make-hash-table :test 'equal)))
+;;		(while (re-search-forward "###\\([0-9]+\\|@\\)###" nil t)
+;;		  (setq loop (1+ loop))
+;;		  (let* ((index (match-string 1))
+;;				 (start (match-beginning 0))
+;;				 (end (match-end 0)))
+;;			(cond
+;;			 ((string= index "@")
+;;			  (setq cursor-pos start)
+;;			  (delete-region start end))
+;;			 (t
+;;			  (let* ((key (format "###%s###" index))
+;;					 (val (or (gethash key values)
+;;							  (let ((input (read-string (format "Value for %s: " key))))
+;;								(puthash key input values)
+;;								input))))
+;;				(goto-char start)
+;;				(delete-region start end)
+;;				(insert val)
+;;				(goto-char (+ start (length val))))))))))
+;;	(when cursor-pos
+;;	  (goto-char cursor-pos))))
 
-;; (define-abbrev-table 'global-abbrev-table
-;;   '(
-;; 	;; ORG
-;; 	("ocb" "#+BEGIN_SRC @\n\n#+END_SRC"
-;; 	 (lambda () (search-backward "@") (delete-char 1)))
-;; 	("oheader" "#+TITLE: ###1###\n#+AUTHOR: ###2###\n#+EMAIL: ###3###\n#+OPTIONS: toc:nil\n"
-;; 	 abbrev--replace-placeholders)
-
-;; 	;; JS/TS snippets
-;; 	("imp" "import { ###1### } from '###2###';"
-;; 	 abbrev--replace-placeholders)
-;; 	("fn" "function ###1### () {\n ###@### ;\n};"
-;; 	 abbrev--replace-placeholders)
-;; 	("clog" "console.log(\">>> LOG:\", { ###@### })"
-;; 	 abbrev--replace-placeholders)
-;; 	("cwarn" "console.warn(\">>> WARN:\", { ###@### })"
-;; 	 abbrev--replace-placeholders)
-;; 	("cerr" "console.error(\">>> ERR:\", { ###@### })"
-;; 	 abbrev--replace-placeholders)
-;; 	("afn" "async function() {\n  \n}"
-;; 	 (lambda () (search-backward "}") (forward-line -1) (end-of-line)))
-;; 	("ife" "(function() {\n  \n})();"
-;; 	 (lambda () (search-backward ")();") (forward-line -1) (end-of-line)))
-;; 	("esdeps" "// eslint-disable-next-line react-hooks/exhaustive-deps"
-;; 	 (lambda () (search-backward ")();") (forward-line -1) (end-of-line)))
-;; 	("eshooks" "// eslint-disable-next-line react-hooks/rules-of-hooks"
-;; 	 (lambda () (search-backward ")();") (forward-line -1) (end-of-line)))
-;; 	))
+;; ;; js (add these in an abbrev table)
+;; ("clog" "console.log(\">>> LOG:\", { ###@### })"
+;;  abbrev--replace-placeholders)
+;; ("cwarn" "console.warn(\">>> WARN:\", { ###@### })"
+;;  abbrev--replace-placeholders)
+;; ("cerr" "console.error(\">>> ERR:\", { ###@### })"
+;;  abbrev--replace-placeholders)
