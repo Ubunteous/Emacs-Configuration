@@ -21,8 +21,7 @@
   ;;;;;;;;;;;
 
   ;; see also org-agenda-file-regexp
-  (let ((inbox-path (if windows-system-p "~/../../Documents/org/" "~/org/")))
-	(setq org-agenda-files (list (concat inbox-path "inbox.org"))))
+  (setq org-agenda-files '("inbox.org" "agenda.org"))
 
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
@@ -41,7 +40,9 @@
   ;;		  (800 1000 1200 1400 1600 1800 2000)
   ;;		  " ┄┄┄┄┄ "
   ;;		  "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+  ;; (setq org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈ now")
 
+  ;; Format for dates in org: %%(org-anniversary 1976 6  1) Emacs is %d years old
   ;; (setq org-agenda-format-date 'org-agenda-format-date-aligned)
 
   ;; use this separator with writeroom
@@ -54,17 +55,18 @@
   ;; ;; 1) agenda type between: agenda, todo, search and tags
   ;; ;; alist of %c (category), %e (effort), %l (level), %i (icon category org-agenda-category-icon-alist),
   ;; ;; %T (last non-inherited tag), %t (time), %s (deadline), %b (breadcrumbs), %(expression)
-  ;; (setq org-agenda-prefix-format
-  ;;		(quote
-  ;;		 ((agenda . "%-12c%?-12t% s")
-  ;;		  (timeline . "% s")
-  ;;		  (todo . "%-12c")
-  ;;		  (tags . "%-12c")
-  ;;		  (search . "%-12c"))))
+  ;; (setq org-agenda-prefix-format " %-12c %?-14t% s")
+  (setq org-agenda-prefix-format
+		'((agenda . "%i %-12:c%?-12t% s")
+		  (timeline . "% s")
+		  (todo . " ")
+		  (tags . "%i %-12:c")
+		  (search . "%i %-12:c")))
 
   (setq org-agenda-time-leading-zero t)
 
   ;; text for current, future, past deadline
+  ;; alt: '("[D] : " "[D] +%3d d.: " "[D] -%3d d.: "))
   (setq org-agenda-deadline-leaders '("" "In %3d d.: " "%2d d. ago: "))
 
   ;; Window: current, other, only | Frame: reorganize, other | Tab: other
@@ -90,9 +92,9 @@
   ;;     (apply orig-fn agenda-extra txt args)))
   ;; (advice-add 'org-agenda-format-item :around #'my/org-agenda-late-extra)
 
-  ;; (setq org-agenda-scheduled-leaders '("" "-%2d")) ; '("" "S%3d: "))
+  ;; (setq org-agenda-scheduled-leaders '("" "-%2d")) ; '("" "S%3d: ")) ; or '("[S] : " "[S] x%3d d.: "))
 
-  ;; (setq org-agenda-todo-keyword-format "%.1s")
+  ;; (setq org-agenda-todo-keyword-format "%.1s") ; org %-10s
   ;; (setq org-agenda-remove-tags t) ; t, nil or 'prefix (see org-agenda-prefix-format with %T)
 
   ;; ;; set org-agenda-menu-show-matcher to nil when using it
@@ -128,8 +130,6 @@
   ;;;;;;;;;;;;;;;;
   ;;   CUSTOM   ;;
   ;;;;;;;;;;;;;;;;
-
-  ;; org-agenda-overriding-header
 
   ;; defaults to: (("n" "Agenda and all TODOs" ((agenda "") (alltodo ""))))
   ;; can combine multiple elements per group (see Block agenda documentation)
@@ -168,6 +168,49 @@
   ;; - (tags-todo "match" settings files)
   ;; org-agenda-custom-commands
   ;; org-agenda-custom-commands-local-options
+  (add-to-list
+   'org-agenda-custom-commands
+   '("w" "THIS WEEK"
+	 ((agenda ""
+			  ((org-agenda-overriding-header
+				(concat "THIS WEEK (W" (format-time-string "%V") ")")))))))
+  (add-to-list
+   'org-agenda-custom-commands
+   '("d" "DAY'S AGENDA"
+	 ((agenda ""
+			  ((org-agenda-overriding-header
+				(concat "TODAY (W" (format-time-string "%V") ")"))
+			   (org-agenda-span 'day)
+			   (org-agenda-start-day nil) ; overrides my -3d preference for weeks
+			   (org-agenda-sorting-strategy
+				'((agenda time-up priority-down category-keep)))
+			   (org-agenda-show-log t)
+			   (org-agenda-log-mode-items '(clock)))))))
+
+  (add-to-list
+   'org-agenda-custom-commands
+   '("g" "Get Things Done (GTD)"
+	 ((agenda ""
+			  ((org-agenda-skip-function
+				'(org-agenda-skip-entry-if 'deadline))
+			   (org-deadline-warning-days 0)))
+	  (todo "NEXT"
+			((org-agenda-skip-function
+			  '(org-agenda-skip-entry-if 'deadline))
+			 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+			 (org-agenda-overriding-header "\nTasks\n")))
+	  (agenda nil
+			  ((org-agenda-entry-types '(:deadline))
+			   (org-agenda-format-date "")
+			   (org-deadline-warning-days 7)
+			   (org-agenda-skip-function
+				'(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
+			   (org-agenda-overriding-header "\nDeadlines")))
+	  (tags-todo "inbox"
+				 ((org-agenda-prefix-format "  %?-12t% s")
+				  (org-agenda-overriding-header "\nInbox\n")))
+	  (tags "CLOSED>=\"<today>\""
+			((org-agenda-overriding-header "\nCompleted today\n"))))))
 
   ;; either a single list or multiple each starting with these:
   ;; CATEGORIES: agenda, todo, tags, search
@@ -193,8 +236,19 @@
   ;; MISC ;;
   ;;;;;;;;;;
 
+  ;; (setq org-todo-keywords
+  ;;		'((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
+  ;; (defun log-todo-next-creation-date (&rest ignore)
+  ;;	"Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
+  ;;	(when (and (string= (org-get-todo-state) "NEXT")
+  ;;              (not (org-entry-get nil "ACTIVATED")))
+  ;;     (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+  ;; (add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+
   (setq org-log-done 'time) ;; add timestamp 'time on done or capture 'note
   (setq org-deadline-warning-days 0)
+  ;; (setq org-log-into-drawer t)
 
   ;; (setq org-agenda-search-view-always-boolean t)
 
@@ -230,15 +284,29 @@
   ;;;;;;;;;;;;
 
   (setq org-log-refile 'time) ; nil, time, note (prompt)
-
   ;; (setq org-refile-keep t)
-
   (setq org-refile-use-outline-path 'file)
+  (setq org-outline-path-complete-in-steps nil)
 
   ;; These files must exist
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)
-							 ;; (nil :maxlevel . 3) ; agenda-files
+  (setq org-refile-targets `((org-agenda-files :maxlevel . 3)
+							 ("projects.org" :regexp . ,(regexp-opt '("Tasks" "Notes"))) ; * sections
+							 (nil :maxlevel . 3) ; agenda-files
 							 ("done.org" :maxlevel . 3)))
+
+  ;; does not work yet but interesting
+  ;; (defun gtd-save-org-buffers ()
+  ;;	"Save `org-agenda-files' buffers without user confirmation.
+  ;; See also `org-save-all-org-buffers'"
+  ;;	(interactive)
+  ;;	(message "Saving org-agenda-files buffers...")
+  ;;	(save-some-buffers t (lambda ()
+  ;;						   (when (member (buffer-file-name) org-agenda-files)
+  ;;							 t)))
+  ;;	(message "Saving org-agenda-files buffers... done"))
+  ;; (advice-add
+  ;;  'org-refile
+  ;;  :after (lambda (&rest _) (gtd-save-org-buffers)))
 
   ;;;;;;;;;;;;;;;
   ;;   DIARY   ;;
@@ -266,27 +334,36 @@
   ;;   CAPTURE   ;;
   ;;;;;;;;;;;;;;;;;
 
-  (defun org-capture-deadline ()
-	(interactive)
-	(org-capture nil "d"))
+  (setq org-directory (if windows-system-p
+						  "~/../../Documents/org/"
+						"~/org/"))
+  (setopt org-default-notes-file (concat org-directory ".notes.org")) ; fallback for captures
 
-  ;; (setq org-directory "~/org") ;; default
-  (setq org-default-notes-file (concat org-directory "~/.notes"))
-
+  ;; ;; alternative syntax to use functions
+  ;; (setq org-capture-templates
+  ;;	  `(("i" "Inbox" entry  (file "inbox.org")
+  ;;		 ,(concat "* TODO %?\n"
+  ;;				  "/Entered on/ %U"))
+  ;;		("n" "Note" entry  (file "notes.org")
+  ;;		 ,(concat "* Note (%a)\n"
+  ;;				  "/Entered on/ %U\n" "\n" "%?"))
+  ;;		("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+  ;;		 ,(concat "* %? :meeting:\n"
+  ;;				  "<%<%Y-%m-%d %a %H:00>>"))))
   (setq org-capture-templates
-		'(("t" "New task for the agenda"
+		'(("i" "Inbox"
 		   entry (file "~/org/inbox.org")
-		   "* %?%i %t" :empty-lines-before 1)
+		   "* %?%i %t"
+		   :empty-lines-before 1)
 		  ("d" "New deadline for the agenda"
 		   entry (file "~/org/inbox.org")
 		   "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
-		  ("s" "Slipbox"
-		   entry (file "~/org/Alter/inbox.org")
-		   "* %?\n")
 		  ;; ("j" "Journal"
 		  ;;  entry (file+datetree "~/org/journal.org")
 		  ;;  "* %?\nEntered on %U\n  %i\n  %a")
-		  ))
+		  ("s" "Slipbox"
+		   entry (file "~/org/Alter/inbox.org")
+		   "* %?\n")))
 
   ;; shift org capture default date to tomorrow
   (advice-add 'org-capture :around
@@ -299,6 +376,10 @@
 								(year (string-to-number (format-time-string "%Y"))))
 							(encode-time 1 1 0 (1+ day) month year))))))
 				  (apply oldfun args))))
+
+  (defun org-capture-deadline ()
+	(interactive)
+	(org-capture nil "d"))
   :general
   ("C-c a" 'org-agenda-show-mix
    "C-c o" 'org-capture-deadline)
