@@ -232,6 +232,7 @@
   ;; - user-defined-up/down (sort according to org-agenda-cmp-user-defined)
   ;; - habit-up/down
   ;; - alpha-up/down (sort headlines alphabetically)
+  ;; => org-agenda-sorting-strategy (use it in org-agenda-custom-commands)
 
   ;;;;;;;;;;
   ;; MISC ;;

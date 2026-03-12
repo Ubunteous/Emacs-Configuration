@@ -21,11 +21,11 @@
 (defun load-user-files (dir list)
   "Load a LIST of files located in the corresponding DIR."
   (dolist (file list)
-    (load-file
-     (expand-file-name
-      ;; make this usable in any dir (not just ~/.emacs.d/ with:
-      ;; (file-name-directory buffer-file-name)
-      (concat "~/.emacs.d/packages/" dir "/" file ".el")))))
+	(load-file
+	 (expand-file-name
+	  ;; make this usable in any dir (not just ~/.emacs.d/ with:
+	  ;; (file-name-directory buffer-file-name)
+	  (concat "~/.emacs.d/packages/" dir "/" file ".el")))))
 
 (defun load-user-files-per-system (dir windows linux both)
   "Load config files depending on the operating system."
@@ -36,9 +36,9 @@
   ;;   (mapcar 'partial-load-user-files `(,linux ,both)))
 
   (if windows-system-p
-      (load-user-files dir windows)
-    (load-user-files dir linux))
-  
+	  (load-user-files dir windows)
+	(load-user-files dir linux))
+
   (load-user-files dir both))
 
 ;; (setq omit-heavy nil)
@@ -52,20 +52,20 @@
 
 ;; (defun load-user-files-per-os (dir &rest args)
 ;;   (let (os
-;; 		(windows-p (eq system-type 'windows-nt))
-;; 		;; use copy-tree as '() are mutable literals which keep there value between function calls
-;; 		;; (list ...) could also be used but is less clean because of the sublists
-;; 		(groups (copy-tree '((:windows) (:linux) (:any)))))
+;;		(windows-p (eq system-type 'windows-nt))
+;;		;; use copy-tree as '() are mutable literals which keep there value between function calls
+;;		;; (list ...) could also be used but is less clean because of the sublists
+;;		(groups (copy-tree '((:windows) (:linux) (:any)))))
 
-;; 	(dolist (x args)
-;; 	  (if (keywordp x)
-;; 		  (setq os x)
-;; 		(push x (cdr (assoc os groups)))))
+;;	(dolist (x args)
+;;	  (if (keywordp x)
+;;		  (setq os x)
+;;		(push x (cdr (assoc os groups)))))
 
-;; 	(let ((file-group (mapcar (lambda (x) (nreverse (cdr x))) groups)))
-;; 	  (load-user-files dir (append
-;; 							(if windows-p (nth 0 file-group) (nth 1 file-group))
-;; 							(nth 2 file-group))))))
+;;	(let ((file-group (mapcar (lambda (x) (nreverse (cdr x))) groups)))
+;;	  (load-user-files dir (append
+;;							(if windows-p (nth 0 file-group) (nth 1 file-group))
+;;							(nth 2 file-group))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               PACKAGES             ;;
@@ -82,7 +82,7 @@
 							  ;; "smtpmail"
 							  "treesit"
 							  "eglot")
-							
+
 							'("auto-insert"
 							  "abbrev"
 							  "completion"
@@ -94,7 +94,7 @@
 							  "recentf"
 							  "hide-show" ;; check ts-fold
 							  "repeat"
-							  "which-key"			  
+							  "which-key"
 							  ;; "eglot-booster"
 							  "isearch"
 							  "windows"
@@ -186,9 +186,7 @@
 							  ;; "delve" ;; bring back later
 							  "org-roam"
 							  "org-roam-ui"
-							  ;; deft
 							  "deft"
-							  "ob/ob-typescript"
 							  "notdeft")
 
 							'("org"
@@ -226,7 +224,7 @@
 							'("flyspell-correct")
 
 							'("jinx")
-							
+
 							'("cape" ;; surprisingly useful!
 							  "corfu"
 
@@ -236,7 +234,6 @@
 							  "consult"
 							  "prescient" ;; alternative to orderless
 							  "vertico"
-
 							  "tempel"
 
 							  ;; "citar"
@@ -274,7 +271,10 @@
 							  ;; "outline-indent" ;; compare to outline
 							  "evil-nerd-commenter"
 							  "helpful"
-							  "iedit" ;; => multi-occur edit. Note: occur-mode e can already edit occur-mode buffer
+
+							  ;; Note: occur-mode e can already edit occur-mode buffer
+							  "iedit" ;; => multi-occur edit
+
 							  "move-text"
 							  "visual-regexp"
 							  "vundo"
@@ -311,7 +311,7 @@
 							  ;; "ultra-scroll"
 							  "aggressive-indent" ;; check dont-indent-if/stop-here-hook
 							  "auto-capitalize" ;; => LaTeX/org mode only
-							  "browse-kill-ring"
+							  ;; "browse-kill-ring"
 							  "compile-angel"
 							  "diminish"
 							  "dimmer" ;; DONE
