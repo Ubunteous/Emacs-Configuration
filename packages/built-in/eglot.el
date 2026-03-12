@@ -189,6 +189,9 @@
 			"g" (cons "eglot" eglot-keymap)
 			"x" (cons "xref" xref-keymap))
   :hook
+  ;; ;; built-in eslint ignores configuration file
+  ;; (js-ts-mode . (lambda () (add-to-list 'eglot-stay-out-of 'flymake)))
+
   ((c-ts-mode
 	c++-ts-mode ;; somehow, needs normal mode for ts-mode
 	;; bash-ts-mode
@@ -214,27 +217,10 @@
 	nix-ts-mode
 	clojure-mode) . eglot-ensure))
 
-
 ;; ;; makes eldoc info appear at point
 ;; (use-package eldoc-box
 ;;   ;; :hook (eglot-managed-mode . eldoc-box-hover-at-point-mode)
 ;;   :defer t)
-
-;; (use-package eglot
-;;   :commands eglot
-;;   :init
-;;   (setq eglot-stay-out-of '(flymake))
-;;   :custom
-;;   (eglot-ignored-server-capabilites '(:documentHighlightProvider))
-;;   (eglot-autoshutdown t)
-;;   :hook
-;;   ;; (eglot-managed-mode . eldoc-box-hover-mode)
-;;   (eglot-managed-mode . fk/company-enable-snippets)
-;;   :config
-;;   (add-to-list 'eglot-server-programs '(python-mode . ("pyright-langserver" "--stdio")))
-;;   (with-eval-after-load 'eglot
-;;     (load-library "project")))
-
 
 ;; ;; does not appear to do much to make flycheck errors appear
 ;; (use-package flycheck-eglot
