@@ -19,31 +19,13 @@
 
   :general
   (:keymaps 'vundo-mode-map
-			;; Use `HJKL` VIM-like motion, also Home/End to jump around.
+			"e"	'vundo-previous ; 'vundo-stem-end
 
-			"d d" 'vundo-diff
-			"d u" 'vundo-diff-unmark
-			"d m" 'vundo-diff-mark
+			"j" 'vundo-diff-mark
+			"J" 'vundo--inspect
+			"k" 'vundo-stem-end
 
-			"m" 'vundo-backward
-			"<left>" 'vundo-backward
-			"n" 'vundo-next
-			"<down>" 'vundo-next
-			"e" 'vundo-previous
-			"<up>" 'vundo-previous
-			"i" 'vundo-forward
-			"<right>" 'vundo-forward
-
-			"q" 'vundo-quit
-
-			"s r" 'vundo-stem-root
-			"s e" 'vundo-stem-end
-			"s m" 'vundo-next-root
-
-			"s s" 'vundo-save
-			"s l" 'vundo-goto-last-saved
-			"s n" 'vundo-goto-next-saved
-
-			"C-g" 'vundo-quit
-			"RET" 'vundo-confirm)
+			"i"	'vundo-forward ; 'vundo--inspect
+			"m"	'vundo-backward ; 'vundo-diff-mark
+			"n"	'vundo-next)
   ("C-d u" 'vundo))
