@@ -11,7 +11,6 @@
 		'(("home"
 		   ("emacs-config" (or (filename . ".emacs.d")
 							   (filename . "emacs-config")))
-           ;; ("martinowen.net" (filename . "martinowen.net"))
 		   ("Godot" (or (mode . gdscript-ts-mode)
 						(filename . "\\tscn\\'")))
 
@@ -31,19 +30,17 @@
 						  (mode . clojure-ts-clojurescript-mode)))
 		   ("Org" (or (mode . org-mode)
 					  (filename . "OrgMode")))
-           ;; ("code" (filename . "code"))
 		   ("JS" (or
 				  (mode . js-ts-mode)
 				  (mode . typescript-ts-mode)
+				  (mode . js-json-mode)
 				  (mode . html-mode)
 				  (mode . css-mode)))
-		   ;; ("Subversion" (name . "\*svn"))
 		   ("Magit" (name . "\*magit"))
-		   ;; ("ERC" (mode . erc-mode))
 		   ("Help" (or (name . "\*Help\*")
 					   (name . "\*Apropos\*")
 					   (name . "\*info\*"))))))
-  
+
   (setq ibuffer-expert t) ;; kill buffers without a query
   (setq ibuffer-show-empty-filter-groups nil)
   :hook (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "home")))
@@ -53,7 +50,7 @@
 ;;   "Collapse all filter groups at once"
 ;;   (interactive)
 ;;   (setq ibuffer-hidden-filter-groups
-;; 	(mapcar #'car (ibuffer-current-filter-groups-with-position)))
+;;		(mapcar #'car (ibuffer-current-filter-groups-with-position)))
 ;;   (ibuffer-update nil t))
 
 ;; (defun ibuffer-expand-all-filter-groups ()

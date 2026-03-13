@@ -190,6 +190,8 @@
 			"x" (cons "xref" xref-keymap))
   :hook
   ;; ;; built-in eslint ignores configuration file
+
+  ;; ;; no need to disable flymake. typescript-language-server expects a jsconfig.json file
   ;; (js-ts-mode . (lambda () (add-to-list 'eglot-stay-out-of 'flymake)))
 
   ((c-ts-mode
