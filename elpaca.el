@@ -251,6 +251,11 @@
 							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
 							  "ovpn"
+							  ;; "claude-code"
+							  ;; "claude-ide"
+							  ;; "ellama"
+							  ;; "aidermacs"
+							  ;; "minuet"
 							  "multiple-cursors"
 							  ;; "powerthesaurus"
 							  ;; "outli"
@@ -259,7 +264,6 @@
 							  "combobulate"
 							  ;; "suggest"
 							  ;; "restclient"
-							  ;; "minuet"
 							  ;; "casual"
 							  "wgrep")
 

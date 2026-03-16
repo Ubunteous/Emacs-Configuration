@@ -24,7 +24,7 @@
   ;;;;;;;;;;;;;;;;;;
   ;; OLLAMA SETUP ;;
   ;;;;;;;;;;;;;;;;;;
-  
+
   ;; (setq minuet-n-completions 1) ; recommended for Local LLM for resource saving
   ;; (setq minuet-provider 'openai-fim-compatible)
   ;; (setq minuet-context-window 512) ;; put a larger value if computer can process it
@@ -33,5 +33,6 @@
   ;; (plist-put minuet-openai-fim-compatible-options :api-key "TERM")
   ;; (plist-put minuet-openai-fim-compatible-options :model "qwen2.5-coder:3b")
   ;; (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 56)
+  ;; (setq minuet-default-guidelines "Guidelines: ...")
   :hook
   (prog-mode-hook . minuet-auto-suggestion-mode))
