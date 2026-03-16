@@ -4,6 +4,6 @@
 
 (use-package direnv
   :defer t
-  :config
+  ;; :config
   ;; (setq direnv-always-show-summary nil)
-  (direnv-mode))
+  :hook prog-mode)

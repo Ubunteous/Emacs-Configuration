@@ -78,9 +78,8 @@
 (load-user-files-per-system "built-in"
 							'()
 
-							'(
+							'("treesit"
 							  ;; "smtpmail"
-							  "treesit"
 							  "eglot")
 
 							'("auto-insert"
@@ -149,6 +148,7 @@
 							'(
 							  ;; "notmuch"
 							  ;; "hyperbole"
+							  "vterm" ;; must be installed via NixOS configuration
 							  "dape")
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
@@ -156,7 +156,6 @@
 							  ;; "activities"
 							  ;; "perspective"
 							  ;; font is transparent. e.g.: ls /path/to/file is hard to see
-							  ;; "vterm" ;; vterm should be installed from NixOS configuration
 							  ;; "eat" ;; slower than vterm but written in elisp
 							  )) ;; requires notmuch package from outside emacs
 
@@ -304,6 +303,7 @@
 							'()
 
 							'("apheleia"
+							  "direnv"
 							  "hl-todo"
 							  "flyover")
 
@@ -325,7 +325,6 @@
 
 ;; (load-user-file "passive-utils/evil")
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode
-;; (load-user-file "passive-utils/direnv")
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;;   programming   ;;
