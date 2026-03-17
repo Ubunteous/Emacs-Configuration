@@ -6,6 +6,15 @@
   :ensure nil
   ;; :straight (:type built-in)
   :defer t
+  :custom-face
+  (isearch ((t (
+				:weight bold
+				;; :underline  (:color foreground-color :style line)
+				:foreground "light sea green"
+				:background "black"))))
+
+  (lazy-highlight ((t (:foreground "light sea green" :background "black"))))
+  (isearch-fail ((t (:foreground "black"  :background "MediumPurple"))))
   :config
   (setq isearch-repeat-on-direction-change t)
 
