@@ -238,6 +238,26 @@
 							  ;; "citar"
 							  "minimal-swiper"))
 
+;;;;;;;;;;;;;
+;;   AI    ;;
+;;;;;;;;;;;;;
+
+(load-user-files-per-system "ai"
+							'()
+
+							'(
+							  ;; "chatgpt-shell"
+							  "agent-shell"
+
+							  ;; "claude-code"
+							  ;; "claude-ide"
+							  ;; "ellama"
+							  ;; "aidermacs"
+							  ;; "minuet"
+							  )
+
+							'("gptel"))
+
 ;;;;;;;;;;;;;;;;;;;
 ;;   utilities   ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -250,11 +270,6 @@
 							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
 							  "ovpn"
-							  ;; "claude-code"
-							  ;; "claude-ide"
-							  ;; "ellama"
-							  ;; "aidermacs"
-							  ;; "minuet"
 							  "multiple-cursors"
 							  ;; "powerthesaurus"
 							  ;; "outli"
@@ -270,7 +285,6 @@
 							  "avy"
 							  ;; "popper" ;; missing popup width configuration
 							  ;; "consult-dir" ;; cool but similar to consult-buffer
-							  "gptel"
 							  ;; "outline-indent" ;; compare to outline
 							  "evil-nerd-commenter"
 							  "helpful"
