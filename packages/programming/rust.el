@@ -36,4 +36,50 @@
 ;;   :hook
 ;;   (rust-mode . (lambda () (flycheck-rust-setup))))
 
-;; other packages: wemacs-racer, cargo.el/cargo-mode, rustic
+;; (use-package cargo
+;;   :defer t
+;;   :mode "\\.rs\\'"
+;;   ;; :general
+;;   ;; ("..." 'cargo-minor-mode-command-map)
+;;   )
+
+;; (use-package cargo-mode
+;;   :defer t
+;;   ;; :config
+;;   ;; (setq cargo-mode-command-build "build"
+;;   ;;		cargo-mode-command-test "test"
+;;   ;;		cargo-mode-command-clippy "clippy")
+
+;;   ;; (setq cargo-mode-use-comint nil)
+
+;;   ;; (setq cargo-mode-default-params
+;;   ;;   '((("r" "run") . "--bin example")
+;;   ;;     (("t" "test") . "-- --no-capture")
+;;   ;;     ("doc" . "--open")))
+;;   )
+
+(use-package rustic
+  :defer t
+  :mode "\\.rs\\'"
+  :config
+  (setq rustic-lsp-client 'eglot)
+  (setq rustic-lsp-setup-p nil)
+
+  ;; (setq rustic-cargo-use-last-stored-arguments t)
+  ;; (setq rustic-lsp-server 'rust-analyzer)
+  ;; (setq rustic-format-trigger nil)
+  ;; (setq rustic-load-optional-libraries t)
+  ;; (setq rustic-test/clean/compile/lints/clippy/install/nextest-arguments/(exec-command))
+  ;; (setq rustic-babel-auto-wrap-main t)
+  ;; (setq rustic-compilation-directory nil)
+  ;; (setq rustic-cargo-open-new-project t)
+  ;; (setq rustic-use-rust-save-some-buffers nil)
+  ;; (setq rustic-cargo-test-disable-warnings nil)
+  ;; (setq rustic-babel-display-compilation-buffer nil)
+  ;; (setq rustic-cargo-auto-add-missing-dependencies t)
+
+  ;; rustic-cargo-run-use-comint t
+  rustic-babel-display-error-popup
+  :hook
+  (rust-mode . rustic-doc-mode)
+  (eglot--managed-mode . (lambda () (flymake-mode -1))))
