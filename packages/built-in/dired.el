@@ -16,7 +16,7 @@
   :config
   (setq dired-dwim-target t)
   (setq dired-free-space nil)
-  (setq dired-kill-when-opening-new-dired-buffer t)
+  ;; (setq dired-kill-when-opening-new-dired-buffer t)
   ;; (setq dired-recursive-copies 'always)
   ;; (setq dired-recursive-deletes 'always)
   (setq delete-by-moving-to-trash t) ;; pairs well with trash package
@@ -27,8 +27,8 @@
 	(interactive)
 
 	(save-excursion
-      (dired-map-over-marks
-       (let ((file (dired-file-name-at-point)))
+	  (dired-map-over-marks
+	   (let ((file (dired-file-name-at-point)))
 		 (when (and file
 					(file-regular-p file)
 					(file-readable-p file))
@@ -37,12 +37,12 @@
 			 (setf init (funcall
 						 #'+
 						 (count-lines (point-min) (point-max)))))))
-       nil))
+	   nil))
 
 	(next-line)
-	
+
 	(when (called-interactively-p 'any)
-      (message "Lines: %s" init))
+	  (message "Lines: %s" init))
 	init)
   :general
   (:keymaps 'dired-mode-map
@@ -51,12 +51,12 @@
 ;; create dir if does not exist when renaming/moving
 (defadvice dired-mark-read-file-name (after rv:dired-create-dir-when-needed (prompt dir op-symbol arg files &optional default) activate)
   (when (member op-symbol '(copy move))
-    (let ((directory-name (if (< 1 (length files))
-                              ad-return-value
-                            (file-name-directory ad-return-value))))
-      (when (and (not (file-directory-p directory-name))
-                 (y-or-n-p (format "directory %s doesn't exist, create it?" directory-name)))
-        (make-directory directory-name t)))))
+	(let ((directory-name (if (< 1 (length files))
+							  ad-return-value
+							(file-name-directory ad-return-value))))
+	  (when (and (not (file-directory-p directory-name))
+				 (y-or-n-p (format "directory %s doesn't exist, create it?" directory-name)))
+		(make-directory directory-name t)))))
 
 (use-package dired-x
   :defer t
@@ -120,39 +120,39 @@
 ;; (defun ora-dired-rsync (dest)
 ;;   (interactive
 ;;    (list (expand-file-name
-;; 		  (read-file-name "Rsync to:" (dired-dwim-target-directory)))))
+;;		  (read-file-name "Rsync to:" (dired-dwim-target-directory)))))
 ;;   ;; store all selected files into "files" list
 ;;   (let ((files (dired-get-marked-files nil current-prefix-arg))
-;; 		(rsync-command
-;; 		 (concat
-;; 		  "rsync"
-;; 		  (if ora-dired-rsync-limit
-;; 			  (format " --bwlimit=%s" ora-dired-rsync-limit)
-;; 			"")
-;; 		  " -arvzut"
-;; 		  (and current-prefix-arg " --delete")
-;; 		  " --progress ")))
+;;		(rsync-command
+;;		 (concat
+;;		  "rsync"
+;;		  (if ora-dired-rsync-limit
+;;			  (format " --bwlimit=%s" ora-dired-rsync-limit)
+;;			"")
+;;		  " -arvzut"
+;;		  (and current-prefix-arg " --delete")
+;;		  " --progress ")))
 ;;     ;; add all selected file names as arguments to the rsync command
 ;;     (dolist (file files)
 ;;       (setq rsync-command
-;; 			(concat rsync-command
-;; 					(if (string-match "^/ssh:\\(.*:\\)\\(.*\\)$" file)
-;; 						(format " -e ssh \"%s%s\""
-;; 								(match-string 1 file)
-;; 								(shell-quote-argument (match-string 2 file)))
-;; 					  (shell-quote-argument file)) " ")))
+;;			(concat rsync-command
+;;					(if (string-match "^/ssh:\\(.*:\\)\\(.*\\)$" file)
+;;						(format " -e ssh \"%s%s\""
+;;								(match-string 1 file)
+;;								(shell-quote-argument (match-string 2 file)))
+;;					  (shell-quote-argument file)) " ")))
 ;;     ;; append the destination
 ;;     (setq rsync-command
-;; 		  (concat rsync-command
-;; 				  (if (string-match "^/ssh:\\(.*?\\)\\([^:]+\\)$" dest)
-;; 					  (format " -e ssh %s%s"
-;; 							  (match-string 1 dest)
-;; 							  (match-string 2 dest))
-;; 					(shell-quote-argument dest))))
+;;		  (concat rsync-command
+;;				  (if (string-match "^/ssh:\\(.*?\\)\\([^:]+\\)$" dest)
+;;					  (format " -e ssh %s%s"
+;;							  (match-string 1 dest)
+;;							  (match-string 2 dest))
+;;					(shell-quote-argument dest))))
 ;;     ;; run the async shell command
 ;;     (let ((default-directory (expand-file-name "~")))
 ;;       (async-shell-command rsync-command
-;; 						   (format "rsync to %s" dest)))
+;;						   (format "rsync to %s" dest)))
 ;;     (message rsync-command)
 ;;     ;; finally, switch to that window
 ;;     (other-window 1)))
