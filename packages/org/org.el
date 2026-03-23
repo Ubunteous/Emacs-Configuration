@@ -34,6 +34,8 @@
   (:keymaps 'personal
 			;; overrides persp-list-buffers in org buffers
 			"b" 'org-switchb)
+  :init
+  (setq org-use-sub-superscripts nil) ;; prevent _ and ^ from altering nearby text
   :config
   ;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
@@ -235,8 +237,6 @@
   (setq org-src-preserve-indentation t)
 
   (setq org-startup-truncated nil) ;; risky with tables and links
-
-  (setq org-use-sub-superscripts nil) ;; _ and ^ do not alter nearby text
 
   ;; do not use image real size in org (as it may be too big)
   ;; (setq org-image-actual-width nil)
