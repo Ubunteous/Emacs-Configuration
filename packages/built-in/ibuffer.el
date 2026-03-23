@@ -37,6 +37,7 @@
 				  (mode . html-mode)
 				  (mode . css-mode)))
 		   ("Magit" (name . "\*magit"))
+		   ("Dired" (mode . dired-mode))
 		   ("Help" (or (name . "\*Help\*")
 					   (name . "\*Apropos\*")
 					   (name . "\*info\*"))))))

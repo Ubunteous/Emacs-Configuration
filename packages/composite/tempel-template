@@ -138,6 +138,7 @@ org-mode
 (elisp "#+begin_src emacs-lisp" n> r> n "#+end_src" :post (org-edit-src-code))
 
 js-ts-mode
+(clog "console.log(" p ");")
 (javascript-methods-instance "console.log(Object.getOwnPropertyNames(" p ".__proto__));")
 (javascript-methods-class "console.log(Object.getOwnPropertyNames(" p ".prototype));")
 
