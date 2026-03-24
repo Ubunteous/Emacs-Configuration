@@ -31,7 +31,7 @@
 
 							  ;; (java-ts-mode . google-java-format)
 							  ;; (rust-ts-mode . rustfmt)
-							  ;; (go-ts-mode . gofmt)
+							  ;; (go-mode . gofmt)
 
 							  (kotlin-mode . ktfmt)
 

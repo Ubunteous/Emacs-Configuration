@@ -176,11 +176,11 @@
 (load-user-files-per-system "org"
 							'(
 							  ;; "htmlize"
-							  )
+							  "ob/ob-powershell")
 
 							'("jupyter" ;; convert org -> ipynb with ox-ipynb
-							  "org-fragtog"
-							  "org-fancy-priorities"
+							  ;; "org-fragtog"
+							  ;; "org-fancy-priorities"
 							  ;; zettelkasten
 							  ;; "delve" ;; bring back later
 							  "org-roam"
@@ -198,13 +198,12 @@
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
-							  ;; "ob/ob-go"
+							  "ob/ob-go"
 							  "ob/ob-typescript"
 							  "ob/ob-html"
 							  ;; "ob/ob-sql" ; broken 3/2026. elpaca issue with monorepos
 							  "ob/ob-sql-mode"
 							  ;; "ob/ob-async"
-							  "ob/ob-powershell"
 							  "ob/ob-nix"))
 
 ;; Ready
@@ -356,8 +355,11 @@
 							  ;; "python/elpy"
 							  "python/highlight-indent-guides"
 
+							  "go"
+							  "elixir"
+
 							  "sh"
-							  "rust"
+							  ;; "rust"
 							  ;; "guile"
 							  "janet"
 							  ;; "clojure"
@@ -387,10 +389,8 @@
 
 							'("elisp"))
 
-;; (load-user-file "programming/elixir")
 ;; (load-user-file "programming/common-lisp")
 ;; (load-user-file "programming/fountain") ;; use with wrap
-;; (load-user-file "programming/go")
 ;; (load-user-file "programming/lisp")
 ;; (load-user-file "programming/json")
 ;; (load-user-file "built-in/java")

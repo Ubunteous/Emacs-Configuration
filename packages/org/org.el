@@ -122,6 +122,7 @@
 		  ("l" . "src lua\n")
 		  ("m" . "center\n")
 		  ("n" . "src nix\n")
+		  ("o" . "src go :imports '(\"fmt\")\n")
 		  ("p" . "src powershell\n")
 		  ;; ("p" . "src python\n")
 		  ;; ("Q" . "src sql-mode\n")
@@ -134,6 +135,7 @@
 		  ("u" . "src jupyter-python\n")
 		  ("w" . "src css\n")
 		  ;; ("x" . "src restclient\n")
+		  ("x" . "elixir\n")
 		  ("y" . "src lilypond :file lily.png\n")
 		  ("#" . "src csharp\n")))
 
