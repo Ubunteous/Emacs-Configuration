@@ -135,7 +135,7 @@
 		  ("u" . "src jupyter-python\n")
 		  ("w" . "src css\n")
 		  ;; ("x" . "src restclient\n")
-		  ("x" . "elixir\n")
+		  ("x" . "src elixir\n")
 		  ("y" . "src lilypond :file lily.png\n")
 		  ("#" . "src csharp\n")))
 
