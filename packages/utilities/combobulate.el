@@ -14,4 +14,7 @@
    yaml-ts-mode
    typescript-ts-mode
    json-ts-mode
-   tsx-ts-mode))
+   tsx-ts-mode)
+  :general (:keymaps 'combobulate-javascript-map
+					 "M-<down>" nil
+					 "M-<up>" nil))
