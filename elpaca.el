@@ -246,7 +246,7 @@
 
 							'(
 							  ;; "chatgpt-shell"
-							  "agent-shell"
+							  ;; "agent-shell"
 
 							  ;; "claude-code"
 							  ;; "claude-ide"
@@ -329,7 +329,7 @@
 							  "aggressive-indent" ;; check dont-indent-if/stop-here-hook
 							  "auto-capitalize" ;; => LaTeX/org mode only
 							  ;; "browse-kill-ring"
-							  "compile-angel"
+							  ;; "compile-angel"
 							  "diminish"
 							  "dimmer" ;; DONE
 							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
