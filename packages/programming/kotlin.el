@@ -2,7 +2,7 @@
 ;;               KOTLIN               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package kotlin
+(use-package kotlin-mode
   :defer t
   ;; :config
   ;; (setq kotlin-command "kotlinc")
@@ -16,7 +16,7 @@
   ;;		kotlin-mode-insert-space-after-asterisk-in-comment t)
 
   ;; (setq kotlin-args-repl nil)
-  :mode "\\.rs\\'")
+  :mode "\\.kt\\'")
 
 ;; (use-package kotlin-ts-mode
 ;;   :defer t)

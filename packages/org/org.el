@@ -118,6 +118,7 @@
 		  ("g" . "src gdscript\n")
 		  ("h" . "src html\n")
 		  ("i" . "src js\n")
+		  ("k" . "src kotlin\n")
 		  ("l" . "src lua\n")
 		  ("m" . "center\n")
 		  ("n" . "src nix\n")
@@ -170,6 +171,7 @@
 	 ;; (janet . t)
 	 (csharp . t)
 	 ;; (html . t)
+	 ;; (kotlin . t) ; not available yet
 	 ;; (lua . t)
 	 ;; (org . t)
 	 ;; (lilypond . t)

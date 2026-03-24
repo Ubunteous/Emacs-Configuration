@@ -15,7 +15,7 @@
 							  (web-mode . prettier-html)
 							  (css-ts-mode . prettier-css)
 
-							  ;; (typescript-ts-mode . prettier-typescript) ;; buit-in
+							  ;; (typescript-ts-mode . prettier-typescript) ;; built-in
 							  (sql-mode . pgformatter)
 
 							  (clojure-ts-mode . cljfmt)
@@ -24,7 +24,7 @@
 							  (gdscript-ts-mode . gdformat)
 							  (python-ts-mode . ruff)
 							  (csharp-ts-mode . csharpier)
-							  
+
 							  ;; change later to typst-ts-mode
 							  ;; also add move to apheleia hook if necessary
 							  ;; (typst--markup-mode . typstfmt)
@@ -33,16 +33,19 @@
 							  ;; (rust-ts-mode . rustfmt)
 							  ;; (go-ts-mode . gofmt)
 
+							  (kotlin-mode . ktfmt)
+
 							  ;; (haskell-mode . ormolu)
 							  (lua-mode . stylua)))
 
   ;; (setf (alist-get 'ormolu apheleia-formatters)
-  ;; 	'("ormolu" "--stdin-input-file" "-"))
+  ;;	'("ormolu" "--stdin-input-file" "-"))
 
   (setf (alist-get 'pgformatter apheleia-formatters)
 		'("pg_format" "-"))
 
   ;; (add-to-list 'apheleia-formatters '(typstfmt "typstfmt" "--stdout"))
   (add-to-list 'apheleia-formatters '(gdformat "gdformat" "-"))
+  (add-to-list 'apheleia-formatters '(ktfmt "ktfmt" "--kotlinlang-style" "-"))
   (add-to-list 'apheleia-formatters '(csharpier "dotnet" "csharpier" "--write-stdout"))
   :hook prog-mode)

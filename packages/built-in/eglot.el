@@ -69,6 +69,8 @@
   (add-to-list 'eglot-server-programs '(js-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
 
+  (add-to-list 'eglot-server-programs '(kotlin-mode . ("kotlin-language-server")))
+
   ;; ;; missing HEX package manager
   ;; (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
 
@@ -214,6 +216,8 @@
 	;; python-ts-mode
 	gdscript-ts-mode
 	csharp-ts-mode
+
+	kotlin-mode
 
 	;; elixir-mode
 	nix-ts-mode
