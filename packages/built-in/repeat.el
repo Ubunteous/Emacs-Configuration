@@ -124,6 +124,12 @@
  '(("g" pop-global-mark "global mark")
    ("G" pop-to-mark-command "mark")))
 
+;; FLYMAKE
+(repeat-it
+ flymake
+ '(("p" flymake-goto-prev-error "previous error")
+   ("n" flymake-goto-next-error "next error")))
+
 ;; AVY
 (repeat-it
  avy
