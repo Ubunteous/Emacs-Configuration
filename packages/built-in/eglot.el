@@ -62,17 +62,22 @@
   (add-to-list 'eglot-server-programs '(python-mode . ("pyright"))) ;; or "basedpyright"
   ;; (add-to-list 'eglot-server-programs '(bash-mode . ("bash-language-server")))
 
-  ;; (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
+  (add-to-list 'eglot-server-programs '(go-mode . ("gopls")))
   (add-to-list 'eglot-server-programs '(sql-mode . ("postgres_lsp")))
-  ;; (add-to-list 'eglot-server-programs '(rust-mode . ("rust-analyzer")))
+  ;; (add-to-list 'eglot-server-programs '(rust-mode .
+  ;;												  ;; ("rust-analyzer")
+  ;;												  ("rust-analyzer" :initializationOptions (:check (:command "clippy")))
+  ;;												  ))
+
   ;; (add-to-list 'eglot-server-programs '(java-mode . ("jdt-language-server")))
   (add-to-list 'eglot-server-programs '(js-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
 
   (add-to-list 'eglot-server-programs '(kotlin-mode . ("kotlin-language-server")))
 
-  ;; ;; missing HEX package manager
-  ;; (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
+  ;; missing HEX package manager
+  (add-to-list 'eglot-server-programs '(elixir-mode . ("elixir-ls")))
+  ;; (add-to-list 'eglot-server-programs '(elixir-mode . ("expert_linux_amd64" "--stdio"))) ; official language server
 
   ;; DO NOT FORGET TO ADD A HOOK AFTER THE SERVER
 
@@ -105,7 +110,6 @@
   (add-to-list 'eglot-server-programs
 			   `((nix-mode nix-ts-mode) . ,(eglot-alternatives '("nixd" "nil"))))
 
-
   ;;;;;;;;;;;;;
   ;; HASKELL ;;
   ;;;;;;;;;;;;;
@@ -127,9 +131,31 @@
 
   (setq eglot--highlights nil)
 
-  ;; prevent eldoc popup from appearing all the time
-  ;; (setq eglot-ignored-server-capabilities '(:hoverProvider)) ;; also deactivate commands
-  (setq eglot-ignored-server-capabilites '(:documentHighlightProvider))
+  ;; (setq eglot-ignored-server-capabilites '(:documentHighlightProvider))
+  (setq eglot-ignored-server-capabilites '(
+										   :hoverProvider ; Documentation on hover (eldoc popup)
+										   ;; :completionProvider ; Code completion
+										   ;; :signatureHelpProvider ; Function signature help
+										   ;; :definitionProvider ; Go to definition
+										   ;; :typeDefinitionProvider ; Go to type definition
+										   ;; :implementationProvider ; Go to implementation
+										   ;; :declarationProvider ; Go to declaration
+										   ;; :referencesProvider ; Find references
+										   :documentHighlightProvider ; Highlight symbols automatically
+										   :documentSymbolProvider ; List symbols in buffer
+										   :workspaceSymbolProvider ; List symbols in workspace
+										   :codeActionProvider ; Execute code actions
+										   :codeLensProvider ; Code lens
+										   :documentFormattingProvider ; Format buffer
+										   :documentRangeFormattingProvider ; Format portion of buffer
+										   :documentOnTypeFormattingProvider ; On-type formatting
+										   ;; :renameProvider ; Rename symbol
+										   :documentLinkProvider ; Highlight links in document
+										   :colorProvider ; Decorate color references
+										   :foldingRangeProvider ; Fold regions of buffer
+										   :executeCommandProvider ; Execute custom commands
+										   ;; :inlayHintProvider ; Inlay hints
+										   ))
 
   (setq eglot-stay-out-of '(yasnippet))
 
@@ -200,9 +226,13 @@
 	c++-ts-mode ;; somehow, needs normal mode for ts-mode
 	;; bash-ts-mode
 
-	;; go-mode
+	go-mode
 	;; sql-mode
+
+	;; ;; rust-analyzer consummes too much ram
+	;; rust-mode
 	;; rust-ts-mode
+
 	;; java-ts-mode
 	js-ts-mode
 	typescript-ts-mode
@@ -217,9 +247,13 @@
 	gdscript-ts-mode
 	csharp-ts-mode
 
+<<<<<<< HEAD
 	kotlin-mode
 
 	;; elixir-mode
+=======
+	elixir-mode
+>>>>>>> 6e6f65a (Document eglot-out-of and add go/rust/elixir)
 	nix-ts-mode
 	clojure-mode) . eglot-ensure))
 
