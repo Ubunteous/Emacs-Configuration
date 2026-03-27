@@ -33,6 +33,7 @@
 								  (project-root project-p)
 								(file-name-directory default-file))))
 
+	  (save-buffer)
 	  (compilation-start (concat "node " (shell-quote-argument (expand-file-name default-file t))))))
 
   (add-to-list 'compilation-error-regexp-alist 'node)
