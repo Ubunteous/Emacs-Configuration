@@ -27,14 +27,14 @@
 ;;   :ensure (queue :type git :host github :repo "emacs-straight/queue")
 ;;   :defer t)
 
-;; somehow not found by elpaca and cider installs it on its own now
-;; and yet, if I comment it, something breaks
-(use-package queue
-  :ensure (queue :type git :host github :repo "emacs-straight/queue")
-  :defer t)
+;; ;; somehow not found by elpaca and cider installs it on its own now
+;; ;; and yet, if I comment it, something breaks on some devices. perhaps due to old elpaca artifacts
+;; (use-package queue
+;;   :ensure (queue :type git :host github :repo "emacs-straight/queue")
+;;   :defer t)
 
 (use-package cider
-  :after queue
+  ;; :after queue
   :defer t
   :config
   ;; load a dev/user.clj file (specified in deps.edn) on jack-in
@@ -58,10 +58,10 @@
 ;;   :defer t
 ;;   :config
 ;;   (setq inf-clojure-repl-type 'clojure
-;; 	inf-clojure-custom-startup "clojure")
+;;	inf-clojure-custom-startup "clojure")
 ;;   :general (:keymaps 'clojure-ts-mode-map
-;; 		     "C-c C-c" 'inf-clojure-eval-buffer
-;; 		     "C-x C-e" 'inf-clojure-eval-last-sexp))
+;;			 "C-c C-c" 'inf-clojure-eval-buffer
+;;			 "C-x C-e" 'inf-clojure-eval-last-sexp))
 
 
 ;; this gives cider-overlay to emacs-lisp-mode (a bit like eros)
