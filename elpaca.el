@@ -174,9 +174,8 @@
 (elpaca-wait)
 
 (load-user-files-per-system "org"
-							'(
-							  ;; "htmlize"
-							  "ob/ob-powershell")
+							'(;; "htmlize"
+							  )
 
 							'("jupyter" ;; convert org -> ipynb with ox-ipynb
 							  ;; "org-fragtog"
@@ -194,17 +193,21 @@
 							  ;; "ord-modern-indent"
 							  "org-appear"
 
-							  "ob/ob-rust"
+							  ;; "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp"
-							  "ob/ob-go"
+							  ;; "ob/ob-go"
 							  "ob/ob-typescript"
-							  "ob/ob-html"
-							  ;; "ob/ob-sql" ; broken 3/2026. elpaca issue with monorepos
-							  "ob/ob-sql-mode"
+							  "ob/ob-powershell"
+							  ;; "ob/ob-html"
+							  "ob/ob-sql"
+							  ;; "ob/ob-sql-mode"
 							  ;; "ob/ob-async"
-							  "ob/ob-nix"))
+							  "ob/ob-nix"
+							  "ob/ob-elixir"
+							  ;; "ob/ob-custom"
+							  ))
 
 ;; Ready
 ;; (load-user-file "org/org-cliplink")
@@ -359,10 +362,10 @@
 							  "elixir"
 
 							  "sh"
-							  ;; "rust"
+							  "rust"
 							  ;; "guile"
 							  "janet"
-							  ;; "clojure"
+							  "clojure"
 							  "javascript"
 							  ;; "kotlin"
 							  "typescript"
