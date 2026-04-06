@@ -354,6 +354,10 @@
   ;; ("C-x f" 'find-file)
   ;; ("C-x C-f" 'set-fill-column)
 
+  ("C-S-b" 'backward-sexp)
+  ("C-S-f" 'forward-sexp)
+  ("C-S-n" 'forward-paragraph)
+  ("C-S-p" 'backward-paragraph)
   ("M-z" 'zap-up-to-char)
 
   ([remap suspend-frame] 'undo)

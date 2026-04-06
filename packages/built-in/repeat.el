@@ -50,6 +50,14 @@
  todo
  '(("t" org-todo "todo")))
 
+;; MOVE
+(repeat-it
+ move
+ '(("b" backward-sexp "sexp backward")
+   ("f" forward-sexp "sexp forward")
+   ("n" forward-paragraph "paragraph down")
+   ("p" backward-paragraph "paragraph up")))
+
 ;; SCROLL
 (repeat-it
  scroll
