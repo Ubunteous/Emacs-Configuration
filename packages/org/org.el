@@ -280,9 +280,13 @@
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 
-;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;
   ;;   FUNCTIONS   ;;
-;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;
+
+  (defun org-babel-kill-ring-save-src-block-at-point ()
+	(interactive)
+	(kill-new (org-element-property :value (org-element-at-point))))
 
   (defun org-babel-previous-block-end ()
 	"Go to the last line of code of the previous source block."
