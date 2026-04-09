@@ -268,6 +268,7 @@
 							'()
 
 							'("expreg"
+							  "gnuplot"
 							  ;; "expand-region" ;; superseded by expreg
 							  ;; "devdocs" ;; missing mathjax lib
 							  "minions"
