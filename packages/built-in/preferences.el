@@ -338,6 +338,7 @@
   :general
   ([remap suspend-frame] 'undo)
   ([remap ibuffer] 'ibuffer-jump)
+  ([remap backward-kill-word] 'backward-delete-word)
 
   ("RET" 'newline-and-indent)
   
@@ -503,3 +504,9 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
 	(if (get-buffer-window buffer 'visible)
 		(delete-windows-on buffer)
 	  (display-buffer buffer))))
+
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
