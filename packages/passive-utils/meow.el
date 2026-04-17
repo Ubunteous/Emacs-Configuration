@@ -8,6 +8,9 @@
   (require 'meow)
   (meow-global-mode 1)
   :config
+  ;; C-d now refers to a keymap and delete-char is on C-d d
+  (setq meow--kbd-delete-char "C-d d")
+
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
 
   ;; fix incorrect kill ring order
@@ -31,9 +34,9 @@
 
   (defface meow-vimreplace-cursor
 	'((((class color) (background dark))
-       (:inherit cursor))
-      (((class color) (background light))
-       (:inherit cursor)))
+	   (:inherit cursor))
+	  (((class color) (background light))
+	   (:inherit cursor)))
 	"Insert replace cursor."
 	:group 'meow)
 
@@ -182,7 +185,7 @@
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
-   '("d" . delete-char) ;; was meow-delete which calls C-d (delete-char)
+   '("d" . meow-delete) ;; meow--kbd-delete-char is now set to C-d d
    '("e" . meow-prev)
    '("E" . meow-prev-expand)
    '("f" . meow-find)
@@ -229,7 +232,7 @@
    '("v" . meow-search)
    '("w" . meow-next-word)
    '("W" . meow-next-symbol)
-   '("x" . delete-char) ;; was meow-delete which calls C-d (delete-char)
+   '("x" . meow-delete)
    '("X" . meow-backward-delete)
    '("y" . meow-save)
    '("Y" . meow-comment-and-duplicate)
@@ -272,14 +275,14 @@
 ;; MEOW BLOCK repeat
 (defvar meow-block-repeat-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "s") #'meow-to-block)
-    (define-key map (kbd "a") #'meow-block)
-    map))
+	(define-key map (kbd "s") #'meow-to-block)
+	(define-key map (kbd "a") #'meow-block)
+	map))
 
 (map-keymap
  (lambda (_key cmd)
    (when (symbolp cmd)
-     (put cmd 'repeat-map 'meow-block-repeat-map)))
+	 (put cmd 'repeat-map 'meow-block-repeat-map)))
  meow-block-repeat-map)
 
 (defun meow-undo-dwim ()
@@ -299,14 +302,14 @@
   (interactive)
 
   (if (use-region-p)
-      (delete-active-region)
-    (backward-delete-char-untabify 1)))
+	  (delete-active-region)
+	(backward-delete-char-untabify 1)))
 
 
 (defmacro nt--call-negative (form)
   "Imitate vim's FORM (F/T) backward search."
   `(let ((current-prefix-arg -1))
-     (call-interactively ,form)))
+	 (call-interactively ,form)))
 
 (defun nt-negative-find ()
   "Imitate vim's F backward search."
@@ -322,7 +325,7 @@
   "Yank and delete selection if it exists."
   (interactive)
   (when (use-region-p)
-    (delete-region (region-end) (region-beginning)))
+	(delete-region (region-end) (region-beginning)))
   (meow-yank))
 
 
@@ -336,7 +339,7 @@
 ;;   "Reinsert the last stretch of killed text after point in context."
 ;;   (interactive)
 ;;   (save-excursion
-;; 	(yank-in-context))
+;;	(yank-in-context))
 ;;   (forward-whitespace))
 
 (defun meow-comment-and-duplicate ()
@@ -350,7 +353,7 @@
 		(end (region-end)))
 
 	(newline)
-	(copy-region-as-kill beg end)	
+	(copy-region-as-kill beg end)
 	(comment-region beg end)
 	(yank)
 
