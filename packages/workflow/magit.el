@@ -159,49 +159,49 @@
 	)
 
   ;; (transient-define-prefix motion-transient ()
-  ;; 	["Motion"
-  ;; 	 ["mark"
-  ;; 	  ("C-<SPC>" "set-mark-command" set-mark-command)
-  ;; 	  ("C-x C-x" "Swap point/mark" exchange-point-and-mark)
+  ;;	["Motion"
+  ;;	 ["mark"
+  ;;	  ("C-<SPC>" "set-mark-command" set-mark-command)
+  ;;	  ("C-x C-x" "Swap point/mark" exchange-point-and-mark)
 
-  ;; 	  ;; pop-to-buffer
-  ;; 	  ;; pop-to-mark-command
-  ;; 	  ("C-x C-@" "pop-global-mark" pop-global-mark)
-  ;; 	  ("M-g m" "consult-mark" consult-mark)
-  ;; 	  ("C-x C-p" "mark-page" mark-page)
-  ;; 	  ("C-M-@" "mark-sexp" mark-sexp)
-  ;; 	  ("C-M-h" "mark-defun" mark-defun)
+  ;;	  ;; pop-to-buffer
+  ;;	  ;; pop-to-mark-command
+  ;;	  ("C-x C-@" "pop-global-mark" pop-global-mark)
+  ;;	  ("M-g m" "consult-mark" consult-mark)
+  ;;	  ("C-x C-p" "mark-page" mark-page)
+  ;;	  ("C-M-@" "mark-sexp" mark-sexp)
+  ;;	  ("C-M-h" "mark-defun" mark-defun)
 
-  ;; 	  ;; mark-paragraph
-  ;; 	  ("C-x h" "mark-whole-buffer" mark-whole-buffer)
-  ;; 	  ]
-  ;; 	 ["xref"
-  ;; 	  ("C-M-," "xref-go-forward" xref-go-forward)
-  ;; 	  ("M-;" "xref-find-definition" xref-find-definitions)
-  ;; 	  ("M-?" "xref-find-ref" xref-find-references)
-  ;; 	  ("C-M-." "xref-find-apropos" xref-find-apropos)
-  ;; 	  ]
-  ;; 	 ["hideshow"
-  ;; 	  ("C-c @ C-t" "hs-hide-all" hs-hide-all)
-  ;; 	  ("C-c @ C-a" "hs-show-all" hs-show-all)
-  ;; 	  ("C-c @ C-e" "hs-toggle-hiding" hs-toggle-hiding)
-  ;; 	  ("C-c @ C-d" "hs-hide-block" hs-hide-block)
-  ;; 	  ("C-c @ C-l" "hs-hide-level" hs-hide-level)
-  ;; 	  ("C-c @ C-s" "hs-show-block" hs-show-block)
-  ;; 	  ]
-  ;; 	 ["avy"
-  ;; 	  ("c" "Go to char" avy-goto-char)
-  ;; 	  ("d" "Go to char 2" avy-goto-char2)
-  ;; 	  ("e" "Go to end of line" avy-goto-end-of-line)
-  ;; 	  ("i" "isearch" avy-isearch)
-  ;; 	  ("l" "Go to line" avy-goto-line)
-  ;; 	  ("m" "Pop mark" avy-pop-mark)
-  ;; 	  ("n" "Next" avy-next)
-  ;; 	  ("p" "Previous" avy-prev)
-  ;; 	  ("t" "Timer" avy-goto-char-timer)
-  ;; 	  ]
-  ;; 	 ]
-  ;; 	)
+  ;;	  ;; mark-paragraph
+  ;;	  ("C-x h" "mark-whole-buffer" mark-whole-buffer)
+  ;;	  ]
+  ;;	 ["xref"
+  ;;	  ("C-M-," "xref-go-forward" xref-go-forward)
+  ;;	  ("M-;" "xref-find-definition" xref-find-definitions)
+  ;;	  ("M-?" "xref-find-ref" xref-find-references)
+  ;;	  ("C-M-." "xref-find-apropos" xref-find-apropos)
+  ;;	  ]
+  ;;	 ["hideshow"
+  ;;	  ("C-c @ C-t" "hs-hide-all" hs-hide-all)
+  ;;	  ("C-c @ C-a" "hs-show-all" hs-show-all)
+  ;;	  ("C-c @ C-e" "hs-toggle-hiding" hs-toggle-hiding)
+  ;;	  ("C-c @ C-d" "hs-hide-block" hs-hide-block)
+  ;;	  ("C-c @ C-l" "hs-hide-level" hs-hide-level)
+  ;;	  ("C-c @ C-s" "hs-show-block" hs-show-block)
+  ;;	  ]
+  ;;	 ["avy"
+  ;;	  ("c" "Go to char" avy-goto-char)
+  ;;	  ("d" "Go to char 2" avy-goto-char2)
+  ;;	  ("e" "Go to end of line" avy-goto-end-of-line)
+  ;;	  ("i" "isearch" avy-isearch)
+  ;;	  ("l" "Go to line" avy-goto-line)
+  ;;	  ("m" "Pop mark" avy-pop-mark)
+  ;;	  ("n" "Next" avy-next)
+  ;;	  ("p" "Previous" avy-prev)
+  ;;	  ("t" "Timer" avy-goto-char-timer)
+  ;;	  ]
+  ;;	 ]
+  ;;	)
   :general
   ;; shadows open-line. Note: C-j already does return+indent
   ;; ("C-o" 'motion-transient) ;; shadows open-line
@@ -232,7 +232,7 @@
   ;; full screen magit
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-bury-buffer-function 'magit-restore-window-configuration)
-  
+
   (setq magit-remote-add-set-remote.pushDefault nil)
   (setopt magit-format-file-function #'magit-format-file-all-the-icons)
 
@@ -245,34 +245,34 @@
   (setq git-commit-summary-max-length 50)
 
   ;; (defun ora-nextmagit-simple-commit ()
-  ;; 	;; commit file at point with message containing file+suffix
-  ;; 	(interactive)
-  ;; 	(magit-with-toplevel
+  ;;	;; commit file at point with message containing file+suffix
+  ;;	(interactive)
+  ;;	(magit-with-toplevel
   ;;     (save-window-excursion
-  ;; 		(let* ((item (magit-current-section))
-  ;; 			   (fname (oref item value))
-  ;; 			   action log)
-  ;; 		  (ignore-errors
-  ;; 			(magit-stage))
-  ;; 		  (search-forward fname)
-  ;; 		  (setq action (if (looking-back "^new file.*" (line-beginning-position))
-  ;; 						   "Add"
-  ;; 						 "Update"))
-  ;; 		  (magit-commit-add-log)
-  ;; 		  (while (not (setq log (magit-commit-message-buffer)))
-  ;; 			(sit-for 0.01))
-  ;; 		  (with-current-buffer log
-  ;; 			(insert action)
-  ;; 			(with-editor-finish nil))))))
+  ;;		(let* ((item (magit-current-section))
+  ;;			   (fname (oref item value))
+  ;;			   action log)
+  ;;		  (ignore-errors
+  ;;			(magit-stage))
+  ;;		  (search-forward fname)
+  ;;		  (setq action (if (looking-back "^new file.*" (line-beginning-position))
+  ;;						   "Add"
+  ;;						 "Update"))
+  ;;		  (magit-commit-add-log)
+  ;;		  (while (not (setq log (magit-commit-message-buffer)))
+  ;;			(sit-for 0.01))
+  ;;		  (with-current-buffer log
+  ;;			(insert action)
+  ;;			(with-editor-finish nil))))))
 
   ;; (defun ora-nextmagit-copy-message ()
-  ;; 	;; copy commit message
-  ;; 	(interactive)
-  ;; 	(let* ((item (magit-current-section))
-  ;; 		   (hash (oref item value)))
+  ;;	;; copy commit message
+  ;;	(interactive)
+  ;;	(let* ((item (magit-current-section))
+  ;;		   (hash (oref item value)))
   ;;     (kill-new
   ;;      (shell-command-to-string
-  ;; 		(format "git log -n 1 --pretty=format:%%s %s" hash)))))
+  ;;		(format "git log -n 1 --pretty=format:%%s %s" hash)))))
 
   (defun magit-branch-and-checkout (branch start-point &optional args)
 	"Create and checkout BRANCH at branch or revision START-POINT."
@@ -282,16 +282,16 @@
 						 (list (magit-branch-arguments))))
 	(if (string-match-p "^stash@{[0-9]+}$" start-point)
 		(magit-run-git "stash" "branch" branch start-point)
-      (magit-call-git "checkout" args "-b" branch start-point)
-      (magit-branch-maybe-adjust-upstream branch start-point)
-      (magit-refresh)))
+	  (magit-call-git "checkout" args "-b" branch start-point)
+	  (magit-branch-maybe-adjust-upstream branch start-point)
+	  (magit-refresh)))
 
   (defun ediff-buffers-dwim ()
 	(interactive)
 	(if (= 2 (length (window-list)))
 		(ediff-buffers (window-buffer (nth 1 (window-list)))
 					   (current-buffer))
-      (call-interactively 'ediff-buffers)))
+	  (call-interactively 'ediff-buffers)))
 
   (defun ora-magit-parent-commit ()
 	(interactive)
@@ -299,12 +299,12 @@
 					 (goto-char (point-min))
 					 (buffer-substring-no-properties (point-min) (line-end-position))))
 		   (parent (shell-command-to-string (format "git get-merge %s" commit))))
-      (when parent
+	  (when parent
 		(let ((parent-commit (and (string-match "commit \\(.*\\)" parent)
 								  (match-string 1 parent))))
 		  (magit-show-commit parent-commit)))))
-
-  ) ;; for v4.3.0+
+  :hook
+  (magit-log-mode . hl-line-mode))
 
 (use-package magit-blame-color-by-age
   :ensure (magit-blame-color-by-age :type git :host github :repo "jdtsmith/magit-blame-color-by-age")
@@ -313,9 +313,9 @@
 
 ;; (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
 ;;   (setq ad-return-value
-;; 	(concat ad-return-value
-;; 		(let ((plus-minus (vc-git--run-command-string
-;; 				   file "diff" "--numstat" "--")))
-;; 		  (and plus-minus
-;; 		       (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus)
-;; 		       (format " +%s-%s" (match-string 1 plus-minus) (match-string 2 plus-minus)))))))
+;;	(concat ad-return-value
+;;		(let ((plus-minus (vc-git--run-command-string
+;;				   file "diff" "--numstat" "--")))
+;;		  (and plus-minus
+;;			   (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus)
+;;			   (format " +%s-%s" (match-string 1 plus-minus) (match-string 2 plus-minus)))))))
