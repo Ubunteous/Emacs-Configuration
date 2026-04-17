@@ -9,7 +9,8 @@
   (setq rust-mode-treesitter-derive t)
   :mode "\\.rs\\'"
   :general
-  ("C-c s" 'cargo-run)
+  (:keymaps 'rust-mode-map
+			"C-c s" 'cargo-run)
   :hook
   (rust-mode . (lambda ()
 				 (setq indent-tabs-mode nil)
