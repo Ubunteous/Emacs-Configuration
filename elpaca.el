@@ -6,6 +6,9 @@
 ;;           LOAD USER FILES          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Load source (.el) or the compiled (.elc or .eln) file whichever is newest
+(setq load-prefer-newer t)
+
 ;; (defun load-user-file (file)
 ;;   "Add FILE to configuration (located in directory: packages)."
 ;;   ;; (interactive "f")

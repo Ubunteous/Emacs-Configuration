@@ -37,17 +37,17 @@ This is useful when followed by an immediate kill."
 	(goto-char isearch-other-end))
 
   ;; (defun isearch-yank-symbol ()
-  ;; 	"*Put symbol at current point into search string."
-  ;; 	(interactive)
-  ;; 	(let ((sym (thing-at-point 'symbol)))
+  ;;	"*Put symbol at current point into search string."
+  ;;	(interactive)
+  ;;	(let ((sym (thing-at-point 'symbol)))
   ;;     (if sym
   ;;         (progn
-  ;; 			(setq isearch-regexp t
+  ;;			(setq isearch-regexp t
   ;;                 isearch-string (concat "\\_<" (regexp-quote sym) "\\_>")
   ;;                 isearch-message (mapconcat 'isearch-text-char-description isearch-string "")
   ;;                 isearch-yank-flag t))
-  ;; 		(ding)))
-  ;; 	(isearch-search-and-update))
+  ;;		(ding)))
+  ;;	(isearch-search-and-update))
 
   ;;   (defun isearch-other-window (regexp-p)
   ;;     "Function to isearch-forward in the next window.
@@ -59,15 +59,15 @@ This is useful when followed by an immediate kill."
   ;;         (isearch-forward regexp-p))))
 
   (defun isearch-consult ()
-    "Invoke `consult-line' from isearch."
-    (interactive)
-    (let ((query (if isearch-regexp
-                     isearch-string
-                   (regexp-quote isearch-string))))
-      (isearch-update-ring isearch-string isearch-regexp)
-      (let (search-nonincremental-instead)
-        (ignore-errors (isearch-done t t)))
-      (consult-line query)))
+	"Invoke `consult-line' from isearch."
+	(interactive)
+	(let ((query (if isearch-regexp
+					 isearch-string
+				   (regexp-quote isearch-string))))
+	  (isearch-update-ring isearch-string isearch-regexp)
+	  (let (search-nonincremental-instead)
+		(ignore-errors (isearch-done t t)))
+	  (consult-line query)))
   :custom-face
   (isearch ((t (
 				:weight bold
@@ -79,11 +79,11 @@ This is useful when followed by an immediate kill."
   (isearch-fail ((t (:foreground "black"  :background "MediumPurple"))))
   :general
   ;; (:keymaps 'minibuffer-local-isearch-map
-  ;; 	    "<left>" 'isearch-reverse-exit-minibuffer
-  ;; 	    "<right>" 'isearch-forward-exit-minibuffer)
+  ;;		"<left>" 'isearch-reverse-exit-minibuffer
+  ;;		"<right>" 'isearch-forward-exit-minibuffer)
 
   (:keymaps 'isearch-mode-map
-			;; "<left>" 'isearch-ring-advance 
+			;; "<left>" 'isearch-ring-advance
 			;; "<right>" 'isearch-forward
 			"<up>" 'isearch-repeat-backward
 			"<down>" 'isearch-repeat-forward
@@ -94,5 +94,5 @@ This is useful when followed by an immediate kill."
 
 ;; go to the end of a match when using isearch-backward
 (advice-add 'isearch-exit :after (lambda ()
-                                   (when (not isearch-forward)
-                                     (goto-char isearch-other-end))))
+								   (when (not isearch-forward)
+									 (goto-char isearch-other-end))))

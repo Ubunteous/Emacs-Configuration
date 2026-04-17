@@ -6,23 +6,26 @@
   :ensure nil
   :defer t
   :init
+  ;; default to horizontal split
+  (setq split-width-threshold 1)
+
   ;; ;; avoid intrusive window splits
   ;; (setq display-buffer-base-action
-  ;; 		'((display-buffer-reuse-window display-buffer-same-window)
-  ;; 		  (reusable-frames . t)))
+  ;;		'((display-buffer-reuse-window display-buffer-same-window)
+  ;;		  (reusable-frames . t)))
 
   ;; (setq even-window-sizes nil) ; avoid resizing
 
   ;; winner mode (window history)
   ;; (winner-mode 1)
-  
+
   ;; auto split windows side by side
   ;; (setq split-height-threshold nil)
   ;; (setq split-width-threshold 80)
 
   ;; (setq other-window-scroll-default #'get-lru-window)
   ;; (setq other-window-scroll-default
-  ;; 		(lambda ()
+  ;;		(lambda ()
   ;;         (or (get-mru-window nil nil 'not-this-one-dummy)
   ;;             (next-window) ;fall back to next window
   ;;             (next-window nil nil 'visible))))
@@ -36,9 +39,9 @@
 
   ;; counter clockwise rotation. use repeat-it for convenience
   ;; (defun other-window-backward ()
-  ;; 	"Goto previous window"
-  ;; 	(interactive)
-  ;; 	(other-window -1))
+  ;;	"Goto previous window"
+  ;;	(interactive)
+  ;;	(other-window -1))
 
   ;; jump to compilation window
   ;; (defadvice compilation-start (after compilation-start-maximize activate)
@@ -185,7 +188,7 @@
   ;;   (defvar pmx--direction -1)
   ;;   (defvar pmx--last-win nil)
   ;;   (defun pmx-other-window (frame)
-  ;; 	"Switch window, with DWIM behavior.
+  ;;	"Switch window, with DWIM behavior.
   ;; Prefix argument FRAME will unconditionally switch frames.
   ;; When called without any windows to switch to, split and select.
   ;; If called not in repeat, reverse directions and switch back to
@@ -193,33 +196,33 @@
   ;; Finally, when called in repeat, continue in the same direction so
   ;; that we can usually get to the right window faster than an `avy'
   ;; call unless there's a ton of windows for some reason."
-  ;; 	(interactive "P")
-  ;; 	(cond (frame (other-frame 1))          ; unconditional with prefix arg
+  ;;	(interactive "P")
+  ;;	(cond (frame (other-frame 1))          ; unconditional with prefix arg
   ;;           ((equal 1 (length (window-list
-  ;; 							 (selected-frame))))
+  ;;							 (selected-frame))))
   ;;            ;; If there is no window or even minibuffer open, split window.  Change
   ;;            ;; the direction so that we go back to the source window on repeat or
   ;;            ;; next call.
   ;;            (let ((source (selected-window))
-  ;; 				 (tall (> (frame-pixel-height) (frame-pixel-width))))
-  ;; 			 (select-window (split-window-right))
-  ;; 			 (if (eq source (next-window))
-  ;; 				 (setq pmx--direction 1)
+  ;;				 (tall (> (frame-pixel-height) (frame-pixel-width))))
+  ;;			 (select-window (split-window-right))
+  ;;			 (if (eq source (next-window))
+  ;;				 (setq pmx--direction 1)
   ;;                (setq pmx--direction -1)
   ;;                (when (not (eq source (previous-window)))
-  ;; 				 (warn "Split window sucessor inconsistent")))))
+  ;;				 (warn "Split window sucessor inconsistent")))))
   ;;           ((not (eq last-command 'pmx-other-window))
   ;;            ;; If we are not repeating an other-window command, reverse the
   ;;            ;; direction and select in that direction.
   ;;            (if (eq pmx--last-win (selected-window))
   ;;                (setq pmx--directionapmx--direction (- pmx--direction))
-  ;; 			 ;;  we changed windows out of band. Reverse directions.
-  ;; 			 (setq pmx--direction -1))
+  ;;			 ;;  we changed windows out of band. Reverse directions.
+  ;;			 (setq pmx--direction -1))
   ;;            (other-window pmx--direction))
   ;;           (t
   ;;            ;; We are repeating.  Continue going in the established direction.
   ;;            (other-window pmx--direction)))
-  ;; 	(setq pmx--last-win (selected-window)))
+  ;;	(setq pmx--last-win (selected-window)))
   :general
   ;; auto balance windows upon deletion
   ("C-x 0" '(lambda ()

@@ -12,8 +12,16 @@
   :defer t
   :ensure nil
   ;; :commands (dired)
-  ;; :straight (:type built-in)
+  :init
+  ;; create directory alongside new file if needed
+  (advice-add 'find-file :before (lambda (filename &optional wildcards)
+								   (unless (file-exists-p filename)
+									 (let ((dir (file-name-directory filename)))
+									   (unless (file-exists-p dir)
+										 (make-directory dir t))))))
   :config
+  ;; (setq dired-auto-revert-buffer t)
+
   (setq dired-dwim-target t)
   (setq dired-free-space nil)
   ;; (setq dired-kill-when-opening-new-dired-buffer t)

@@ -21,92 +21,18 @@
   (apropos-variable-button ((t (:foreground "#a6e12d")))) ; green
   (apropos-misc-button ((t (:foreground "#fefff8")))) ; white
   :init
-  (defvar-keymap mark-keymap
-	:doc "Keymap for embark bindings.")
-
-  ;; keeps a server running (not necessary>use emacs-client directly)
-  ;;(server-start)
-  ;; default is set to 300 characters
-  ;; (setq auto-save-interval 20)
-
-  ;; to avoid triggering prompts every time a file is opened
-  (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
-  (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
-
-  ;; show both the row and column of the point in the modeline
-  (setq column-number-mode t)
-
-  ;; default to horizontal split
-  (setq split-width-threshold 1)
-
-  ;; ;; add project name in modeline
-  ;; (setq project-mode-line t)
-
-  ;; Remember and restore the last cursor location of opened files
-  (save-place-mode 1)
-  (setq save-place-file "~/.emacs.d/files/save-place.el")
-
-  ;; Don't pop up UI dialogs when prompting
-  (setq use-dialog-box nil)
-
-  ;; hide minibuffer scroll bar
-  ;; (set-window-scroll-bars (minibuffer-window) nil nil)
-
-  ;; Remove text properties for kill ring entries (saves times when using savehist)
-  ;; (defun unpropertize-kill-ring ()
-  ;;   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
-  ;; (add-hook 'kill-emacs-hook 'unpropertize-kill-ring)
-
   ;; if C-n is done at the end of the buffer, insert a newline
   ;; (setq next-line-add-newlines t)
-
-  ;; set apropos results by relevancy
-  (setq apropos-sort-by-scores t)
-  (setq apropos-compact-layout t)
-
-  ;; disable the menu bar (it's useful but currently broken)
-  (menu-bar-mode -1)
-
-  ;; save M-x and file history ; Need to check how it works first
-  ;;(savehist-mode 1) ;; already defined elsewhere
-  ;;(setq savehist-file "~/.emacs.d/custom/savehist")
-
-  ;; suspend-frame is useless in window mode. I am thus replacing it
-  (put 'suspend-frame' disabled t)
 
   ;; (setq-default
   ;;  display-line-numbers-grow-only t
   ;;  ;; display-line-numbers-type t ;; defaults to t
   ;;  display-line-numbers-width 2)
 
-  ;;(defun safe-find-library (library)
-  ;;  "Find LIBRARY and enter view mode."
-  ;;  (interactive "Library name: ")
-  ;;  (find-library library)
-  ;;  (view-mode))
   (setq view-read-only t) ;; enable view-mode on read only files
 
   ;; save last session
   ;; (desktop-save-mode 1)
-
-  ;; custom scratch message
-  (setq initial-scratch-message ";; This is where the fun begins")
-
-  ;; insert matching pair of parenthesis
-  (electric-pair-mode t)
-
-  ;; add " if another behind
-  ;; but may cause issue in some modes (gdscript) if line 1 "<point> and line 2 ""
-  (setq electric-pair-preserve-balance t)
-
-  ;; smarter electric insert
-  (setq-default electric-pair-inhibit-predicate
-				'(lambda (CHAR)
-				   (or (electric-pair-conservative-inhibit CHAR)
-					   ;; (eq (point) (line-end-position))
-					   ;; also inhibit when using char " after a word
-					   (and (eq (char-before) ?\")
-							(eq (char-syntax (char-before (1- (point)))) ?w)))))
 
   ;; ;; prevent insertion of double "
   ;; (setq electric-pair-inhibit-predicate
@@ -132,16 +58,6 @@
   ;; highlight the current line
   ;;(setq global-hl-line-mode t)
 
-  ;; delete selected text on insertion
-  (delete-selection-mode +1)
-
-  ;; remove the tool bar
-  (tool-bar-mode -1)
-
-  ;; toggle every scroll bar
-  ;; (toggle-scroll-bar)
-  (scroll-bar-mode -1)
-
   ;; automatic linebreak
   ;;(auto-fill-mode)
 
@@ -151,8 +67,6 @@
   ;; emacs search and buffers are case insensitive
   ;;(setq case-fold-search t)
 
-  (setopt tab-width 4)
-
   ;; toggle-truncate-lines or visual-line-mode or global-visual-line-mode
   ;;(setq-default truncate-lines t)
   (global-visual-line-mode t)
@@ -160,25 +74,8 @@
   ;; mute bell function
   (setq ring-bell-function #'ignore)
 
-  ;; correct accents in filenames
-  (when windows-system-p
-	(prefer-coding-system 'utf-8)
-	(set-default-coding-systems 'utf-8)
-	(setq coding-system-for-read 'utf-8)
-	(setq coding-system-for-write 'utf-8)
-	(setq file-name-coding-system 'utf-8))
-
   ;; use minibuffer in minibuffer. useful to search in minibuffer with swiper
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
-
-  ;; move auto save folder in specific directory
-  ;; USED TO BE A CUSTOM SET
-  (setq auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-")
-		auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~"))
-
-  ;; move bookmarks in specific directory
-  (custom-set-variables
-   '(bookmark-default-file "~/.emacs.d/files/bookmark-default.el"))
 
   ;; need to install a dict and setup a daemon first
   ;; (setq dictionary-server "localhost")
@@ -194,9 +91,6 @@
   (setq kill-buffer-query-functions
 		(remq 'process-kill-buffer-query-function
 			  kill-buffer-query-functions))
-
-  ;; move elpa dir
-  (setq package-user-dir "~/.emacs.d/files/elpa")
 
   ;; save automatically before M-x compile
   (setq compilation-ask-about-save nil
@@ -227,17 +121,6 @@
 		;; compilation-max-output-line-length nil
 		compilation-always-kill t)
 
-  (advice-add 'find-file :before (lambda (filename &optional wildcards)
-								   (unless (file-exists-p filename)
-									 (let ((dir (file-name-directory filename)))
-									   (unless (file-exists-p dir)
-										 (make-directory dir t))))))
-
-  (advice-add 'customize :after (lambda ()
-								  (search-forward "search")
-								  (move-beginning-of-line 0)
-								  (forward-line)))
-
   ;; Does not work yet. Learn more about rg / fd first before replacing emacs' defaults
   ;; (grep-apply-setting 'grep-command '("rg -H -e -0 ")) ;; "grep --color=auto -nH --null -e "
   ;; (grep-apply-setting 'grep-find-command '("fd . ")) ;; ("find . -type f -exec grep --color=auto -nH --null -e  \\{\\} +" . 54)
@@ -257,6 +140,80 @@
   ;; (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
   ;; (setopt display-line-numbers-width 3) ; Set a minimum width
 
+  ;; Modes to highlight the current line with
+  ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
+  ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
+
+  ;; ;; Better support for files with long lines
+  ;; (setq-default bidi-paragraph-direction 'left-to-right)
+  ;; (setq-default bidi-inhibit-bpa t)
+  ;; (global-so-long-mode 1)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; EXPECTED IN MODERN EDITOR ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; add " if another behind
+  ;; but may cause issue in some modes (gdscript) if line 1 "<point> and line 2 ""
+  (setq electric-pair-preserve-balance t)
+
+  ;; smarter electric insert
+  (setq-default electric-pair-inhibit-predicate
+				'(lambda (CHAR)
+				   (or (electric-pair-conservative-inhibit CHAR)
+					   ;; (eq (point) (line-end-position))
+					   ;; also inhibit when using char " after a word
+					   (and (eq (char-before) ?\")
+							(eq (char-syntax (char-before (1- (point)))) ?w)))))
+
+  ;; custom scratch message
+  (setq initial-scratch-message ";; This is where the fun begins")
+
+  ;; insert matching pair of parenthesis
+  (electric-pair-mode t)
+
+  ;; delete selected text on insertion
+  (delete-selection-mode +1)
+
+  ;; suspend-frame is useless in window mode. I am thus replacing it
+  (put 'suspend-frame' disabled t)
+
+  ;;;;;;;;;;;;;;;
+  ;; EMACS DIR ;;
+  ;;;;;;;;;;;;;;;
+
+  ;; Remember and restore the last cursor location of opened files
+  (save-place-mode 1)
+  (setq save-place-file "~/.emacs.d/files/save-place.el")
+
+  ;; save M-x and file history ; Need to check how it works first
+  ;;(savehist-mode 1) ;; already defined elsewhere
+  ;;(setq savehist-file "~/.emacs.d/custom/savehist")
+
+  ;; move auto save folder in specific directory
+  ;; USED TO BE A CUSTOM SET
+  (setq auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-")
+		auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~"))
+
+  ;; move bookmarks in specific directory
+  (custom-set-variables
+   '(bookmark-default-file "~/.emacs.d/files/bookmark-default.el"))
+
+  ;; move elpa dir
+  (setq package-user-dir "~/.emacs.d/files/elpa")
+
+  ;;;;;;;;;;;;;;;;
+  ;; MS WINDOWS ;;
+  ;;;;;;;;;;;;;;;;
+
+  ;; correct accents in filenames
+  (when windows-system-p
+	(prefer-coding-system 'utf-8)
+	(set-default-coding-systems 'utf-8)
+	(setq coding-system-for-read 'utf-8)
+	(setq coding-system-for-write 'utf-8)
+	(setq file-name-coding-system 'utf-8))
+
   ;;;;;;;;;;;;
   ;; SCROLL ;;
   ;;;;;;;;;;;;
@@ -272,76 +229,105 @@
   ;; cursor
   ;; (blink-cursor-mode -1) ; Steady cursor
   ;; (pixel-scroll-precision-mode) ; Smooth scrolling
-  
-  ;;;;;
 
-  ;; Modes to highlight the current line with
-  ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
-  ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
+  ;;;;;;;;;;;;;;;;;;
+  ;; EMACS DAEMON ;;
+  ;;;;;;;;;;;;;;;;;;
 
-  ;; (setq kill-do-not-save-duplicates t) ;; customize-set-variable
-  ;; (steq load-prefer-newer t)
+  ;; keeps a server running (not necessary>use emacs-client directly)
+  ;; (server-start)
 
-  ;; ;; Better support for files with long lines
-  ;; (setq-default bidi-paragraph-direction 'left-to-right)
-  ;; (setq-default bidi-inhibit-bpa t)
-  ;; (global-so-long-mode 1)
+  ;;;;;;;;;;;;;;;;;;;;;;
+  ;; HELP AND APROPOS ;;
+  ;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; set apropos results by relevancy
+  (setq apropos-sort-by-scores t)
+  (setq apropos-compact-layout t)
+
+  ;;;;;;;;;;;;;
+  ;; EDITION ;;
+  ;;;;;;;;;;;;;
+
+  ;; Remove text properties for kill ring entries (saves times when using savehist)
+  ;; (defun unpropertize-kill-ring ()
+  ;;   (setq kill-ring (mapcar 'substring-no-properties kill-ring)))
+  ;; (add-hook 'kill-emacs-hook 'unpropertize-kill-ring)
+
+  ;; (put 'downcase-region 'disabled nil)
+
+  ;; default is set to 300 input events
+  ;; (setq auto-save-interval 20)
+
+  ;; (setq 'kill-do-not-save-duplicates t)
 
   ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
   (setq set-mark-command-repeat-pop t)
   ;; (setq mark-ring-max 16)
   ;; (setq global-mark-ring-max 16)
 
-  ;; (put 'downcase-region 'disabled nil)
+  ;;;;;;;;;;;;;;;;
+  ;; APPEARANCE ;;
+  ;;;;;;;;;;;;;;;;
 
-  ;;;;;;;;;;;;;;;;;;;;;
-  ;; SYSTEM CRAFTERS ;;
-  ;;;;;;;;;;;;;;;;;;;;;
 
-  ;; (setq 'dired-auto-revert-buffer t)
-  ;; (setq 'kill-do-not-save-duplicates t)
+  ;; show both the row and column of the point in the modeline
+  (setq column-number-mode t)
 
-  ;; ;; Better support for files with long lines
-  ;; (setq-default bidi-paragraph-direction 'left-to-right)
-  ;; (setq-default bidi-inhibit-bpa t)
-  ;; (global-so-long-mode 1)
+  ;; disable the menu bar (it's useful but currently broken)
+  (menu-bar-mode -1)
 
-  ;; Load source (.el) or the compiled (.elc or .eln) file whichever is newest
-  ;; (setq 'load-prefer-newer t)
-  ;; hide lint messages on package update
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
-				 (display-buffer-no-window)
-				 (allow-no-window . t)))
+  ;; remove the tool bar
+  (tool-bar-mode -1)
 
-  ;; ;; for latex (greek chars as unicode) \delta \Delta
-  ;; ;; use with => for instance
-  ;; (prettify-symbols-mode)
+  ;; toggle every scroll bar
+  ;; (toggle-scroll-bar)
+  (scroll-bar-mode -1)
 
-  ;; ;; add your pretty symbols
+  ;; Don't pop up UI dialogs when prompting
+  (setq use-dialog-box nil)
+
+  ;; hide minibuffer scroll bar
+  ;; (set-window-scroll-bars (minibuffer-window) nil nil)
+
+  ;; ;; add project name in modeline
+  ;; (setq project-mode-line t)
+
+  (setopt tab-width 4)
+
+  ;; ;; add your pretty symbols to replace default appearance
   ;; (mapc (lambda (pair) (push pair prettify-symbols-alist))
-  ;; 		'(;; Syntax
-  ;;         ("def" . #x2131)
-  ;;         ("not" . #x2757)
-  ;;         ("in"  . #x2208)
+  ;;		'(
+  ;;		  ;; ;; Syntax
+  ;;		  ;; ("def" . #x2131)
+  ;;		  ;; ("not" . #x2757)
+  ;;		  ;; ("in"  . #x2208)
 
-  ;; 			  ;; numbers
-  ;; 			  ("1" . #x2780)
-  ;; 			  ("2" . #x2781)
-  ;; 			  ("3" . #x2782)
-  ;; 			  ("4" . #x2783)
-  ;; 			  ("5" . #x2784)
-  ;; 			  ("6" . #x2785)
-  ;; 			  ("7" . #x2786)
-  ;; 			  ("8" . #x2787)
-  ;; 			  ("9" . #x2788)))
+  ;;		  ;; numbers
+  ;;		  ("1" . #x2780)
+  ;;		  ("2" . #x2781)
+  ;;		  ("3" . #x2782)
+  ;;		  ("4" . #x2783)
+  ;;		  ("5" . #x2784)
+  ;;		  ("6" . #x2785)
+  ;;		  ("7" . #x2786)
+  ;;		  ("8" . #x2787)
+  ;;		  ("9" . #x2788)))
+
+  ;;;;;;;;;;;;;;;;;;
+  ;; KEY BINDINGS ;;
+  ;;;;;;;;;;;;;;;;;;
+
+  (defvar-keymap mark-keymap
+	:doc "Keymap for embark bindings.")
+
   :general
   ([remap suspend-frame] 'undo)
   ([remap ibuffer] 'ibuffer-jump)
   ([remap backward-kill-word] 'backward-delete-word)
 
   ("RET" 'newline-and-indent)
-  
+
   ("C-c f" 'find-file)
   ("C-c t" 'execute-extended-command)
   ("C-g" 'keyboard-quit-dwim)

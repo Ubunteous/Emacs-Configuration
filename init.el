@@ -21,7 +21,7 @@
 ;; Adjust garbage collection thresholds during startup, and thereafter
 (setq gc-cons-threshold (* 128 1024 1024) )
 (add-hook 'emacs-startup-hook
-          (lambda () (setq gc-cons-threshold (* 20 1024 1024) )))
+		  (lambda () (setq gc-cons-threshold (* 20 1024 1024) )))
 
 ;; no need to resize anything since xmonad deals with it already
 (setq frame-inhibit-implied-resize t)
@@ -50,46 +50,46 @@
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil :depth 1 :inherit ignore
-                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                              :build (:not elpaca-activate)))
+							  :ref nil :depth 1 :inherit ignore
+							  :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+							  :build (:not elpaca-activate)))
 (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
-       (build (expand-file-name "elpaca/" elpaca-builds-directory))
-       (order (cdr elpaca-order))
-       (default-directory repo))
+	   (build (expand-file-name "elpaca/" elpaca-builds-directory))
+	   (order (cdr elpaca-order))
+	   (default-directory repo))
   (add-to-list 'load-path (if (file-exists-p build) build repo))
   (unless (file-exists-p repo)
-    (make-directory repo t)
-    (when (<= emacs-major-version 28) (require 'subr-x))
-    (condition-case-unless-debug err
-        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-                                                  ,@(when-let* ((depth (plist-get order :depth)))
-                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
-                                                  ,(plist-get order :repo) ,repo))))
-                  ((zerop (call-process "git" nil buffer t "checkout"
-                                        (or (plist-get order :ref) "--"))))
-                  (emacs (concat invocation-directory invocation-name))
-                  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-                                        "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-                  ((require 'elpaca))
-                  ((elpaca-generate-autoloads "elpaca" repo)))
-            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-          (error "%s" (with-current-buffer buffer (buffer-string))))
-      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+	(make-directory repo t)
+	(when (<= emacs-major-version 28) (require 'subr-x))
+	(condition-case-unless-debug err
+		(if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+				  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+												  ,@(when-let* ((depth (plist-get order :depth)))
+													  (list (format "--depth=%d" depth) "--no-single-branch"))
+												  ,(plist-get order :repo) ,repo))))
+				  ((zerop (call-process "git" nil buffer t "checkout"
+										(or (plist-get order :ref) "--"))))
+				  (emacs (concat invocation-directory invocation-name))
+				  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+										"--eval" "(byte-recompile-directory \".\" 0 'force)")))
+				  ((require 'elpaca))
+				  ((elpaca-generate-autoloads "elpaca" repo)))
+			(progn (message "%s" (buffer-string)) (kill-buffer buffer))
+		  (error "%s" (with-current-buffer buffer (buffer-string))))
+	  ((error) (warn "%s" err) (delete-directory repo 'recursive))))
   (unless (require 'elpaca-autoloads nil t)
 	;; required by windows with its different path system
-    (when windows-system-p
-      (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
-    (require 'elpaca)
-    (elpaca-generate-autoloads "elpaca" repo)
-    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
+	(when windows-system-p
+	  (add-to-list 'load-path "~/.emacs.d/files/elpaca/repos/elpaca/"))
+	(require 'elpaca)
+	(elpaca-generate-autoloads "elpaca" repo)
+	(let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
 ;; Disable package.el in favour of elpaca.el
 (setq package-enable-at-startup nil)
-; 
+										;
 ;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
@@ -101,19 +101,19 @@
 (defun elpaca-use-package--maybe (fn &rest args)
   "Temporarily disable `elpaca-use-package-mode' for FN with ARGS if :elpaca nil."
   (let* ((pargs (cdr-safe args))
-         (declared (member :elpaca pargs)))
-    (if (and (not (eq this-command 'eval-last-sexp))
-             (or (cadr declared)
-                 (and (not declared) use-package-always-ensure)))
-        (apply fn args)
-      (setq args (cl-loop for i below (length args)
-                          for arg = (nth i args)
-                          if (eq arg :elpaca) do (cl-incf i)
-                          else collect arg))
-      (elpaca-use-package-mode -1)
-      (unwind-protect
-          (apply fn args)
-        (elpaca-use-package-mode 1)))))
+		 (declared (member :elpaca pargs)))
+	(if (and (not (eq this-command 'eval-last-sexp))
+			 (or (cadr declared)
+				 (and (not declared) use-package-always-ensure)))
+		(apply fn args)
+	  (setq args (cl-loop for i below (length args)
+						  for arg = (nth i args)
+						  if (eq arg :elpaca) do (cl-incf i)
+						  else collect arg))
+	  (elpaca-use-package-mode -1)
+	  (unwind-protect
+		  (apply fn args)
+		(elpaca-use-package-mode 1)))))
 
 
 ;; Uncomment for systems which cannot create symlinks (like windows 10):
@@ -126,8 +126,8 @@
 
 (setq package-archives
 	  '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
-        ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-        ("melpa" . "https://melpa.org/packages/")))
+		("nongnu" . "https://elpa.nongnu.org/nongnu/")
+		("melpa" . "https://melpa.org/packages/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               GENERAL              ;;

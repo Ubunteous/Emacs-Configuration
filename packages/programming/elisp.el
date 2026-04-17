@@ -7,32 +7,38 @@
   :defer t
   :init
   ;; (defun eval-region-or-buffer ()
-  ;; 	(interactive)
-  ;; 	(cond
-  ;; 	 (mark-active
+  ;;	(interactive)
+  ;;	(cond
+  ;;	 (mark-active
   ;;     (call-interactively 'eval-region)
   ;;     (message "Region evaluated!")
   ;;     (setq deactivate-mark t))
-  ;; 	 (t
+  ;;	 (t
   ;;     (save-buffer)
   ;;     (eval-buffer)
   ;;     (message "Buffer evaluated!"))))
+
+  ;;(defun safe-find-library (library)
+  ;;  "Find LIBRARY and enter view mode."
+  ;;  (interactive "Library name: ")
+  ;;  (find-library library)
+  ;;  (view-mode))
 
   (defun eval-last-sexp-or-region (prefix)
 	"Eval region from BEG to END if active, otherwise the last sexp."
 	(interactive "P")
 	(if (and (mark) (use-region-p))
 		(eval-region (min (point) (mark)) (max (point) (mark)))
-      ;; (pp-eval-last-sexp prefix)
-      (eval-last-sexp prefix)))
+	  ;; (pp-eval-last-sexp prefix)
+	  (eval-last-sexp prefix)))
 
   ;; :config
   ;; (define-short-documentation-group list
-  ;; 	"Making Lists"
-  ;; 	(make-list
-  ;; 	 :eval (make-list 5 'a))
-  ;; 	(cons
-  ;; 	 :eval (cons 1 '(2 3 4))))
+  ;;	"Making Lists"
+  ;;	(make-list
+  ;;	 :eval (make-list 5 'a))
+  ;;	(cons
+  ;;	 :eval (cons 1 '(2 3 4))))
   :general (
 			;; "C-c x" 'eval-region-or-buffer
 			[remap eval-last-sexp] 'eval-last-sexp-or-region)

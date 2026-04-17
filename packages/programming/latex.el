@@ -68,6 +68,10 @@
   ;;   CONFIG   ;;
   ;;;;;;;;;;;;;;;;
 
+  ;; to avoid triggering prompts every time a file is opened
+  (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
+  (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
+
   ;; do not open the master with an incorrect encoding (fr characters)
   (setq latexenc-dont-use-TeX-master-flag t)
 
@@ -84,6 +88,9 @@
 		TeX-source-correlate-start-server t)
   (setq-default TeX-master nil)
   :hook
+  ;; for latex (greek chars as unicode) \delta \Delta
+  (text-mode . prettify-symbols-mode)
+
   ;;:hook ((visual-line-mode math-mode) . LaTeX-mode)
   (tex-mode-hook . (lambda () (setq ispell-parser 'tex)))
   (TeX-after-compilation-finished-functions . TeX-revert-document-buffer)
