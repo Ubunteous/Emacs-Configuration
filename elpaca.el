@@ -87,6 +87,8 @@
 
 							'("auto-insert"
 							  "abbrev"
+							  ;; "message"
+							  "outline"
 							  "completion"
 							  "dired" ;; => add git compatibility
 							  "fly"
