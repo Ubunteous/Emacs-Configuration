@@ -247,13 +247,8 @@
 	gdscript-ts-mode
 	csharp-ts-mode
 
-<<<<<<< HEAD
-	kotlin-mode
-
-	;; elixir-mode
-=======
+	;; kotlin-mode
 	elixir-mode
->>>>>>> 6e6f65a (Document eglot-out-of and add go/rust/elixir)
 	nix-ts-mode
 	clojure-mode) . eglot-ensure))
 
