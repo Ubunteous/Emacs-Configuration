@@ -52,8 +52,37 @@
 	(when (called-interactively-p 'any)
 	  (message "Lines: %s" init))
 	init)
+
+  (defun dired-sort-by-x (x)
+	"Toggle sorting by date, and refresh the Dired buffer.
+With a prefix argument, edit the current listing switches instead."
+	(interactive)
+	(when dired-sort-inhibit
+	  (error "Cannot sort this Dired buffer"))
+
+	(let* ((sort-flags '(
+						 :name ""
+						 :time "t"
+						 :size "S"))
+		   (selected-flag (plist-get
+						   sort-flags
+						   x)))
+
+	  (message (format "Sorting directory by %s with flag \'%s\'" x selected-flag))
+	  (dired-sort-other (concat "--group-directories-first -al"  selected-flag))))
+
+  (transient-define-prefix dired-sort-transient ()
+	"Dired sort."
+	["Sort options"
+	 ["Simple"
+	  ("n" "Name" (lambda () (interactive) (dired-sort-by-x :name)))
+	  ("t" "Time" (lambda () (interactive) (dired-sort-by-x :time)))
+	  ("s" "Size" (lambda () (interactive) (dired-sort-by-x :size)))
+	  ]
+	 ])
   :general
   (:keymaps 'dired-mode-map
+			"s" 'dired-sort-transient
 			"<" 'dired-count-lines))
 
 ;; create dir if does not exist when renaming/moving
