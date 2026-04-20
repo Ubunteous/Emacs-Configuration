@@ -35,17 +35,17 @@
   ;; (progn
   ;;   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   ;;   (add-hook 'text-mode-hook 'flyspell-mode))
-  :hook
-  (prog-mode . flyspell-prog-mode)
-  (text-mode . flyspell-mode)
   :config
+  ;; (setq flyspell-check-changes t) ; only warn on text changed
+  ;; (setq flyspell-use-meta-tab t) ; corrects with M-t
+
   ;; use aspell instead on ispell (requires aspell installation)
   (if windows-system-p
 	  (progn
 		(setenv "LANG" "en_GB.UTF-8")
 		(setenv "DICPATH" "C:/Hunspell/dictionaries/") ;; dic/aff files
 		(setq ispell-program-name "C:/Hunspell/hunspell/bin/hunspell.exe"))
-    (setq ispell-program-name "aspell"))
+	(setq ispell-program-name "aspell"))
 
   (setq ispell-choices-win-default-height 10) ;; default too small
 
@@ -53,7 +53,10 @@
   ;; echo "dict-dir /run/current-system/sw/lib/aspell" >> ~/.aspell.conf
   (setq ispell-dictionary "en_GB")
   ;; Sets flyspell correction to use two-finger mouse click
-  (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word))
+  (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+  :hook
+  (prog-mode . flyspell-prog-mode)
+  (text-mode . flyspell-mode))
 
 ;;;;;;;;;;;;;;
 ;; FLYCHECK ;;
@@ -72,32 +75,32 @@
 ;; (setq flycheck-mode-success-indicator "0")
 
 ;; (setq tabulated-list-format
-;; 	  '[("File" 15)
-;; 		("Line"
-;; 		 5
-;; 		 flycheck-error-list-entry-<
-;; 		 :right-align t)
-;; 		("Col" 3 nil :right-align t)
-;; 		("Level"
-;; 		 7
-;; 		 flycheck-error-list-entry-level-<)
-;; 		("ID" 16 t)
-;; 		(#("Message (Checker)"
-;; 		   0 7 (face
-;; 				flycheck-error-list-error-message)
-;; 		   9 16 (face
-;; 				 flycheck-error-list-checker-name))
-;; 		 0
-;; 		 t)])
+;;	  '[("File" 15)
+;;		("Line"
+;;		 5
+;;		 flycheck-error-list-entry-<
+;;		 :right-align t)
+;;		("Col" 3 nil :right-align t)
+;;		("Level"
+;;		 7
+;;		 flycheck-error-list-entry-level-<)
+;;		("ID" 16 t)
+;;		(#("Message (Checker)"
+;;		   0 7 (face
+;;				flycheck-error-list-error-message)
+;;		   9 16 (face
+;;				 flycheck-error-list-checker-name))
+;;		 0
+;;		 t)])
 ;; (tabulated-list-init-header)
 
 ;; ;; MyPy Integration
 ;; (flycheck-define-checker
 ;;     python-mypy ""
 ;;     :command ("mypy"
-;; 		"--ignore-missing-imports"
-;; 		"--python-version" "3.6"
-;; 		source-original)
+;;		"--ignore-missing-imports"
+;;		"--python-version" "3.6"
+;;		source-original)
 ;;     :error-patterns
 ;;     ((error line-start (file-name) ":" line ": error:" (message) line-end))
 ;;     :modes python-mode)
@@ -132,17 +135,17 @@
 ;;     (mapc
 ;;      (lambda (err)
 ;;        (funcall callback
-;; 				(format "%s: %s"
-;; 						(let ((level (flycheck-error-level err)))
-;; 						  (pcase level
-;; 							('info (propertize "I" 'face 'flycheck-error-list-info))
-;; 							('error (propertize "E" 'face 'flycheck-error-list-error))
-;; 							('warning (propertize "W" 'face 'flycheck-error-list-warning))
-;; 							(_ level)))
-;; 						(flycheck-error-message err))
-;; 				:thing (or (flycheck-error-id err)
-;; 						   (flycheck-error-group err))
-;; 				:face 'font-lock-doc-face))
+;;				(format "%s: %s"
+;;						(let ((level (flycheck-error-level err)))
+;;						  (pcase level
+;;							('info (propertize "I" 'face 'flycheck-error-list-info))
+;;							('error (propertize "E" 'face 'flycheck-error-list-error))
+;;							('warning (propertize "W" 'face 'flycheck-error-list-warning))
+;;							(_ level)))
+;;						(flycheck-error-message err))
+;;				:thing (or (flycheck-error-id err)
+;;						   (flycheck-error-group err))
+;;				:face 'font-lock-doc-face))
 ;;      flycheck-errors)))
 
 ;; (defun mp-flycheck-prefer-eldoc ()

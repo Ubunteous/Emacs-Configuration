@@ -5,6 +5,8 @@
 (use-package help
   :defer t
   :ensure nil
+  ;; :config
+  ;; (setq help-window-keep-selected t)
   :general
   (:keymaps 'help-mode-map
 			"n" 'next-line

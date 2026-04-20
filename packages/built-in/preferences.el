@@ -29,6 +29,9 @@
   ;;  ;; display-line-numbers-type t ;; defaults to t
   ;;  display-line-numbers-width 2)
 
+  ;; remove warning when calling advanced commands
+  ;; (setq disabled-command-function nil)
+
   (setq view-read-only t) ;; enable view-mode on read only files
 
   ;; save last session
@@ -126,32 +129,34 @@
   ;; (grep-apply-setting 'grep-find-command '("fd . ")) ;; ("find . -type f -exec grep --color=auto -nH --null -e  \\{\\} +" . 54)
   ;; (grep-apply-setting 'grep-find-template '("fd . "))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; emacs bedrock settings ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;
+  ;; COMPLETIONS ;;
+  ;;;;;;;;;;;;;;;;;
 
-  ;; (setopt completions-detailed t)
-  ;; (setopt completions-group t)
-  ;; (setopt completion-auto-select 'second-tab)
-  ;; (setopt completion-auto-select t)
-  ;; (setopt x-underline-at-descent-line nil) ; Prettier underlines
-  (setq switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
-  ;; (setopt show-trailing-whitespace t) ; By default, underline trailing spaces
-  ;; (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
-  ;; (setopt display-line-numbers-width 3) ; Set a minimum width
+  (setq completions-detailed t)
+  (setq completions-group t)
+  (setq completion-auto-select 'second-tab) ; or t
 
-  ;; Modes to highlight the current line with
-  ;; (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
-  ;;   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
+  ;;;;;;;;;;;;;;
+  ;; TERMINAL ;;
+  ;;;;;;;;;;;;;;
 
-  ;; ;; Better support for files with long lines
-  ;; (setq-default bidi-paragraph-direction 'left-to-right)
-  ;; (setq-default bidi-inhibit-bpa t)
-  ;; (global-so-long-mode 1)
+  ;; place these config in a dedicated file once there are enough
+  (setq comint-terminfo-terminal "ansi") ; defaults to dumb
+
+  ;; defaults to "less"
+  (cond ((executable-find "bat") (setenv "PAGER" "bat"))
+		((executable-find "cat") (setenv "PAGER" "cat"))
+		nil)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; EXPECTED IN MODERN EDITOR ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; (setq indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
+  ;; (setq display-line-numbers-width 3) ; Set a minimum width
+
+  (setq x-underline-at-descent-line nil) ; Prettier underlines
 
   ;; add " if another behind
   ;; but may cause issue in some modes (gdscript) if line 1 "<point> and line 2 ""
@@ -185,6 +190,9 @@
   ;; Remember and restore the last cursor location of opened files
   (save-place-mode 1)
   (setq save-place-file "~/.emacs.d/files/save-place.el")
+  (advice-add 'save-place-after-find-file-hook :after
+			  (lambda (&rest _)
+				(when buffer-file-name (ignore-errors (recenter)))))
 
   ;; save M-x and file history ; Need to check how it works first
   ;;(savehist-mode 1) ;; already defined elsewhere
@@ -245,9 +253,34 @@
   (setq apropos-sort-by-scores t)
   (setq apropos-compact-layout t)
 
+  ;;;;;;;;;;;;;;;;;;
+  ;; PERFORMANCES ;;
+  ;;;;;;;;;;;;;;;;;;
+
+  ;; do not check if hostname exists (ping)
+  (setq ffap-machine-p-known 'reject)
+
+  ;; disable right to left languages (like arabic) features
+  (setq-default bidi-display-reordering t
+				bidi-paragraph-direction 'left-to-right
+				bidi-inhibit-bpa t)
+
+  (setq redisplay-skip-fontification-on-input t)
+
+  (setq read-process-output-max (* 4 1024 1024)) ; speeds up modern language servers
+
+  ;; do not process cursors/highlight in unselected windows
+  (setq-default cursor-in-non-selected-windows nil)
+  (setq highlight-nonselected-windows nil)
+
   ;;;;;;;;;;;;;
   ;; EDITION ;;
   ;;;;;;;;;;;;;
+
+  ;; makes regexp builder syntax more coherent
+  (setq reb-re-syntax 'string) ; read, rx or string
+  (setq save-interprogram-paste-before-kill t)
+  ;; (setq kill-do-not-save-duplicates t)
 
   ;; Remove text properties for kill ring entries (saves times when using savehist)
   ;; (defun unpropertize-kill-ring ()
@@ -259,8 +292,6 @@
   ;; default is set to 300 input events
   ;; (setq auto-save-interval 20)
 
-  ;; (setq 'kill-do-not-save-duplicates t)
-
   ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
   (setq set-mark-command-repeat-pop t)
   ;; (setq mark-ring-max 16)
@@ -269,7 +300,6 @@
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
   ;;;;;;;;;;;;;;;;
-
 
   ;; show both the row and column of the point in the modeline
   (setq column-number-mode t)
@@ -370,11 +400,26 @@
 			"s" 'mark-sexp
 			"w" 'mark-word)
 
+  (:keymaps 'goto-map
+			"re" 'grep
+			"rr" 'rgrep
+			"rl" 'lgrep
+			"rv" 'vc-git-grep
+			"M-r M-e" 'grep
+			"M-r M-r" 'rgrep
+			"M-r M-l" 'lgrep
+			"M-r M-v" 'vc-git-grep)
+
   (:keymaps 'personal
 			;; "C-c u" 'mode-line-other-buffer
 			"d" 'delete-char
 			"k" (cons "mark" mark-keymap))
   :hook
+  ;; Make the *Occur* buffer names unique and writable
+  (occur-hook . (lambda ()
+				  (occur-rename-buffer t)
+				  (setq buffer-read-only nil)))
+
   ;; superword-mode counts my_short_ex as a single word
   ;; (prog-mode . superword-mode)
   ;; (before-save . whitespace-cleanup)
@@ -496,3 +541,16 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
+
+(defun find-thing-at-point-dwim (&optional arg)
+  "Find url, variable, function or file at point."
+  (interactive "P")
+
+  (cond ((thing-at-point 'url)
+		 (browse-url (thing-at-point 'url) arg))
+		((not (eq (variable-at-point) 0))
+		 ;; (call-interactively 'describe-variable/function)
+		 (describe-variable (symbol-at-point)))
+		((function-called-at-point)
+		 (describe-function (symbol-at-point)))
+		(t (find-file-at-point))))

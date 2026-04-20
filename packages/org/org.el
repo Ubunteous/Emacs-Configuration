@@ -251,6 +251,12 @@
 
   ;; (setq org-support-shift-select 1)) ;; heresy
 
+  (setq org-catch-invisible-edits 'smart)
+  ;; (setq org-replace-disputed-keys nil)
+  ;; (setq org-support-shift-select t)
+  ;; (setq org-special-ctrl-o nil) ; insert row in table
+  ;; (setq org-src-window-setup 'current-window) ; defaults to reorganize-frame
+
   (setq org-use-speed-commands t)
   ;; :hook
   ;; might be risky if it cancels normal image display

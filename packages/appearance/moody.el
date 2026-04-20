@@ -23,5 +23,3 @@
 ;;   (set-face-attribute 'mode-line          nil :box        nil)
 ;;   (set-face-attribute 'mode-line-inactive nil :box        nil)
 ;;   (set-face-attribute 'mode-line-inactive nil :background "#f9f2d9"))
-
-;; (setq x-underline-at-descent-line t))

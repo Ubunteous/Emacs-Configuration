@@ -33,9 +33,13 @@
   ;;go to help window
   (setq help-window-select t)
 
+  ;; proportional resizing
+  (setq window-combination-resize t)
+
   ;; uncomment if you start using windmove
   ;; (setq windmove-wrap-around t)
   ;; (setq windmove-allow-all-windows <add exceptions here>)
+  ;; (setq windmove-create-window t)
 
   ;; counter clockwise rotation. use repeat-it for convenience
   ;; (defun other-window-backward ()
@@ -60,7 +64,7 @@
   (setq mouse-autoselect-window t)
 
   (setq switch-to-buffer-in-dedicated-window 'pop)
-  (setq switch-to-buffer-obey-display-actions t)
+  (setq switch-to-buffer-obey-display-actions t) ; Make switching buffers more consistent
 
   (defun kill-buffer-refocus ()
 	"Not only kill current buffer but also remove its window."
