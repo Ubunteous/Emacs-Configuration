@@ -10,8 +10,8 @@
 ;; "model": "gpt-4o-mini",
 ;; "store": true,
 ;; "messages": [
-;; 	     {"role": "user", "content": "write a haiku about ai"}
-;; 	     ]
+;;		 {"role": "user", "content": "write a haiku about ai"}
+;;		 ]
 ;; }'
 
 ;; Place your api-key in ~/.authinfo
@@ -23,8 +23,9 @@
   :defer t
   :config
   (setq gptel--system-message "Respond concisely.")
-  (setq gptel-model 'gemini-flash-latest
-		gptel-backend
+  (setq gptel-model 'gemini-flash-latest)
+
+  (setq gptel-backend
 		(gptel-make-gemini "Gemini"
 		  :key
 		  (plist-get (car (auth-source-search
@@ -32,5 +33,37 @@
 						   :user "apikey"))
 					 :secret)
 		  :stream t))
+
+  (defun gptel-switch-backend ()
+	(interactive)
+	;; There probably is a way to have multiple providers. Remove this function if you figure it out
+	(if (eq gptel-model 'gemini-flash-latest)
+		(progn
+		  (setq gptel-model 'gpt-5.4-mini
+				gptel-backend
+				(gptel-make-openai "ChatGPT" :key 'gptel-api-key :stream t)
+				backend gptel-backend)
+		  (message "Model set to ChatGPT"))
+	  (progn
+		(setq gptel-model 'gemini-flash-latest
+			  gptel-backend
+			  (gptel-make-gemini "Gemini"
+				:key
+				(plist-get (car (auth-source-search
+								 :host "googleapis.com"
+								 :user "apikey"))
+						   :secret)
+				:stream t)))
+	  (message "Model set to Gemini")))
+
+  (gptel-make-preset 'chatgpt
+	:description "Preset for chatgpt"
+	:backend "ChatGPT"
+	:model 'gpt-5.4-mini)
+
+  (gptel-make-preset 'gemini
+	:description "Preset for chatgpt"
+	:backend "Gemini"
+	:model 'gemini-flash-latest)
   :general (:keymaps 'gptel-mode-map
 					 "C-c C-h" 'gptel-menu))
