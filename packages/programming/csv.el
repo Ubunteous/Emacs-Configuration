@@ -4,7 +4,10 @@
 
 (use-package csv-mode
   :defer t
-  :ensure nil
-  :hook ((csv-mode . csv-align-mode)
-		 (csv-mode . (lambda () (progn (visual-line-mode -1)
-									   (toggle-truncate-lines))))))
+  :config
+  (setq csv-separators '("\t" "," "\|"))
+  :mode "\\.csv\\'"
+  :hook (csv-mode . (lambda () (progn
+								 (csv-align-mode)
+								 (visual-line-mode -1)
+								 (toggle-truncate-lines)))))

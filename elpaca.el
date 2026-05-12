@@ -355,8 +355,7 @@
 (load-user-files-per-system "programming"
 							'("c#"
 							  "ahk"
-							  "powershell"
-							  "css")
+							  "powershell")
 
 							'("godot"
 							  "python/python"
@@ -392,11 +391,12 @@
 							  ;; "yuck"
 							  ;; "typst"
 							  "haskell"
-							  "csv"
 							  ;; "lilypond"
 							  "latex")
 
-							'("elisp"))
+							'("elisp"
+							  "csv"
+							  "css"))
 
 ;; (load-user-file "programming/common-lisp")
 ;; (load-user-file "programming/fountain") ;; use with wrap
