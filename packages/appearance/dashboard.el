@@ -26,28 +26,28 @@
 
   ;; (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   ;; (setq dashboard-projects-backend 'projectile)
-  
+
   (setq dashboard-set-navigator t) ;; web
   ;; Format: "(icon title help action face prefix suffix)"
   (setq dashboard-navigator-buttons
 		`(;; line1
-          ((,
+		  ((,
 			(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
-            "Homepage"
-            "Browse homepage"
+			"Homepage"
+			"Browse homepage"
 			(lambda (&rest _) (browse-url "https://github.com/Ubunteous")))
-           ("★"
+		   ("★"
 			"Star"
 			"Reach for the stars"
 			(lambda (&rest _) (browse-url "https://www.youtube.com/watch?v=QH2-TGUlwu4")) warning ))
-          ;; line 2
-          (
+		  ;; line 2
+		  (
 		   (,
 			(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
-            "Linkedin"
-            "Browse Linkedin"
-            (lambda (&rest _) (browse-url "https://www.linkedin.com/")))
-           ("⚑"
+			"Linkedin"
+			"Browse Linkedin"
+			(lambda (&rest _) (browse-url "https://www.linkedin.com/")))
+		   ("⚑"
 			nil
 			"Go get some help"
 			(lambda (&rest _) (browse-url "https://stackoverflow.com")) warning ))))
@@ -61,4 +61,10 @@
 		'((recents  . 5)
 		  ;; (projects . 3)
 		  ;; (agenda   . 5))))
-		  (bookmarks . 5))))
+		  (bookmarks . 5)))
+
+  ;; these lines are equivalent but bind/general fail (loading order issue)
+  (keymap-set dashboard-mode-map "b" #'bookmark-jump)
+  ;; :bind (:map dashboard-mode-map ("b" . bookmark-jump))
+  ;; :general (:keymaps 'dashboard-mode-map "b" 'bookmark-jump)
+  )
