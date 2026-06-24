@@ -244,11 +244,19 @@
 	(or (alist-get (intern mode-name) consult-doc--mode-mappings)
 		mode-name)))
 
-(defun consult-doc ()
-  "Open the org doc of the appropriate language."
-  (interactive)
+(defun consult--doc-prompt-file ()
+  ;; Ask for a documentation filename for specific mode.
+  (completing-read "Choose a documentation file"
+				   (mapcar 'cdr consult-doc--mode-mappings)))
 
-  (let* ((doc-file (concat (consult--doc-mode-name) ".org"))
+(defun consult-doc (arg)
+  "Open the org doc of the appropriate language."
+  (interactive "P")
+
+  (let* ((mode (if current-prefix-arg
+				   (consult--doc-prompt-file)
+				 (consult--doc-mode-name)))
+		 (doc-file (concat mode ".org"))
 		 (filepath (concat consult-doc-dir doc-file)))
 
 	(catch 'nofile
@@ -262,6 +270,7 @@
 	(progn
 	  (org-cycle-overview)
 	  (consult-org-heading)
+
 	  (org-show-subtree)
 	  (forward-line 2)
 	  (read-only-mode))))
