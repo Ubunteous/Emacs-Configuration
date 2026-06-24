@@ -230,56 +230,42 @@
 
 (defvar consult-doc-dir "~/org/Informatics/Languages/")
 
+(defvar consult-doc--mode-mappings '((bash . "sh")
+									 (emacs-lisp . "elisp")
+									 (clojure . "clojure/clojure.org")))
+
 (defun consult--doc-mode-name ()
   "Get the language associated to the current major-mode."
-  (let ((mode (symbol-name major-mode)))
-    (if (and (> (length mode) 6)
-			 (equal (substring mode -7) "ts-mode"))
-		(setq suffix-pos -8) ;; ts-mode
-      (setq suffix-pos -5))
+  (let* ((mode-symbol (symbol-name major-mode)) ; from doc: never alter symbol-name directly
+		 (mode-name (thread-last
+					  mode-symbol
+					  (string-remove-suffix "-mode")
+					  (string-remove-suffix "-ts"))))
+	(or
+	 (alist-get (intern mode-name) consult-doc--mode-mappings)
+	 mode-name)))
 
-    (setq mode (substring (symbol-name major-mode) 0 suffix-pos))
-    mode))
-
-(defun consult-doc () ;; (start end)
+(defun consult-doc ()
   "Open the org doc of the appropriate language."
-  ;; (interactive "r")
   (interactive)
-  ;; ;; only show 2 windows after function call
-  ;; (when (not (eq (length (window-list)) 1))
-  ;;   (delete-other-windows))
 
   (let* ((doc-file (concat (consult--doc-mode-name) ".org"))
-		 (dir (cond ((string-equal doc-file "clojure.org") "clojure/") (t "")))
-		 (file-path (concat consult-doc-dir dir doc-file))
-		 ;; (region-text (when (region-active-p) (buffer-substring start end)))
-		 )
+		 (filepath (concat consult-doc-dir doc-file)))
 
 	(catch 'nofile
-      (when (not (file-exists-p file-path))
-		(throw 'nofile (error (concat "File: " file-path " not found."))))
+	  (when (not (file-exists-p filepath))
+		(throw 'nofile (error (concat "File: " filepath " not found\nConsider adding a consult-doc mapping for " (symbol-name major-mode))))))
 
-	  ;; ;; needs to be chained or other-window won't work
-	  ;; (progn
-	  ;; 	(split-window-right)
-	  ;; 	(other-window 1)
-	  ;; 	(if (get-buffer doc-file)
-	  ;; 		(switch-to-buffer doc-file)
-	  ;; 	  (find-file (concat file-path)))))
+	(if (get-buffer doc-file)
+		(switch-to-buffer doc-file)
+	  (find-file filepath))
 
-	  (if (get-buffer doc-file)
-		  (switch-to-buffer doc-file)
-		(find-file (concat file-path))))
-
-	(delete-other-windows (get-buffer-window doc-file))
-	
-	(org-cycle-overview)
-	(consult-org-heading)
-	;; (insert region-text)
-	(read-only-mode)
-	;; (org-cycle)
-	;; (use-local-map (copy-keymap org-mode-map))
-	))
+	(progn
+	  (org-cycle-overview)
+	  (consult-org-heading)
+	  (org-show-subtree)
+	  (forward-line 2)
+	  (read-only-mode))))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; CONSULT TO DO ;;
