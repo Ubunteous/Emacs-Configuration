@@ -60,28 +60,27 @@
 				(cons #'tempel-expand
 					  (cons #'tempel-complete
 							completion-at-point-functions))))
+
+  (defun tempel-maximise-capf-priority ()
+	;; Put tempel capfs first in completion-at-point-functions
+	(setq-local completion-at-point-functions
+				(remove 'tempel-complete
+						(remove 'tempel-expand
+								completion-at-point-functions)))
+	(tempel-setup-capf))
   :hook
   (prog-mode . tempel-setup-capf)
-  ;; dirty but it works. find later a way to auto include eglot managed modes
-  ;; (prog-mode . (lambda ()
-  ;;		 (unless (member major-mode '(python-ts-mode python-mode))
-  ;;		   (tempel-setup-capf))))
 
-  ;; (eglot-managed-mode . tempel-setup-capf)
-  ;; (eglot-managed-mode . (lambda ()
-  ;;			  (setq-local completion-at-point-functions
-  ;;					  (append
-  ;;					   '(tempel-expand tempel-complete eglot-completion-at-point)
-  ;;					   (nthcdr 3 completion-at-point-functions)))))
-  )
+  ;; make sure eglot-capf appears after tempel-capf in completion-at-point-functions
+  (eglot-managed-mode . tempel-maximise-capf-priority))
 
 (use-package tempel-collection
   :defer t
   :after tempel)
 
-(use-package eglot-tempel
-  :defer t
-  :after eglot
-  ;; :preface (eglot-tempel-mode)
-  ;; :init (eglot-tempel-mode t)
-  :hook (eglot-managed-mode . (lambda () (setq eglot-tempel-mode t))))
+;; (use-package eglot-tempel
+;;   :defer t
+;;   ;; :preface (eglot-tempel-mode)
+;;   ;; :init (eglot-tempel-mode t)
+;;   :after eglot
+;;   :hook (eglot-managed-mode . eglot-tempel-mode t))
