@@ -241,9 +241,8 @@
 					  mode-symbol
 					  (string-remove-suffix "-mode")
 					  (string-remove-suffix "-ts"))))
-	(or
-	 (alist-get (intern mode-name) consult-doc--mode-mappings)
-	 mode-name)))
+	(or (alist-get (intern mode-name) consult-doc--mode-mappings)
+		mode-name)))
 
 (defun consult-doc ()
   "Open the org doc of the appropriate language."
