@@ -16,7 +16,9 @@
   (setq writeroom-width 60
 		writeroom-fullscreen-effect "maximized")
   ;; writeroom-added-width-left -10)
-  (setq writeroom-restore-window-config t)
+
+  ;; bad restoration in some cases (in org mode, first M-x writeroom-mode recalls previous buffer)
+  ;; (setq writeroom-restore-window-config t)
 
   ;; (add-to-list writeroom-global-effects my-writeroom-theme)
   :hook
