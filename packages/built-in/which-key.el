@@ -7,12 +7,9 @@
   :ensure nil
   :defer t
   :general
-  (:keymaps 'help-map
-			"M" 'which-key-show-major-mode)
-  (:keymaps 'which-key-mode-map
-			;; with bindings starting wit C-x, use SPC to cycle
-			"C-x §" 'which-key-show-next-page-cycle ;; cannot use space as it shadows rectangle-mode
-			"C-c SPC" 'which-key-show-next-page-cycle)
+  (:keymaps 'which-key-C-h-map
+			"C-n" 'which-key-show-next-page-cycle ;; cannot use space as it shadows rectangle-mode
+			"C-p" 'which-key-show-previous-page-cycle)
   :init
   (which-key-mode)
   :config
