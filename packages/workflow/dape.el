@@ -2,6 +2,12 @@
 ;;                DAPE                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; USAGE:
+;; Call dape with C-u to override debugger options such as:
+;; + :cwd with absolute path
+;; + :args ["arg1" "arg2" ..]
+;; + :env (:RUST_LOG "WARN" :FOO "BAR")
+
 ;; (use-package jsonrpc
 ;;   ;; temporary fork
 ;;   :defer t

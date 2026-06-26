@@ -83,6 +83,7 @@
 
 							'("treesit"
 							  ;; "smtpmail"
+							  ;; "hexl"
 							  "eglot")
 
 							'("auto-insert"
@@ -115,6 +116,7 @@
 						   "align"
 						   ;; "ws"
 						   "fix-encoding"
+						   "keep-duplicate-lines"
 						   "smart-insert"
 						   "auto-close-compilation"
 						   "org-tables-to-json"
@@ -234,7 +236,7 @@
 							'("cape" ;; surprisingly useful!
 							  "corfu"
 
-							  "embark" ;; use it with consult
+							  ;; "embark" ;; use it with consult
 							  "marginalia"
 							  "orderless"
 							  "consult"
@@ -325,7 +327,7 @@
 							'()
 
 							'("apheleia"
-							  "direnv"
+							  ;; "direnv"
 							  "hl-todo"
 							  "flyover")
 
@@ -368,9 +370,12 @@
 
 							  "sh"
 							  "rust"
+
 							  ;; "guile"
 							  "janet"
 							  "clojure"
+							  "common-lisp"
+
 							  "javascript"
 							  ;; "kotlin"
 							  "typescript"
@@ -398,9 +403,8 @@
 							  "csv"
 							  "css"))
 
-;; (load-user-file "programming/common-lisp")
 ;; (load-user-file "programming/fountain") ;; use with wrap
-;; (load-user-file "programming/lisp")
+;; (load-user-file "programming/lisp") ;; for yuck
 ;; (load-user-file "programming/json")
 ;; (load-user-file "built-in/java")
 ;; (load-user-file "programming/meghanada")

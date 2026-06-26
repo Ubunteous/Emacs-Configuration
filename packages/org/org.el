@@ -119,7 +119,8 @@
 		  ("h" . "src html\n")
 		  ("i" . "src js\n")
 		  ("k" . "src kotlin\n")
-		  ("l" . "src lua\n")
+		  ("L" . "src lua\n")
+		  ("l" . "src lisp\n")
 		  ("m" . "center\n")
 		  ("n" . "src nix\n")
 		  ("o" . "src go :imports '(\"fmt\")\n")
@@ -157,6 +158,7 @@
    ;;  (lambda (pair)
    ;;	  (locate-library (concat "ob-" (symbol-name (car pair)))))...)
    '((emacs-lisp . t)
+	 (lisp . t) ; common-lisp
 	 (shell . t)
 	 ;; (latex . t)
 	 (clojure . t)
@@ -290,7 +292,8 @@
   ;;   FUNCTIONS   ;;
   ;;;;;;;;;;;;;;;;;;;
 
-  (defun org-babel-kill-ring-save-src-block-at-point ()
+  (defun org-babel-copy-block-at-point ()
+	"Copy the content of the org babel block at point."
 	(interactive)
 	(kill-new (org-element-property :value (org-element-at-point))))
 
