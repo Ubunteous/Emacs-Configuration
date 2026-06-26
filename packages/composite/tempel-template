@@ -11,6 +11,9 @@ prog-mode
 (bug (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "BUG ")
 (hack (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "HACK ")
 
+sh-mode
+
+(bash "#!/usr/bin/env bash")
 
 latex-mode
 
