@@ -22,6 +22,7 @@
   :config
   ;; (setq dired-auto-revert-buffer t)
 
+  (setq dired-hide-details-hide-absolute-location t); in dired-hide-details-mode
   (setq dired-dwim-target t)
   (setq dired-free-space nil)
   ;; (setq dired-kill-when-opening-new-dired-buffer t)

@@ -36,7 +36,7 @@
 
   ;; reduces minibuffer clutter
   ;; (setq eldoc-echo-area-use-multiline-p nil)
-
+  ;; (setq eldoc-help-at-pt t)
   ;; (setq eldoc-echo-area-prefer-doc-buffer t)
 
   ;; deactivate echo area to only keep buffer/popup

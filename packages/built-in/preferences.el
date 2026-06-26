@@ -4,22 +4,22 @@
 
 (use-package misc
   :ensure nil
-  :custom-face
+  :config
   ;; highlight available in hl-mode
-  (hl-line ((t (:foreground "cyan"))))
+  (set-face-attribute 'hl-line nil :foreground "cyan")
 
   ;; change color for search bar in M-x customize
-  (widget-field ((t (:foreground "medium spring green" :background "#272821"))))
+  (set-face-attribute 'widget-field nil :foreground "medium spring green" :background "#272821")
 
-  (apropos-symbol ((t (:foreground "#a6e12d")))) ; green
+  (set-face-attribute 'apropos-symbol nil :foreground "#a6e12d") ; green
 
-  (apropos-keybinding ((t (:foreground "#66d9ee")))) ; blue
-  (apropos-user-option-button ((t (:foreground "#ae81ff")))) ; purple
+  (set-face-attribute 'apropos-keybinding nil :foreground "#66d9ee") ; blue
+  (set-face-attribute 'apropos-user-option-button nil :foreground "#ae81ff") ; purple
 
-  (apropos-button ((t (:foreground "#fefff8")))) ; white
-  (apropos-function-button ((t (:foreground "#fc961f")))) ; orange
-  (apropos-variable-button ((t (:foreground "#a6e12d")))) ; green
-  (apropos-misc-button ((t (:foreground "#fefff8")))) ; white
+  (set-face-attribute 'apropos-button nil :foreground "#fefff8") ; white
+  (set-face-attribute 'apropos-function-button nil :foreground "#fc961f") ; orange
+  (set-face-attribute 'apropos-variable-button nil :foreground "#a6e12d") ; green
+  (set-face-attribute 'apropos-misc-button nil :foreground "#fefff8") ; white
   :init
   ;; if C-n is done at the end of the buffer, insert a newline
   ;; (setq next-line-add-newlines t)
@@ -136,6 +136,17 @@
   (setq completions-detailed t)
   (setq completions-group t)
   (setq completion-auto-select 'second-tab) ; or t
+  (setq completion-eager-update t)
+  (setq completion-eager-display 'auto)
+  (setq minibuffer-visible-completions 'up-down)
+
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;; VERSION CONTROL ;;
+  ;;;;;;;;;;;;;;;;;;;;;
+
+  (setq vc-auto-revert-mode t)
+  ;; (setq vc-allow-rewriting-published-history t)
+  (setq vc-dir-auto-hide-up-to-date 'revert)
 
   ;;;;;;;;;;;;;;
   ;; TERMINAL ;;
@@ -152,6 +163,13 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; EXPECTED IN MODERN EDITOR ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; (setq zone-all-frames t)
+  ;; (setq zone-all-windows-in-frame t)
+
+  (setq native-comp-async-on-battery-power nil) ; stop native-comp jobs on battery
+  (setq view-lossage-auto-refresh t) ; live-updating C-h l
+  (setq uniquify-after-kill-buffer-flag t) ; rename buffers after killing one with similar name
 
   ;; (setq indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
   ;; (setq display-line-numbers-width 3) ; Set a minimum width
@@ -277,6 +295,8 @@
   ;; EDITION ;;
   ;;;;;;;;;;;;;
 
+  (setq kill-region-dwim 'emacs-word) ; C-w with no region kills a word
+
   ;; makes regexp builder syntax more coherent
   (setq reb-re-syntax 'string) ; read, rx or string
   (setq save-interprogram-paste-before-kill t)
@@ -292,10 +312,15 @@
   ;; default is set to 300 input events
   ;; (setq auto-save-interval 20)
 
+  ;;;;;;;;;;
+  ;; MARK ;;
+  ;;;;;;;;;;
+
   ;; after C-u C-<Space>, more C-<Space> will reapeat the "pop-mark" action
   (setq set-mark-command-repeat-pop t)
   ;; (setq mark-ring-max 16)
   ;; (setq global-mark-ring-max 16)
+  (setq delete-pair-push-mark t)
 
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
@@ -531,7 +556,7 @@ URL: https://christiantietze.de/posts/2021/03/change-case-of-word-at-point/"
 (defun toggle-compilation-window ()
   "Show/Hide the window containing the '*compilation*' buffer."
   (interactive)
-  (when-let ((buffer compilation-last-buffer))
+  (when-let* ((buffer compilation-last-buffer))
 	(if (get-buffer-window buffer 'visible)
 		(delete-windows-on buffer)
 	  (display-buffer buffer))))

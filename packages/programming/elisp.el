@@ -39,6 +39,8 @@
   ;;	 :eval (make-list 5 'a))
   ;;	(cons
   ;;	 :eval (cons 1 '(2 3 4))))
+
+  ;; (setq ielm-history-file-name "~/.emacs.d/files/ielm-history.eld")
   :general (
 			;; "C-c x" 'eval-region-or-buffer
 			[remap eval-last-sexp] 'eval-last-sexp-or-region)

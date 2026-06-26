@@ -42,6 +42,8 @@
 					   (name . "\*Apropos\*")
 					   (name . "\*info\*"))))))
 
+
+  (setq ibuffer-human-readable-size t)
   (setq ibuffer-expert t) ;; kill buffers without a query
   (setq ibuffer-show-empty-filter-groups nil)
   :hook (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "home")))
