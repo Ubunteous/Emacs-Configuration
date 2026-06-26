@@ -91,6 +91,6 @@
 ;;   :defer t
 ;;   :general
 ;;   (:keymaps 'embark-file-map
-;; 	    "s" 'sudo-edit-find-file
-;; 	    'embark-become-file-buffer-map
-;; 	    "s" . 'sudo-edit-find-file))
+;;		"s" 'sudo-edit-find-file
+;;		'embark-become-file-buffer-map
+;;		"s" . 'sudo-edit-find-file))

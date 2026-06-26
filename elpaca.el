@@ -204,7 +204,7 @@
 							  ;; "ob/ob-rust"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
-							  "ob/ob-csharp"
+							  "ob/ob-csharp" ; native c# support in emacs 31
 							  ;; "ob/ob-go"
 							  "ob/ob-typescript"
 							  "ob/ob-powershell"
@@ -237,7 +237,7 @@
 							'("cape" ;; surprisingly useful!
 							  "corfu"
 
-							  ;; "embark" ;; use it with consult
+							  "embark" ;; use it with consult
 							  "marginalia"
 							  "orderless"
 							  "consult"
