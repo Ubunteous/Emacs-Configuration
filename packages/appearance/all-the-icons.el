@@ -27,15 +27,16 @@
   :after (all-the-icons marginalia) ;; selectrum/vertico
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init (all-the-icons-completion-mode)
-  :custom-face (all-the-icons-completion-dir-face ((t (:foreground "SteelBlue3"))))
   :config
+  (set-face-attribute 'all-the-icons-completion-dir-face nil :foreground "SteelBlue3")
+
   ;; fix for vertico
   (define-minor-mode all-the-icons-completion-mode
-    "Add icons to completion candidates."
-    :global t
-    (if all-the-icons-completion-mode
-  	(advice-add (compat-function completion-metadata-get) :around #'all-the-icons-completion-completion-metadata-get)
-      (advice-remove (compat-function completion-metadata-get) #'all-the-icons-completion-completion-metadata-get))))
+	"Add icons to completion candidates."
+	:global t
+	(if all-the-icons-completion-mode
+		(advice-add (compat-function completion-metadata-get) :around #'all-the-icons-completion-completion-metadata-get)
+	  (advice-remove (compat-function completion-metadata-get) #'all-the-icons-completion-completion-metadata-get))))
 
 
 (use-package all-the-icons-ibuffer
@@ -47,8 +48,9 @@
   :defer t
   :after (all-the-icons dired)
   :diminish all-the-icons-dired-mode
-  :custom-face (all-the-icons-dired-dir-face ((t (:foreground "SteelBlue3"))))
   :config
+  (set-face-attribute 'all-the-icons-dired-dir-face nil :foreground "SteelBlue3")
+
   (setq all-the-icons-dired-monochrome nil)
 
   (defface all-the-icons-dired-todo-dir-face

@@ -5,9 +5,6 @@
 ;; Example configuration for Consult
 (use-package consult
   :defer t
-  :custom-face
-  (consult-preview-match ((t (:foreground "#272821" :background "light sea green"))))
-  (consult-preview-line ((t (:background "unspecified"))))
   :init
   (defvar-keymap consult-search-keymap
 	:doc "Keymap for search functions in consult.")
@@ -33,6 +30,9 @@
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
   :config
+  (set-face-attribute 'consult-preview-match nil :foreground "#272821" :background "light sea green")
+  (set-face-attribute 'consult-preview-line nil :background "unspecified")
+
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
   ;; (setq consult-preview-key 'any)

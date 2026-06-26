@@ -19,9 +19,6 @@
   ;;		  :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
   ;;		  :version (lambda (_) (require 'tex-site) AUCTeX-version))
   ;; :requires reftex
-  :custom-face
-  ;; :set-face-foreground 'font-latex-sedate-face "#66d9ee") ; unknown keywords
-  (font-latex-sedate-face ((t (:foreground "#66d9ee")))) ; unknown keywords
   ;; LaTeX and latex modes are the same
   ;; :mode ("\\.tex\\'" . LaTeX-mode) ; or latex-mode
 
@@ -32,7 +29,10 @@
   ;; %%% TeX-master: "master file name without extension"
   ;; %%% End:
   :mode ("\\.tex\\'" . rubbish-here)
-  :config
+  :configFileName
+  (set-face-attribute 'swiper-background-match-face-1 nil :background "light sea green")
+  (set-face-attribute 'font-latex-sedate-face nil :foreground "#66d9ee") ; unknown keywords
+
   ;; to avoid triggering prompts every time a file is opened
   (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
   (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))

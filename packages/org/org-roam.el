@@ -10,34 +10,34 @@
 (use-package org-roam
   :defer t
   ;; :after emacsql
-  :custom-face
-  (org-roam-link-current ((nil (:background "#e24888" :underline t))))
-  (org-roam-link ((nil (:background "#e24888" :underline t))))
   ;; :custom
   ;; (org-roam-db (file-truename "~/org/org-roam/database/org-roam.db"))
   ;; (org-roam-completion-everywhere t)
 
   ;; ;; to save db locally
   ;; (setq-local org-roam-directory
-  ;; 			  (expand-file-name
-  ;; 			   (concat
-  ;; 				(locate-dominating-file default-directory ".dir-locals.el")
-  ;; 				"org-roam")))
+  ;;			  (expand-file-name
+  ;;			   (concat
+  ;;				(locate-dominating-file default-directory ".dir-locals.el")
+  ;;				"org-roam")))
   :config
+  (set-face-attribute 'org-roam-link-current nil :background "#e24888" :underline t)
+  (set-face-attribute 'org-roam-link nil :background "#e24888" :underline t)
+
   (setq org-roam-directory (file-truename "~/org/Alter/roam"))
   ;; exclude headlines with the "ATTACH" tag
   ;; (setq org-roam-db-node-include-function
-  ;; 	(lambda ()
+  ;;	(lambda ()
   ;;         (not (member "ATTACH" (org-get-tags)))))
 
   ;; Configure org-roam popup buffer
   ;; (add-to-list 'display-buffer-alist
   ;;              '("\\*org-roam\\*"
-  ;; 		 (display-buffer-in-direction)
-  ;; 		 (direction . right)
-  ;; 		 (window-width . 0.33)
-  ;; 		 (window-height . fit-window-to-buffer)
-  ;; 		 (window-parameters . ((no-other-window . t)
+  ;;		 (display-buffer-in-direction)
+  ;;		 (direction . right)
+  ;;		 (window-width . 0.33)
+  ;;		 (window-height . fit-window-to-buffer)
+  ;;		 (window-parameters . ((no-other-window . t)
   ;;                                      (no-delete-other-windows . t)))))
 
   ;; ;; Make sure the backlinks buffer always shows up in a side window

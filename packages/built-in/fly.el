@@ -9,10 +9,10 @@
   (defvar-keymap flymake-keymap
 	:doc "Keymap for flymake bindings.")
   :config
+  (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :height 1.0)
+
   ;; (setq flymake-indicator-type) ;; fringes (default), margins or nil
   (setq flymake-show-diagnostics-at-end-of-line 'short) ;; defaults to nil. use either 'short or t
-  :custom-face
-  (flymake-end-of-line-diagnostics-face ((t (:height 1.0))))
   :general
   (:keymaps 'flymake-keymap
 			"b" 'flymake-running-backends

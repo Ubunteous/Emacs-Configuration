@@ -5,10 +5,14 @@
 (use-package org-agenda
   :defer t
   :ensure nil
-  :custom-face
-  ;; (org-agenda-date ((t (:foreground "light sea green"))))
-  (org-agenda-calendar-event ((t (:foreground "light sea green"))))
   :config
+  ;;;;;;;;;;
+  ;; FACE ;;
+  ;;;;;;;;;;
+
+  ;; (set-face-attribute 'org-agenda-date nil :foreground "light sea green")
+  (set-face-attribute 'org-agenda-calendar-event nil :foreground "light sea green")
+
   ;;;;;;;;;;;;;;;;
   ;;   AGENDA   ;;
   ;;;;;;;;;;;;;;;;

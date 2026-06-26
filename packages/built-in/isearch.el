@@ -6,16 +6,15 @@
   :ensure nil
   ;; :straight (:type built-in)
   :defer t
-  :custom-face
-  (isearch ((t (
-				:weight bold
-				;; :underline  (:color foreground-color :style line)
-				:foreground "light sea green"
-				:background "black"))))
-
-  (lazy-highlight ((t (:foreground "light sea green" :background "black"))))
-  (isearch-fail ((t (:foreground "black"  :background "MediumPurple"))))
   :config
+  (set-face-attribute 'isearch nil
+					  :weight bold
+					  ;; :underline  (:color foreground-color :style line)
+					  :foreground "light sea green"
+					  :background "black")
+  (set-face-attribute 'lazy-highlight nil :foreground "light sea green" :background "black")
+  (set-face-attribute 'isearch-fail nil :foreground "black"  :background "MediumPurple")
+
   (setq isearch-repeat-on-direction-change t)
 
   (setq isearch-lazy-count t
@@ -68,15 +67,6 @@ This is useful when followed by an immediate kill."
 	  (let (search-nonincremental-instead)
 		(ignore-errors (isearch-done t t)))
 	  (consult-line query)))
-  :custom-face
-  (isearch ((t (
-				:weight bold
-				;; :underline  (:color foreground-color :style line)
-				:foreground "light sea green"
-				:background "black"))))
-
-  (lazy-highlight ((t (:foreground "light sea green" :background "black"))))
-  (isearch-fail ((t (:foreground "black"  :background "MediumPurple"))))
   :general
   ;; (:keymaps 'minibuffer-local-isearch-map
   ;;		"<left>" 'isearch-reverse-exit-minibuffer

@@ -6,13 +6,13 @@
 (use-package corfu
   :defer t
   :ensure (corfu :files (:defaults "extensions/*"))
-  :custom-face
-  (corfu-default ((t (:background "#2e2e2e"))))
-  (corfu-current ((t (:background "#282828"))))
-  (eruby-standard-face ((t (:slant italic))))
   ;; :init
   ;; (global-corfu-mode)
   :config
+  (set-face-attribute 'corfu-default nil :background "#2e2e2e")
+  (set-face-attribute 'corfu-current nil :background "#282828")
+  (set-face-attribute 'eruby-standard-face nil :slant italic)
+
   (setq corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
   ;; (setq corfu-preselect-first nil) ;; Disable candidate preselection
 

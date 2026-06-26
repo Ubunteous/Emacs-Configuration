@@ -8,11 +8,6 @@
   ;; :after ox-latex
   ;; :straight (:type built-in)
   :ensure nil
-  :custom-face
-  (org-block-begin-line ((t (:foreground "light sea green"))))
-  (org-imminent-deadline ((t (:foreground "dark sea green" :inherit nil))))
-  (org-upcoming-deadline ((t (:foreground "medium see green"))))
-  (org-upcoming-distant-deadline ((t (:foreground "light sea green"))))
   :general
   (:keymaps 'org-mode-map
 			"C-c -" 'org-ctrl-c-plus
@@ -37,6 +32,15 @@
   :init
   (setq org-use-sub-superscripts nil) ;; prevent _ and ^ from altering nearby text
   :config
+  ;;;;;;;;;;;
+  ;; FACES ;;
+  ;;;;;;;;;;;
+
+  (set-face-attribute 'org-block-begin-line nil :foreground "light sea green")
+  (set-face-attribute 'org-imminent-deadline nil :foreground "dark sea green" :inherit nil)
+  (set-face-attribute 'org-upcoming-deadline nil :foreground "medium see green")
+  (set-face-attribute 'org-upcoming-distant-deadline nil :foreground "light sea green")
+
   ;;;;;;;;;;;;;;;;;;;;;;
   ;;   LATEX EXPORT   ;;
   ;;;;;;;;;;;;;;;;;;;;;;

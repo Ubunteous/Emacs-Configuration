@@ -4,9 +4,9 @@
 
 (use-package minimap
   :defer t
-  :custom-face
-  (minimap-active-region-background ((t (:background "Brown"))))
   :config
+  (set-face-attribute 'minimap-active-region-background nil :background "Brown")
+
   (setq minimap-minimum-width 10
-	minimap-width-fraction 0.1
-	minimap-window-location "right"))
+		minimap-width-fraction 0.1
+		minimap-window-location "right"))

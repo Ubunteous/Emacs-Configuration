@@ -327,9 +327,9 @@ if (typeof(displayObject) == 'undefined')
 
   ;; shadows meow. replaced by Tab
   (keymap-unset dape-info-scope-mode-line-map "e")
-  :custom-face
-  (dape-breakpoint-face ((t (:foreground "#f82570" :height 2))))
-  (dape-inlay-hint-face ((t (:height 2))))
+
+  (set-face-attribute 'dape-breakpoint-face nil :foreground "#f82570" :height 2)
+  (set-face-attribute 'dape-inlay-hint-face nil :height 2)
   :general (:keymaps 'dape-global-map
 					 "H" 'dape-transient
 					 "N" 'dape-breakpoint-goto-next

@@ -218,10 +218,9 @@
   ;; :after compat
   :after transient
   :defer t
-  :custom-face
-  (smerge-markers ((t (:background "deep sky blue"))))
-  (smerge-lower ((t (:background "brown"))))
   :config
+  (set-face-attribute 'smerge-markers :background "deep sky blue")
+  (set-face-attribute 'smerge-lower :background "brown")
   ;; ;; updates modeline with branch. higher cost than hook
   ;; (setq auto-revert-check-vc-info t
   ;;       auto-revert-interval 10)

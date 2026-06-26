@@ -15,11 +15,11 @@
   :config
   (hydra-posframe-mode)
   (setq hydra-posframe-border-width 5
-	hydra-posframe-poshandler 'posframe-poshandler-p0.5p0-to-w0.5p1)
+		hydra-posframe-poshandler 'posframe-poshandler-p0.5p0-to-w0.5p1)
   ;; hydra-posframe-poshandler 'posframe-poshandler-frame-center)
-  :custom-face
-  (hydra-posframe-face ((t (:background "Black"))))
-  (hydra-posframe-border-face ((t (:background "Teal")))))
+
+  (set-face-attribute 'hydra-posframe-face nil :background "Black")
+  (set-face-attribute 'hydra-posframe-border-face nil :background "Teal"))
 
 (use-package major-mode-hydra
   ;; pretty hydra

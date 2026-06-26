@@ -4,16 +4,16 @@
 
 (use-package diff-hl
   :defer t
-  :custom-face
-  (diff-hl-insert ((t (:foreground "lime green" :background "lime green")))) ;; #a6e12d
-  (diff-hl-change ((t (:foreground "orange" :background "orange"))))
-  (diff-hl-delete ((t (:foreground "firebrick2" :background "firebrick2"))))
   :init
   (defvar-keymap diff-hl-keymap
 	:doc "Keymap for diff-hl.")
   ;; (global-diff-hl-mode)
   ;; (diff-hl-dired-mode)
   :config
+  (set-face-attribute 'diff-hl-insert nil :foreground "lime green" :background "lime green") ;; #a6e12d
+  (set-face-attribute 'diff-hl-change nil :foreground "orange" :background "orange")
+  (set-face-attribute 'diff-hl-delete nil :foreground "firebrick2" :background "firebrick2")
+
   (set-fringe-mode '(4 . 0))
 
   ;; (setq diff-hl-bmp-max-width 4)
