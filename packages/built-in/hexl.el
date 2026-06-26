@@ -48,3 +48,13 @@ Hexadecimal is: %s
 Decimal is: %d"
 	   this-command
 	   xnum (string-to-number xnum 16)))))
+
+;; (defun view-byte-array (format)
+;;   "View the current file in od dump"
+;;   (interactive "sFormat Code: ")
+;;   (let* (($outputbuffer "*od dump*")
+;;          ($fname (buffer-file-name))
+;;          $cmdStr)
+;;     (setq $cmdStr (concat "od --endian=big -t " format " \""   $fname "\" &"))
+;;     (message "Running %s" $cmdStr)
+;;     (shell-command $cmdStr $outputbuffer)))
