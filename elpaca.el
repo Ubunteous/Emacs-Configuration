@@ -118,6 +118,7 @@
 						   "fix-encoding"
 						   "keep-duplicate-lines"
 						   "smart-insert"
+						   "highlight-changes"
 						   "auto-close-compilation"
 						   "org-tables-to-json"
 						   "org-properties-to-csv"
