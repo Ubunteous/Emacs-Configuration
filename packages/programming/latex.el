@@ -65,4 +65,7 @@
 
   ;; for latex (greek chars as unicode) \delta \Delta
   (text-mode . prettify-symbols-mode)
-  (LaTeX-mode . reftex-mode))
+  (LaTeX-mode . reftex-mode)
+
+  ;; flyspell broken with latex in 6/2026 (freezes/hangs)
+  (LaTeX-mode . (lambda () (flyspell-mode -1))))
