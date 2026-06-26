@@ -230,9 +230,21 @@
 
 (defvar consult-doc-dir "~/org/Informatics/Languages/")
 
-(defvar consult-doc--mode-mappings '((bash . "sh")
+(defvar consult-doc--mode-mappings '((awk . "awk")
+									 (bash . "sh")
+									 (c . "c")
+									 (clojure . "clojure/clojure")
+									 (common-lisp . "common-lisp")
+									 (csharp . "csharp")
+									 (css . "web/css")
+									 (elisp . "elisp")
 									 (emacs-lisp . "elisp")
-									 (clojure . "clojure/clojure.org")))
+									 (godot . "godot/gdscript")
+									 (html . "web/html")
+									 (janet . "janet")
+									 (javascript . "javascript/javascript")
+									 (python . "python/python")
+									 (reaper . "reaper_lua")))
 
 (defun consult--doc-mode-name ()
   "Get the language associated to the current major-mode."
