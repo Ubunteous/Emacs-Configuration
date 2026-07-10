@@ -384,8 +384,9 @@
 							  "yaml"
 							  "markdown"
 							  "scss"
-
+							  "css"
 							  "sql/sql"
+
 							  ;; "sql/pgmacs"
 							  ;; "sql/ejc"
 
@@ -400,9 +401,8 @@
 							  "latex")
 
 							'("elisp"
-							  "xml"
 							  "csv"
-							  "css"))
+							  "xml"))
 
 ;; (load-user-file "programming/fountain") ;; use with wrap
 ;; (load-user-file "programming/lisp") ;; for yuck
