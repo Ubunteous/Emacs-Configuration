@@ -121,13 +121,18 @@
   ;; requires a restart even if error about symlinks
   (elpaca-no-symlink-mode)
 
-;; hack to use find-file at c:/Users/<name>/
-(setq default-directory "~/../../Documents/"))
+  ;; hack to use find-file at c:/Users/<name>/
+  (setq default-directory "~/../../Documents/"))
 
+;; if you ever need to replace a channel
+;; 1) move elpa/melpa directory
+;; 2) M-x package-refresh-contents
+;; 3) M-x package-install-selected-packages
 (setq package-archives
 	  '(("gnu-elpa" . "https://elpa.gnu.org/packages/")
 		("nongnu" . "https://elpa.nongnu.org/nongnu/")
-		("melpa" . "https://melpa.org/packages/")))
+		;; ("melpa-stable" . "https://releases.melpa.org/packages/")
+		("melpa" . "https://snapshots.melpa.org/packages/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               GENERAL              ;;
