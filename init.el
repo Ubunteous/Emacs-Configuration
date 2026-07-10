@@ -156,8 +156,18 @@
 ;; also check mode-line-collapse-minor-modes (alternative to diminish/delight) to hide some modes:
 ;; (setq mode-line-collapse-minor-modes '(abbrev-mode flyspell-mode flyspell-prog-mode eldoc-mode))
 
-;;abbreviate names. use-package has built-in support for it
-(use-package diminish)
+;; abbreviate names. use-package has built-in support for it
+;; use C-h f to see the name of the file.el where the mode to diminish is defined
+(use-package diminish
+  :init
+  ;; (diminish 'auto-revert-mode) ; arev
+  ;; (diminish 'hs-minor-mode)
+  ;; (diminish 'symbol-overlay)
+
+  (diminish 'abbrev-mode)
+  (diminish 'eldoc-mode)
+  (diminish 'visual-line-mode)
+  (diminish 'which-key-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;

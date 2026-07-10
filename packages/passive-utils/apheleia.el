@@ -4,6 +4,7 @@
 
 (use-package apheleia
   :defer t
+  :diminish apheleia-mode "fmt"
   :config
   ;; (setq apheleia-global-mode 1)
   (setq apheleia-mode-lighter " Format")

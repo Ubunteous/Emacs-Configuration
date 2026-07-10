@@ -5,11 +5,12 @@
 (use-package completion-preview
   :ensure nil
   :defer t
+  :diminish completion-preview-mode
   :config
   (setq completion-preview-completion-styles '(orderless-first-prefix))
 
   ;; (setq completion-preview-sort-function 'minibuffer--sort-by-length-alpha)
-  
+
   ;; (setq completion-preview-minimum-symbol-length 3) ;; default
   (setq completion-preview-idle-delay 2) ;; in seconds
 

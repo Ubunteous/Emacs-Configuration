@@ -3,8 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package undo-hl
-  ;; :straight
-  ;; (undo-hl :type git :host github :repo "casouri/undo-hl")
+  :defer t
+  :diminish
   :ensure (undo-hl :type git :host github :repo "casouri/undo-hl")
   :config
   (setq undo-hl-flash-duration 0.1) ;; default 0.02
