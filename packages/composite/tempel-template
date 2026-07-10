@@ -11,6 +11,16 @@ prog-mode
 (bug (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "BUG ")
 (hack (if (derived-mode-p 'emacs-lisp-mode) ";; " comment-start) "HACK ")
 
+nxml-mode
+
+(process "<process name=\"" p "\">" n> q n> "</process>")
+(description "<description>" p "</description>" n> q)
+(callable "<callable>" p "</callable>" n> q)
+(sub "<processes>" q n> "</processes>")
+(result "<result value=\"" p "\">" n> q n> "</result>")
+(input "<input>" n> "<var>" n> "<name>" p "</name>" n> "<required>" p "</required>" n> "</var>" n> "</input>" n> q)
+(output "<output>" n> "<var>" n> "<name>" p "</name>" n "</var>" n "</output>" n> q)
+
 sh-mode
 
 (bash "#!/usr/bin/env bash")
@@ -34,6 +44,9 @@ emacs-lisp-mode
 (use-package "use-package " q n> ":defer t")
 (ensure ":ensure (name :type git :host github :repo \"author/name\")")
 (recipe ":ensure (" p " :type git :host github :repo \"" q "\")")
+(section ";;" (make-string (length title) ?\;) ";;;;" n
+		 ";; " (p "Title: " title) " ;;" n
+		 ";;" (make-string (length title) ?\;) ";;;;" n)
 
 (autoload ";;;###autoload")
 (pt "(point)")
@@ -149,7 +162,9 @@ python-ts-mode
 (def_function "def " p "(" p "):" n> q)
 (testtest "def " p "(" p "):" n> q)
 
+
 nix-ts-mode
+
 (nix-direnv "# 1) save this as shell.nix" n
 			"# run in the same directory:" n
 			"# 2) echo \"use nix\" >> .envrc" n
@@ -184,8 +199,11 @@ nix-ts-mode
 			"in {" n n>
 			"options.lab.module = { enable = mkEnableOption \"Enables support for module\"; };" n n>
 			"config = mkIf (labcfg.enable && cfg.enable) {" n q n "};" n n
-			"}"
-			)
+			"}")
+
+(section "##" (make-string (length title) ?#) "##" n
+		 "# " (p "Title: " title) " #" n
+		 "##" (make-string (length title) ?#) "##" n)
 
 
 gdscript-mode

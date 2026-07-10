@@ -70,6 +70,7 @@
 	(tempel-setup-capf))
   :hook
   (prog-mode . tempel-setup-capf)
+  (nxml-mode . tempel-setup-capf)
 
   ;; make sure eglot-capf appears after tempel-capf in completion-at-point-functions
   (eglot-managed-mode . tempel-maximise-capf-priority))
