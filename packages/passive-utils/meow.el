@@ -188,8 +188,9 @@
    '("d" . meow-delete) ;; meow--kbd-delete-char is now set to C-d d
    '("e" . meow-prev)
    '("E" . meow-prev-expand)
-   '("f" . meow-find)
-   '("F" . nt-negative-find)
+   ;; '("f" . meow-find)
+   '("f" . meow-find-repeatidly)
+   '("F" . nt-negative-find-repeatidly)
    '("g" . meow-cancel-selection)
    '("G" . meow-grab)
    ;; '("h" . meow-left)
@@ -225,8 +226,8 @@
    '("S" . meow-to-block)
    ;; '("S" . meow-open-above)
    ;; '("S" . meow-insert-at-begin)
-   '("t" . meow-till)
-   '("T" . nt-negative-till)
+   '("t" . meow-till-repeatidly)
+   '("T" . nt-negative-till-repeatidly)
    '("u" . meow-undo-dwim)
    '("U" . meow-pop-selection)
    '("v" . meow-search)
@@ -272,6 +273,10 @@
   (key-chord-define meow-insert-state-keymap "nn" 'meow-normal-mode)
   :hook meow-mode)
 
+;;;;;;;;;;;;
+;; Repeat ;;
+;;;;;;;;;;;;
+
 ;; MEOW BLOCK repeat
 (defvar meow-block-repeat-map
   (let ((map (make-sparse-keymap)))
@@ -284,6 +289,11 @@
    (when (symbolp cmd)
 	 (put cmd 'repeat-map 'meow-block-repeat-map)))
  meow-block-repeat-map)
+
+;;;;;;;;;;;;;;;
+;; Functions ;;
+;;;;;;;;;;;;;;;
+
 
 (defun meow-undo-dwim ()
   (interactive)
@@ -305,29 +315,12 @@
 	  (delete-active-region)
 	(backward-delete-char-untabify 1)))
 
-
-(defmacro nt--call-negative (form)
-  "Imitate vim's FORM (F/T) backward search."
-  `(let ((current-prefix-arg -1))
-	 (call-interactively ,form)))
-
-(defun nt-negative-find ()
-  "Imitate vim's F backward search."
-  (interactive)
-  (nt--call-negative 'meow-find))
-
-(defun nt-negative-till ()
-  "Imitate vim's T backward search."
-  (interactive)
-  (nt--call-negative 'meow-till))
-
 (defun meow-yank-delete-selection ()
   "Yank and delete selection if it exists."
   (interactive)
   (when (use-region-p)
 	(delete-region (region-end) (region-beginning)))
   (meow-yank))
-
 
 (defun yank-after ()
   "Reinsert the last stretch of killed text after point."
@@ -365,6 +358,8 @@
 	(next-line)
 	(end-of-line)))
 
+;; SELECT UNTIL ;;
+
 (defun meow-select-until-eol (arg)
   (interactive "P")
   (set-mark-command arg)
@@ -374,3 +369,40 @@
   (interactive "P")
   (set-mark-command arg)
   (crux-move-beginning-of-line arg))
+
+;; FIND/TILL
+
+(defun meow-find-repeatidly ()
+  "Like meow-find but keeps reaching for the next sensible match on further invocation."
+  (interactive)
+  (if (region-active-p)
+	  (let ((point (point)))
+		(cond ((eq (region-end) point) (meow--find-continue-forward))
+			  ((eq (region-beginning) point) (meow--find-continue-backward))
+			  (call-interactively 'meow-find)))
+	(call-interactively 'meow-find)))
+
+(defun meow-till-repeatidly ()
+  "Like meow-till but keeps reaching for the next sensible match on further invocation."
+  (interactive)
+  (if (region-active-p)
+	  (let ((point (point)))
+		(cond ((eq (region-end) point) (meow--till-continue-forward))
+			  ((eq (region-beginning) point) (meow--till-continue-backward))
+			  (call-interactively 'meow-till)))
+	(call-interactively 'meow-till)))
+
+(defmacro nt--call-negative (form)
+  "Imitate vim's FORM (F/T) backward search."
+  `(let ((current-prefix-arg -1))
+	 (call-interactively ,form)))
+
+(defun nt-negative-find-repeatidly ()
+  "Imitate vim's F backward search."
+  (interactive)
+  (nt--call-negative 'meow-find-repeatidly))
+
+(defun nt-negative-till-repeatidly ()
+  "Imitate vim's T backward search."
+  (interactive)
+  (nt--call-negative 'meow-till-repeatidly))
