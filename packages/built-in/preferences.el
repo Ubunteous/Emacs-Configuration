@@ -326,6 +326,10 @@
   ;; APPEARANCE ;;
   ;;;;;;;;;;;;;;;;
 
+  ;; reduce size of minor modes in modeline by putting them in a submenu called ...
+  (setq mode-line-collapse-minor-modes '(abbrev-mode eldoc-mode visual-line-mode which-key-mode auto-revert-mode))
+  ;; (setq mode-line-collapse-minor-modes-to " ...")
+
   ;; show both the row and column of the point in the modeline
   (setq column-number-mode t)
 
