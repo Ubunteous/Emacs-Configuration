@@ -20,6 +20,9 @@
   ;;			   (concat
   ;;				(locate-dominating-file default-directory ".dir-locals.el")
   ;;				"org-roam")))
+  :init
+  (defvar-keymap org-roam-keymap
+	:doc "Keymap for org roam bindings.")
   :config
   (set-face-attribute 'org-roam-link-current nil :background "#e24888" :underline t)
   (set-face-attribute 'org-roam-link nil :background "#e24888" :underline t)
@@ -234,28 +237,29 @@
 
   ;; (setq org-roam-db-update-on-save t)
   :general
-  ("C-c r g" 'org-roam-buffer-toggle
-   ;; "C-c r d" 'org-roam-buffer-display-dedicated
+  (:keymaps 'mode-specific-map
+			"l" 'org-roam-node-find
+			"r" (cons "roam" org-roam-keymap))
 
-   ;; if a new file has a name similar to another one, use ido-select-text
-   "C-c r i" 'org-roam-node-insert
-   "C-c r c" 'org-roam-capture
-   "C-c r f" 'org-roam-node-find
-   "C-c l" 'org-roam-node-find
+  (:keymaps 'org-roam-keymap
+			"c" 'org-roam-capture
+			"d" 'delve-index
+			"f" 'org-roam-node-find
+			"g" 'org-roam-buffer-toggle
+			"i" 'org-roam-node-insert
+			"n" 'capture-slipbox
+			"s" 'org-roam-db-sync
+			"t" 'org-roam-tag-add
 
-   ;; "C-c r o" 'org-id-get-create
-   "C-c r t" 'org-roam-tag-add
-   ;; "C-c r a" 'org-roam-alias-add
+			;; "a" 'org-roam-alias-add
+			;; "d" 'org-roam-buffer-display-dedicated
+			;; "g" 'org-roam-graph
+			;; "o" 'org-id-get-create
+			;; "r" 'org-roam-node-random
+			;; "y" 'org-id-get-create
 
-   ;; "C-c r r" 'org-roam-node-random
-   ;; "C-c r g" 'org-roam-graph
-
-   ;; "C-c r y" 'org-id-get-create
-   "C-c r n" 'capture-slipbox
-
-   "C-c r d" 'delve-index
-
-   "C-c r s" 'org-roam-db-sync)
+			;; note: if a new file has a name similar to another one, use ido-select-text
+			)
   :hook
   ((org-roam-mode . org-roam-db-autosync-mode)))
 

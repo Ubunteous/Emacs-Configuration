@@ -62,26 +62,30 @@
   ;; ("C-c m" 'consult-mode-command)
   ;; ("C-c k" 'consult-kmacro)
   ;; C-x bindings (ctl-x-map)
-  ("C-x M-:" 'consult-complex-command ;; orig. repeat-complex-command
-   "C-x b" 'consult-buffer ;; orig. switch-to-buffer
-   "C-x 4 b" 'consult-buffer-other-window ;; orig. switch-to-buffer-other-window
-   "C-x 5 b" 'consult-buffer-other-frame ;; orig. switch-to-buffer-other-frame
-   ;; "C-x r b" 'consult-bookmark ;; orig. bookmark-jump. adds a preview. create bookmark if missing
-   "C-x p b" 'consult-project-buffer ;; orig. project-switch-to-buffer
+  ("C-M-#" 'consult-register
+
    ;; Custom M-# bindings for fast register access
    "M-#" 'consult-register-load
    "M-'" 'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-   "C-M-#" 'consult-register
    ;; Other custom bindings
    "M-y" 'consult-yank-pop ;; orig. yank-pop
-   "<help> a" 'consult-apropos ;; orig. apropos-command
    ;; M-g bindings (goto-map)
 
-   "C-x r s" 'consult-register-store ;; shadows copy-to-register
-   "C-x r i" 'consult-register ;; shadows insert-register
+   ;; orig. apropos-command
+   "<help> a" 'consult-apropos)
 
-   "C-c y" consult-goto-keymap
-   "C-c u" consult-search-keymap)
+  (:keymaps 'ctl-x-map
+			"M-:" 'consult-complex-command ;; orig. repeat-complex-command
+			"b" 'consult-buffer ;; orig. switch-to-buffer
+			"4 b" 'consult-buffer-other-window ;; orig. switch-to-buffer-other-window
+			"5 b" 'consult-buffer-other-frame ;; orig. switch-to-buffer-other-frame
+			;; "C-x r b" 'consult-bookmark ;; orig. bookmark-jump. adds a preview. create bookmark if missing
+			"p b" 'consult-project-buffer ;; orig. project-switch-to-buffer
+
+			"r s" 'consult-register-store ;; shadows copy-to-register
+			"r i" 'consult-register ;; shadows insert-register
+
+			"c" (cons "consult" consult-keymap))
 
   (:keymaps 'consult-keymap
 			"a" 'consult-org-agenda
@@ -126,6 +130,7 @@
 			"k" 'consult-global-mark
 			"m" 'consult-mark
 			"o" 'consult-outline) ;; Alternative: consult-org-heading
+
   (:keymaps 'consult-search-keymap
 			;; M-s bindings (search-map)
 			"e" 'consult-isearch-history
@@ -140,15 +145,22 @@
 			"o" 'consult-org-dir
 			"r" 'consult-ripgrep
 			"u" 'consult-focus-lines)
+
   (:keymaps 'isearch-mode-map
 			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
 			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
 			"M-s l" 'consult-line ;; needed by consult-line to detect isearch
 			"M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
+
   ;; Minibuffer history
   (:keymaps 'minibuffer-local-map
 			"M-s" 'consult-history ;; orig. next-matching-history-element
 			"M-r" 'consult-history) ;; orig. previous-matching-history-element
+
+  (:keymaps 'mode-specific-map
+			"u" (cons "consult-search" consult-search-keymap)
+			"y" (cons "consult-goto" consult-goto-keymap))
+
   (:keymaps 'personal
 			"c" (cons "consult" consult-keymap)
 			"r" 'consult-doc)

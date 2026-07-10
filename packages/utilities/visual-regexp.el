@@ -4,15 +4,21 @@
 
 (use-package visual-regexp
   :defer t
+  :init
+  (defvar-keymap visual-regexp-keymap
+	:doc "Keymap for visual regexp.")
   :general
-  ("C-c v e" 'vr/replace
-   "C-c v q" 'vr/query-replace
-   "C-c v m" 'vr/mc-mark))
+  (:keymaps 'mode-specific-map
+			"v" (cons "visual-regexp" visual-regexp-keymap))
 
+  (:keymaps 'visual-regexp-keymap
+			"e" 'vr/replace
+			"q" 'vr/query-replace
+			"m" 'vr/mc-mark))
 
 (use-package visual-regexp-steroids
   :defer t
-  :after visual-regexp
   :general
-  ("C-c v s" 'vr/isearch-forward
-   "C-c v r" 'vr/isearch-backward))
+  (:keymaps 'visual-regexp-keymap
+			"s" 'vr/isearch-forward
+			"r" 'vr/isearch-backward))

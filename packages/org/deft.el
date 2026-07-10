@@ -13,15 +13,18 @@
 
   ;; Rules to transform the file's title
   ;; (setq deft-file-naming-rules
-  ;; 	'((noslash . "-")
+  ;;	'((noslash . "-")
   ;;         (nospace . "-")
   ;;         (case-fn . downcase)))
   :general
-  ("<f8>" 'deft
-   "C-x C-g" 'deft-find-file)
-  )
+  (
+   ;; "<f8>" 'deft
+   "C-x C-g" 'deft-find-file))
 
 (use-package zetteldeft
   :after deft
   :config
-  (zetteldeft-set-classic-keybindings))
+  (zetteldeft-set-classic-keybindings) ; only loaded after deft invocation
+  :general
+  (:keymaps 'mode-specific-map
+			"d" (cons "deft" zetteldeft-prefix)))

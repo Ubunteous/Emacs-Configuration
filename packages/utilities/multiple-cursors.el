@@ -16,7 +16,6 @@
 							  meow-normal-mode))
   :general
   ;; poor interactions with meow
-  ("C-c v c" 'mc/edit-lines)
   (:keymaps 'multiple-cursors-keymap
 			"a a" 'mc/mark-all-dwim
 			"a t" 'mc/mark-all-like-this-dwim
@@ -28,7 +27,7 @@
 			"e l" 'mc/edit-lines
 
 			"k" 'mc/mark-pop
-			"m" 'mc/mark-more-like-this-extended
+			"l" 'mc/edit-lines
 
 			"n c" 'mc/cycle-backward
 			"n n" 'mc/mark-next-like-this
@@ -50,8 +49,11 @@
 			"s" 'mc/sort-regions
 			"v" 'mc/vertical-align
 
+			"x" 'mc/mark-more-like-this-extended
+
 			"#" 'mc/insert-numbers
 			"." 'mc/repeat-command
 			"SPC" 'mc/vertical-align-with-space)
+
   (:keymaps 'personal
 			"m" (cons "cursor" multiple-cursors-keymap)))

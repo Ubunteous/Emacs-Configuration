@@ -382,16 +382,7 @@
   ([remap backward-kill-word] 'backward-delete-word)
 
   ("RET" 'newline-and-indent)
-
-  ("C-c f" 'find-file)
-  ("C-c t" 'execute-extended-command)
   ("C-g" 'keyboard-quit-dwim)
-
-  ("C-c n" 'previous-buffer)
-  ("C-c e" 'next-buffer)
-
-  ("C-c g" 'pop-global-mark)
-  ("C-c G" 'pop-to-mark-command)
 
   ;; ("C-x f" 'find-file)
   ;; ("C-x C-f" 'set-fill-column)
@@ -404,12 +395,34 @@
 
   ([remap suspend-frame] 'undo)
   ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)
-  ("C-x $" 'set-quad-selective-display)
-  ("C-x k" 'kill-buffer-refocus)
   ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
 
   (:keymaps 'ctl-x-map
-			"C-k" 'eval-defun)
+			"k" 'kill-buffer-refocus
+			"C-k" 'eval-defun
+			"$" 'set-quad-selective-display
+
+			"4" (cons "other-window" ctl-x-4-map)
+			"5" (cons "other-frame" ctl-x-5-map)
+			;; "6" (cons "2C-command" 2C-mode-map) ; breaks renamming if used
+			;; "8"  ; no map
+			"a" (cons "abbrev" abbrev-map) ; (i prefix for inverse addition to abbrev mode)
+			"n" (cons "narrow" narrow-map)
+			"p" (cons "project" project-prefix-map)
+			"r" (cons "rect/register" ctl-x-r-map)
+			"t" (cons "tab" tab-bar-map) ; (^ prefix to detach)
+			"v" (cons "vc" vc-prefix-map) ; (prefixes b for branches and M for merge base)
+			"w" (cons "window" window-prefix-map) ; (^ prefix to tear/detach)
+			"x" (cons "buffer" ctl-x-x-map)
+			"RET" (cons "encoding" mule-keymap))
+
+  (:keymaps 'mode-specific-map
+			"e" 'next-buffer
+			"f" 'find-file
+			"g" 'pop-global-mark
+			"G" 'pop-to-mark-command
+			"n" 'previous-buffer
+			"t" 'execute-extended-command)
 
   (:keymaps 'ctl-x-r-map
 			"a" 'append-to-register)

@@ -23,6 +23,9 @@
 			"l" 'hs-hide-level
 			"t" 'hs-toggle-hiding)
 
+  (:keymaps 'mode-specific-map
+			"@" (cons "hideshow" hideshow-keymap))
+
   (:keymaps 'personal
 			"h" (cons "hs" hideshow-keymap)
 			"C-h" 'hs-toggle-hiding)

@@ -39,9 +39,11 @@
 			"t" 'iedit-toggle-selection)
   (:keymaps 'isearch-mode-map
 			"C-i" 'iedit-mode-from-isearch)
-  ("C-c i" iedit-keymap))
 
-(defun iedit-replace ()									
+  (:keymaps 'mode-specific-map
+			"i" (cons "iedit" iedit-keymap)))
+
+(defun iedit-replace ()
   ;; quickly enter iedit mode to replace string at point
   (interactive)
   (iedit-mode)
