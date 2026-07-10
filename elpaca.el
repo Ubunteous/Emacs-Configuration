@@ -401,6 +401,7 @@
 							  "latex")
 
 							'("elisp"
+							  "xml"
 							  "csv"
 							  "css"))
 
