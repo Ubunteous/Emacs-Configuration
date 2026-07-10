@@ -152,8 +152,8 @@
   ;; TERMINAL ;;
   ;;;;;;;;;;;;;;
 
-  ;; place these config in a dedicated file once there are enough
-  (setq comint-terminfo-terminal "ansi") ; defaults to dumb
+  ;; value "ansi" causes massive issues (repeated line) in python terminal
+  ;; (setq comint-terminfo-terminal "ansi") ; defaults to dumb
 
   ;; defaults to "less"
   (cond ((executable-find "bat") (setenv "PAGER" "bat"))
