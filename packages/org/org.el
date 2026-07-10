@@ -4,31 +4,7 @@
 
 (use-package org
   :defer t
-  ;; :after jupyter
-  ;; :after ox-latex
-  ;; :straight (:type built-in)
   :ensure nil
-  :general
-  (:keymaps 'org-mode-map
-			"C-c -" 'org-ctrl-c-plus
-			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
-
-			;; removed as I need the default bindings for navigation
-			;; "C-n" 'org-next-visible-heading
-			;; "C-p" 'org-previous-visible-heading
-			;; "C-f" 'org-forward-heading-same-level
-			;; "C-b" 'org-backward-heading-same-level
-
-			"C-c C-h m" 'org-table-move-cell-left
-			"C-c C-h n" 'org-table-move-cell-down
-			"C-c C-h e" 'org-table-move-cell-up
-			"C-c C-h i" 'org-table-move-cell-right
-
-			"C-c C-n" 'org-babel-next-block-end
-			"C-c C-p" 'org-babel-previous-block-end)
-  (:keymaps 'personal
-			;; overrides persp-list-buffers in org buffers
-			"b" 'org-switchb)
   :init
   (setq org-use-sub-superscripts nil) ;; prevent _ and ^ from altering nearby text
   :config
@@ -281,6 +257,57 @@
 		org-html-meta-tags nil
 		org-html-xml-declaration nil)
 
+  ;;;;;;;;;;;;;;;;;
+  ;;   CAPTURE   ;;
+  ;;;;;;;;;;;;;;;;;
+
+  (setopt org-directory (if windows-system-p
+							"~/../../Documents/org/"
+						  "~/org/"))
+  (setopt org-default-notes-file (concat org-directory "agenda/.notes.org")) ; fallback for captures
+
+  ;; ;; alternative syntax to use functions
+  ;; (setq org-capture-templates
+  ;;	  `(("i" "Inbox" entry  (file "inbox.org")
+  ;;		 ,(concat "* TODO %?\n"
+  ;;				  "/Entered on/ %U"))
+  ;;		("n" "Note" entry  (file "notes.org")
+  ;;		 ,(concat "* Note (%a)\n"
+  ;;				  "/Entered on/ %U\n" "\n" "%?"))
+  ;;		("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+  ;;		 ,(concat "* %? :meeting:\n"
+  ;;				  "<%<%Y-%m-%d %a %H:00>>"))))
+  (setq org-capture-templates
+		'(("i" "Inbox"
+		   entry (file "agenda/inbox.org")
+		   "* %?%i %t"
+		   :empty-lines-before 1)
+		  ("d" "New deadline for the agenda"
+		   entry (file "agenda/inbox.org")
+		   "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
+		  ;; ("j" "Journal"
+		  ;;  entry (file+datetree "~/org/journal.org")
+		  ;;  "* %?\nEntered on %U\n  %i\n  %a")
+		  ("s" "Slipbox"
+		   entry (file "Alter/inbox.org")
+		   "* %?\n")))
+
+  ;; shift org capture default date to tomorrow
+  (advice-add 'org-capture :around
+			  (lambda (oldfun &rest args)
+				(let ((org-overriding-default-time
+					   (funcall
+						(lambda ()
+						  (let ((day (string-to-number (format-time-string "%d")))
+								(month (string-to-number (format-time-string "%m")))
+								(year (string-to-number (format-time-string "%Y"))))
+							(encode-time 1 1 0 (1+ day) month year))))))
+				  (apply oldfun args))))
+
+  (defun org-capture-deadline ()
+	(interactive)
+	(org-capture nil "d"))
+
   ;;;;;;;;;;;;;;;
   ;; FUNCTIONS ;;
   ;;;;;;;;;;;;;;;
@@ -369,4 +396,31 @@
   ;;   (interactive)
   ;;   (save-buffer)
   ;;   (org-export-dispatch "lO"))
-  )
+
+  :general
+  ("C-c o" 'org-capture-deadline)
+
+  ;; a bit redundant with C-c C-d (org-deadline)
+  (:keymaps 'org-capture-mode-map
+			"C-c d" 'org-timestamp-up-day)
+
+  (:keymaps 'org-mode-map
+			"C-c -" 'org-ctrl-c-plus
+			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
+
+			;; removed as I need the default bindings for navigation
+			;; "C-n" 'org-next-visible-heading
+			;; "C-p" 'org-previous-visible-heading
+			;; "C-f" 'org-forward-heading-same-level
+			;; "C-b" 'org-backward-heading-same-level
+
+			"C-c C-h m" 'org-table-move-cell-left
+			"C-c C-h n" 'org-table-move-cell-down
+			"C-c C-h e" 'org-table-move-cell-up
+			"C-c C-h i" 'org-table-move-cell-right
+
+			"C-c C-n" 'org-babel-next-block-end
+			"C-c C-p" 'org-babel-previous-block-end)
+  (:keymaps 'personal
+			;; overrides persp-list-buffers in org buffers
+			"b" 'org-switchb))

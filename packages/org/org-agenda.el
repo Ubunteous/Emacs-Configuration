@@ -2,6 +2,12 @@
 ;;             ORG-AGENDA             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; org agenda workflow:
+;; + Use agenda capture template to fill inbox
+;; + Refile from inbox to dedicated file
+;; + Add a timestamp to done items via org-log-done 'time for weekly review
+;; + Consult entries via a super view combining all the information need
+
 (use-package org-agenda
   :defer t
   :ensure nil
@@ -335,61 +341,5 @@
 
   ;; defaults to c if available. Uses org-calendar-goto-agenda
   ;; (setq org-calendar-to-agenda-key 'default)
-
-  ;;;;;;;;;;;;;;;;;
-  ;;   CAPTURE   ;;
-  ;;;;;;;;;;;;;;;;;
-
-  (setopt org-directory (if windows-system-p
-							"~/../../Documents/org/"
-						  "~/org/"))
-  (setopt org-default-notes-file (concat org-directory "agenda/.notes.org")) ; fallback for captures
-
-  ;; ;; alternative syntax to use functions
-  ;; (setq org-capture-templates
-  ;;	  `(("i" "Inbox" entry  (file "inbox.org")
-  ;;		 ,(concat "* TODO %?\n"
-  ;;				  "/Entered on/ %U"))
-  ;;		("n" "Note" entry  (file "notes.org")
-  ;;		 ,(concat "* Note (%a)\n"
-  ;;				  "/Entered on/ %U\n" "\n" "%?"))
-  ;;		("m" "Meeting" entry  (file+headline "agenda.org" "Future")
-  ;;		 ,(concat "* %? :meeting:\n"
-  ;;				  "<%<%Y-%m-%d %a %H:00>>"))))
-  (setq org-capture-templates
-		'(("i" "Inbox"
-		   entry (file "agenda/inbox.org")
-		   "* %?%i %t"
-		   :empty-lines-before 1)
-		  ("d" "New deadline for the agenda"
-		   entry (file "agenda/inbox.org")
-		   "* %?%i \nDEADLINE: <%<%Y-%m-%d %a>>" :empty-lines-before 1) ;; %t <%<%m-%d %a>>
-		  ;; ("j" "Journal"
-		  ;;  entry (file+datetree "~/org/journal.org")
-		  ;;  "* %?\nEntered on %U\n  %i\n  %a")
-		  ("s" "Slipbox"
-		   entry (file "Alter/inbox.org")
-		   "* %?\n")))
-
-  ;; shift org capture default date to tomorrow
-  (advice-add 'org-capture :around
-			  (lambda (oldfun &rest args)
-				(let ((org-overriding-default-time
-					   (funcall
-						(lambda ()
-						  (let ((day (string-to-number (format-time-string "%d")))
-								(month (string-to-number (format-time-string "%m")))
-								(year (string-to-number (format-time-string "%Y"))))
-							(encode-time 1 1 0 (1+ day) month year))))))
-				  (apply oldfun args))))
-
-  (defun org-capture-deadline ()
-	(interactive)
-	(org-capture nil "d"))
   :general
-  ("C-c a" 'org-agenda-show-mix
-   "C-c o" 'org-capture-deadline)
-
-  ;; a bit redundant with C-c C-d (org-deadline)
-  (:keymaps 'org-capture-mode-map
-			"C-c d" 'org-timestamp-up-day))
+  ("C-c a" 'org-agenda-show-mix))
