@@ -5,6 +5,7 @@
 (use-package flymake
   :ensure nil
   :defer t
+  :diminish flymake-mode "fmake"
   :init
   (defvar-keymap flymake-keymap
 	:doc "Keymap for flymake bindings.")
@@ -30,7 +31,7 @@
   :ensure nil
   ;; :straight (:type built-in)
   :defer t
-  :diminish flyspell-mode "spell"
+  :diminish flyspell-mode "fspell"
   ;; :init
   ;; (progn
   ;;   (add-hook 'prog-mode-hook 'flyspell-prog-mode)

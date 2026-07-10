@@ -145,6 +145,16 @@
   :demand t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;              DIMINISH              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; also check mode-line-collapse-minor-modes (alternative to diminish/delight) to hide some modes:
+;; (setq mode-line-collapse-minor-modes '(abbrev-mode flyspell-mode flyspell-prog-mode eldoc-mode))
+
+;;abbreviate names. use-package has built-in support for it
+(use-package diminish)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

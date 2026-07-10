@@ -342,7 +342,6 @@
 							  "auto-capitalize" ;; => LaTeX/org mode only
 							  ;; "browse-kill-ring"
 							  ;; "compile-angel"
-							  "diminish"
 							  "dimmer" ;; DONE
 							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
 							  "no-littering"
@@ -483,7 +482,6 @@
 ;; (load-user-file "appearance/poet")
 ;; (load-user-file "appearance/cascadia")
 ;; (load-user-file "appearance/fira-code-mode") ;; works a bit too well. remove from latex/org
-;; modeline (can also be configured with delighted)
 ;; (load-user-file "appearance/doom-modeline")
 ;; (load-user-file "appearance/powerline")
 ;; (load-user-file "appearance/minimap")
