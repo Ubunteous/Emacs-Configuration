@@ -7,6 +7,9 @@
   :defer t
   :diminish completion-preview-mode
   :config
+  ;; prevents vertico from showing annoying red char
+  (set-face-attribute 'completions-first-difference nil :foreground nil)
+
   (setq completion-preview-completion-styles '(orderless-first-prefix))
 
   ;; (setq completion-preview-sort-function 'minibuffer--sort-by-length-alpha)
