@@ -252,6 +252,8 @@
 ;;   AI    ;;
 ;;;;;;;;;;;;;
 
+;; most promising package (2026):
+;; Aideremacs, Claude-code, Ellama, Minuet
 (load-user-files-per-system "ai"
 							'()
 
