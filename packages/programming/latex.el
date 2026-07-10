@@ -3,7 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package auctex
-  :ensure nil ; installed via nix
+  :defer t
+  ;; :ensure nil ; installed via nix
   ;; :ensure (auctex :pre-build (("./autogen.sh")
   ;;				  ("./configure"
   ;;				   "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
@@ -19,23 +20,28 @@
   ;;		  :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
   ;;		  :version (lambda (_) (require 'tex-site) AUCTeX-version))
   ;; :requires reftex
-  ;; LaTeX and latex modes are the same
-  ;; :mode ("\\.tex\\'" . LaTeX-mode) ; or latex-mode
 
-  ;; somehow, putting rubbish makes TeX-command available
-  ;; (but the following becomes necessary at file bottom - except in master):
-  ;; %%% Local Variables:
-  ;; %%% mode: latex
-  ;; %%% TeX-master: "master file name without extension"
-  ;; %%% End:
-  :mode ("\\.tex\\'" . rubbish-here)
-  :configFileName
-  (set-face-attribute 'swiper-background-match-face-1 nil :background "light sea green")
-  (set-face-attribute 'font-latex-sedate-face nil :foreground "#66d9ee") ; unknown keywords
+  :init
+  (defun latex-compile ()
+	"Save file and compile with pdf LaTeX."
+	(interactive)
+	(save-buffer)
+	(TeX-command "LaTeX" #'TeX-master-file nil)) ; TeX-command comes from auctex
+
+  (defun latex-view-pdf ()
+	(interactive)
+	(save-window-excursion
+	  (async-shell-command
+	   (if (string= TeX-master "Oeuvres")
+		   "evince 'output/Oeuvres à Découvrir.pdf'"
+		 (concat "evince " (file-name-base (buffer-file-name)) ".pdf")))))
 
   ;; to avoid triggering prompts every time a file is opened
+  ;; note: C-c C-v used to work but I am now getting missing .dvi file errors. using latex-view-pdf as alternative
   (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
   (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
+  :config
+  (set-face-attribute 'font-latex-sedate-face nil :foreground "#66d9ee") ; unknown keywords
 
   ;; do not open the master with an incorrect encoding (fr characters)
   (setq latexenc-dont-use-TeX-master-flag t)
@@ -52,14 +58,10 @@
 		reftex-plug-into-AUCTeX t
 		TeX-source-correlate-start-server t)
   ;; (setq-default TeX-master nil)
-
-  (defun latex-compile ()
-	"Save file and compile with pdf LaTeX."
-	(interactive)
-	(save-buffer)
-	(TeX-command "LaTeX" 'TeX-master-file))
-  :general (:keymaps 'LaTeX-mode-map
-					 "C-c s" 'latex-compile)
+  :general
+  (:keymaps 'latex-mode-map
+			"C-c s" 'latex-compile
+			"C-c C-v" 'latex-view-pdf)
   :hook
   ;; ((visual-line-mode math-mode) . LaTeX-mode)
 
@@ -68,4 +70,6 @@
   (LaTeX-mode . reftex-mode)
 
   ;; flyspell broken with latex in 6/2026 (freezes/hangs)
-  (LaTeX-mode . (lambda () (flyspell-mode -1))))
+  (LaTeX-mode . (lambda () (flyspell-mode -1)))
+  (LaTeX-mode . latex-mode)
+  :mode ("\\.tex\\'" . latex-mode))
