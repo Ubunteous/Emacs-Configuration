@@ -8,26 +8,28 @@
   :init
   (defvar-keymap hideshow-keymap
 	:doc "Keymap for code folding.")
+  (define-key personal-misc-bindings-keymap (kbd "h") hideshow-keymap)
+  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "h" "hs")
+
   ;; :config
   ;; (setq hs-headline nil)
   ;; (setq hs-hide-comments-when-hiding-all t)
   ;; (setq hs-allow-nesting nil)
-  :general
-  (:keymaps 'hideshow-keymap
-			"a" 'hs-hide-all
-			"A" 'hs-show-all
-			"b" 'hs-hide-block
-			"B" 'hs-show-block
-			"h" 'hs-toggle-hiding
-			"i" 'hs-hide-initial-comment-block
-			"l" 'hs-hide-level
-			"t" 'hs-toggle-hiding)
+  :bind
+  (:map hideshow-keymap
+		("a" . hs-hide-all)
+		("A" . hs-show-all)
+		("b" . hs-hide-block)
+		("B" . hs-show-block)
+		("h" . hs-toggle-hiding)
+		("i" . hs-hide-initial-comment-block)
+		("l" . hs-hide-level)
+		("t" . hs-toggle-hiding))
 
-  (:keymaps 'mode-specific-map
-			"@" (cons "hideshow" hideshow-keymap))
+  (:map mode-specific-map
+		("@" . hideshow-keymap))
 
-  (:keymaps 'personal
-			"h" (cons "hs" hideshow-keymap)
-			"C-h" 'hs-toggle-hiding)
+  (:map personal-misc-bindings-keymap
+		("C-h" . hs-toggle-hiding))
   :hook
   (prog-mode . hs-minor-mode))

@@ -44,18 +44,18 @@
 	  (setq-local outline-minor-mode-highlight nil)
 	  (outline-hide-sublevels 1)
 	  (outline-minor-mode +1)))
-  :general (:keymaps 'outline-navigation-repeat-map
-					 "<down>" 'outline-next-visible-heading
-					 "<up>" 'outline-previous-visible-heading
-					 "+" 'outline-show-subtree
-					 "-" 'outline-hide-subtree
-					 "*" 'outline-show-subtree
-					 "\\" 'outline-hide-leaves
-					 "/ s" 'outline-show-by-heading-regexp
-					 "/ h" 'outline-hide-by-heading-regexp
-					 ;; "/ s" 'outline-show-by-heading-regexp
-					 ;; "/ h" 'outline-hide-by-heading-regexp
-					 )
+  :bind (:map outline-navigation-repeat-map
+			  ("<down>" . outline-next-visible-heading)
+			  ("<up>" . outline-previous-visible-heading)
+			  ("+" . outline-show-subtree)
+			  ("-" . outline-hide-subtree)
+			  ("*" . outline-show-subtree)
+			  ("\\" . outline-hide-leaves)
+			  ("/ s" . outline-show-by-heading-regexp)
+			  ("/ h" . outline-hide-by-heading-regexp)
+			  ;; ("/ s" . outline-show-by-heading-regexp)
+			  ;; ("/ h" . outline-hide-by-heading-regexp)
+			  )
   :hook (
 		 ;; (find-file . outline-everywhere-minor-mode)
 		 (archive-extract . outline-everywhere-minor-mode)

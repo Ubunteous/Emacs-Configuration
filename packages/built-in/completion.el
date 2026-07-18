@@ -21,19 +21,19 @@
   ;; (setq completion-preview-command '(insert-char delete-backward-char backward-delete-char-untabify analyze-text-conversion completion-preview-complete))
 
   ;; (add-to-list 'completion-preview-command
-  ;; 			   '(org-self-insert-command
-  ;; 				 org-delete-backward-char
-  ;; 				 self-insert-command
-  ;; 				 meow-backward-char)
-  :general
+  ;;			   '(org-self-insert-command
+  ;;				 org-delete-backward-char
+  ;;				 self-insert-command
+  ;;				 meow-backward-char)
+  :bind
   ;; "M-i" 'completion-preview-complete
-  (:keymaps 'completion-preview-active-mode-map
-			"<escape>" 'completion-preview-hide
+  (:map completion-preview-active-mode-map
+		("<escape>" . completion-preview-hide)
 
-			;; "RET" 'newline
-			;; "TAB" 'completion-preview-insert/complete
-			"C-n" 'completion-preview-next-candidate
-			"C-p" 'completion-preview-prev-candidate)
+		;; "RET" 'newline
+		;; "TAB" 'completion-preview-insert/complete
+		("C-n" . completion-preview-next-candidate)
+		("C-p" . completion-preview-prev-candidate))
   :hook emacs-lisp-mode)
 
 ;; :config

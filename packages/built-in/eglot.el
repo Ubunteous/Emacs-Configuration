@@ -8,9 +8,13 @@
   :init
   (defvar-keymap eglot-keymap
 	:doc "Keymap for eglot bindings.")
+  (define-key personal-misc-bindings-keymap (kbd "g") eglot-keymap)
+  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "g" "eglot")
 
   (defvar-keymap xref-keymap
 	:doc "Keymap for xref bindings.")
+  (define-key personal-misc-bindings-keymap (kbd "x") xref-keymap)
+  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "x" "xref")
 
   (defun peek-eldoc ()
 	(interactive)
@@ -175,52 +179,49 @@
   ;;	"Advising function to use `find-tag-marker-ring' (R ignored)."
   ;;	(xref-push-marker-stack))
   ;; (advice-add 'find-function :before 'add-point-to-find-tag-marker-ring)
-  :general
-  (:keymaps 'eglot-keymap
-			;; use instead C-h . for display-local-help
-			"a a" 'eglot-code-actions
-			"a o" 'eglot-code-action-organize-imports
-			"a q" 'eglot-code-action-quickfix
-			"a i" 'eglot-code-action-inline
-			"a e" 'eglot-code-action-extract
-			"a r" 'eglot-code-action-rewrite
+  :bind
+  (:map eglot-keymap
+		;; use instead C-h . for display-local-help
+		("a a" . eglot-code-actions)
+		("a o" . eglot-code-action-organize-imports)
+		("a q" . eglot-code-action-quickfix)
+		("a i" . eglot-code-action-inline)
+		("a e" . eglot-code-action-extract)
+		("a r" . eglot-code-action-rewrite)
 
-			"b e" 'eglot-events-buffer
-			"b f" 'eglot-format-buffer
-			"b l" 'eglot-list-connections
-			"b r" 'eglot-stderr-buffer
+		("b e" . eglot-events-buffer)
+		("b f" . eglot-format-buffer)
+		("b l" . eglot-list-connections)
+		("b r" . eglot-stderr-buffer)
 
-			"d" 'eglot-find-declaration
-			"e" 'eldoc
+		("d" . eglot-find-declaration)
+		("e" . eldoc)
 
-			"f" 'eglot-format
-			"C-f" 'eglot-format-buffer
+		("f" . eglot-format)
+		("C-f" . eglot-format-buffer)
 
-			"i" 'eglot-find-implementation
-			;; "C-o" 'python-sort-imports ;; requires python module (isort)
-			"p" 'eldoc-box-help-at-point
-			"r" 'eglot-rename
-			"R" 'eglot-reconnect
-			"s" 'eglot-shutdown
-			"S" 'eglot-shutdown-all
-			"t" 'eglot-find-typeDefinition)
+		("i" . eglot-find-implementation)
+		;; "C-o" 'python-sort-imports ;; requires python module (isort)
+		("p" . eldoc-box-help-at-point)
+		("r" . eglot-rename)
+		("R" . eglot-reconnect)
+		("s" . eglot-shutdown)
+		("S" . eglot-shutdown-all)
+		("t" . eglot-find-typeDefinition))
 
-  (:keymaps 'xref-keymap
-			"," 'xref-go-back
-			"C-," 'xref-go-forward
-			"C-." 'xref-find-apropos
-			"?" 'xref-find-references
-			";" 'xref-find-definitions
-			"q" 'xref-query-replace-in-results
-			"f" 'xref-find-references-and-replace)
-  (:keymaps 'personal
-			"g" (cons "eglot" eglot-keymap)
-			"x" (cons "xref" xref-keymap))
+  (:map xref-keymap
+		("," . xref-go-back)
+		("C-," . xref-go-forward)
+		("C-." . xref-find-apropos)
+		("?" . xref-find-references)
+		(";" . xref-find-definitions)
+		("q" . xref-query-replace-in-results)
+		("f" . xref-find-references-and-replace))
   :hook
   ;; ;; built-in eslint ignores configuration file
 
   ;; ;; no need to disable flymake. typescript-language-server expects a jsconfig.json file
-  ;; (js-ts-mode . (lambda () (add-to-list 'eglot-stay-out-of 'flymake)))
+  ;; (js-ts-mode . (lambda () (add-to-list . eglot-stay-out-of . flymake)))))
 
   ((c-ts-mode
 	c++-ts-mode ;; somehow, needs normal mode for ts-mode

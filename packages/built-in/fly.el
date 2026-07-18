@@ -9,19 +9,20 @@
   :init
   (defvar-keymap flymake-keymap
 	:doc "Keymap for flymake bindings.")
+  (define-key personal-misc-bindings-keymap (kbd "f") flymake-keymap)
+  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "f" "flymake")
+
   :config
   (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :height 1.0)
 
   ;; (setq flymake-indicator-type) ;; fringes (default), margins or nil
   (setq flymake-show-diagnostics-at-end-of-line 'short) ;; defaults to nil. use either 'short or t
-  :general
-  (:keymaps 'flymake-keymap
-			"b" 'flymake-running-backends
-			"d" 'flymake-show-project-diagnostics
-			"n" 'flymake-goto-next-error
-			"p" 'flymake-goto-prev-error)
-  (:keymaps 'personal
-			"f" (cons "flymake" flymake-keymap))
+  :bind
+  (:map flymake-keymap
+		("b" . flymake-running-backends)
+		("d" . flymake-show-project-diagnostics)
+		("n" . flymake-goto-next-error)
+		("p" . flymake-goto-prev-error))
   :hook
   (prog-mode . flymake-mode)
   (flymake-mode . (lambda () (delete 'elisp-flymake-checkdoc flymake-diagnostic-functions))))

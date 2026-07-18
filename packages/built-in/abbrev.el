@@ -148,21 +148,21 @@
 
   ;; ;; define abbrev for specific major mode
   ;; (progn
-  ;; 	(when (boundp 'go-mode-abbrev-table)
+  ;;	(when (boundp 'go-mode-abbrev-table)
   ;;     (clear-abbrev-table go-mode-abbrev-table))
-  ;; 	(define-abbrev-table 'go-mode-abbrev-table
+  ;;	(define-abbrev-table 'go-mode-abbrev-table
   ;;     '(
-  ;; 		("p" "fmt.Printf(\"%v\\n\", hh▮)")
-  ;; 		("eq" "=="))))
+  ;;		("p" "fmt.Printf(\"%v\\n\", hh▮)")
+  ;;		("eq" "=="))))
 
   ;; (setq save-abbrevs nil) ;; save word abbrevs when file saved
   ;; (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'"))
-  :general
+  :bind
+  [remap dabbrev-expand] 'hippie-expand ;; like (global-set-key [...] '...)
   ;; Swap M-/ and C-M-/
-  ("M-:" 'hippie-expand
-   ;; "C-M-:" 'dabbrev-expand
-   "M-/" 'eval-expression
-   [remap dabbrev-expand] 'hippie-expand) ;; like (global-set-key [...] '...)
+  ("M-:" . hippie-expand)
+  ;; "C-M-:" . dabbrev-expand
+  ("M-/" . eval-expression)
   :hook (prog-mode org-mode))
 
 ;; ;; Notes: alternative to tempel which leverages built-in tools

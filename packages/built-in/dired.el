@@ -81,10 +81,10 @@ With a prefix argument, edit the current listing switches instead."
 	  ("s" "Size" (lambda () (interactive) (dired-sort-by-x :size)))
 	  ]
 	 ])
-  :general
-  (:keymaps 'dired-mode-map
-			"s" 'dired-sort-transient
-			"<" 'dired-count-lines))
+  :bind
+  (:map dired-mode-map
+		("s" . dired-sort-transient)
+		("<" . dired-count-lines)))
 
 ;; create dir if does not exist when renaming/moving
 (defadvice dired-mark-read-file-name (after rv:dired-create-dir-when-needed (prompt dir op-symbol arg files &optional default) activate)
@@ -138,11 +138,11 @@ With a prefix argument, edit the current listing switches instead."
   :after dired
   :config
   (setq dired-subtree-use-backgrounds nil)
-  :general (:keymaps 'dired-mode-map
-					 "i" 'dired-subtree-insert
-					 ";" 'dired-subtree-remove
-					 "TAB" 'dired-subtree-toggle
-					 "S-TAB" 'dired-subtree-remove))
+  :bind (:map dired-mode-map
+			  ("i" . dired-subtree-insert)
+			  (";" . dired-subtree-remove)
+			  ("TAB" . dired-subtree-toggle)
+			  ("S-TAB" . dired-subtree-remove)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; OREMACS DIRED RSYNC ;;
@@ -208,5 +208,5 @@ With a prefix argument, edit the current listing switches instead."
 
 ;; see git info from dired by using the ")" key
 ;;(use-package dired-git-info
-;;  :general (:map 'dired-mode-map
-;;              ")" 'dired-git-info-mode))
+;;  :bind (:map dired-mode-map
+;;              (")" . dired-git-info-mode)))

@@ -138,13 +138,13 @@
 ;;               GENERAL              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defvar-keymap personal-misc-bindings-keymap
+  :doc "Keymap for miscellaneous bindings to keep around.")
+
 ;; Block until current queue processed. replaces (elpaca-wait)
 (use-package general
   :ensure (:wait t)
   :config
-  (defvar-keymap personal-misc-bindings-keymap
-	:doc "Keymap for miscellaneous bindings to keep around.")
-
   ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
   (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
   :demand t)

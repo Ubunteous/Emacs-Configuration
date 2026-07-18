@@ -23,12 +23,12 @@
   (setopt recentf-save-file "~/.emacs.d/files/recentf-save.el")
 
   ;; (setq recentf-exclude ("/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'"))
-  :general
-  ("C-c C-r" 'recentf-open-files)
+  :bind
+  ("C-c C-r" . recentf-open-files)
   :hook
   (find-file . recentf-save-list))
 
 ;; only necessary if recent-save-file is not loaded with custom
 ;;  (elpaca-after-init . (lambda () (load-file
-;; 				    (expand-file-name
-;; 				     "~/.emacs.d/files/recentf-save.el"))))))
+;;					(expand-file-name
+;;					 "~/.emacs.d/files/recentf-save.el"))))))

@@ -47,7 +47,7 @@
   (setq ibuffer-expert t) ;; kill buffers without a query
   (setq ibuffer-show-empty-filter-groups nil)
   :hook (ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "home")))
-  :general ("C-x C-b" 'ibuffer))
+  :bind ("C-x C-b" . ibuffer))
 
 ;; (defun ibuffer-collapse-all-filter-groups ()
 ;;   "Collapse all filter groups at once"

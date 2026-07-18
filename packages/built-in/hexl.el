@@ -5,8 +5,8 @@
 (use-package hexl
   :ensure nil
   :defer t
-  :general (:keymaps 'hexl-mode-map
-					 "C-t" 'hexadecimal-to-decimal))
+  :bind (:map hexl-mode-map
+			  ("C-t" . hexadecimal-to-decimal)))
 
 (defun decimal-to-hexadecimal ()
   (interactive)

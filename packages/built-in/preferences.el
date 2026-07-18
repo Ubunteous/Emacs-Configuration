@@ -380,6 +380,7 @@
   (defvar-keymap mark-keymap
 	:doc "Keymap for mark bindings.")
   (define-key personal-misc-bindings-keymap (kbd "k") mark-keymap) ; no ' for keymaps
+  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "k" "mark")
 
   :bind
   ([remap suspend-frame] . undo)

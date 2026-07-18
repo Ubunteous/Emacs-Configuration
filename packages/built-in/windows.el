@@ -227,12 +227,12 @@
   ;;            ;; We are repeating.  Continue going in the established direction.
   ;;            (other-window pmx--direction)))
   ;;	(setq pmx--last-win (selected-window)))
-  :general
+  :bind
   ;; auto balance windows upon deletion
-  ("C-x 0" '(lambda ()
-			  (interactive)
-			  (delete-window)
+  ("C-x 0" . (lambda ()
+			   (interactive)
+			   (delete-window)
 
-			  ;; balance windows if more than 1
-			  (unless (= 1 (length (window-list)))
-				(balance-windows)))))
+			   ;; balance windows if more than 1
+			   (unless (= 1 (length (window-list)))
+				 (balance-windows)))))

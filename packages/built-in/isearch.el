@@ -67,19 +67,19 @@ This is useful when followed by an immediate kill."
 	  (let (search-nonincremental-instead)
 		(ignore-errors (isearch-done t t)))
 	  (consult-line query)))
-  :general
+  :bind
   ;; (:keymaps 'minibuffer-local-isearch-map
   ;;		"<left>" 'isearch-reverse-exit-minibuffer
   ;;		"<right>" 'isearch-forward-exit-minibuffer)
 
-  (:keymaps 'isearch-mode-map
-			;; "<left>" 'isearch-ring-advance
-			;; "<right>" 'isearch-forward
-			"<up>" 'isearch-repeat-backward
-			"<down>" 'isearch-repeat-forward
-			"C-<return>" 'isearch-exit-other-end
-			"C-a" 'avy-isearch
-			"C-o" 'isearch-consult))
+  (:map isearch-mode-map
+		;; ("<left>" . isearch-ring-advance)
+		;; ("<right>" . isearch-forward)
+		("<up>" . isearch-repeat-backward)
+		("<down>" . isearch-repeat-forward)
+		("C-<return>" . isearch-exit-other-end)
+		("C-a" . avy-isearch)
+		("C-o" . isearch-consult)))
 
 
 ;; go to the end of a match when using isearch-backward
