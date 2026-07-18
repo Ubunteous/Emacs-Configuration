@@ -19,9 +19,7 @@
 
   (setq centaur-tabs-ace-jump-keys
 		'(?& ?é ?\" ?\' ?\( ?- ?è ?_ ?ç))
-  :general
-  (:keymaps 'personal
-			"j" 'centaur-tabs-ace-jump))
+  :bind (:map personal-misc-bindings-keymap ("j" . centaur-tabs-ace-jump)))
 
 ;; use this alongside centaur-tabs-buffer-groups-function
 ;; (defun centaur-tabs-buffer-groups ()

@@ -39,7 +39,7 @@
   ;; (setq agent-shell-thought-process-expand-by-default nil)
   ;; (setq agent-shell-user-message-expand-by-default nil)
   ;; (setq agent-shell-write-inhibit-minor-modes '(aggressive-indent-minor-mode))
-  :general (:keymaps 'agent-shell-mode-map
-					 "RET" 'newline
-					 "C-c C-c" 'shell-maker-submit
-					 "C-c C-k" 'agent-shell-interrupt))
+  :bind (:map agent-shell-mode-map
+			  ("RET" . newline)
+			  ("C-c C-c" . shell-maker-submit)
+			  ("C-c C-k" . agent-shell-interrupt)))

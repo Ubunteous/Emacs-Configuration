@@ -28,8 +28,7 @@
   (ellama-context-header-line-global-mode +1)
   ;; show ellama session id in header line in all buffers
   (ellama-session-header-line-global-mode +1)
-  :general (:keymaps 'personal
-					 "i" 'ellama)
+  :bind (:map personal-misc-bindings-keymap ("i" . ellama))
   :hook
   ;; send last message in chat buffer with C-c C-c
   (org-ctrl-c-ctrl-c-hook . ellama-chat-send-last-message))

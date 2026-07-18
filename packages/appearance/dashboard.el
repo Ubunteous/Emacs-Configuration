@@ -66,5 +66,4 @@
   ;; these lines are equivalent but bind/general fail (loading order issue)
   (keymap-set dashboard-mode-map "b" #'bookmark-jump)
   ;; :bind (:map dashboard-mode-map ("b" . bookmark-jump))
-  ;; :general (:keymaps 'dashboard-mode-map "b" 'bookmark-jump)
   )

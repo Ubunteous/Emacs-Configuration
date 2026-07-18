@@ -65,5 +65,5 @@
 	:description "Preset for chatgpt"
 	:backend "Gemini"
 	:model 'gemini-flash-latest)
-  :general (:keymaps 'gptel-mode-map
-					 "C-c C-h" 'gptel-menu))
+  :bind (:map gptel-mode-map
+			  ("C-c C-h" . gptel-menu)))

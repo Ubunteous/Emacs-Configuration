@@ -32,5 +32,5 @@
   ;; See the Configuration section below
   (setq aidermacs-default-chat-mode 'architect)
   (setq aidermacs-default-model "sonnet")
-  :general (:keymaps 'personal
-					 "i" 'aidermacs-transient-menu))
+  :bind (:map personal-misc-bindings-keymap
+			  ("i" . aidermacs-transient-menu)))
