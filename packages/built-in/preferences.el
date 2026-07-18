@@ -378,84 +378,72 @@
   ;;;;;;;;;;;;;;;;;;
 
   (defvar-keymap mark-keymap
-	:doc "Keymap for embark bindings.")
+	:doc "Keymap for mark bindings.")
+  (define-key personal-misc-bindings-keymap (kbd "k") mark-keymap) ; no ' for keymaps
 
-  :general
-  ([remap suspend-frame] 'undo)
-  ([remap ibuffer] 'ibuffer-jump)
-  ([remap backward-kill-word] 'backward-delete-word)
+  :bind
+  ([remap suspend-frame] . undo)
+  ([remap ibuffer] . ibuffer-jump)
+  ([remap backward-kill-word] . backward-delete-word)
+  ([remap suspend-frame] . undo)
+  ;; ([remap eval-last-sexp] . pp-eval-last-sexp)
 
-  ("RET" 'newline-and-indent)
-  ("C-g" 'keyboard-quit-dwim)
+  ("C-g" . keyboard-quit-dwim)
+  ("RET" . newline-and-indent)
 
-  ;; ("C-x f" 'find-file)
-  ;; ("C-x C-f" 'set-fill-column)
+  ;; ("C-x f" . find-file)
+  ;; ("C-x C-f" . set-fill-column)
 
-  ("C-S-b" 'backward-sexp)
-  ("C-S-f" 'forward-sexp)
-  ("C-S-n" 'forward-paragraph)
-  ("C-S-p" 'backward-paragraph)
-  ("M-z" 'zap-up-to-char)
+  ("C-S-b" . backward-sexp)
+  ("C-S-f" . forward-sexp)
+  ("C-S-n" . forward-paragraph)
+  ("C-S-p" . backward-paragraph)
+  ("M-z" . zap-up-to-char)
 
-  ([remap suspend-frame] 'undo)
-  ;; ([remap eval-last-sexp] 'pp-eval-last-sexp)
-  ("C-d" personal-misc-bindings-keymap) ;; no quote for a prefix map
+  (:map ctl-x-map
+		("k" . kill-buffer-refocus)
+		("C-k" . eval-defun)
+		("$" . set-quad-selective-display))
 
-  (:keymaps 'ctl-x-map
-			"k" 'kill-buffer-refocus
-			"C-k" 'eval-defun
-			"$" 'set-quad-selective-display
+  (:map mode-specific-map
+		("e" . next-buffer)
+		("f" . find-file)
+		("g" . pop-global-mark)
+		("G" . pop-to-mark-command)
+		("n" . previous-buffer)
+		("t" . execute-extended-command))
 
-			"4" (cons "other-window" ctl-x-4-map)
-			"5" (cons "other-frame" ctl-x-5-map)
-			;; "6" (cons "2C-command" 2C-mode-map) ; breaks renamming if used
-			;; "8"  ; no map
-			"a" (cons "abbrev" abbrev-map) ; (i prefix for inverse addition to abbrev mode)
-			"n" (cons "narrow" narrow-map)
-			"p" (cons "project" project-prefix-map)
-			"r" (cons "rect/register" ctl-x-r-map)
-			"t" (cons "tab" tab-bar-map) ; (^ prefix to detach)
-			"v" (cons "vc" vc-prefix-map) ; (prefixes b for branches and M for merge base)
-			"w" (cons "window" window-prefix-map) ; (^ prefix to tear/detach)
-			"x" (cons "buffer" ctl-x-x-map)
-			"RET" (cons "encoding" mule-keymap))
+  (:map ctl-x-r-map
+		("a" . append-to-register))
 
-  (:keymaps 'mode-specific-map
-			"e" 'next-buffer
-			"f" 'find-file
-			"g" 'pop-global-mark
-			"G" 'pop-to-mark-command
-			"n" 'previous-buffer
-			"t" 'execute-extended-command)
+  (:map mark-keymap
+		("<" . mark-beginning-of-buffer)
+		(">" . mark-end-of-buffer)
+		("P" . mark-page)
+		("b" . mark-whole-buffer)
+		("d" . mark-defun)
+		("e" . mark-end-of-sentence)
+		("p" . mark-paragraph)
+		("s" . mark-sexp)
+		("w" . mark-word))
 
-  (:keymaps 'ctl-x-r-map
-			"a" 'append-to-register)
+  (:map goto-map
+		("re" . grep)
+		("rr" . rgrep)
+		("rl" . lgrep)
+		("rv" . vc-git-grep)
+		("M-r M-e" . grep)
+		("M-r M-r" . rgrep)
+		("M-r M-l" . lgrep)
+		("M-r M-v" . vc-git-grep))
 
-  (:keymaps 'mark-keymap
-			"<" 'mark-beginning-of-buffer
-			">" 'mark-end-of-buffer
-			"P" 'mark-page
-			"b" 'mark-whole-buffer
-			"d" 'mark-defun
-			"e" 'mark-end-of-sentence
-			"p" 'mark-paragraph
-			"s" 'mark-sexp
-			"w" 'mark-word)
-
-  (:keymaps 'goto-map
-			"re" 'grep
-			"rr" 'rgrep
-			"rl" 'lgrep
-			"rv" 'vc-git-grep
-			"M-r M-e" 'grep
-			"M-r M-r" 'rgrep
-			"M-r M-l" 'lgrep
-			"M-r M-v" 'vc-git-grep)
-
-  (:keymaps 'personal
-			;; "C-c u" 'mode-line-other-buffer
-			"d" 'delete-char
-			"k" (cons "mark" mark-keymap))
+  (:map personal-misc-bindings-keymap
+		;; "C-c u" . mode-line-other-buffer
+		("d" . delete-char)
+		)
+  :bind-keymap
+  ("C-d" . personal-misc-bindings-keymap)
+  ;; ("C-d k" . mark-keymap)
   :hook
   ;; Make the *Occur* buffer names unique and writable
   (occur-hook . (lambda ()
