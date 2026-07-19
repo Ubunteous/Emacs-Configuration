@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                TYPST               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,14 +23,14 @@
 
 ;;   ;; experimental (needs emacs 30)
 ;;   ;; (setq typst-ts-mode-enable-raw-blocks-highlight t
-;;   ;; 	typst-ts-mode-highlight-raw-blocks-at-startup t)
+;;   ;;		typst-ts-mode-highlight-raw-blocks-at-startup t)
 
 ;;   ;; needs consult-imenu
 ;;   ;; (setq consult-imenu-config
-;;   ;; 	(append consult-imenu-config
-;;   ;; 		'((typst-ts-mode :topLevel "Headings" :types
-;;   ;; 				 ((?h "Headings" typst-ts-markup-header-face)
-;;   ;; 				  (?f "Functions" font-lock-function-name-face))))))
+;;   ;;		(append consult-imenu-config
+;;   ;;			'((typst-ts-mode :topLevel "Headings" :types
+;;   ;;					 ((?h "Headings" typst-ts-markup-header-face)
+;;   ;;					  (?f "Functions" font-lock-function-name-face))))))
 ;;   )
 
 (use-package websocket
@@ -37,4 +39,3 @@
 (use-package typst-preview
   :defer t
   :ensure (typst-preview :type git :host github :repo "havarddj/typst-preview.el"))
-

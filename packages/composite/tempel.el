@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               TEMPEL               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,8 +8,8 @@
   :defer t
   ;; Require trigger prefix before template name when completing.
   :init
-  (defvar-keymap tempel-keymap
-	:doc "Keymap for tempel bindings.")
+  (defvar-subkeymap personal-misc-bindings-keymap "t" tempel-keymap "Keymap for tempel bindings.")
+
   ;; ;; Setup completion at point
   ;; (defun tempel-setup-capf ()
   ;;   ;; Add the Tempel Capf to `completion-at-point-functions'.
@@ -27,23 +29,20 @@
   ;; either locally or globally. `expand-abbrev' is bound to C-x '.
   ;; (prog-mode . tempel-abbrev-mode)
   ;; (global-tempel-abbrev-mode)
-  :general
-  ("M-+" 'tempel-expand) ;; alternative tempel-expand
-  ("M-n" 'tempel-complete)
-  ("M-*" 'tempel-insert)
+  :bind
+  ("M-+" . tempel-expand) ;; alternative tempel-expand
+  ("M-n" . tempel-complete)
+  ("M-*" . tempel-insert)
 
-  (tempel-map
-   "C-n" 'tempel-next
-   "RET" 'tempel-next ;; risky. but C-o may replace it
-   "C-p" 'tempel-previous)
+  (:map tempel-map
+		("C-n" . tempel-next)
+		("RET" . tempel-next) ;; risky. but C-o may replace it
+		("C-p" . tempel-previous))
 
-  (tempel-keymap
-   "e" 'tempel-expand
-   "c" 'tempel-complete
-   "i" 'tempel-insert)
-
-  (personal
-   "t" (cons "tempel" tempel-keymap))
+  (:map tempel-keymap
+		("e" . tempel-expand)
+		("c" . tempel-complete)
+		("i" . tempel-insert))
   :config
   (setq tempel-path "~/.emacs.d/packages/composite/tempel-template")
   ;; Setup completion at point

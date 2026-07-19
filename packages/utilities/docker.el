@@ -1,11 +1,12 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               DOCKER               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package docker
   :defer t
-  :general
-  ("C-c c" 'docker)
+  :bind ("C-c c" . docker)
   :config
   (setq docker-command "podman"
 	docker-compose-command "podman-compose"))

@@ -1,8 +1,9 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             DISPROJECT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package disproject
   :defer t
-  :general (:keymap ctl-x-map
-					("p" . disproject-dispatch)))
+  :bind (:map ctl-x-map ("p" . disproject-dispatch)))

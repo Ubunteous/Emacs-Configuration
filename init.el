@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; init.el --- early bird  -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; Code:
@@ -135,21 +136,6 @@
 		("melpa" . "https://snapshots.melpa.org/packages/")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;               GENERAL              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defvar-keymap personal-misc-bindings-keymap
-  :doc "Keymap for miscellaneous bindings to keep around.")
-
-;; Block until current queue processed. replaces (elpaca-wait)
-(use-package general
-  :ensure (:wait t)
-  :config
-  ;; now (:keymaps 'personal ...) refers to personal-misc-bindings-keymap
-  (setf (alist-get 'personal general-keymap-aliases) 'personal-misc-bindings-keymap)
-  :demand t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              DIMINISH              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -159,6 +145,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              LISP FILES            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defvar-keymap personal-misc-bindings-keymap
+  :doc "Keymap for miscellaneous bindings to keep around.")
+
+(defmacro defvar-subkeymap (host-keymap key new-keymap doc)
+  "Add to a HOST-KEYMAP KEY a documented NEW-KEYMAP."
+  (let* ((map-name (symbol-name new-keymap))
+		 (label (string-join (butlast (split-string map-name "-")) "-")))
+	`(progn
+	   (defvar-keymap ,new-keymap :doc ,doc)
+	   (define-key ,host-keymap (kbd ,key) ,new-keymap)
+	   (which-key-add-keymap-based-replacements ,host-keymap ,key ,label))))
 
 (load-file "~/.emacs.d/elpaca.el")
 

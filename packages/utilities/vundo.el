@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                VUNDO               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -17,15 +19,17 @@
   ;;  '(vundo-stem ((t (:foreground "#808080"))))
   ;;  '(vundo-highlight ((t (:foreground "#FFFF00")))))
 
-  :general
-  (:keymaps 'vundo-mode-map
-			"e"	'vundo-previous ; 'vundo-stem-end
+  :bind
+  (:map vundo-mode-map
+		("e"	. vundo-previous) ; 'vundo-stem-end
 
-			"j" 'vundo-diff-mark
-			"J" 'vundo--inspect
-			"k" 'vundo-stem-end
+		("j" . vundo-diff-mark)
+		("J" . vundo--inspect)
+		("k" . vundo-stem-end)
 
-			"i"	'vundo-forward ; 'vundo--inspect
-			"m"	'vundo-backward ; 'vundo-diff-mark
-			"n"	'vundo-next)
-  ("C-d u" 'vundo))
+		("i" . vundo-forward) ; 'vundo--inspect
+		("m" . vundo-backward) ; 'vundo-diff-mark
+		("n" . vundo-next))
+
+  (:map personal-misc-bindings-keymap
+		("u" . vundo)))

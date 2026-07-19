@@ -4,5 +4,4 @@
 
 (use-package deadgrep
   :defer t
-  :general
-  ("C-c d" 'deadgrep))
+  :bind ("C-c d" . deadgrep))

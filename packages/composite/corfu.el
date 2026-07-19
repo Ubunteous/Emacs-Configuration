@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               CORFU                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,7 +13,7 @@
   :config
   (set-face-attribute 'corfu-default nil :background "#2e2e2e")
   (set-face-attribute 'corfu-current nil :background "#282828")
-  (set-face-attribute 'eruby-standard-face nil :slant italic)
+  (set-face-attribute 'eruby-standard-face nil) ; :slant italic is not understood
 
   (setq corfu-cycle t) ;; Enable cycling for `corfu-next/previous'
   ;; (setq corfu-preselect-first nil) ;; Disable candidate preselection
@@ -35,23 +37,23 @@
   ;; Enable Corfu only for certain modes.
   ;;        (shell-mode . corfu-mode)
   ;;        (eshell-mode . corfu-mode))
-  :general (:keymaps 'corfu-map
-					 "<escape>" 'corfu-quit
+  :bind (:map corfu-map
+			  ("<escape>" . corfu-quit)
 
-					 ;; "TAB" 'corfu-next
-					 ;; "S-TAB" 'corfu-previous
+			  ;; ("TAB" . corfu-next)
+			  ;; ("S-TAB" . corfu-previous)
 
-					 "C-n" 'corfu-next
-					 "TAB" 'corfu-insert
-					 "C-p" 'corfu-previous
-					 "RET" 'newline))
+			  ("C-n" . corfu-next)
+			  ("TAB" . corfu-insert)
+			  ("C-p" . corfu-previous)
+			  ("RET" . newline)))
 
 ;; will show most likely candidate transparently
 ;; cannot be used when corfu-auto is true
 ;; (use-package corfu-candidate-overlay
 ;;   :ensure (:type git
-;; 		 :repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
-;; 		 :files (:defaults "*.el"))
+;;		 :repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay"
+;;		 :files (:defaults "*.el"))
 ;;   :defer t
 ;;   ;; :after corfu
 ;;   ;; :config
@@ -66,23 +68,23 @@
 
 ;;   ;; (setq corfu-auto t) ;; breaks this package
 ;;   :hook prog-mode . (lambda ()
-;; 		      (let ((inhibit-message t))
-;; 			(corfu-candidate-overlay-mode +1))))
+;;			  (let ((inhibit-message t))
+;;			(corfu-candidate-overlay-mode +1))))
 
 
 
 ;; (use-package corfu-candidate-overlay
 ;;   :ensure (corfu-candidate-overlay :type git
-;; 								   ;; :files (:defaults "*.el")
-;; 								   :repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay")  
+;;								   ;; :files (:defaults "*.el")
+;;								   :repo "https://code.bsdgeek.org/adam/corfu-candidate-overlay")
 ;;   :after corfu
 ;;   ;; :config
 ;;   ;; enable corfu-candidate-overlay mode globally
 ;;   ;; this relies on having corfu-auto set to nil
 ;;   ;; (corfu-candidate-overlay-mode +1)
-;;   ;; :general
-;;   ;; "C-<tab>" 'completion-at-point
-;;   ;; "C-S-<tab>" 'corfu-candidate-overlay-complete-at-point
+;;   ;; :bind
+;;   ;; ("C-<tab>" . completion-at-point)
+;;   ;; ("C-S-<tab>" . corfu-candidate-overlay-complete-at-point)
 ;;   :hook prog-mode)
 
 (use-package emacs
@@ -111,8 +113,8 @@
 ;;   :after corfu
 ;;   :config
 ;;   (setq corfu-popupinfo-delay 0.2
-;; 	corfu-popupinfo-max-width 70
-;; 	corfu-popupinfo-max-height 20)
+;;	corfu-popupinfo-max-width 70
+;;	corfu-popupinfo-max-height 20)
 
 ;;   ;; (corfu-popupinfo-mode 1)
 ;;   :hook corfu-mode)
@@ -131,13 +133,12 @@
   (add-to-list 'savehist-additional-variables 'corfu-history)
   :hook corfu-mode)
 
-
 (use-package corfu-prescient
   :defer t
   :ensure (corfu-prescient
 	   :type git :host github
 	   :repo "radian-software/prescient.el")
-  
+
   :after corfu
   :config
   (setq corfu-prescient-override-sorting t)

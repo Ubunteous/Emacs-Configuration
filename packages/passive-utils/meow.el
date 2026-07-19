@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                MEOW                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -9,7 +11,7 @@
   (meow-global-mode 1)
   :config
   ;; C-d now refers to a keymap and delete-char is on C-d d
-  (setq meow--kbd-delete-char "C-d d")
+  (setq meow--kbd-delete-char "C-d d") ; does not work well on init
 
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-colemak-dh)
 
@@ -185,7 +187,7 @@
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
-   '("d" . meow-delete) ;; meow--kbd-delete-char is now set to C-d d
+   '("d" . remapped-meow-delete) ;; meow--kbd-delete-char is now set to C-d d
    '("e" . meow-prev)
    '("E" . meow-prev-expand)
    ;; '("f" . meow-find)
@@ -233,7 +235,7 @@
    '("v" . meow-search)
    '("w" . meow-next-word)
    '("W" . meow-next-symbol)
-   '("x" . meow-delete)
+   '("x" . remapped-meow-delete)
    '("X" . meow-backward-delete)
    '("y" . meow-save)
    '("Y" . meow-comment-and-duplicate)
@@ -261,8 +263,7 @@
   ;; does not work because of inherit
   ;; (meow-insert-cursor ((t (:background "light sea green"))))
   ;; (meow-normal-cursor ((t (:background "#fefff8"))))
-  :general (:keymaps 'meow-insert-state-keymap
-					 "<DEL>" 'meow-backward-char))
+  :bind (:map meow-insert-state-keymap ("<DEL>" . meow-backward-char)))
 
 (use-package key-chord
   :defer t
@@ -406,3 +407,8 @@
   "Imitate vim's T backward search."
   (interactive)
   (nt--call-negative 'meow-till-repeatidly))
+
+(defun remapped-meow-delete ()
+  "Call delete-char from its new position (more reliable than meow--kbd-delete-char)."
+  (interactive)
+  (meow--execute-kbd-macro 'delete-char))

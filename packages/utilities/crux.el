@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                CRUX                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,12 +8,12 @@
   :defer t
   :config
   (setq crux-reopen-as-root t)
-  :general
-  ("C-a" 'crux-move-beginning-of-line
+  :bind
+  ("C-a" . crux-move-beginning-of-line)
 
-   ;; unused but useful:
-   ;; "C-c k" 'crux-kill-other-buffers
-   ;; crux-open-with ; open visited file in default external program
-   ;; crux-sudo-edit ; edit currently visited file as root
+  ;; unused but useful:
+  ;; "C-c k" 'crux-kill-other-buffers
+  ;; crux-open-with ; open visited file in default external program
+  ;; crux-sudo-edit ; edit currently visited file as root
 
-   "C-k" 'crux-smart-kill-line))
+   ("C-k" . crux-smart-kill-line))

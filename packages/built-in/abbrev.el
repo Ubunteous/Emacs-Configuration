@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               ABBREV               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -158,7 +160,7 @@
   ;; (setq save-abbrevs nil) ;; save word abbrevs when file saved
   ;; (setq dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'"))
   :bind
-  [remap dabbrev-expand] 'hippie-expand ;; like (global-set-key [...] '...)
+  ([remap dabbrev-expand] . hippie-expand) ;; like (global-set-key [...] '...)
   ;; Swap M-/ and C-M-/
   ("M-:" . hippie-expand)
   ;; "C-M-:" . dabbrev-expand

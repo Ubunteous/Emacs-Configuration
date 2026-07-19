@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                CAPE                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,8 +9,7 @@
   ;; Bind dedicated completion commands
   ;; Alternative prefix keys: C-c p, M-p, M-+, ...
   :init
-  (defvar-keymap cape-keymap
-	:doc "Keymap for cape bindings.")
+  (defvar-subkeymap mode-specific-map "z" cape-keymap "Keymap for cape bindings.")
 
   ;; make cape available on <tab> on startup
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
@@ -34,25 +35,22 @@
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 
   (setq cape-dict-file (getenv "WORDLIST"))
-  :general
-  (:keymaps 'mode-specific-map
-			"z" (cons "cape" cape-keymap))
-
-  (:keymaps 'cape-keymap
-			"p" 'completion-at-point ;; capf
-			;; "t" 'complete-tag ;; etags
-			"d" 'cape-dabbrev ;; or dabbrev-completion
-			"h" 'cape-history
-			"f" 'cape-file
-			"k" 'cape-keyword
-			;; "s" 'cape-symbol
-			"a" 'cape-abbrev
-			"i" 'cape-ispell
-			"l" 'cape-line
-			"w" 'cape-dict ;; /usr/share/dict/words or $WORDLIST
-			"\\" 'cape-tex
-			"_" 'cape-tex
-			"^" 'cape-tex
-			;; "&" 'cape-sgml ;; unicode
-			;; "r" 'cape-rfc1345 ;; unicode
-			))
+  :bind
+  (:map cape-keymap
+		("p" . completion-at-point) ;; capf
+		;; "t" 'complete-tag ;; etags
+		("d" . cape-dabbrev) ;; or dabbrev-completion
+		("h" . cape-history)
+		("f" . cape-file)
+		("k" . cape-keyword)
+		;; ("s" . cape-symbol)
+		("a" . cape-abbrev)
+		("i" . cape-ispell)
+		("l" . cape-line)
+		("w" . cape-dict) ;; /usr/share/dict/words or $WORDLIST
+		("\\" . cape-tex)
+		("_" . cape-tex)
+		("^" . cape-tex)
+		;; ("&" cape-sgml) ;; unicode
+		;; ("r" cape-rfc1345) ;; unicode
+		))

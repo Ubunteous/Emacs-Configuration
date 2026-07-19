@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              ORG-ROAM              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,8 +23,7 @@
   ;;				(locate-dominating-file default-directory ".dir-locals.el")
   ;;				"org-roam")))
   :init
-  (defvar-keymap org-roam-keymap
-	:doc "Keymap for org roam bindings.")
+  (defvar-subkeymap mode-specific-map "r" org-roam-keymap "Keymap for org roam bindings.")
   :config
   (set-face-attribute 'org-roam-link-current nil :background "#e24888" :underline t)
   (set-face-attribute 'org-roam-link nil :background "#e24888" :underline t)
@@ -83,19 +84,19 @@
 
 		  ;; ("p" "alter-plot" plain "%?"
 		  ;;  :if-new (file+head "${slug}.org"
-		  ;; 		      "#+title: ${title}\n#+filetags: :plot:\n\n")
+		  ;;			  "#+title: ${title}\n#+filetags: :plot:\n\n")
 		  ;; :immediate-finish t
 		  ;; :empty-lines 1
 		  ;; :unnarrowed t)
 
-		  
+
 		  ("b" "alter-boite-a-idees" plain "%?"
 		   :if-new (file+head "idees/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
 		   ;; :immediate-finish t
 		   :empty-lines 1
 		   :unnarrowed t)
-		  
+
 		  ("w" "alter-worldbuilding" plain "%?"
 		   :if-new (file+head "$worldbuilding/{slug}.org"
 							  "#+title: ${title}\n#+filetags: :worldbuilding:\n\n")
@@ -103,7 +104,7 @@
 		   :empty-lines 1
 		   :unnarrowed t)
 
-		  
+
 		  ("e" "alter-écriture" plain "%?"
 		   :if-new (file+head "écriture/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :écriture:\n\n")
@@ -134,21 +135,21 @@
 
 		  ;; ("f" "fiction" plain "%?"
 		  ;;  :if-new (file+head "${title}.org"
-		  ;; 		      "#+title: ${title}")
+		  ;;			  "#+title: ${title}")
 		  ;;  ;; :immediate-finish t
 		  ;;  :empty-lines 1
 		  ;;  :unnarrowed t)
 
 		  ;; ("m" "musique" plain "%?"
 		  ;;  :if-new (file+head "${title}.org"
-		  ;; 		      "#+title: ${title}")
+		  ;;			  "#+title: ${title}")
 		  ;;  ;; :immediate-finish t
 		  ;;  :empty-lines 1
 		  ;;  :unnarrowed t)
 
 		  ;; ("r" "rêves" plain "%?"
 		  ;;  :if-new (file+head "${title}.org"
-		  ;; 		      "#+title: ${title}")
+		  ;;			  "#+title: ${title}")
 		  ;; :immediate-finish t
 		  ;; :empty-lines 1
 		  ;; :unnarrowed t)
@@ -160,7 +161,7 @@
 		   ;; :immediate-finish t
 		   :empty-lines 1
 		   :unnarrowed t)
-		  
+
 		  ("se" "cité-ambre" plain "%?"
 		   :if-new (file+head "scene/cité-ambre/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
@@ -188,21 +189,21 @@
 		   ;; :immediate-finish t
 		   :empty-lines 1
 		   :unnarrowed t)
-		  
+
 		  ("sa" "cathédrale-albâtre" plain "%?"
 		   :if-new (file+head "scene/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
 		   ;; :immediate-finish t
 		   :empty-lines 1
 		   :unnarrowed t)
-		  
+
 		  ("sc" "ile-céleste" plain "%?"
 		   :if-new (file+head "scene/ile-céleste/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
 		   ;; :immediate-finish t
 		   :empty-lines 1
 		   :unnarrowed t)
-		  
+
 		  ("sh" "hangdoc" plain "%?"
 		   :if-new (file+head "scene/hangdoc/${slug}.org"
 							  "#+title: ${title}\n#+filetags: :scene:\n\n")
@@ -218,13 +219,13 @@
 		   :unnarrowed t)))
 
   (cl-defmethod org-roam-node-type ((node org-roam-node))
-    "Return the TYPE of NODE."
-    (condition-case nil
+	"Return the TYPE of NODE."
+	(condition-case nil
 		(file-name-nondirectory
 		 (directory-file-name
-          (file-name-directory
-           (file-relative-name (org-roam-node-file node) org-roam-directory))))
-      (error "")))
+		  (file-name-directory
+		   (file-relative-name (org-roam-node-file node) org-roam-directory))))
+	  (error "")))
 
   ;; appearance in vertico completion buffer
   (setq org-roam-node-display-template
@@ -236,30 +237,27 @@
 		 ))
 
   ;; (setq org-roam-db-update-on-save t)
-  :general
-  (:keymaps 'mode-specific-map
-			"l" 'org-roam-node-find
-			"r" (cons "roam" org-roam-keymap))
+  :bind
+  (:map org-roam-keymap
+		("c" . org-roam-capture)
+		("d" . delve-index)
+		("f" . org-roam-node-find)
+		("g" . org-roam-buffer-toggle)
+		("i" . org-roam-node-insert)
+		("n" . capture-slipbox)
+		("s" . org-roam-db-sync)
+		("t" . org-roam-tag-add))
 
-  (:keymaps 'org-roam-keymap
-			"c" 'org-roam-capture
-			"d" 'delve-index
-			"f" 'org-roam-node-find
-			"g" 'org-roam-buffer-toggle
-			"i" 'org-roam-node-insert
-			"n" 'capture-slipbox
-			"s" 'org-roam-db-sync
-			"t" 'org-roam-tag-add
+  ;; ("a" . org-roam-alias-add)
+  ;; ("d" . org-roam-buffer-display-dedicated)
+  ;; ("g" . org-roam-graph)
+  ;; ("o" . org-id-get-create)
+  ;; ("r" . org-roam-node-random)
+  ;; ("y" . org-id-get-create)
 
-			;; "a" 'org-roam-alias-add
-			;; "d" 'org-roam-buffer-display-dedicated
-			;; "g" 'org-roam-graph
-			;; "o" 'org-id-get-create
-			;; "r" 'org-roam-node-random
-			;; "y" 'org-id-get-create
+  ;; note: if a new file has a name similar to another one, use ido-select-text
 
-			;; note: if a new file has a name similar to another one, use ido-select-text
-			)
+  (:map mode-specific-map ("l" . org-roam-node-find))
   :hook
   ((org-roam-mode . org-roam-db-autosync-mode)))
 
@@ -269,7 +267,7 @@
 
 (use-package consult-org-roam
   :ensure t
-  :after org-roam
+  ;; :after org-roam
   ;; :init
   ;; (require 'consult-org-roam)
   ;; Activate the minor mode
@@ -288,12 +286,13 @@
   ;; (consult-customize
   ;;  consult-org-roam-forward-links
   ;;  :preview-key (kbd "M-."))
-  :general
+  :bind
   ;; Define some convenient keybindings as an addition
-  ("C-c r e" 'consult-org-roam-file-find
-   "C-c r b" 'consult-org-roam-backlinks
-   "C-c r l" 'consult-org-roam-forward-links
-   "C-c r r" 'consult-org-roam-search)
+  (:map org-roam-keymap
+		("e" . consult-org-roam-file-find)
+		("b" . consult-org-roam-backlinks)
+		("l" . consult-org-roam-forward-links)
+		("r" . consult-org-roam-search))
   :hook
   ((org-roam-mode . consult-org-roam-mode)))
 
@@ -305,9 +304,9 @@
   (advice-add 'yes-or-no-p :around #'my/return-t)
   (advice-add 'y-or-n-p :around #'my/return-t)
   (let ((res (apply orig-fun args)))
-    (advice-remove 'yes-or-no-p #'my/return-t)
-    (advice-remove 'y-or-n-p #'my/return-t)
-    res))
+	(advice-remove 'yes-or-no-p #'my/return-t)
+	(advice-remove 'y-or-n-p #'my/return-t)
+	res))
 (advice-add 'org-roam-capture--finalize :around #'my/disable-yornp)
 
 (defun capture-slipbox ()
@@ -355,4 +354,3 @@
 ;;   ;; (global-set-key (kbd "<f2> f") #'quickroam-find)
 ;;   ;; (global-set-key (kbd "<f2> i") #'quickroam-insert)
 ;;   )
-

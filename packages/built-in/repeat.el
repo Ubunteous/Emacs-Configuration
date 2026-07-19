@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                REPEAT              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,12 +23,12 @@
 ;; useful but only work with char shortcuts (not <left>). See switch buffer for the regular syntax
 (defmacro repeat-it (group cmds)
   (let ((map (intern (concat (symbol-name group) "-repeat-map"))))
-    `(progn
-       (defvar ,map (make-sparse-keymap))
-       (cl-loop for (key def hint) in ,cmds do
-                (define-key ,map (kbd key) def)
-                (put def 'repeat-map ',map)
-                (when hint (put def 'repeat-hint hint))))))
+	`(progn
+	   (defvar ,map (make-sparse-keymap))
+	   (cl-loop for (key def hint) in ,cmds do
+				(define-key ,map (kbd key) def)
+				(put def 'repeat-map ',map)
+				(when hint (put def 'repeat-hint hint))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYMAP REPETITION ;;
@@ -37,8 +39,8 @@
 ;;   "Add 'repeat-mode' support to a KEYMAP."
 ;;   (map-keymap
 ;;    (lambda (_key cmd)
-;; 	 (when (symbolp cmd)
-;; 	   (put cmd 'repeat-map keymap)))
+;;	 (when (symbolp cmd)
+;;	   (put cmd 'repeat-map keymap)))
 ;;    (symbol-value keymap)))
 
 ;;;;;;;;;;;;

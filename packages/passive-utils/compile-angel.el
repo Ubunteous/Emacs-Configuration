@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            COMPILE-ANGEL           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,21 +62,21 @@
   ;;;;;;;;;;;;;;;;;;
   ;; IGNORE FILES ;;
   ;;;;;;;;;;;;;;;;;;
-  
+
   ;; Ensure that the value of `savehist-file` is updated before proceeding
   (with-eval-after-load "savehist"
 	(push (concat "/" (file-name-nondirectory savehist-file))
-          compile-angel-excluded-files))
+		  compile-angel-excluded-files))
 
   ;; Ensure that the value of `recentf-save-file` is updated before proceeding
   (with-eval-after-load "recentf"
 	(push (concat "/" (file-name-nondirectory recentf-save-file))
-          compile-angel-excluded-files))
+		  compile-angel-excluded-files))
 
   ;; Ensure that the value of `custom-file` is updated before proceeding
   (with-eval-after-load "cus-edit"
 	(when (stringp custom-file)
-      (push (concat "/" (file-name-nondirectory custom-file))
+	  (push (concat "/" (file-name-nondirectory custom-file))
 			compile-angel-excluded-files)))
 
   ;; A global mode that compiles .el files before they are loaded using `load' or `require'

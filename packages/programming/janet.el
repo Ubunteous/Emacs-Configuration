@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                JANET               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,11 +10,11 @@
 		 :repo "sogaiu/janet-ts-mode"
 		 :files ("*.el"))
   :mode "\\.janet\\'"
-  :general (:keymaps 'janet-ts-mode-map
-		     "C-c s" '(lambda () (interactive)
+  :bind (:map janet-ts-mode-map
+			 ("C-c s" . (lambda () (interactive)
 				(if (get-buffer "*ajrepl-repl*")
-				    (ajrepl-send-buffer)
-				  (ajrepl))))
+					(ajrepl-send-buffer)
+				  (ajrepl)))))
   ;; dirty. janet-mode always comes back in auto-mode-alist
   ;; :hook janet-mode ;; potentially makes org mode hang
   )
@@ -32,5 +34,5 @@
 ;; (use-package flycheck-janet
 ;;   :defer t
 ;;   :ensure (:host github
-;; 		 :repo "sogaiu/flycheck-janet"
-;; 		 :files ("*.el")))
+;;		 :repo "sogaiu/flycheck-janet"
+;;		 :files ("*.el")))

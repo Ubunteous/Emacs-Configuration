@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                MAGIT               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -202,13 +204,12 @@
   ;;	  ]
   ;;	 ]
   ;;	)
-  :general
+  :bind
   ;; shadows open-line. Note: C-j already does return+indent
   ;; ("C-o" 'motion-transient) ;; shadows open-line
-  ("C-S-h" 'hrm-help-transient)
-  ("C-h y" 'hrm-help-transient)
-  (:keymaps 'personal
-			"v" 'vim-transient)
+  ("C-S-h" . hrm-help-transient)
+  ("C-h y" . hrm-help-transient)
+  (:map personal-misc-bindings-keymap ("v" . vim-transient))
   :hook
   (prog-mode . hs-minor-mode))
 
@@ -216,11 +217,12 @@
   ;; fixes emacs 29 issue with old transient package (dependency)
   ;; :ensure (:tag "v3.3.0")
   ;; :after compat
-  :after transient
+  ;; :after transient
   :defer t
   :config
-  (set-face-attribute 'smerge-markers :background "deep sky blue")
-  (set-face-attribute 'smerge-lower :background "brown")
+  (set-face-attribute 'smerge-markers nil :background "deep sky blue")
+  (set-face-attribute 'smerge-lower nil :background "brown")
+
   ;; ;; updates modeline with branch. higher cost than hook
   ;; (setq auto-revert-check-vc-info t
   ;;       auto-revert-interval 10)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                DELVE               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,9 +10,9 @@
   :after (org-roam)
   ;; this is necessary if use-package-always-defer is true
   :demand t
-  :general
-  ;; "C-c r d" 'delve-index
-  ;; ("<f12>" 'delve)
+  ;; :bind
+  ;; ("C-c r d" . delve-index)
+  ;; ("<f12>" . delve)
   :config
   ;; set meaningful tag names for the dashboard query
   (setq delve-dashboard-tags '("Index" "Scene" "Character" "Worldbuilding"))
@@ -32,9 +34,9 @@
   "Delve into org-roam index."
 
   (unless delve-global-minor-mode
-    (delve-global-minor-mode))
+	(delve-global-minor-mode))
 
   (let ((buf "DELVE Zettel imported from 'index.delve'"))
-    (if (get-buffer buf)
-	(switch-to-buffer buf)
-      (switch-to-buffer (delve--get-collection-buffer "~/org/Alter/.delve/index.delve")))))
+	(if (get-buffer buf)
+		(switch-to-buffer buf)
+	  (switch-to-buffer (delve--get-collection-buffer "~/org/Alter/.delve/index.delve")))))

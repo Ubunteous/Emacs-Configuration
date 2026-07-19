@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             TREE-SITTER            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16,9 +18,9 @@
   )
 
 ;; (add-to-list 'major-mode-remap-alist
-;; 	     '(python-mode . python-ts-mode)
-;; 	     '(nix-mode . nix-ts-mode)
-;; 	     '(gdscript-mode . gdscript-ts-mode))
+;;		 '(python-mode . python-ts-mode)
+;;		 '(nix-mode . nix-ts-mode)
+;;		 '(gdscript-mode . gdscript-ts-mode))
 
 ;; find mode faces with customize-apropos-faces RET ^font-lock-
 ;; use treesit-inspect-node-at-point to discover if parser is available
@@ -74,14 +76,14 @@
   (setq treesit-auto-langs '(c cpp c-sharp css bash javascript typescript haskell python)) ;; also: rust java go and maybe Haskell
 
   ;; (setq treesit-auto-recipe-list
-  ;; 	`(,(make-treesit-auto-recipe
-  ;; 	    :lang 'python
-  ;; 	    :ts-mode 'python-ts-mode
-  ;; 	    :remap 'anaconda-mode
-  ;; 	    :url "https://github.com/tree-sitter/tree-sitter-python"
-  ;; 	    :revision "master"
-  ;; 	    :source-dir "src"
-  ;; 	    :ext "\\.py[yw]?\\'")))
+  ;;	`(,(make-treesit-auto-recipe
+  ;;		:lang 'python
+  ;;		:ts-mode 'python-ts-mode
+  ;;		:remap 'anaconda-mode
+  ;;		:url "https://github.com/tree-sitter/tree-sitter-python"
+  ;;		:revision "master"
+  ;;		:source-dir "src"
+  ;;		:ext "\\.py[yw]?\\'")))
 
   ;; if non nil download missing lang-ts-mode
   ;; (setq treesit-auto-install 'prompt)
@@ -113,8 +115,8 @@
 ;;   ;; :config
 ;;   ;; (global-tree-sitter-mode)
 ;;   :hook ((anaconda-mode . tree-sitter-mode)
-;; 	 ;; (python-mode . tree-sitter-mode)
-;; 	 (emacs-lisp-mode . tree-sitter-mode)))
+;;	 ;; (python-mode . tree-sitter-mode)
+;;	 (emacs-lisp-mode . tree-sitter-mode)))
 
 
 ;; installer made for tree-sitter (not built-in)

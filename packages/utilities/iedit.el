@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                IEDIT               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,42 +8,38 @@
 (use-package iedit
   :defer t
   :init
-  (defvar-keymap iedit-keymap
-	:doc "Keymap for search functions in consult.")
+  (defvar-subkeymap mode-specific-map "i" iedit-keymap "Keymap for iedit.")
   :config
   (setq iedit-auto-save-occurrence-in-kill-ring nil)
-  :general
-  (:keymaps 'iedit-keymap
-			"." 'iedit-execute-last-modification
-			"k s" 'iedit-end-and-call-kmacro
-			"k s" 'iedit-start-kmacro
+  :bind
+  (:map iedit-keymap
+		("." . iedit-execute-last-modification)
+		("k s" . iedit-end-and-call-kmacro)
+		("k s" . iedit-start-kmacro)
 
-			"o b" 'iedit-blank-occurrences
-			"o d" 'iedit-delete-occurrences
-			"o c" 'iedit-downcase-occurrences
-			"o u" 'iedit-upcase-occurrences
+		("o b" . iedit-blank-occurrences)
+		("o d" . iedit-delete-occurrences)
+		("o c" . iedit-downcase-occurrences)
+		("o u" . iedit-upcase-occurrences)
 
-			"e d" 'iedit-expand-down-a-line
-			"e D" 'iedit-expand-down-to-occurrence
-			"e u" 'iedit-expand-up-a-line
-			"e U" 'iedit-expand-up-to-occurrence
-			"e n" 'iedit-number-occurrences
+		("e d" . iedit-expand-down-a-line)
+		("e D" . iedit-expand-down-to-occurrence)
+		("e u" . iedit-expand-up-a-line)
+		("e U" . iedit-expand-up-to-occurrence)
+		("e n" . iedit-number-occurrences)
 
-			"n" 'iedit-next-occurrence
-			"N" 'iedit-goto-first-occurrence
-			"p" 'iedit-prev-occurrence
-			"P" 'iedit-goto-last-occurrence
+		("n" . iedit-next-occurrence)
+		("N" . iedit-goto-first-occurrence)
+		("p" . iedit-prev-occurrence)
+		("P" . iedit-goto-last-occurrence)
 
-			"R" 'iedit-rectangle-mode
-			"r" 'iedit-replace
-			;; "r" 'iedit-replace-occurrences
-			"m" 'iedit-switch-to-mc-mode
-			"t" 'iedit-toggle-selection)
-  (:keymaps 'isearch-mode-map
-			"C-i" 'iedit-mode-from-isearch)
-
-  (:keymaps 'mode-specific-map
-			"i" (cons "iedit" iedit-keymap)))
+		("R" . iedit-rectangle-mode)
+		("r" . iedit-replace)
+		;; ("r" . iedit-replace-occurrences)
+		("m" . iedit-switch-to-mc-mode)
+		("t" . iedit-toggle-selection))
+  (:map isearch-mode-map
+		("C-i" . iedit-mode-from-isearch)))
 
 (defun iedit-replace ()
   ;; quickly enter iedit mode to replace string at point

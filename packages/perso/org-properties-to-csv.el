@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;        ORG-PROPERTIES-TO-CSV       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13,10 +15,10 @@
 (defun alist-intersection-values (alist keys)
   "Return values from ALIST for KEYS that intersect with keys in ALIST."
   (let* ((alist-keys (mapcar 'car alist))
-         (intersection (cl-intersection keys alist-keys :test 'equal)))
-    (mapcar (lambda (key)
-              (cdr (assoc key alist)))
-            intersection)))
+		 (intersection (cl-intersection keys alist-keys :test 'equal)))
+	(mapcar (lambda (key)
+			  (cdr (assoc key alist)))
+			intersection)))
 
 (defun get-org-properties ()
   (let* ((columns (remove "ID" (org-buffer-property-keys)))
@@ -37,10 +39,10 @@
 
 (defun write-strings-to-file (strings filename)
   (with-temp-buffer
-    (mapc (lambda (s)
+	(mapc (lambda (s)
 			(when (not (string-empty-p s))
 			  (insert (concat s "\n")))) strings)
-    (write-region (point-min) (point-max) (concat "~/org/Projets/Alter/csv/" filename) nil)))
+	(write-region (point-min) (point-max) (concat "~/org/Projets/Alter/csv/" filename) nil)))
 
 
 (defun org-properties-to-csv () (interactive)

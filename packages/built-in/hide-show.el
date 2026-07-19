@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              HIDE-SHOW             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,10 +8,8 @@
   :ensure nil
   :defer t
   :init
-  (defvar-keymap hideshow-keymap
-	:doc "Keymap for code folding.")
-  (define-key personal-misc-bindings-keymap (kbd "h") hideshow-keymap)
-  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "h" "hs")
+  (defvar-subkeymap personal-misc-bindings-keymap "h" hideshow-keymap "Keymap for code folding.")
+  (which-key-add-keymap-based-replacements mode-specific-map "@" "hideshow")
 
   ;; :config
   ;; (setq hs-headline nil)

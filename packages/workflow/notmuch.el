@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               NOTMUCH              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,19 +12,18 @@
 
 (use-package notmuch
   :defer t
-  :general
-  ("C-c w" 'notmuch)
+  :bind ("C-c w" . notmuch)
   ;; (:keymaps 'notmuch-show-mode-map
-  ;; 	    "S" (lambda ()
-  ;; 		  "mark message as spam"
-  ;; 		  (interactive)
-  ;; 		  (notmuch-show-tag (list "+spam" "-inbox"))))
+  ;;		"S" (lambda ()
+  ;;		  "mark message as spam"
+  ;;		  (interactive)
+  ;;		  (notmuch-show-tag (list "+spam" "-inbox"))))
   ;; (:keymaps 'notmuch-search-mode-map
-  ;; 	    "S" (lambda ()
-  ;; 		  "mark message as spam"
-  ;; 		  (interactive)
-  ;; 		  (notmuch-search-tag (list "-inbox" "+spam"))
-  ;; 		  (next-line)))
+  ;;		"S" (lambda ()
+  ;;		  "mark message as spam"
+  ;;		  (interactive)
+  ;;		  (notmuch-search-tag (list "-inbox" "+spam"))
+  ;;		  (next-line)))
   :config
   ;; I will decide later which one I prefer
   ;; Options: 'sendmail-query-once, 'smtpmail-send-it
@@ -33,9 +34,9 @@
   ;; fix message send error
   ;; (setq smtpmail-stream-type 'starttls) ;; did not serve
   (setq smtpmail-debug-info nil) ;; do not show debug trace
-  
+
   (setq message-directory "mbsync")
-  
+
   ;; setup the mail address and use name
   (setq mail-user-agent 'message-user-agent)
 

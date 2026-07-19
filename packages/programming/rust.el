@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                RUST                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,9 +10,9 @@
   (setq rust-format-on-save t)
   (setq rust-mode-treesitter-derive t)
   :mode "\\.rs\\'"
-  :general
-  (:keymaps 'rust-mode-map
-			"C-c s" 'cargo-run)
+  :bind
+  (:map rust-mode-map
+		("C-c s" . cargo-run))
   :hook
   (rust-mode . (lambda ()
 				 (setq indent-tabs-mode nil)
@@ -40,8 +42,8 @@
 ;; (use-package cargo
 ;;   :defer t
 ;;   :mode "\\.rs\\'"
-;;   ;; :general
-;;   ;; ("..." 'cargo-minor-mode-command-map)
+;;   ;; :bind
+;;   ;; ("..." . cargo-minor-mode-command-map)
 ;;   )
 
 ;; (use-package cargo-mode

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              WHICH-KEY             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,6 +9,7 @@
   :ensure nil
   :defer t
   :config
+  ;; built-in
   (which-key-add-keymap-based-replacements ctl-x-map "4" "other-window")
   (which-key-add-keymap-based-replacements ctl-x-map "5" "other-frame")
   ;; "6"2C-command" 2C-mode-map) ; breaks renamming if used
@@ -20,8 +23,6 @@
   (which-key-add-keymap-based-replacements ctl-x-map "w" "window") ; (^ prefix to tear/detach)
   (which-key-add-keymap-based-replacements ctl-x-map "x" "buffer")
   (which-key-add-keymap-based-replacements ctl-x-map "RET" "encoding")
-
-  (which-key-add-keymap-based-replacements hideshow-keymap "@" "hideshow")
   :bind
   (:map which-key-C-h-map
 		("C-n" . which-key-show-next-page-cycle) ;; cannot use space as it shadows rectangle-mode

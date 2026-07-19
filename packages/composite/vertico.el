@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               VERTICO              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13,27 +15,27 @@
   (setq read-file-name-completion-ignore-case t
 		read-buffer-completion-ignore-case t
 		completion-ignore-case t)
-  
+
   (defun vertico-insert ()
-    "Insert current candidate in minibuffer or a space if no candidate found."
-    (interactive)
-    (if (> vertico--total 0)
+	"Insert current candidate in minibuffer or a space if no candidate found."
+	(interactive)
+	(if (> vertico--total 0)
 		(let ((vertico--index (max 0 vertico--index)))
 		  (insert (prog1 (vertico--candidate) (delete-minibuffer-contents))))
-      (insert " ")))
+	  (insert " ")))
 
   (defun my-minibuffer-setup ()
-    (set (make-local-variable 'face-remapping-alist)
+	(set (make-local-variable 'face-remapping-alist)
 		 '((default :height 1.25))))
-  :general
-  (:keymaps 'vertico-map
-			"?" 'minibuffer-completion-help
-			"C-<return>" 'vertico-exit-input ;; ignore completion
-			"M-RET" 'minibuffer-force-complete-and-exit
-			;; risky but if it works it can be confortable
-			"SPC" 'vertico-insert
-			"C-SPC" '(lambda () (interactive) (insert " "))
-			"M-TAB" 'minibuffer-complete)
+  :bind
+  (:map vertico-map
+		("?" . minibuffer-completion-help)
+		("C-<return>" . vertico-exit-input) ;; ignore completion
+		("M-RET" . minibuffer-force-complete-and-exit)
+		;; risky but if it works it can be confortable
+		("SPC" . vertico-insert)
+		("C-SPC" . (lambda () (interactive) (insert " ")))
+		("M-TAB" . minibuffer-complete))
   :hook
   (minibuffer-setup . my-minibuffer-setup))
 
@@ -43,7 +45,7 @@
 ;;   :after vertico
 ;;   :config
 ;;   (setq vertico-multiform-commands
-;; 	'((consult-line
+;;	'((consult-line
 ;;            posframe
 ;;            (vertico-posframe-poshandler . posframe-poshandler-frame-top-center)
 ;;            (vertico-posframe-border-width . 10)
@@ -74,9 +76,9 @@
 ;;   :defer t
 ;; :ensure nil
 ;;   :after vertico
-;;   :general (:keymaps 'vertico-map
-;; 		     "M-q" 'vertico-quick-insert
-;; 		     "C-q" 'vertico-quick-exit))
+;;   :bind (:map vertico-map
+;;			 ("M-q" . vertico-quick-insert)
+;;			 ("C-q" . vertico-quick-exit)))
 
 ;; Configure directory extension.
 (use-package vertico-directory
@@ -88,10 +90,10 @@
   ;; :load-path "files/straight/straight/repos/vertico/extensions/"
   :after vertico
   ;; More convenient directory navigation commands
-  :general (:keymaps 'vertico-map
-		     "RET" 'vertico-directory-enter
-		     "DEL" 'vertico-directory-delete-char
-		     "M-DEL" 'vertico-directory-delete-word)
+  :bind (:map vertico-map
+			  ("RET" . vertico-directory-enter)
+			  ("DEL" . vertico-directory-delete-char)
+			  ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
@@ -115,17 +117,17 @@
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
   (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
+	(cons (format "[CRM%s] %s"
+				  (replace-regexp-in-string
+				   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+				   crm-separator)
+				  (car args))
+		  (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
   ;; Do not allow the cursor in the minibuffer prompt
   (setq minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
+		'(read-only t cursor-intangible t face minibuffer-prompt))
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
@@ -159,7 +161,7 @@
 ;; :ensure nil
 ;;   ;; :ensure (:files (:defaults "extensions/vertico-multiform.el"))
 ;;   :after vertico
-;;   :config  
+;;   :config
 ;;   (add-to-list 'vertico-multiform-categories
 ;;                '(jinx grid (vertico-grid-annotate . 20)))
 ;;   (vertico-multiform-mode 1)
@@ -172,7 +174,7 @@
 ;;   :after vertico
 ;;   ;; :config
 ;;   ;; (setq vertico-multiform-categories
-;;   ;; 	'((file grid)
+;;   ;;		'((file grid)
 ;;   ;;      (consult-grep buffer)))
 ;;   )
 
@@ -190,6 +192,6 @@
 ;;   :defer t
 ;;   :config
 ;;   ;; (setq vertico-multiform-categories
-;;   ;; 	'((file grid)
+;;   ;;		'((file grid)
 ;;   ;;      (consult-grep buffer)))
 ;;   )

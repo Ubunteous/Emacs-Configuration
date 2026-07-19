@@ -1,10 +1,13 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             CLAUDE-IDE             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package claude-code-ide
   :ensure (claude-code-ide.el :type git :host github :repo "manzaltu/claude-code-ide.el")
-  ;; :general ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  ;; :bind ("C-c C-'" .
+  claude-code-ide-menu) ; Set your favorite keybinding
   :config
   ;; (claude-code-ide-emacs-tools-setup) ; Optionally enable Emacs MCP tools
 

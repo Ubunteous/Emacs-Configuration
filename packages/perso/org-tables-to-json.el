@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         ORG-TABLES-TO-JSON         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,9 +53,9 @@
 						do
 						(when (string= name (org-element-property :name table))
 						  (throw 'pos (org-element-property :contents-begin table)))))))
-    (when pos
-      (goto-char pos)
-      (remove 'hline (org-table-to-lisp)))))
+	(when pos
+	  (goto-char pos)
+	  (remove 'hline (org-table-to-lisp)))))
 
 (defun org-convert-named-tables-to-json ()
   "Save to ~/Desktop/json/table.org org tables with a #+name: in current buffer."

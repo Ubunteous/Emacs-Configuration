@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             ACTIVITIES             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5,8 +7,8 @@
 (use-package activities
   :defer t
   :init
-  (defvar-keymap activities-keymap
-	:doc "Keymap for activities.")
+  (defvar-subkeymap personal-misc-bindings-keymap "k" activities-keymap "Keymap for activities.")
+
   ;; :config
   ;; (setq activities-sort-by #'activities-sort-by-active-age)
   ;; (setq activities-annotation-colors '("blue" "red" 0.65)) ; age
@@ -28,20 +30,19 @@
   ;; activities-after-switch-functions
   ;; activities-buffer-local-variables
   ;; activities-before-resume-functions
-  :general (:keymaps 'activities-keymap
-					 "b" 'activities-switch-buffer
-					 "c" 'activities-define
-					 "d" 'activities-discard
-					 "k" 'activities-kill
-					 "l" 'activities-list
-					 "m" 'activities-mode
-					 "n" 'activities-new
-					 "p" 'activities-suspend
-					 "r" 'activities-rename
-					 "s" 'activities-save-all
-					 "t" 'activities-tabs-mode
-					 "u" 'activities-resume
-					 "v" 'activities-revert
-					 "w" 'activities-switch)
-  (:keymaps 'personal
-			"i" (cons "activity" activities-keymap)))
+  :bind (:map activities-keymap
+			  ("b" . activities-switch-buffer)
+			  ("c" . activities-define)
+			  ("d" . activities-discard)
+			  ("k" . activities-kill)
+			  ("l" . activities-list)
+			  ("m" . activities-mode)
+			  ("n" . activities-new)
+			  ("p" . activities-suspend)
+			  ("r" . activities-rename)
+			  ("s" . activities-save-all)
+			  ("t" . activities-tabs-mode)
+			  ("u" . activities-resume)
+			  ("v" . activities-revert)
+			  ("w" . activities-switch))
+  (:map personal-misc-bindings-keymap ("i" . activities-keymap)))

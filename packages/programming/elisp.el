@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                ELISP               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41,16 +43,16 @@
   ;;	 :eval (cons 1 '(2 3 4))))
 
   ;; (setq ielm-history-file-name "~/.emacs.d/files/ielm-history.eld")
-  :general (
-			;; "C-c x" 'eval-region-or-buffer
-			[remap eval-last-sexp] 'eval-last-sexp-or-region)
-  ;; :hook
-  ;; (after-save . check-parens)
-
-  (:keymaps 'emacs-lisp-mode-map
+  :bind
+  ;; "C-c x" 'eval-region-or-buffer
+  ([remap eval-last-sexp] . eval-last-sexp-or-region)
+  (:map emacs-lisp-mode-map
 			;; note: # can be used before a lambda which may be byte compiled
 			;; "C-c x" #'(lambda () (interactive) (save-buffer) (eval-buffer) (message "buffer eval complete"))
-			"C-c x" 'eval-region-or-buffer))
+			("C-c x" . eval-region-or-buffer))
+  ;; :hook
+  ;; (after-save . check-parens)
+  )
 
 
 (defun elisp-find-definition (name)

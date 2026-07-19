@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 EJC                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -27,7 +29,7 @@
    :password "change") ;; password needed unless psql conf changed
 
   ;; (setq ejc-org-mode-show-results nil)
-  
+
   ;; avoid early nrepl launch
   ;; (add-hook 'ejc-sql-connected-hook
   ;;           (lambda ()

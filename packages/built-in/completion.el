@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             COMPLETION             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,7 +10,7 @@
   :diminish completion-preview-mode
   :config
   ;; prevents vertico from showing annoying red char
-  (set-face-attribute 'completions-first-difference nil :foreground nil)
+  (set-face-attribute 'completions-first-difference nil :foreground 'unspecified)
 
   (setq completion-preview-completion-styles '(orderless-first-prefix))
 

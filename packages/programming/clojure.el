@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               CLOJURE              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -59,9 +61,9 @@
 ;;   :config
 ;;   (setq inf-clojure-repl-type 'clojure
 ;;	inf-clojure-custom-startup "clojure")
-;;   :general (:keymaps 'clojure-ts-mode-map
-;;			 "C-c C-c" 'inf-clojure-eval-buffer
-;;			 "C-x C-e" 'inf-clojure-eval-last-sexp))
+;;   :bind (:map clojure-ts-mode-map
+;;			 ("C-c C-c" . inf-clojure-eval-buffer)
+;;			 ("C-x C-e" . inf-clojure-eval-last-sexp)))
 
 
 ;; this gives cider-overlay to emacs-lisp-mode (a bit like eros)

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             ORG-MODERN             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14,14 +16,14 @@
    org-special-ctrl-a/e t
    org-insert-heading-respect-content t
    org-modern-star 'replace
-   
+
    org-modern-hide-stars " "
    org-modern-list '((43 . "+")  ;; +
 					 (45 . "-")  ;; -
 					 (42 . "•")) ;; *
 
    ;; org-modern-priority-faces '((?A :background "red"
-   ;; 								   :foreground "yellow"))
+   ;;								   :foreground "yellow"))
 
    ;; Org styling, hide markup etc.
    org-hide-emphasis-markers t

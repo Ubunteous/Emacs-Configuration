@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              AIDERMACS             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -32,5 +34,6 @@
   ;; See the Configuration section below
   (setq aidermacs-default-chat-mode 'architect)
   (setq aidermacs-default-model "sonnet")
-  :bind (:map personal-misc-bindings-keymap
+  :bind (:map
+		 personal-misc-bindings-keymap
 			  ("i" . aidermacs-transient-menu)))

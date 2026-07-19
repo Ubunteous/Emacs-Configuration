@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    PROGRAMMING LANGUAGE: JUPYTER   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -12,10 +14,10 @@
 ;;   "Load the Lisp file named FILE."
 ;;   ;; This is a case where .elc and .so/.dll make a lot of sense.
 ;;   (interactive (list (let ((completion-ignored-extensions
-;; 			    (remove module-file-suffix
-;; 				    (remove ".elc"
-;; 					    completion-ignored-extensions))))
-;; 		       (read-file-name "Load file: " nil nil 'lambda))))
+;;				(remove module-file-suffix
+;;					(remove ".elc"
+;;						completion-ignored-extensions))))
+;;			   (read-file-name "Load file: " nil nil 'lambda))))
 
 ;;   (if (eq file 'emacs-zmq.so)
 ;;       (load (expand-file-name file) nil nil t)
@@ -28,17 +30,17 @@
   :defer t
   :after org ;; ob
   :requires zmq
-  :general
-  (:keymaps 'org-mode-map
-	    "C-c p" '(org-insert-jupyter-block "python")
-	    "C-c j" '(org-insert-jupyter-block "javascript")
-	    ;; :config
-	    ;; (add-to-list 'org-structure-template-alist '("t" . "test"))
-	    ;; (append 'org-structure-template-alist '("t" . "test"))
-	    
-	    ;; (add-to-list 'org-babel-load-languages '(test . t))
-	    ;; (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-	    ))
+  :bind
+  (:map org-mode-map
+		("C-c p" . (lambda () (interactive) (org-insert-jupyter-block "python")))
+		("C-c j" . (lambda () (interactive) (org-insert-jupyter-block "javascript")))
+		;; :config
+		;; (add-to-list 'org-structure-template-alist '("t" . "test"))
+		;; (append 'org-structure-template-alist '("t" . "test"))
+
+		;; (add-to-list 'org-babel-load-languages '(test . t))
+		;; (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+		))
 
 ;; hide stderr error about frozen modules
 ;; jupyter-command: Content written to stderr stream
@@ -49,8 +51,8 @@
   "Insert a jupyter block (with linebreak if mark inactive)"
   (interactive)
   (if mark-active
-      (org-insert-structure-template (concat "src jupyter-" TYPE))
-    (org-insert-structure-template (concat "src jupyter-" TYPE "\n"))))
+	  (org-insert-structure-template (concat "src jupyter-" TYPE))
+	(org-insert-structure-template (concat "src jupyter-" TYPE "\n"))))
 
 
 (defun org-jupyter-setup ()
@@ -68,14 +70,14 @@
 
 ;; not necessary anymore with:
 ;; (org-insert-structure-template "src jupyter-python")
-;; :general
-;; (org-mode-map
-;;  "C-c j"
-;;  '(lambda () (interactive)
-;;     (tempel-insert 'jupyter))))
+;; :bind
+;; (:map org-mode-map
+;;  ("C-c j"
+;;  . (lambda () (interactive)
+;;     (tempel-insert 'jupyter)))))
 
 
-;; ;; add jupyter-python to babel
+;; ;; add python to babel
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
 ;;  (append org-babel-load-languages
@@ -102,12 +104,12 @@
 
 ;; (defun my/select-jupyter-kernel ()
 ;;   (let ((ports (my/get-open-ports))
-;; 	(files (my/list-jupyter-kernel-files)))
+;;	(files (my/list-jupyter-kernel-files)))
 ;;     (completing-read
 ;;      "Jupyter kernels: "
 ;;      (seq-filter
 ;;       (lambda (file)
-;; 	(member (cdr file) ports))
+;;	(member (cdr file) ports))
 ;;       files))))
 
 
@@ -125,7 +127,7 @@
 ;; ;;   "Open Jupyter QtConsole, connected to a Jupyter kernel"
 ;; ;;   (interactive)
 ;; ;;   (start-process "jupyter-qtconsole" nil "setsid" "jupyter" "qtconsole" "--existing"
-;; ;; 		 (file-name-nondirectory (my/select-jupyter-kernel))))
+;; ;;		 (file-name-nondirectory (my/select-jupyter-kernel))))
 
 ;; (defun my/jupyter-cleanup-kernels ()
 ;;   (interactive)

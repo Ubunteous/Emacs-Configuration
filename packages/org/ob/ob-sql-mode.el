@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             OB-SQL-MODE            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -150,7 +152,7 @@
 
 (defcustom org-babel-sql-mode-start-interpreter-prompt
   (lambda (bufname buf product)
-    (y-or-n-p (format "Interpreter not running in %s.  Start it? " bufname)))
+	(y-or-n-p (format "Interpreter not running in %s.  Start it? " bufname)))
   "Function to call if the buffer BUF called BUFNAME is not running PRODUCT.
 
 If the function returns t then a buffer will be created, otherwise the
@@ -174,7 +176,7 @@ session will not be started."
 
 (defvar org-babel-header-args:sql-mode
   '((:product . :any)
-    (:session . :any)))
+	(:session . :any)))
 
 (defvar org-babel-sql-mode-pre-execute-hook nil
   "Hook for functions to be called before the query is executed.
@@ -192,14 +194,14 @@ The hook should return a new BODY modified in some way.")
   (let* ((split-version (split-string org-version "\\."))
 		 (org-major (string-to-number (nth 0 split-version)))
 		 (org-minor (string-to-number (nth 1 split-version))))
-    (if (or (and (= org-major 9)
+	(if (or (and (= org-major 9)
 				 (< org-minor 2))
 			(< org-major 9))
 		(add-to-list 'org-structure-template-alist
 					 `(,org-babel-sql-mode-template-selector
-                       "#+BEGIN_SRC sql-mode ?\n\n#+END_SRC"
-                       "#+BEGIN_SRC sql-mode ?\n\n#+END_SRC"))
-      (add-to-list 'org-structure-template-alist
+					   "#+BEGIN_SRC sql-mode ?\n\n#+END_SRC"
+					   "#+BEGIN_SRC sql-mode ?\n\n#+END_SRC"))
+	  (add-to-list 'org-structure-template-alist
 				   `(,org-babel-sql-mode-template-selector
 					 . "src sql-mode")))))
 
@@ -209,27 +211,27 @@ The hook should return a new BODY modified in some way.")
 ;; https://write.as/nikclayton/missing-prompt-issues-with-sql-mode-and-sqlite-on-windows
 (with-eval-after-load "sql"
   (if (eq system-type 'windows-nt)
-      (add-to-list 'sql-sqlite-options "-interactive")))
+	  (add-to-list 'sql-sqlite-options "-interactive")))
 
 (defun org-babel-execute:sql-mode (body params)
   "Execute the SQL statements in BODY using PARAMS."
   (let* ((processed-params (org-babel-process-params params))
-         (session (cdr (assoc :session processed-params)))
-         (session-proc (org-babel-sql-mode-initiate-session session processed-params))
-         (sql-product (intern (cdr (assoc :product params))))
-         (sql-prompt-regexp (sql-get-product-feature sql-product :prompt-regexp))
-         (sql-prompt-cont-regexp (sql-get-product-feature sql-product :prompt-cont-regexp)))
-    (with-temp-buffer
-      (let ((adjusted-body (run-hook-with-args-until-success
-                            'org-babel-sql-mode-pre-execute-hook
-                            body processed-params)))
-        (when adjusted-body
-          (setq body adjusted-body)))
-      (sql-redirect session-proc body (buffer-name) nil)
-      (run-hooks 'org-babel-sql-mode-post-execute-hook)
-      ;; The output may contain the prompt or (more likely) the continuation
-      ;; prompt. Search for both and remove them.
-      (save-match-data
+		 (session (cdr (assoc :session processed-params)))
+		 (session-proc (org-babel-sql-mode-initiate-session session processed-params))
+		 (sql-product (intern (cdr (assoc :product params))))
+		 (sql-prompt-regexp (sql-get-product-feature sql-product :prompt-regexp))
+		 (sql-prompt-cont-regexp (sql-get-product-feature sql-product :prompt-cont-regexp)))
+	(with-temp-buffer
+	  (let ((adjusted-body (run-hook-with-args-until-success
+							'org-babel-sql-mode-pre-execute-hook
+							body processed-params)))
+		(when adjusted-body
+		  (setq body adjusted-body)))
+	  (sql-redirect session-proc body (buffer-name) nil)
+	  (run-hooks 'org-babel-sql-mode-post-execute-hook)
+	  ;; The output may contain the prompt or (more likely) the continuation
+	  ;; prompt. Search for both and remove them.
+	  (save-match-data
 		(goto-char (point-min))
 		(while (re-search-forward sql-prompt-regexp nil t)
 		  (replace-match "")))
@@ -243,25 +245,25 @@ The hook should return a new BODY modified in some way.")
 
 Determines the buffer from values in `PARAMS'."
   (let* ((bufname (org-babel-sql-mode--buffer-name _params))
-         (sql-bufname (format "*SQL: %s*" bufname))
-         (buf (get-buffer sql-bufname))
-         (product (intern (cdr (assoc :product _params)))))
-    (unless (assoc product sql-product-alist)
-      (user-error "Product `%s' is not in `sql-product-alist'" product))
-    (save-current-buffer
-      (unless (sql-buffer-live-p buf product)
-        (if (funcall org-babel-sql-mode-start-interpreter-prompt
+		 (sql-bufname (format "*SQL: %s*" bufname))
+		 (buf (get-buffer sql-bufname))
+		 (product (intern (cdr (assoc :product _params)))))
+	(unless (assoc product sql-product-alist)
+	  (user-error "Product `%s' is not in `sql-product-alist'" product))
+	(save-current-buffer
+	  (unless (sql-buffer-live-p buf product)
+		(if (funcall org-babel-sql-mode-start-interpreter-prompt
 					 sql-bufname buf product )
-            ;; Temporarily redefine pop-to-buffer to do nothing, so
-            ;; that when sql-product-interactive calls it nothing
-            ;; happens.  Otherwise the frame is split to show the
-            ;; interactive buffer, which is not wanted.
-            (let ((old-pop-to-buffer (symbol-function 'pop-to-buffer)))
-              (fset 'pop-to-buffer #'(lambda (&rest _r)))
-              (sql-product-interactive product bufname)
-              (fset 'pop-to-buffer old-pop-to-buffer))
-          (user-error "Can't do anything without an SQL interactive buffer")))
-      (get-buffer sql-bufname))))
+			;; Temporarily redefine pop-to-buffer to do nothing, so
+			;; that when sql-product-interactive calls it nothing
+			;; happens.  Otherwise the frame is split to show the
+			;; interactive buffer, which is not wanted.
+			(let ((old-pop-to-buffer (symbol-function 'pop-to-buffer)))
+			  (fset 'pop-to-buffer #'(lambda (&rest _r)))
+			  (sql-product-interactive product bufname)
+			  (fset 'pop-to-buffer old-pop-to-buffer))
+		  (user-error "Can't do anything without an SQL interactive buffer")))
+	  (get-buffer sql-bufname))))
 
 (defun org-babel-sql-mode--buffer-name (params)
   "Return a buffer name to use for the `SESSION'.
@@ -269,7 +271,7 @@ Determines the buffer from values in `PARAMS'."
 The buffer name is (currently) derived from the :product and :session
 keys in `PARAMS', but do not depend on this."
   (format "%s:%s" (cdr (assoc :product params))
-          (cdr (assoc :session params))))
+		  (cdr (assoc :session params))))
 
 (provide 'ob-sql-mode)
 ;;; ob-sql-mode.el ends here

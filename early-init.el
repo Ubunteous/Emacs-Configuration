@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; early-init.el --- early bird  -*- no-byte-compile: t -*-
 ;;; Commentary:
 ;;; Code:

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                GUILE               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -17,7 +19,7 @@
 ;; GNU Kawa => geiser-kawa
 ;; MIT/GNU Scheme => geiser-mit
 ;; Racket => geiser-racket
-;; Stklos => geiser-stklos 
+;; Stklos => geiser-stklos
 
 ;; Note that geiser-eval-* shows the output in the message area
 ;; Open a split with the *Geiser Debug* buffer for more details

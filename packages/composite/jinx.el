@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                JINX                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,9 +12,9 @@
   :defer  t
   ;; :after vertico
   :diminish
-  :general
-  ("M-$" 'jinx-correct
-   "C-M-$" 'jinx-languages)
+  :bind
+  ("M-$" . jinx-correct)
+  ("C-M-$" . jinx-languages)
   :config
   (setq jinx-languages "en_GB")
   ;; (add-to-list 'vertico-multiform-categories
@@ -32,9 +34,9 @@
   "Switch from english to french."
   (interactive)
   (if (string= jinx-languages "fr")
-      (progn
+	  (progn
 		(jinx-languages "en")
 		(ispell-change-dictionary "en"))
-    (progn
-      (jinx-languages "fr")
-      (ispell-change-dictionary "fr"))))
+	(progn
+	  (jinx-languages "fr")
+	  (ispell-change-dictionary "fr"))))

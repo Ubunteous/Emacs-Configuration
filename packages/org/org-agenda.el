@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             ORG-AGENDA             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -341,5 +343,4 @@
 
   ;; defaults to c if available. Uses org-calendar-goto-agenda
   ;; (setq org-calendar-to-agenda-key 'default)
-  :general
-  ("C-c a" 'org-agenda-show-mix))
+  :bind ("C-c a" . org-agenda-show-mix))

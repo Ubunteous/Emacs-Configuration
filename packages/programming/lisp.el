@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;    PROGRAMMING LANGUAGE: LISP      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,4 +12,4 @@
 ;;   :config
 ;;   ;; key words for yuck
 ;;   (font-lock-add-keywords 'lisp-mode
-;; 			  '(("defwindow" . 'font-lock-keyword-face))))
+;;			  '(("defwindow" . 'font-lock-keyword-face))))

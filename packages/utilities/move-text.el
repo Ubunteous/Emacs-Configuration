@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              MOVE-TEXT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -26,10 +28,10 @@
 
 ;;   (push-mark)
 ;;   (let ((n (if arg (prefix-numeric-value arg) 1)))
-;; 	(cl-loop
-;; 	 repeat n do
-;; 	 (progn
-;; 	   (forward-line 1)
-;; 	   (transpose-lines 1)
-;; 	   (forward-line -1)
-;; 	   (indent-according-to-mode)))))
+;;	(cl-loop
+;;	 repeat n do
+;;	 (progn
+;;	   (forward-line 1)
+;;	   (transpose-lines 1)
+;;	   (forward-line -1)
+;;	   (indent-according-to-mode)))))

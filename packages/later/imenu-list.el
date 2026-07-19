@@ -4,7 +4,7 @@
 
 (use-package imenu-list
   :defer t
-  :general ("C-'" 'imenu-list-smart-toggle)
+  :bind ("C-'" . imenu-list-smart-toggle)
   :config
   (setq imenu-list-focus-after-activation t
 	imenu-list-auto-resize t

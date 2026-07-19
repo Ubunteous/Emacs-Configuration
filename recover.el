@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                PANIC               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -84,11 +86,11 @@
 (display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-(advice-add 'find-file :before (lambda (filename &optional wildcards) 
-                                 (unless (file-exists-p filename)
-                                   (let ((dir (file-name-directory filename)))
-                                     (unless (file-exists-p dir)
-                                       (make-directory dir t))))))
+(advice-add 'find-file :before (lambda (filename &optional wildcards)
+								 (unless (file-exists-p filename)
+								   (let ((dir (file-name-directory filename)))
+									 (unless (file-exists-p dir)
+									   (make-directory dir t))))))
 
 (advice-add 'customize :after (lambda ()
 								(search-forward "search")

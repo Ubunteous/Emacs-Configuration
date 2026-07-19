@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               CASUAL               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,7 +26,7 @@
 	  ]
 
 	 ["Help"
-	  ("m" "Man" casual-man-tmenu) 
+	  ("m" "Man" casual-man-tmenu)
 	  ("n" "Calc" casual-calc-tmenu)
 	  ("h" "Help" casual-help-tmenu)
 	  ("I" "Info" casual-info-tmenu)
@@ -47,7 +49,7 @@
 	  ("C-f" "transform" casual-editkit-transform-text-tmenu)
 	  ("C-g" "registers" casual-editkit-registers-tmenu)
 	  ]
-	 
+
 	 ["Editkit"
 	  ("C-k" "kill" casual-editkit-kill-tmenu)
 	  ("C-M" "macro" casual-editkit-macro-tmenu)
@@ -58,7 +60,7 @@
 	  ("C-p" "project" casual-editkit-project-tmenu)
 	  ("C-R" "reformat" casual-editkit-reformat-tmenu)
 	  ]
-	 
+
 	 ["Editkit"
 	  ("C-r" "rectangle" casual-editkit-rectangle-tmenu)
 	  ("C-S" "sort" casual-editkit-sort-tmenu)
@@ -68,7 +70,7 @@
 	  ("C-W" "windows delete" casual-editkit-windows-delete-tmenu)
 	  ("C-w" "windows" casual-editkit-windows-tmenu)
 	  ]
-	 
+
 	 ["Dired"
 	  ("S-g" "general" casual-dired-tmenu)
 	  ("S-S" "sort" casual-dired-sort-by-tmenu)
@@ -76,5 +78,4 @@
 	  ]
 	 ]
 	)
-  :general
-  ("C-c m" 'casual-transient))
+  :bind ("C-c m" . casual-transient))

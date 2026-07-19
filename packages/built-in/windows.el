@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               WINDOWS              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -130,9 +132,9 @@
   (defun other-window-mru ()
 	"Select the most recently used window on this frame."
 	(interactive)
-	(when-let ((mru-window
-				(get-mru-window
-				 nil nil 'not-this-one-dummy)))
+	(when-let* ((mru-window
+				 (get-mru-window
+				  nil nil 'not-this-one-dummy)))
 	  (select-window mru-window)))
 
   ;;;;;;;;;;;;;;;

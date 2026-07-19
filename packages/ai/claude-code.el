@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             CLAUDE-CODE            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -30,7 +32,8 @@
   ;;     (call-process "paplay" nil nil nil "/usr/share/sounds/freedesktop/stereo/message.oga")))
   ;; (setq claude-code-notification-function #'my-claude-notify-with-sound)
 
-  ;; :bind (:map personal-misc-bindings-keymap ("i" . claude-code-command-map)) ; not working yet
+  ;; :bind (:map personal-misc-bindings-keymap
+  ("i" . claude-code-command-map)) ; not working yet
   :hook
   ((claude-code-process-environment-functions . monet-start-server-function)
    (claude-code-mode . monet-mode)))

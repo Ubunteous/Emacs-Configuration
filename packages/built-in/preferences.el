@@ -1,5 +1,7 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;                MISC                ;;
+;;            PREFERENCES             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package misc
@@ -216,11 +218,6 @@
   ;;(savehist-mode 1) ;; already defined elsewhere
   ;;(setq savehist-file "~/.emacs.d/custom/savehist")
 
-  ;; move auto save folder in specific directory
-  ;; USED TO BE A CUSTOM SET
-  (setq auto-save-list-file-prefix (concat user-emacs-directory "files/auto-save-list/.saves-")
-		auto-save-list-file-name (concat user-emacs-directory "files/auto-save-list/.saves-5642-nixos~"))
-
   ;; move bookmarks in specific directory
   (custom-set-variables
    '(bookmark-default-file "~/.emacs.d/files/bookmark-default.el"))
@@ -377,10 +374,7 @@
   ;; KEY BINDINGS ;;
   ;;;;;;;;;;;;;;;;;;
 
-  (defvar-keymap mark-keymap
-	:doc "Keymap for mark bindings.")
-  (define-key personal-misc-bindings-keymap (kbd "k") mark-keymap) ; no ' for keymaps
-  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "k" "mark")
+  (defvar-subkeymap personal-misc-bindings-keymap "k" mark-keymap "Keymap for mark bindings.")
 
   :bind
   ([remap suspend-frame] . undo)
@@ -440,11 +434,11 @@
 
   (:map personal-misc-bindings-keymap
 		;; "C-c u" . mode-line-other-buffer
-		("d" . delete-char)
-		)
+
+		;; fix when keymap was on C-d and interfered with meow
+		("d" . delete-char))
   :bind-keymap
   ("C-d" . personal-misc-bindings-keymap)
-  ;; ("C-d k" . mark-keymap)
   :hook
   ;; Make the *Occur* buffer names unique and writable
   (occur-hook . (lambda ()

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;     PROGRAMMING LANGUAGE: LaTeX    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -22,6 +24,14 @@
   ;; :requires reftex
 
   :init
+  (defvar-keymap latex-mode-map
+	:doc "Keymap for LaTeX. Loaded earlier than the real one for key binding.")
+
+  ;; to avoid triggering prompts every time a file is opened
+  ;; note: C-c C-v used to work but I am now getting missing .dvi file errors. using latex-view-pdf as alternative
+  (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
+  (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
+  :config
   (defun latex-compile ()
 	"Save file and compile with pdf LaTeX."
 	(interactive)
@@ -36,12 +46,8 @@
 		   "evince 'output/Oeuvres à Découvrir.pdf'"
 		 (concat "evince " (file-name-base (buffer-file-name)) ".pdf")))))
 
-  ;; to avoid triggering prompts every time a file is opened
-  ;; note: C-c C-v used to work but I am now getting missing .dvi file errors. using latex-view-pdf as alternative
-  (add-to-list 'safe-local-variable-values '(TeX-view-program-list . '("Evince" "evince 'output/Oeuvres à Découvrir.pdf'")))
-  (add-to-list 'safe-local-variable-values '(LaTeX-command . "latex -jobname 'Oeuvres à Découvrir' -output-directory ./output"))
-  :config
-  (set-face-attribute 'font-latex-sedate-face nil :foreground "#66d9ee") ; unknown keywords
+  ;; could not find any latex related face (7/2026)
+  ;; (set-face-attribute 'font-latex-sedate-face nil :foreground "#66d9ee")
 
   ;; do not open the master with an incorrect encoding (fr characters)
   (setq latexenc-dont-use-TeX-master-flag t)
@@ -58,10 +64,10 @@
 		reftex-plug-into-AUCTeX t
 		TeX-source-correlate-start-server t)
   ;; (setq-default TeX-master nil)
-  :general
-  (:keymaps 'latex-mode-map
-			"C-c s" 'latex-compile
-			"C-c C-v" 'latex-view-pdf)
+  :bind
+  (:map latex-mode-map
+		("C-c s" . latex-compile)
+		("C-c C-v" . latex-view-pdf))
   :hook
   ;; ((visual-line-mode math-mode) . LaTeX-mode)
 

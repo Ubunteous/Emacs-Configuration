@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              ORDERLESS             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14,11 +16,11 @@
   ;; '(partial-completion substring initials flex))
 
   ;; (setq completion-category-overrides
-  ;; 	'((file (styles . (partial-completion substring)))
-  ;; 	  (buffer (styles . (basic partial-completion substring)))
-  ;; 	  ;; (project-file (styles . (partial-completion substring)))
-  ;; 	  (info-menu (styles . (substring)))))
-  
+  ;;	'((file (styles . (partial-completion substring)))
+  ;;	  (buffer (styles . (basic partial-completion substring)))
+  ;;	  ;; (project-file (styles . (partial-completion substring)))
+  ;;	  (info-menu (styles . (substring)))))
+
   (defun first-prefix-dispatch (pattern index _total)
 	(if (= index 0) 'orderless-literal-prefix))
   (orderless-define-completion-style orderless-first-prefix

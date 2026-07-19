@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 SQL                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,7 +12,7 @@
 
   ;; ;; multiple db can be setup with this variable
   ;; (setq sql-postgres-login-params
-  ;; 		'((user :default "postgres")
+  ;;		'((user :default "postgres")
   ;;         (database :default "posttgres")
   ;;         (server :default "/var/run/postgresql") ;; no need for creds
   ;;         (port :default 5432)))
@@ -52,10 +54,10 @@
 	(interactive)
 	(let ((original-window (selected-window)))
 	  (sql-connect 'pgsql-alter "*pgsql-alter*")
-      (select-window original-window)))
-  :general
-  (:keymaps 'sql-mode-map
-			"\"" '(lambda () (interactive) (insert ?\'))))
+	  (select-window original-window)))
+  :bind
+  (:map sql-mode-map
+		("\"" . (lambda () (interactive) (insert ?\')))))
 
 (use-package sqlup-mode
   :defer t
@@ -74,29 +76,29 @@
 ;; connection."
 ;;   `(progn
 ;;      ,@(mapcar (lambda (conn)
-;; 		 `(add-to-list 'sql-connection-alist ',conn))
-;; 	       connections)
+;;		 `(add-to-list 'sql-connection-alist ',conn))
+;;		   connections)
 ;;      ,@(mapcar (lambda (conn)
-;; 		 (let* ((varname (car conn))
-;; 			(fn-name (intern (format "sql-connect-to-%s" varname)))
-;; 			(buf-name (format "*%s*" varname)))
-;; 		   `(defun ,fn-name ,'()
-;; 		      (interactive)
-;; 		      (sql-connect ',varname ,buf-name))))
-;; 	       connections)))
+;;		 (let* ((varname (car conn))
+;;			(fn-name (intern (format "sql-connect-to-%s" varname)))
+;;			(buf-name (format "*%s*" varname)))
+;;		   `(defun ,fn-name ,'()
+;;			  (interactive)
+;;			  (sql-connect ',varname ,buf-name))))
+;;		   connections)))
 
 
 ;; ;; use like this:
 ;; (sql-specify-connections
 ;;  (mytest-pgsql-dev (sql-product 'postgres)
-;; 		   (sql-port 5432)
-;; 		   (sql-server "localhost")
-;; 		   (sql-user "postgres")
-;; 		   (sql-password "password")
-;; 		   (sql-database "myapp_development"))
+;;		   (sql-port 5432)
+;;		   (sql-server "localhost")
+;;		   (sql-user "postgres")
+;;		   (sql-password "password")
+;;		   (sql-database "myapp_development"))
 ;;  (mytest-pgsql-test (sql-product 'postgres)
-;; 		    (sql-port 5432)
-;; 		    (sql-server "localhost")
-;; 		    (sql-user "postgres")
-;; 		    (sql-password "password")
-;; 		    (sql-database "myapp_test")))
+;;			(sql-port 5432)
+;;			(sql-server "localhost")
+;;			(sql-user "postgres")
+;;			(sql-password "password")
+;;			(sql-database "myapp_test")))

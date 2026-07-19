@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               OB-SQL               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -9,6 +11,6 @@
   ;; (require 'ob-sql-mode)
   ;; ;; no prompt to evaluate sql block
   ;; (setq org-confirm-babel-evaluate
-  ;; 	(lambda (lang body)
+  ;;	(lambda (lang body)
   ;;         (not (string= lang "sql-mode"))))
   )

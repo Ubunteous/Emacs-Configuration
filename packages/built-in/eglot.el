@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                EGLOT               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,15 +8,8 @@
   :ensure nil
   :defer t
   :init
-  (defvar-keymap eglot-keymap
-	:doc "Keymap for eglot bindings.")
-  (define-key personal-misc-bindings-keymap (kbd "g") eglot-keymap)
-  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "g" "eglot")
-
-  (defvar-keymap xref-keymap
-	:doc "Keymap for xref bindings.")
-  (define-key personal-misc-bindings-keymap (kbd "x") xref-keymap)
-  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "x" "xref")
+  (defvar-subkeymap personal-misc-bindings-keymap "g" eglot-keymap "Keymap for eglot bindings.")
+  (defvar-subkeymap personal-misc-bindings-keymap "x" xref-keymap "Keymap for xref bindings.")
 
   (defun peek-eldoc ()
 	(interactive)

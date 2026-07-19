@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             BREAK-TIME             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41,9 +43,9 @@
 (defun breaktime-start (&optional seconds)
   (interactive)
   (when breaktime-timer
-    (cancel-timer breaktime-timer))
+	(cancel-timer breaktime-timer))
   (unless seconds
-    (setq seconds (read-number "How long (seconds) " breaktime-interval)))
+	(setq seconds (read-number "How long (seconds) " breaktime-interval)))
   (setq breaktime-timer
 	(run-at-time t seconds 'break-notifier)))
 ;; (run-at-time t breaktime-interval 'breaktime--take-a-break)))
@@ -52,5 +54,5 @@
 (defun breaktime-stop ()
   (interactive)
   (when breaktime-timer
-    (cancel-timer breaktime-timer)
-    (setq breaktime-timer nil)))
+	(cancel-timer breaktime-timer)
+	(setq breaktime-timer nil)))

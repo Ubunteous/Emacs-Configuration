@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            SPELL CHECK             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,11 +9,7 @@
   :defer t
   :diminish flymake-mode "fmake"
   :init
-  (defvar-keymap flymake-keymap
-	:doc "Keymap for flymake bindings.")
-  (define-key personal-misc-bindings-keymap (kbd "f") flymake-keymap)
-  (which-key-add-keymap-based-replacements personal-misc-bindings-keymap "f" "flymake")
-
+  (defvar-subkeymap personal-misc-bindings-keymap "f" flymake-keymap "Keymap for flymake bindings.")
   :config
   (set-face-attribute 'flymake-end-of-line-diagnostics-face nil :height 1.0)
 

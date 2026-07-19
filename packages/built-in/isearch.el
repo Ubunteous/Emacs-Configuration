@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               ISEARCH              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,7 +10,7 @@
   :defer t
   :config
   (set-face-attribute 'isearch nil
-					  :weight bold
+					  ;; :weight "bold" ; bold is not understood somehow
 					  ;; :underline  (:color foreground-color :style line)
 					  :foreground "light sea green"
 					  :background "black")

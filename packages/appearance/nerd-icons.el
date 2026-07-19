@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             NERD-ICONS             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,7 +10,7 @@
   ;; ;; no face/color for dir
   ;; (add-to-list 'nerd-icons-dir-icon-alist
   ;;              '("dir-a" nerd-icons-faicon "nf-fa-book" :face nerd-icons-red))
-  
+
   ;; (add-to-list 'nerd-icons-extension-icon-alist
   ;;              '("file-a" nerd-icons-faicon "nf-fa-book" :face nerd-icons-red))
   )

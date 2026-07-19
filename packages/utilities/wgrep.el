@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                WGREP               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,6 +12,6 @@
   ;; (setq wgrep-enable-key "r")
   ;; apply all changes even if read-only
   ;; (setq wgrep-change-readonly-file t)
-  :general
-  (:keymaps 'grep-mode-map
-	    "C-x C-q" 'wgrep-change-to-wgrep-mode))
+  :bind
+  (:map grep-mode-map
+		("C-x C-q" . wgrep-change-to-wgrep-mode)))

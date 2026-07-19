@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              MARGINALIA             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,10 +9,10 @@
 (use-package marginalia
   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
   :defer t
-  :general
-  ("M-A" 'marginalia-cycle)
-  (:map 'minibuffer-local-map
-		"M-A" 'marginalia-cycle)
+  :bind
+  ("M-A" . marginalia-cycle)
+  (:map minibuffer-local-map
+		("M-A" . marginalia-cycle))
   :init
   (marginalia-mode)
   :config
@@ -24,5 +26,4 @@
 		(marginalia--fields
 		 ((or (documentation-property sym 'variable-documentation)
 			  (marginalia--definition-prefix sym))
-		  :truncate 1.0 :face 'marginalia-documentation)))))
-  )
+		  :truncate 1.0 :face 'marginalia-documentation))))))

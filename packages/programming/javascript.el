@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             JAVASCRIPT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,11 +9,11 @@
 
 (use-package js2-mode
   :defer t
-  :general
-  (:keymaps 'js2-minor-mode-map
-			"C-c C-c" 'node-run
-			"M-;" 'js2-jump-to-definition
-			"RET" 'smart-insert-semicolon)
+  :bind
+  (:map js2-minor-mode-map
+		("C-c C-c" . node-run)
+		("M-;" . js2-jump-to-definition)
+		("RET" . smart-insert-semicolon))
 
   ;; :mode ("\\.js\\'" . js2-mode) ;; major mode
   ;; :mode (("\\.js\\'" . js2-mode)

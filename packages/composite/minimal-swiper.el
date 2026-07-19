@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            SWIPER + IVY            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,6 +22,6 @@
 
   (set-face-attribute 'swiper-line-face nil :foreground "unspecified")
   ;; (setq swiper-action-recenter t)
-  :general
-  ;; ("C-c s" 'swiper-isearch)
-  ("C-s" 'swiper-isearch))
+  :bind
+  ;; ("C-c s" . swiper-isearch)
+  ("C-s" . swiper-isearch))

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             COMBOBULATE            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -15,8 +17,8 @@
    typescript-ts-mode
    json-ts-mode
    tsx-ts-mode)
-  :general (:keymaps 'combobulate-javascript-map
-					 "M-<down>" nil
-					 "M-S-<down>" 'combobulate-splice-down
-					 "M-<up>" nil
-					 "M-S-<up>" 'combobulate-splice-up))
+  :bind (:map combobulate-javascript-map
+			  ("M-<down>" . nil)
+			  ("M-S-<down>" . combobulate-splice-down)
+			  ("M-<up>" . nil)
+			  ("M-S-<up>" . combobulate-splice-up)))

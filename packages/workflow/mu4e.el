@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                MU4E                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -30,8 +32,7 @@
 
   :ensure nil
   ;; :commands (mu4e)
-  :general
-  ("C-c m" 'mu4e)
+  :bind ("C-c m" . mu4e)
   :config
   ;; use mu4e for e-mail in emacs
   (setq mail-user-agent 'mu4e-user-agent)
@@ -54,7 +55,7 @@
   ;; the 'All Mail' folder by pressing ``ma''.
 
   ;; (setq send-mail-function 'sendmail-send-it)
-  
+
   (setq mu4e-maildir-shortcuts
 		'( (:maildir "/INBOX"              :key ?i)
 		   (:maildir "/[Gmail].Sent Mail"  :key ?s)
@@ -76,10 +77,10 @@
 
   ;; no prompt when leaving
   (setq mu4e-confirm-quit nil)
-  
+
   ;; misc
   ;; (setq mu4e-mu-binary (executable-find "mu")) ;; not needed here
   ;; (setq mu4e-maildir "~/.maildir"))) ;; does not seem to exist. maybe use mu4e-maildir-list instead
-  
+
   ;; no duplicates
   (setq mu4e-headers-skip-duplicates t))

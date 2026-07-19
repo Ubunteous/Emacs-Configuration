@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               CONSULT              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,12 +8,12 @@
 (use-package consult
   :defer t
   :init
-  (defvar-keymap consult-search-keymap
-	:doc "Keymap for search functions in consult.")
-  (defvar-keymap consult-goto-keymap
-	:doc "Keymap for motion functions in consult.")
-  (defvar-keymap consult-keymap
-	:doc "Keymap for general functions in consult.")
+  (defvar-subkeymap personal-misc-bindings-keymap "c" consult-keymap "Keymap for general functions in consult.")
+  (define-key ctl-x-map (kbd "c") consult-keymap)
+  (which-key-add-keymap-based-replacements ctl-x-map "c" "consult")
+
+  (defvar-subkeymap mode-specific-map "y" consult-goto-keymap "Keymap for motion functions in consult.")
+  (defvar-subkeymap mode-specific-map "u" consult-search-keymap "Keymap for search functions in consult.")
 
   ;; Optionally configure the register formatting. This improves the register
   ;; preview for `consult-register', `consult-register-load',
@@ -57,113 +59,105 @@
 
   ;; influences consult-line and consult-grep
   (setq consult-point-placement 'match-end)
-  :general
+  :bind
   ;; ("C-c h" 'consult-history)
   ;; ("C-c m" 'consult-mode-command)
   ;; ("C-c k" 'consult-kmacro)
   ;; C-x bindings (ctl-x-map)
-  ("C-M-#" 'consult-register
+  ("C-M-#" . consult-register)
 
-   ;; Custom M-# bindings for fast register access
-   "M-#" 'consult-register-load
-   "M-'" 'consult-register-store ;; orig. abbrev-prefix-mark (unrelated)
-   ;; Other custom bindings
-   "M-y" 'consult-yank-pop ;; orig. yank-pop
-   ;; M-g bindings (goto-map)
+  ;; Custom M-# bindings for fast register access
+  ("M-#" . consult-register-load)
+  ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
+  ;; Other custom bindings
+  ("M-y" . consult-yank-pop) ;; orig. yank-pop
+  ;; M-g bindings (goto-map)
 
-   ;; orig. apropos-command
-   "<help> a" 'consult-apropos)
+  ;; orig. apropos-command
+  ("<help> a" . consult-apropos)
 
-  (:keymaps 'ctl-x-map
-			"M-:" 'consult-complex-command ;; orig. repeat-complex-command
-			"b" 'consult-buffer ;; orig. switch-to-buffer
-			"4 b" 'consult-buffer-other-window ;; orig. switch-to-buffer-other-window
-			"5 b" 'consult-buffer-other-frame ;; orig. switch-to-buffer-other-frame
-			;; "C-x r b" 'consult-bookmark ;; orig. bookmark-jump. adds a preview. create bookmark if missing
-			"p b" 'consult-project-buffer ;; orig. project-switch-to-buffer
+  (:map ctl-x-map
+		("M-:" . consult-complex-command) ;; orig. repeat-complex-command
+		("b" . consult-buffer) ;; orig. switch-to-buffer
+		("4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+		("5 b" . consult-buffer-other-frame) ;; orig. switch-to-buffer-other-frame
+		;; ("C-x r b" . consult-bookmark) ;; orig. bookmark-jump. adds a preview. create bookmark if missing
+		("p b" . consult-project-buffer) ;; orig. project-switch-to-buffer
 
-			"r s" 'consult-register-store ;; shadows copy-to-register
-			"r i" 'consult-register ;; shadows insert-register
+		("r s" . consult-register-store) ;; shadows copy-to-register
+		("r i" . consult-register)) ;; shadows insert-register
 
-			"c" (cons "consult" consult-keymap))
+  (:map consult-keymap
+		("a" . consult-org-agenda)
+		("b" . consult-bookmark)
+		("d" . consult-find)
+		("D" . consult-locate)
+		("e" . consult-compile-error)
+		("f" . consult-flymake) ;; Alternative: consult-flycheck
+		("F" . consult-recent-file)
+		("g" . consult-goto-line) ;; orig. goto-line
+		("G" . consult-goto-line) ;; orig. goto-line
+		("h" . consult-doc)
+		("H" . consult-man)
+		("C-h" . consult-info)
+		("S-h" . consult-info-emacs)
+		("i" . consult-imenu)
+		("I" . consult-imenu-multi)
+		("C-i" . consult-isearch-history)
+		("k" . consult-keep-lines)
+		("K" . consult-kmacro)
+		("l" . consult-line)
+		("L" . consult-line-multi)
+		("m" . consult-mark)
+		("M" . consult-global-mark)
+		("o" . consult-outline) ;; Alternative: consult-org-heading
+		("O" . consult-multi-occur)
+		;; ("r" . consult-grep)
+		("r" . consult-ripgrep)
+		;; ("R" . consult-git-grep)
+		("R" . consult-org-dir)
+		("s" . consult-register) ;; better interface than -load
+		("S" . consult-register-store)
+		("u" . consult-focus-lines))
 
-  (:keymaps 'consult-keymap
-			"a" 'consult-org-agenda
-			"b" 'consult-bookmark
-			"d" 'consult-find
-			"D" 'consult-locate
-			"e" 'consult-compile-error
-			"f" 'consult-flymake ;; Alternative: consult-flycheck
-			"F" 'consult-recent-file
-			"g" 'consult-goto-line ;; orig. goto-line
-			"G" 'consult-goto-line ;; orig. goto-line
-			"h" 'consult-doc
-			"H" 'consult-man
-			"C-h" 'consult-info
-			"S-h" 'consult-info-emacs
-			"i" 'consult-imenu
-			"I" 'consult-imenu-multi
-			"C-i" 'consult-isearch-history
-			"k" 'consult-keep-lines
-			"K" 'consult-kmacro
-			"l" 'consult-line
-			"L" 'consult-line-multi
-			"m" 'consult-mark
-			"M" 'consult-global-mark
-			"o" 'consult-outline ;; Alternative: consult-org-heading
-			"O" 'consult-multi-occur
-			;; "r" 'consult-grep
-			"r" 'consult-ripgrep
-			;; "R" 'consult-git-grep
-			"R" 'consult-org-dir
-			"s" 'consult-register ;; better interface than -load
-			"S" 'consult-register-store
-			"u" 'consult-focus-lines)
+  (:map consult-goto-keymap
+		("e" . consult-compile-error)
+		("f" . consult-flymake) ;; Alternative: consult-flycheck
+		("g" . consult-goto-line) ;; orig. goto-line
+		("G" . consult-goto-line) ;; orig. goto-line
+		("i" . consult-imenu)
+		("I" . consult-imenu-multi)
+		("k" . consult-global-mark)
+		("m" . consult-mark)
+		("o" . consult-outline)) ;; Alternative: consult-org-heading
 
-  (:keymaps 'consult-goto-keymap
-			"e" 'consult-compile-error
-			"f" 'consult-flymake ;; Alternative: consult-flycheck
-			"g" 'consult-goto-line ;; orig. goto-line
-			"G" 'consult-goto-line ;; orig. goto-line
-			"i" 'consult-imenu
-			"I" 'consult-imenu-multi
-			"k" 'consult-global-mark
-			"m" 'consult-mark
-			"o" 'consult-outline) ;; Alternative: consult-org-heading
+  (:map consult-search-keymap
+		;; M-s bindings (search-map)
+		("e" . consult-isearch-history)
+		("d" . consult-find)
+		("D" . consult-locate)
+		("g" . consult-grep)
+		("G" . consult-git-grep)
+		("k" . consult-keep-lines)
+		("l" . consult-line)
+		("L" . consult-line-multi)
+		("m" . consult-multi-occur)
+		("o" . consult-org-dir)
+		("r" . consult-ripgrep)
+		("u" . consult-focus-lines))
 
-  (:keymaps 'consult-search-keymap
-			;; M-s bindings (search-map)
-			"e" 'consult-isearch-history
-			"d" 'consult-find
-			"D" 'consult-locate
-			"g" 'consult-grep
-			"G" 'consult-git-grep
-			"k" 'consult-keep-lines
-			"l" 'consult-line
-			"L" 'consult-line-multi
-			"m" 'consult-multi-occur
-			"o" 'consult-org-dir
-			"r" 'consult-ripgrep
-			"u" 'consult-focus-lines)
-
-  (:keymaps 'isearch-mode-map
-			"M-e" 'consult-isearch-history ;; orig. isearch-edit-string
-			"M-s e" 'consult-isearch-history ;; orig. isearch-edit-string
-			"M-s l" 'consult-line ;; needed by consult-line to detect isearch
-			"M-s L" 'consult-line-multi) ;; needed by consult-line to detect isearch
+  (:map isearch-mode-map
+		("M-e" . consult-isearch-history) ;; orig. isearch-edit-string
+		("M-s e" . consult-isearch-history) ;; orig. isearch-edit-string
+		("M-s l" . consult-line) ;; needed by consult-line to detect isearch
+		("M-s L" . consult-line-multi)) ;; needed by consult-line to detect isearch
 
   ;; Minibuffer history
-  (:keymaps 'minibuffer-local-map
-			"M-s" 'consult-history ;; orig. next-matching-history-element
-			"M-r" 'consult-history) ;; orig. previous-matching-history-element
+  (:map minibuffer-local-map
+		("M-s" . consult-history) ;; orig. next-matching-history-element
+		("M-r" . consult-history)) ;; orig. previous-matching-history-element
 
-  (:keymaps 'mode-specific-map
-			"u" (cons "consult-search" consult-search-keymap)
-			"y" (cons "consult-goto" consult-goto-keymap))
-
-  (:keymaps 'personal
-			"c" (cons "consult" consult-keymap)
-			"r" 'consult-doc)
+  (:map personal-misc-bindings-keymap ("r" . consult-doc))
   :hook
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -177,11 +171,11 @@
 ;;   :defer t
 ;;   :config
 ;;   (setq consult-notes-file-dir-sources '(("Org"  ?o  "~/org/Projets/") ;; narrowing key o
-;; 					 ("Alter" ?a "~/org/Alter/roam/" :hidden t))) ;; Set notes dir(s), see below
+;;					 ("Alter" ?a "~/org/Alter/roam/" :hidden t))) ;; Set notes dir(s), see below
 ;;   ;; Set org-roam integration, denote integration, or org-heading integration e.g.:
 ;;   (setq consult-notes-org-headings-files '("~/org/Alter/roam/index/sequences.org"
 ;;                                            ;; "org/Alter/roam/index/"
-;; 					   ))
+;;					   ))
 
 ;;   ;; search only for text files in denote dir
 ;;   ;; (setq consult-notes-denote-files-function (function denote-directory-text-only-files))
@@ -198,21 +192,21 @@
 
 (defun consult-line-delayed-async (async)
   (lambda (action)
-    (if (and (stringp action) (not (equal action "")))
-        (let ((lines))
-          (with-current-buffer (window-buffer (minibuffer-selected-window))
-            (save-excursion
-              (goto-char (point-min))
-              (while (search-forward-regexp action nil t 1)
-                (push (consult--location-candidate
-                       (consult--buffer-substring (line-beginning-position)
-                                                  (line-end-position)
-                                                  'fontify)
-                       (point-marker) (line-number-at-pos))
-                      lines))))
-          (funcall async 'flush)
-          (funcall async (nreverse lines)))
-      (funcall async action))))
+	(if (and (stringp action) (not (equal action "")))
+		(let ((lines))
+		  (with-current-buffer (window-buffer (minibuffer-selected-window))
+			(save-excursion
+			  (goto-char (point-min))
+			  (while (search-forward-regexp action nil t 1)
+				(push (consult--location-candidate
+					   (consult--buffer-substring (line-beginning-position)
+												  (line-end-position)
+												  'fontify)
+					   (point-marker) (line-number-at-pos))
+					  lines))))
+		  (funcall async 'flush)
+		  (funcall async (nreverse lines)))
+	  (funcall async action))))
 
 (defun consult-line-delayed ()
   (interactive)
@@ -304,13 +298,13 @@
 ;;;;;;;;;;;;;;;;;;;
 
 (use-package consult-todo
-  :defer t
-  :after consult
-  :config
-  (defconst consult-todo--narrow
-	'((?t . "TODO")
-      (?f . "FIXME")
-      (?b . "DEBUG")
-      (?p . "PROGRESS")
-	  (?d . "DONE"))
-	"Default mapping of narrow and keywords."))
+:defer t
+:after consult
+:config
+(defconst consult-todo--narrow
+  '((?t . "TODO")
+	(?f . "FIXME")
+	(?b . "DEBUG")
+	(?p . "PROGRESS")
+	(?d . "DONE"))
+  "Default mapping of narrow and keywords."))

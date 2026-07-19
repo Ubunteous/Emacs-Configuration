@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             ORG-ROAM-UI            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,12 +13,10 @@
   ;; :hook (after-init . org-roam-ui-mode)
   :config
   (setq org-roam-ui-sync-theme t
-        org-roam-ui-follow t
-        org-roam-ui-update-on-save t
-        org-roam-ui-open-on-start t)
-  :general
-  ("C-c r u" 'org-roam-ui-mode)
-  )
+		org-roam-ui-follow t
+		org-roam-ui-update-on-save t
+		org-roam-ui-open-on-start t)
+  :bind ("C-c r u" . org-roam-ui-mode))
 
 ;; (setq org-roam-ui-custom-theme
 ;;       '((bg . "#1E2029")

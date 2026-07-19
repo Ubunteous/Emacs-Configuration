@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                GODOT               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -31,11 +33,11 @@
   ;; overrides default gdscript-mode behaviour
   (with-eval-after-load 'eglot
 	(defvar eglot-server-programs)
-    (push (cons 'gdscript-mode #'("localhost" 6005))
+	(push (cons 'gdscript-mode #'("localhost" 6005))
 		  eglot-server-programs))
-  :general
-  (:keymaps 'gdscript-mode-map
-			"RET" 'smart-insert-colon-python)
+  :bind
+  (:map gdscript-mode-map
+		("RET" . smart-insert-colon-python))
   :hook
   (gdscript-ts-mode . auto-revert-mode)
   :mode

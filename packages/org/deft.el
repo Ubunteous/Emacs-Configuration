@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                DEFT                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16,15 +18,15 @@
   ;;	'((noslash . "-")
   ;;         (nospace . "-")
   ;;         (case-fn . downcase)))
-  :general
-  (
-   ;; "<f8>" 'deft
-   "C-x C-g" 'deft-find-file))
+  :bind
+  ;; ("<f8>" . deft)
+  ("C-x C-g" . deft-find-file))
 
 (use-package zetteldeft
   :after deft
   :config
   (zetteldeft-set-classic-keybindings) ; only loaded after deft invocation
-  :general
-  (:keymaps 'mode-specific-map
-			"d" (cons "deft" zetteldeft-prefix)))
+  (which-key-add-keymap-based-replacements mode-specific-map "d" "zettel")
+  :bind
+  (:map mode-specific-map
+		("d" . zetteldeft-prefix)))

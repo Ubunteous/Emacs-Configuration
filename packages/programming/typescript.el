@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             TYPESCRIPT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7,9 +9,9 @@
   :ensure nil ;; emacs-typescript/typescript.el
   :config
   (setq typescript-ts-mode-indent-offset 4)
-  :general
-  (:keymaps 'typescript-ts-mode-map
-			"C-c C-c" 'recompile)
+  :bind
+  (:map typescript-ts-mode-map
+		("C-c C-c" . recompile))
   :mode ("\\.ts\\'" . typescript-ts-mode)
   :hook
   (typescript-ts-mode . (lambda ()

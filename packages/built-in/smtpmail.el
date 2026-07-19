@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;              SMTPMAIL              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -18,7 +20,7 @@
   (setq auth-source-debug t)
 
   ;; (setq user-mail-address ""
-  ;; 		user-full-name  "")
+  ;;		user-full-name  "")
 
   ;; report problems with the smtp server
   (setq smtpmail-debug-info t)

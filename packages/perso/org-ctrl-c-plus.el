@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           ORG-CTRL-C-PLUS          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,12 +12,12 @@ Calls `org-table-insert-hline', `org-toggle-item', or
   (interactive)
   (cond
    ((org-at-table-p)
-    (call-interactively 'org-table-insert-hline))
+	(call-interactively 'org-table-insert-hline))
    ((org-region-active-p)
-    (call-interactively 'org-toggle-item)
+	(call-interactively 'org-toggle-item)
 	(call-interactively 'org-shiftright))
    ((org-in-item-p)
-    (call-interactively 'org-cycle-list-bullet))
+	(call-interactively 'org-cycle-list-bullet))
    (t
-    (call-interactively 'org-toggle-item)
+	(call-interactively 'org-toggle-item)
 	(call-interactively 'org-shiftright))))

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;             MU4E-ALERT             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,9 +26,9 @@
 
   ;; example config to avoid "/[Gmail].All Mail"
   ;; (setq mu4e-alert-interesting-mail-query
-  ;; 	(concat
-  ;; 	 "flag:unread"
-  ;; 	 " AND NOT flag:trashed"
-  ;; 	 " AND NOT maildir:"
-  ;; 	 "\"/[Gmail].All Mail\""))
+  ;;	(concat
+  ;;	 "flag:unread"
+  ;;	 " AND NOT flag:trashed"
+  ;;	 " AND NOT maildir:"
+  ;;	 "\"/[Gmail].All Mail\""))
   )

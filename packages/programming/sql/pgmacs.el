@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               PGMACS               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,4 +12,3 @@
   (defun pgmacs-open-maindb () (interactive)
 	 (pgmacs-open-string
 	  "dbname=mydb user=pgmacs_readonly_user host=localhost password=change")))
-

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               JAVA-MODE              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10,10 +12,10 @@
   :hook
   (java-mode . (lambda ()
 		 (set (make-local-variable 'compile-command)
-		      (concat "javac " buffer-file-name))))
-  :general
-  (:keymaps 'java-mode-map
-	    "C-c C-c" 'java-run))
+			  (concat "javac " buffer-file-name))))
+  :bind
+  (:map java-mode-map
+		("C-c C-c" . java-run)))
 
 (defun java-run ()
   (interactive)

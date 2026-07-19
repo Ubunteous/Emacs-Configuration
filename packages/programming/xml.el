@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 XML                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50,7 +52,7 @@
 
 	(when (char-equal (char-after) ?<)
 	  (open-line 1)))
-  :general
-  (:keymaps 'nxml-mode-map
-			">" 'nxml-finish-element-dwim
-			"RET" 'nxml-newline-and-indent-dwim))
+  :bind
+  (:map nxml-mode-map
+		(">" . nxml-finish-element-dwim)
+		("RET" . nxml-newline-and-indent-dwim)))

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package no-littering
   :defer t
   :init
@@ -11,16 +13,16 @@
   ;; Backup files ;;
   ;;;;;;;;;;;;;;;;;;
 
-  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+  (setq backup-directory-alist `(("." . ,(expand-file-name "files/tmp/backups/" user-emacs-directory))))
 
   ;;;;;;;;;;;;;;;;;;;;;
   ;; Auto save files ;;
   ;;;;;;;;;;;;;;;;;;;;;
 
   ;; auto-save-mode doesn't create the path automatically!
-  (make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
-  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-		auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+  (make-directory (expand-file-name "files/tmp/auto-saves/" user-emacs-directory) t)
+  (setq auto-save-list-file-prefix (expand-file-name "files/tmp/auto-saves/sessions/" user-emacs-directory)
+		auto-save-file-name-transforms `((".*" ,(expand-file-name "files/tmp/auto-saves/" user-emacs-directory) t)))
 
   ;;;;;;;;;;;;;;;;;;;;;
   ;; Emacs directory ;;

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           EXPAND-REGION            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -15,6 +17,6 @@
    expand-region
    '(("=" er/expand-region "expand")
 	 ("+" er/contract-region "contract")))
-  :general
-  ("C-=" 'er/expand-region
-   "C-+" 'er/contract-region))
+  :bind
+  ("C-=" . er/expand-region)
+  ("C-+" . er/contract-region)))

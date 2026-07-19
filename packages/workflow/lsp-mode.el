@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               LSP-MODE             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,8 +23,8 @@
   ;; (setq lsp-pyright-use-library-code-for-types t) ;; set this to nil if getting too many false positive type errors
   ;; (setq lsp-pyright-stub-path (concat (getenv "HOME") "/src/python-type-stubs")) ;; example
   :hook (python-ts-mode . (lambda ()
-                            (require 'lsp-pyright)
-                            (lsp)))) ;; or lsp-deferred
+							(require 'lsp-pyright)
+							(lsp)))) ;; or lsp-deferred
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               COMPANY              ;;
@@ -32,9 +34,9 @@
   :after lsp-mode
   :hook prog-mode
   :bind (:map company-active-map
-              ("<tab>" . company-complete-selection))
+			  ("<tab>" . company-complete-selection))
   (:map lsp-mode-map
-        ("<tab>" . company-indent-or-complete-common))
+		("<tab>" . company-indent-or-complete-common))
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                DAPE                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -18,9 +20,24 @@
   ;; :after jsonrpc
   :ensure (dape :type git :host github :repo "svaante/dape")
   :commands (dape-breakpoint-toggle)
-  ;; :init
+  :init
   ;; To use window configuration like gud (gdb-mi)
   ;; (setq dape-buffer-window-arrangement 'gud)
+
+  (add-to-list 'display-buffer-alist
+			   `((derived-mode . dape-repl-mode)
+				 (display-buffer-reuse-mode-window
+				  display-buffer-in-direction)
+				 (mode dape-repl-mode)
+				 (window . root)
+				 (window-width . 0.4)
+				 (direction . right)))
+
+  (add-to-list 'display-buffer-alist
+			   '("\\`\\*\\dape-info .*\\*\\'"
+				 (display-buffer-reuse-mode-window
+				  display-buffer-in-direction)
+				 (window-width . 0.4)))
   :config
   ;; (setq window-sides-vertical t)
 
@@ -61,9 +78,9 @@
   ;; (setq dape-info-variable-table-aligned t)
   ;; (setq dape-buffer-window-arrangement 'right) ;; left, right or gud
   ;; (setq dape-display-source-buffer-action
-  ;; 		'((display-buffer-reuse-window
-  ;; 		   display-buffer-same-window
-  ;; 		   display-buffer-use-some-window)))
+  ;;		'((display-buffer-reuse-window
+  ;;		   display-buffer-same-window
+  ;;		   display-buffer-use-some-window)))
 
   ;; MISC
   ;; (setq dape-request-timeout 10)
@@ -85,21 +102,6 @@
 	 ("s" dape-step-in "step in")
 	 ("u" dape-until "until")))
 
-  (add-to-list 'display-buffer-alist
-			   `((derived-mode . dape-repl-mode)
-				 (display-buffer-reuse-mode-window
-				  display-buffer-in-direction)
-				 (mode dape-repl-mode)
-				 (window . root)
-				 (window-width . 0.4)
-				 (direction . right)))
-
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*\\dape-info .*\\*\\'"
-				 (display-buffer-reuse-mode-window
-				  display-buffer-in-direction)
-				 (window-width . 0.4)))
-
   (setq dape-configs
 		`(
 		  ;; (godot
@@ -116,13 +118,13 @@
 								  (dape--ensure-executable runtime-executable))
 
 								;; (let ((dap-debug-server-path
-								;; 	   (car (plist-get config 'command-args))))
+								;;	   (car (plist-get config 'command-args))))
 								;;   (unless (file-exists-p dap-debug-server-path)
-								;; 	(user-error "File %S does not exist" dap-debug-server-path)))
+								;;	(user-error "File %S does not exist" dap-debug-server-path)))
 
 								(unless (commandp "js-debug")
 								  (user-error "Command js-debug unavailable on system"))
-								
+
 								)
 					  command "node"
 
@@ -169,14 +171,14 @@
 	  ("k" "Kill session" dape-kill) ;; no binding
 	  ("D" "Kill adapter" dape-disconnect-quit)
 	  ]
-	 
+
 	 ["Step"
 	  ("n" "Next line" dape-next)
 	  ("u" "Run until" dape-until)
 	  ("s" "Step in" dape-step-in)
 	  ("o" "Step out" dape-step-out)
 	  ]
-	 
+
 	 ["Breakpoint"
 	  ("b" "Toggle" dape-breakpoint-toggle)
 	  ("e" "Expression" dape-breakpoint-expression)
@@ -252,9 +254,9 @@
 	(dape--breakpoint-goto 1))
 
   (defun dape-repl-help ()
-   	;; Show dape-repl welcome message with available commands
-   	(insert
-   	 (format "
+	;; Show dape-repl welcome message with available commands
+	(insert
+	 (format "
 * Welcome to the Dape REPL *
 
 Available Dape commands:
@@ -262,36 +264,36 @@ Available Dape commands:
 
 Any other input or input starting with a space is sent directly to the
 debugger.  An empty line will repeat the last command.\n\n"
-   			 (with-temp-buffer
-   			   (insert  "  "
-   						(mapconcat (pcase-lambda (`(,str . ,command))
-   									 (setq str (concat str))
-   									 (when dape-repl-use-shorthand
-   									   (set-text-properties
-   										0 (thread-last (dape--repl-shorthand-alist)
-   													   (rassoc command)
-   													   (car)
-   													   (length))
-   										'(font-lock-face help-key-binding)
-   										str))
-   									 str)
-   								   dape-repl-commands
-   								   ", "))
+			 (with-temp-buffer
+			   (insert  "  "
+						(mapconcat (pcase-lambda (`(,str . ,command))
+									 (setq str (concat str))
+									 (when dape-repl-use-shorthand
+									   (set-text-properties
+										0 (thread-last (dape--repl-shorthand-alist)
+													   (rassoc command)
+													   (car)
+													   (length))
+										'(font-lock-face help-key-binding)
+										str))
+									 str)
+								   dape-repl-commands
+								   ", "))
 
-   			   (let ((fill-column 72)
-   					 (adaptive-fill-mode t))
-   				 (fill-region (point-min) (point-max)))
-   			   (buffer-string))))
+			   (let ((fill-column 72)
+					 (adaptive-fill-mode t))
+				 (fill-region (point-min) (point-max)))
+			   (buffer-string))))
 
-    (set-marker (process-mark (get-buffer-process (current-buffer))) (point))
-    (comint-output-filter (get-buffer-process (current-buffer))
-                          dape--repl-prompt))
+	(set-marker (process-mark (get-buffer-process (current-buffer))) (point))
+	(comint-output-filter (get-buffer-process (current-buffer))
+						  dape--repl-prompt))
 
   (defun dape-repl-eval (&rest expression)
 	"Evaluate EXPRESSION in REPL buffer."
 	(dape-evaluate-expression (dape--live-connection 'last)
-                              (string-join expression " ")
-                              "watch"))
+							  (string-join expression " ")
+							  "watch"))
 
   (defun dape-repl-js-entries (&rest expression)
 	(dape-evaluate-expression
@@ -309,7 +311,7 @@ if (typeof(displayObject) == 'undefined')
 			if (typeof value === 'object' && value !== null) {
 				console.log(`${prefix}${key}:`);
 				displayObject(value, indent + 1);
-		   	} else {
+			} else {
 				console.log(`${prefix}${key}: ${value}`);
 			}
 		}
@@ -330,12 +332,12 @@ if (typeof(displayObject) == 'undefined')
 
   (set-face-attribute 'dape-breakpoint-face nil :foreground "#f82570" :height 2)
   (set-face-attribute 'dape-inlay-hint-face nil :height 2)
-  :general (:keymaps 'dape-global-map
-					 "H" 'dape-transient
-					 "N" 'dape-breakpoint-goto-next
-					 "P" 'dape-breakpoint-goto-prev)
-  (:keymaps 'dape-info-scope-mode-line-map
-			"TAB" 'dape-info-scope-toggle)
+  :bind (:map dape-global-map
+			  ("H" . dape-transient)
+			  ("N" . dape-breakpoint-goto-next)
+			  ("P" . dape-breakpoint-goto-prev))
+  (:map dape-info-scope-mode-line-map
+		("TAB" . dape-info-scope-toggle))
   ;; :hook
   ;; (kill-emacs . dape-breakpoint-save)
   ;; (after-init . dape-breakpoint-load)

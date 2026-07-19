@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;           OUTLINE-INDENT           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,27 +31,27 @@
 
   (setq outline-blank-line t) ;; between sections
   ;; (setq-default search-invisible nil) ;; prevent search
-  ;; :general
+  ;; :bind
   ;; ;; Fold management
-  ;; (:keymaps 'outline-indent-minor-mode-map
-  ;; 			"C-c o o" 'outline-indent-open-fold     ; Open fold at point
-  ;; 			"C-c o c" 'outline-indent-close-fold    ; Close fold at point
-  ;; 			"C-c o m" 'outline-indent-close-folds   ; Close all folds
-  ;; 			"C-c o r" 'outline-indent-open-folds    ; Open all folds
-  ;; 			"C-c o O" 'outline-indent-open-fold-rec ; Open fold recursively
-  ;; 			"C-c o TAB" 'outline-indent-toggle-fold ; Toggle fold at point
-  ;; 			"C-c o t" 'outline-indent-toggle-level-at-point ; Toggle level at point
-  ;; 			;; Selection
-  ;; 			"C-c o v" 'outline-indent-select ; Select current indented block
+  ;; (:map outline-indent-minor-mode-map
+  ;;			("C-c o o" . outline-indent-open-fold)     ; Open fold at point
+  ;;			("C-c o c" . outline-indent-close-fold)    ; Close fold at point
+  ;;			("C-c o m" . outline-indent-close-folds)   ; Close all folds
+  ;;			("C-c o r" . outline-indent-open-folds)    ; Open all folds
+  ;;			("C-c o O" . outline-indent-open-fold-rec) ; Open fold recursively
+  ;;			("C-c o TAB" . outline-indent-toggle-fold) ; Toggle fold at point
+  ;;			("C-c o t" . outline-indent-toggle-level-at-point) ; Toggle level at point
+  ;;			;; Selection
+  ;;			("C-c o v" . outline-indent-select) ; Select current indented block
 
-  ;; 			;; Navigation at same indentation level
-  ;; 			"C-c o n" 'outline-indent-forward-same-level ; Next heading at same level
-  ;; 			"C-c o p" 'outline-indent-backward-same-level ; Previous heading at same level
+  ;;			;; Navigation at same indentation level
+  ;;			("C-c o n" . outline-indent-forward-same-level) ; Next heading at same level
+  ;;			("C-c o p" . outline-indent-backward-same-level) ; Previous heading at same level
 
-  ;; 			;; Shift left or right
-  ;; 			"C-c o <right>" 'outline-indent-shift-right
-  ;; 			"C-c o <left>" 'outline-indent-shift-left
+  ;;			;; Shift left or right
+  ;;			("C-c o <right>" . outline-indent-shift-right)
+  ;;			("C-c o <left>" . outline-indent-shift-left)
 
-  ;; 			;; Insert heading
-  ;; 			"C-c o i" 'outline-indent-insert-heading)
+  ;;			;; Insert heading
+  ;;			("C-c o i" . outline-indent-insert-heading))
   :hook (prog-mode . outline-indent-minor-mode))

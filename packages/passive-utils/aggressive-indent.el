@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          AGGRESSIVE-INDENT         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,15 +8,15 @@
   :defer t
   :config
   (setq aggressive-indent-comments-too t)
-  
+
   ;; (setq aggressive-indent-excluded-modes '(haskell-mode))
   ;; (setq aggressive-indent-protected-commands '(undo))
 
   ;; (setq aggressive-indent-dont-electric-modes '(haskell-mode))
-  
+
   ;; (add-to-list 'aggressive-indent-dont-indent-if
-  ;; 			   '(derived-mode-p 'sql-mode)
-  ;; 			   '(derived-mode-p 'gdscript-mode))
+  ;;			   '(derived-mode-p 'sql-mode)
+  ;;			   '(derived-mode-p 'gdscript-mode))
   ;; (add-to-list
   ;;  'aggressive-indent-dont-indent-if
   ;;  '(and (derived-mode-p 'c++-mode)

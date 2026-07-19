@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;            ALL-THE-ICONS           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14,7 +16,7 @@
   ;; (add-to-list 'all-the-icons-regexp-icon-alist '("^test\\.test$" all-the-icons-fileicon "test-coffeescript" :height 1.0 :v-adjust 0.0 :face all-the-icons-yellow))
 
   ;; dir: only icon can change. colour will default to all-the-icons-dired-dir-face
-  ;; (add-to-list 'all-the-icons-dir-icon-alist '("test" all-the-icons-octicon "code" :face all-the-icons-dred :height 0.9)) 
+  ;; (add-to-list 'all-the-icons-dir-icon-alist '("test" all-the-icons-octicon "code" :face all-the-icons-dred :height 0.9))
   )
 
 ;;(all-the-icons-icon-for-dir "file-directory"
@@ -84,9 +86,9 @@
 												   all-the-icons-dired-dir-colors
 												   'all-the-icons-dired-dir-face)
 									:v-adjust all-the-icons-dired-v-adjust)
-      (apply 'all-the-icons-icon-for-file file
+	  (apply 'all-the-icons-icon-for-file file
 			 (append
-              `(:v-adjust ,all-the-icons-dired-v-adjust)
-              (when all-the-icons-dired-monochrome
+			  `(:v-adjust ,all-the-icons-dired-v-adjust)
+			  (when all-the-icons-dired-monochrome
 				`(:face ,(face-at-point)))))))
   :hook (dired-mode . all-the-icons-dired-mode))

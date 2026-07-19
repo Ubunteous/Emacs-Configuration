@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; straight-package --- Summary
 ;;; Code:
 ;;; Commentary:
@@ -130,9 +131,9 @@
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it
 ;; (breaktime-start (* 22 60)) ;; 22 minutes
 
-;; ;;;;;;;;;;;;;;;;;;;;
-;; ;;   appearance   ;;
-;; ;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;
+;;   appearance   ;;
+;;;;;;;;;;;;;;;;;;;;
 
 (load-user-files "appearance"
 				 '("monokaolin"
@@ -190,6 +191,7 @@
 							  ;; "org-fancy-priorities"
 							  ;; zettelkasten
 							  ;; "delve" ;; bring back later
+
 							  "org-roam"
 							  "org-roam-ui"
 							  "deft"
@@ -245,7 +247,6 @@
 							  "vertico"
 							  "tempel"
 
-							  ;; "citar"
 							  "minimal-swiper"))
 
 ;;;;;;;;;;;;;
@@ -344,10 +345,11 @@
 							  "auto-capitalize" ;; => LaTeX/org mode only
 							  ;; "browse-kill-ring"
 							  ;; "compile-angel"
-							  "dimmer" ;; DONE
+							  ;; "dimmer" ;; DONE
 							  "undo-hl" ;; => not in melpa yet. maybe use hook+pulse to replace it
 							  "no-littering"
-							  "writeroom"))
+							  "writeroom"
+							  ))
 
 ;; (load-user-file "passive-utils/evil")
 ;; (load-user-file "passive-utils/rainbow") ;; colorize color names (like css mode). alt: colorful-mode

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                 ORG                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -397,30 +399,30 @@
   ;;   (save-buffer)
   ;;   (org-export-dispatch "lO"))
 
-  :general
-  ("C-c o" 'org-capture-deadline)
+  :bind
+  ("C-c o" . org-capture-deadline)
 
-  ;; a bit redundant with C-c C-d (org-deadline)
-  (:keymaps 'org-capture-mode-map
-			"C-c d" 'org-timestamp-up-day)
+  ;;  a bit redundant with C-c C-d (org-deadline)
+  ;; (:map org-capture-mode-map
+  ;;	("C-c d" . org-timestamp-up-day))
 
-  (:keymaps 'org-mode-map
-			"C-c -" 'org-ctrl-c-plus
-			"C-c s" '(lambda () (interactive) (org-export-dispatch "lo"))
+  (:map org-mode-map
+		("C-c -" . org-ctrl-c-plus)
+		("C-c s" . (lambda () (interactive) (org-export-dispatch "lo")))
 
-			;; removed as I need the default bindings for navigation
-			;; "C-n" 'org-next-visible-heading
-			;; "C-p" 'org-previous-visible-heading
-			;; "C-f" 'org-forward-heading-same-level
-			;; "C-b" 'org-backward-heading-same-level
+		;; removed as I need the default bindings for navigation
+		;; ("C-n" . org-next-visible-heading)
+		;; ("C-p" . org-previous-visible-heading)
+		;; ("C-f" . org-forward-heading-same-level)
+		;; ("C-b" . org-backward-heading-same-level)
 
-			"C-c C-h m" 'org-table-move-cell-left
-			"C-c C-h n" 'org-table-move-cell-down
-			"C-c C-h e" 'org-table-move-cell-up
-			"C-c C-h i" 'org-table-move-cell-right
+		("C-c C-S-h m" . org-table-move-cell-left)
+		("C-c C-S-h n" . org-table-move-cell-down)
+		("C-c C-S-h e" . org-table-move-cell-up)
+		("C-c C-S-h i" . org-table-move-cell-right)
 
-			"C-c C-n" 'org-babel-next-block-end
-			"C-c C-p" 'org-babel-previous-block-end)
-  (:keymaps 'personal
-			;; overrides persp-list-buffers in org buffers
-			"b" 'org-switchb))
+		("C-c C-n" . org-babel-next-block-end)
+		("C-c C-p" . org-babel-previous-block-end))
+  (:map personal-misc-bindings-keymap
+		;; overrides persp-list-buffers in org buffers
+		("b" . org-switchb)))

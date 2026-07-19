@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                AVY                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -6,19 +8,18 @@
   :ensure nil ;; already requested by ace
   :defer t
   :init
-  (defvar-keymap avy-keymap
-	:doc "Keymap for avy.")
+  (defvar-subkeymap personal-misc-bindings-keymap "a" avy-keymap "Keymap for avy.")
   :config
   ;; ;; shorter paths if close to cursor
   ;; (setq avy-orders-alist
-  ;; 		'((avy-goto-char . avy-order-closest)
+  ;;		'((avy-goto-char . avy-order-closest)
   ;;         (avy-goto-word-0 . avy-order-closest)))
-  
+
   ;; (setq avy-timeout-seconds .8)
 
   ;; for more precision
   ;; (setq avy-keys-alist
-  ;; 		`((avy-goto-char . ,(number-sequence ?a ?f))
+  ;;		`((avy-goto-char . ,(number-sequence ?a ?f))
   ;;         (avy-goto-word-1 . (?f ?g ?h ?j))))
 
   (setq avy-indent-line-overlay t)
@@ -29,24 +30,24 @@
   ;; New Actions
   (defun avy-action-copy-whole-line (pt)
 	(save-excursion
-      (goto-char pt)
-      (cl-destructuring-bind (start . end)
-          (bounds-of-thing-at-point 'line)
+	  (goto-char pt)
+	  (cl-destructuring-bind (start . end)
+		  (bounds-of-thing-at-point 'line)
 		(copy-region-as-kill start end)))
 	(select-window
 	 (cdr
-      (ring-ref avy-ring 0)))
+	  (ring-ref avy-ring 0)))
 	t)
 
   (defun avy-action-kill-whole-line (pt)
 	(save-excursion
-      (goto-char pt)
-      (cl-destructuring-bind (start . end)
-          (bounds-of-thing-at-point 'line)
+	  (goto-char pt)
+	  (cl-destructuring-bind (start . end)
+		  (bounds-of-thing-at-point 'line)
 		(kill-region start end)))
 	(select-window
 	 (cdr
-      (ring-ref avy-ring 0)))
+	  (ring-ref avy-ring 0)))
 	t)
 
   (defun avy-action-yank-whole-line (pt)
@@ -71,8 +72,8 @@
 
   (defun avy-action-flyspell (pt)
 	(save-excursion
-      (goto-char pt)
-      (when (require 'flyspell nil t)
+	  (goto-char pt)
+	  (when (require 'flyspell nil t)
 		(flyspell-auto-correct-word)))
 	(select-window
 	 (cdr (ring-ref avy-ring 0)))
@@ -81,8 +82,8 @@
 
   (defun avy-action-helpful (pt)
 	(save-excursion
-      (goto-char pt)
-      (helpful-at-point))
+	  (goto-char pt)
+	  (helpful-at-point))
 	(select-window
 	 (cdr (ring-ref avy-ring 0)))
 	t)
@@ -91,17 +92,17 @@
   (defun avy-action-embark (pt)
 	(unwind-protect
 		(save-excursion
-          (goto-char pt)
-          (embark-act))
-      (select-window
-       (cdr (ring-ref avy-ring 0))))
+		  (goto-char pt)
+		  (embark-act))
+	  (select-window
+	   (cdr (ring-ref avy-ring 0))))
 	t)
   (setf (alist-get ?. avy-dispatch-alist) 'avy-action-embark)
 
   (defun avy-eval-last-sexp (pt)
 	(save-excursion
-      (goto-char pt)
-      (eval-last-sexp nil))
+	  (goto-char pt)
+	  (eval-last-sexp nil))
 	t)
   (setf (alist-get ?E avy-dispatch-alist) 'avy-eval-last-sexp)
 
@@ -111,17 +112,15 @@
    '(("p" avy-prev "previous")
 	 ("n" avy-next "next")
 	 ("m" avy-pop-mark)))
-  :general
-  ("C-'" 'avy-goto-char-timer)
-  (:keymaps 'avy-keymap
-			"c" 'avy-goto-char
-			"d" 'avy-goto-char2
-			"e" 'avy-goto-end-of-line
-			"i" 'avy-isearch
-			"l" 'avy-goto-line
-			"m" 'avy-pop-mark
-			"n" 'avy-next
-			"p" 'avy-prev
-			"t" 'avy-goto-char-timer)
-  (:keymaps 'personal
-			"a" (cons "avy" avy-keymap)))
+  :bind
+  ("C-'" . avy-goto-char-timer)
+  (:map avy-keymap
+		("c" . avy-goto-char)
+		("d" . avy-goto-char2)
+		("e" . avy-goto-end-of-line)
+		("i" . avy-isearch)
+		("l" . avy-goto-line)
+		("m" . avy-pop-mark)
+		("n" . avy-next)
+		("p" . avy-prev)
+		("t" . avy-goto-char-timer)))
