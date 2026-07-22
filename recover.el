@@ -117,6 +117,7 @@
 	(eval-buffer)
 	(message "Buffer evaluated!"))))
 
+(global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "C-c f") 'find-file)
 (global-set-key (kbd "C-c t") 'execute-extended-command)
 (global-set-key (kbd "C-c k") 'kill-buffer-refocus)

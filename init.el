@@ -36,6 +36,10 @@
 
 (setq windows-system-p (eq system-type 'windows-nt))
 
+(when windows-system-p
+  (push '(fullscreen . maximized) default-frame-alist)) ; maximise
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;               ELPACA               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54,8 +58,8 @@
 							  :ref nil :depth 1 :inherit ignore
 							  :files (:defaults "elpaca-test.el" (:exclude "extensions"))
 							  :build (:not elpaca-activate)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
-	   (build (expand-file-name "elpaca/" elpaca-builds-directory))
+(let* ((repo  (expand-file-name "files/elpaca/" elpaca-sources-directory))
+	   (build (expand-file-name "files/elpaca/" elpaca-builds-directory))
 	   (order (cdr elpaca-order))
 	   (default-directory repo))
   (add-to-list 'load-path (if (file-exists-p build) build repo))

@@ -66,6 +66,14 @@
  '(("v" scroll-up-command "scroll up")
    ("b" scroll-down-command "scroll down")))
 
+;; CHAR MOTION
+(repeat-it
+ char-motion
+ '(("m" backward-char "left")
+   ("n" next-line "next")
+   ("e" previous-line "previous")
+   ("i" forward-char "right")))
+
 ;; SWITCH-BUFFER
 (defvar-keymap switch-buffer-repeat-map
   :repeat t
