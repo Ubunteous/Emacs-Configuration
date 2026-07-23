@@ -6,18 +6,23 @@
 
 (use-package completion-preview
   :ensure nil
-  :defer t
   :diminish completion-preview-mode
   :config
-  ;; prevents vertico from showing annoying red char
-  (set-face-attribute 'completions-first-difference nil :foreground 'unspecified)
+  ;; (set-face-attribute 'completion-preview nil :underline "red")
+  ;; (set-face-attribute 'completion-preview-exact nil :underline "blue")
+  ;; (set-face-attribute 'completion-preview-common nil :underline "yellow")
+  ;; (set-face-attribute 'completion-preview-highlight nil :underline "magenta")
 
-  (setq completion-preview-completion-styles '(orderless-first-prefix))
+  ;; prevents vertico from showing annoying red char
+  (set-face-attribute 'completions-first-difference nil :foreground 'undefined)
+
+  (setq completion-preview-completion-styles '(orderless-flex))
 
   ;; (setq completion-preview-sort-function 'minibuffer--sort-by-length-alpha)
 
   ;; (setq completion-preview-minimum-symbol-length 3) ;; default
   (setq completion-preview-idle-delay 2) ;; in seconds
+  (setq completion-preview-exact-match-only t)
 
   ;; commands which triger completion-preview
   ;; (setq completion-preview-command '(insert-char delete-backward-char backward-delete-char-untabify analyze-text-conversion completion-preview-complete))
@@ -36,7 +41,7 @@
 		;; "TAB" 'completion-preview-insert/complete
 		("C-n" . completion-preview-next-candidate)
 		("C-p" . completion-preview-prev-candidate))
-  :hook emacs-lisp-mode)
+  :hook (emacs-lisp-mode eshell-mode))
 
 ;; :config
 ;; Most of these variables will be introduced in emacs 29

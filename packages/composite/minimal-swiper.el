@@ -20,7 +20,7 @@
   (set-face-attribute 'swiper-match-face-3 nil :background "light sea green")
   (set-face-attribute 'swiper-match-face-4 nil :background "light sea green")
 
-  (set-face-attribute 'swiper-line-face nil :foreground "unspecified")
+  (set-face-attribute 'swiper-line-face nil :foreground 'unspecified)
   ;; (setq swiper-action-recenter t)
   :bind
   ;; ("C-c s" . swiper-isearch)
