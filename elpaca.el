@@ -158,6 +158,7 @@
 							  ;; "notmuch"
 							  ;; "hyperbole"
 							  "vterm" ;; must be installed via NixOS configuration
+							  ;; "ghostel" ;; must be installed via NixOS configuration
 							  "dape")
 							'("ace-window" ;; add rotate/transpose frame
 							  ;; "forge" ;; bring back later
