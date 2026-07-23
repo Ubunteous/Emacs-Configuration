@@ -165,7 +165,6 @@
 (load-file "~/.emacs.d/elpaca.el")
 
 ;; set custom file in which emacs will add stuff on its own
-(setq custom-file "~/.emacs.d/custom/customize.el")
-(load custom-file :no-error-if-file-is-missing)
+(load "~/.emacs.d/custom/customize.el" :no-error-if-file-is-missing)
 
 ;;; init.el ends here
