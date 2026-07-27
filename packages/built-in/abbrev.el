@@ -125,6 +125,7 @@
 	  ("reciept" "receipt")
 	  ("recomend" "recommend")
 	  ("refered" "referred")
+	  ("réflection" "réflexion")
 	  ("refrence" "reference")
 	  ("relevent" "relevant")
 	  ("rythm" "rhythm")
