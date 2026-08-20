@@ -52,7 +52,18 @@
 
 	(when (char-equal (char-after) ?<)
 	  (open-line 1)))
+
+  (add-to-list 'hs-special-modes-alist
+			   '(nxml-mode
+				 "<!--\\|<[^/>]*[^/]>"
+				 "-->\\|</[^/>]*[^/]>"
+
+				 "<!--"
+				 sgml-skip-tag-forward
+				 nil))
+  ;; :config
   :bind
   (:map nxml-mode-map
 		(">" . nxml-finish-element-dwim)
-		("RET" . nxml-newline-and-indent-dwim)))
+		("RET" . nxml-newline-and-indent-dwim))
+  :hook (nxml-mode . hs-minor-mode))
