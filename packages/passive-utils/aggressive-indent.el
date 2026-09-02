@@ -23,5 +23,7 @@
   ;;        (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
   ;;                            (thing-at-point 'line)))))
   :hook (prog-mode . (lambda ()
-					   (unless (member major-mode '(c-mode c-ts-mode anaconda-mode gdscript-ts-mode sql-mode))
+					   (unless (member major-mode '(sql-mode
+													c-mode c-ts-mode
+													anaconda-mode gdscript-ts-mode-hook python-mode python-ts-mode))
 						 (aggressive-indent-mode)))))
