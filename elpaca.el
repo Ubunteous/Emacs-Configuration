@@ -113,19 +113,21 @@
 ;;   perso   ;;
 ;;;;;;;;;;;;;;;
 
-(load-user-files "perso" '("calendar" ;; year-calendar function
-						   "align"
-						   ;; "ws"
-						   "fix-encoding"
-						   "keep-duplicate-lines"
-						   "smart-insert"
-						   "highlight-changes"
+(load-user-files "perso" '("align"
 						   "auto-close-compilation"
-						   "org-tables-to-json"
-						   "org-properties-to-csv"
-						   "replace-in-buffer"
+						   "case"
+						   "fix-encoding"
+						   "highlight-changes"
+						   "keep-duplicate-lines"
+						   "netmate"
 						   "org-ctrl-c-plus"
-						   "case"))
+						   "org-properties-to-csv"
+						   "org-tables-to-json"
+						   "replace-in-buffer"
+						   "smart-insert"
+						   ;; "ws"
+						   "calendar" ;; year-calendar function
+						   ))
 
 ;; (load-user-file "perso/break-time")
 ;; (load-user-file "perso/cursor-color") ;; cool but I still do not know why I made it

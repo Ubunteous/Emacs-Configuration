@@ -34,7 +34,9 @@
 	  ;; (pp-eval-last-sexp prefix)
 	  (eval-last-sexp prefix)))
 
-  ;; :config
+  :config
+  (setq show-paren-style 'mixed) ; show expression if matching paren out of screen
+
   ;; (define-short-documentation-group list
   ;;	"Making Lists"
   ;;	(make-list
@@ -47,9 +49,9 @@
   ;; "C-c x" 'eval-region-or-buffer
   ([remap eval-last-sexp] . eval-last-sexp-or-region)
   (:map emacs-lisp-mode-map
-			;; note: # can be used before a lambda which may be byte compiled
-			;; "C-c x" #'(lambda () (interactive) (save-buffer) (eval-buffer) (message "buffer eval complete"))
-			("C-c x" . eval-region-or-buffer))
+		;; note: # can be used before a lambda which may be byte compiled
+		;; "C-c x" #'(lambda () (interactive) (save-buffer) (eval-buffer) (message "buffer eval complete"))
+		("C-c x" . eval-region-or-buffer))
   ;; :hook
   ;; (after-save . check-parens)
   )
