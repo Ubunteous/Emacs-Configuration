@@ -244,7 +244,7 @@
 									 (csharp . "csharp")
 									 (css . "web/css")
 									 (elisp . "elisp")
-									 (emacs-lisp . "elisp")
+									 (emacs-lisp . "emacs-lisp")
 									 (godot . "godot/gdscript")
 									 (html . "web/html")
 									 (janet . "janet")
