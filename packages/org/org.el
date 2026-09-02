@@ -163,7 +163,7 @@
 	 ;; (kotlin . t) ; not available yet
 	 (lua . t)
 	 ;; (org . t)
-	 ;; (lilypond . t)
+	 (lilypond . t)
 	 ;; (restclient . t)
 	 ))
 
@@ -319,11 +319,6 @@
 	(let (org-log-done org-log-states) ;; turn off logging
 	  (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
-
-  ;;;;;;;;;;;;;;;;;;;
-  ;;   FUNCTIONS   ;;
-  ;;;;;;;;;;;;;;;;;;;
 
   (defun org-babel-copy-block-at-point ()
 	"Copy the content of the org babel block at point."

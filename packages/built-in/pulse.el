@@ -6,6 +6,8 @@
 
 (use-package pulse
   :ensure nil
+  :custom-face
+  (pulse-highlight-start-face ((nil (:background "light sea green"))))
   :init
   (defun pulse-line (&rest _)
 	"Pulse the current line."
@@ -14,9 +16,8 @@
 					 scroll-down-command
 					 ;; other-window
 					 ace-window
+					 ;; set-mark
 					 recenter-top-bottom))
 	(advice-add command :after #'pulse-line))
 
-  (setq pulse-iterations 32)
-  :config
-  (set-face-attribute 'pulse-highlight-start-face nil :background "light sea green"))
+  (setq pulse-iterations 32))

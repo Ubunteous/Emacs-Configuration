@@ -4,24 +4,31 @@
 ;;            PREFERENCES             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package misc
+;; regression introduced in emacs 31 where
+;; set-face-attribute and :custom-face are ignored in initial load
+(define-advice use-package-handler/:custom-face (:override (name _keyword args rest state) stupid)
+  (use-package-concat
+   (mapcar (lambda (def) `(apply #'face-spec-set (backquote ,def))) args)
+   (use-package-process-keywords name rest state)))
+
+(use-package preferences
   :ensure nil
-  :config
+  :custom-face
   ;; highlight available in hl-mode
-  (set-face-attribute 'hl-line nil :foreground "cyan")
+  (hl-line ((nil (:foreground "cyan"))))
 
   ;; change color for search bar in M-x customize
-  (set-face-attribute 'widget-field nil :foreground "medium spring green" :background "#272821")
+  (widget-field ((nil :foreground "medium spring green" :background "#272821")))
 
-  (set-face-attribute 'apropos-symbol nil :foreground "#a6e12d") ; green
+  (apropos-symbol ((nil :foreground "#a6e12d"))) ; green
 
-  (set-face-attribute 'apropos-keybinding nil :foreground "#66d9ee") ; blue
-  (set-face-attribute 'apropos-user-option-button nil :foreground "#ae81ff") ; purple
+  (apropos-keybinding ((nil :foreground "#66d9ee"))) ; blue
+  (apropos-user-option-button ((nil :foreground "#ae81ff"))) ; purple
 
-  (set-face-attribute 'apropos-button nil :foreground "#fefff8") ; white
-  (set-face-attribute 'apropos-function-button nil :foreground "#fc961f") ; orange
-  (set-face-attribute 'apropos-variable-button nil :foreground "#a6e12d") ; green
-  (set-face-attribute 'apropos-misc-button nil :foreground "#fefff8") ; white
+  (apropos-button ((nil :foreground "#fefff8"))) ; white
+  (apropos-function-button ((nil :foreground "#fc961f"))) ; orange
+  (apropos-variable-button ((nil :foreground "#a6e12d"))) ; green
+  (apropos-misc-button ((nil :foreground "#fefff8"))) ; white
   :init
   ;; if C-n is done at the end of the buffer, insert a newline
   ;; (setq next-line-add-newlines t)
@@ -81,6 +88,9 @@
 
   ;; use minibuffer in minibuffer. useful to search in minibuffer with swiper
   ;; (setq enable-recursive-minibuffers t) ;; already defined in vertico
+
+  ;; resize minibuffer after each prompt to fit new prompt size
+  ;; (setq resize-mini-windows 'grow-only)
 
   ;; need to install a dict and setup a daemon first
   ;; (setq dictionary-server "localhost")
@@ -318,6 +328,7 @@
   ;; (setq mark-ring-max 16)
   ;; (setq global-mark-ring-max 16)
   (setq delete-pair-push-mark t)
+  (setq exchange-point-and-mark-highlight-region nil) ; prevent region activation on exchange
 
   ;;;;;;;;;;;;;;;;
   ;; APPEARANCE ;;
@@ -449,7 +460,8 @@
   ;; (prog-mode . superword-mode)
   ;; (before-save . whitespace-cleanup)
   (emacs-lisp-mode . (lambda () (add-hook 'before-save-hook 'whitespace-cleanup nil 'make-it-local)))
-  (prog-mode . display-line-numbers-mode))
+  (prog-mode . display-line-numbers-mode)
+  (prog-mode . delete-trailing-whitespace-mode))
 
 (defun keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
@@ -579,3 +591,9 @@ With argument ARG, do this that many times."
 		((function-called-at-point)
 		 (describe-function (symbol-at-point)))
 		(t (find-file-at-point))))
+
+(defun diff-current-buffer-with-file () ; use with recover-this-file
+  "Compare the current modified buffer with the saved version."
+  (interactive)
+  (let ((diff-switches "-u")) ;; unified diff
+	(diff-buffer-with-file (current-buffer))))

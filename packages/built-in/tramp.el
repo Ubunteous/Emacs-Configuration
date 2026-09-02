@@ -5,6 +5,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; use with /ssh:host@domain:/path or /su::/path
+;; also see tramp-rpc.el if needs more speed
 
 (use-package tramp
   :defer t
