@@ -205,6 +205,7 @@
 							  "org-appear"
 
 							  ;; "ob/ob-rust"
+							  "ob/ob-lilypond"
 							  ;; "ob/ob-janet"
 							  ;; "ob/ob-restclient"
 							  "ob/ob-csharp" ; native c# support in emacs 31
@@ -379,7 +380,8 @@
 							  ;; "guile"
 							  "janet"
 							  "clojure"
-							  "common-lisp"
+							  "common-lisp/common-lisp"
+							  ;; "common-lisp/log4slime" ; currently broken
 
 							  "javascript"
 							  ;; "kotlin"
