@@ -23,7 +23,7 @@
 										 (make-directory dir t))))))
   :config
   ;; (setq dired-auto-revert-buffer t)
-
+  (add-to-list 'dired-guess-shell-alist-user '("\\.pdf$" "evince &")) ; default ! suggestion
   (setq dired-hide-details-hide-absolute-location t); in dired-hide-details-mode
   (setq dired-dwim-target t)
   (setq dired-free-space nil)
@@ -32,6 +32,13 @@
   ;; (setq dired-recursive-deletes 'always)
   (setq delete-by-moving-to-trash t) ;; pairs well with trash package
   (setq dired-listing-switches "--group-directories-first -al")
+
+  (defun browse-file-directory ()
+	"Open the current file's directory however the OS would."
+	(interactive)
+	(if default-directory
+		(browse-url (expand-file-name default-directory))
+	  (error "No `default-directory' to open")))
 
   (defun dired-count-lines ()
 	"Count the line number of each marked readable regular file in the dired buffer."
@@ -85,6 +92,7 @@ With a prefix argument, edit the current listing switches instead."
 	 ])
   :bind
   (:map dired-mode-map
+		("J" . browse-file-directory)
 		("s" . dired-sort-transient)
 		("<" . dired-count-lines)))
 
