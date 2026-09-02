@@ -37,4 +37,4 @@
   ;; (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 56)
   ;; (setq minuet-default-guidelines "Guidelines: ...")
   :hook
-  (prog-mode-hook . minuet-auto-suggestion-mode))
+  (prog-mode . minuet-auto-suggestion-mode))
