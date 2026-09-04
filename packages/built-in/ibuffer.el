@@ -16,6 +16,12 @@
 		   ("Godot" (or (mode . gdscript-ts-mode)
 						(filename . "\\tscn\\'")))
 
+		   ("Lisp" (or (mode . lisp-mode)
+					   (mode . slime-repl-mode)
+					   (mode . sldb-mode)
+					   (name . "\*inferior-lisp\*")
+					   (name . "\*slime-events\*")))
+
 		   ("C#" (or (mode . csharp-mode)
 					 (mode . nxml-mode)
 					 (filename . "\\resx\\'")
