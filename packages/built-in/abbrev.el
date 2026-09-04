@@ -114,7 +114,6 @@
 	  ("possesion" "possession")
 	  ("preceed" "precede")
 	  ("presance" "presence")
-	  ("principal" "principle")
 	  ("privelege" "privilege")
 	  ("promiss" "promise")
 	  ("pronounciation" "pronunciation")
