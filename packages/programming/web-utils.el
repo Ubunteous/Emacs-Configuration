@@ -43,6 +43,21 @@
 	  (buffer-list))
 	 (concat search-term ".*{") 5)))
 
+(defun html-browse-tag-documentation ()
+  "Open the documentation of the nearest html tag."
+  (interactive)
+  (save-excursion
+	(if (or
+		 (and
+		  (search-backward-regexp "<[^/]" (point-at-bol) t)
+		  (forward-char))
+		 (and
+		  (eq (char-before) ?<)
+		  (not (eq (char-after) ? ))))
+		(let ((tag (thing-at-point 'sexp 'no-properties)))
+		  (browse-url (concat "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/" tag)))
+	  (message "No valid html <tag> at point"))))
+
 ;; to use it
 ;; + create a js file containing alert("Hello");
 ;; M-x run-skewer
