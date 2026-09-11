@@ -17,6 +17,14 @@
   :config
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   (setq web-mode-markup-indent-offset 4)
+
+  (add-to-list 'hs-special-modes-alist
+			   '(web-mode
+				 "{\\|<[^/>]+?"
+				 "}\\|</[^/>]*[^/]>"
+				 "<!--"
+				 nil ; forward-sexp function
+				 nil))
   :hook (web-mode . sgml-electric-tag-pair-mode))
 ;; (web-mode . web-mode-init-hook))
 
