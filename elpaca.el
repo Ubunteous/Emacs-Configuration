@@ -382,13 +382,10 @@
 							  ;; "guile"
 							  "janet"
 							  "clojure"
-							  "common-lisp/common-lisp"
-							  ;; "common-lisp/log4slime" ; currently broken
 
 							  "javascript"
 							  ;; "kotlin"
 							  "typescript"
-							  "web-utils"
 							  "caddyfile"
 							  "yaml"
 							  "markdown"
@@ -410,6 +407,11 @@
 							  "latex")
 
 							'("elisp"
+
+							  "common-lisp/common-lisp"
+							  ;; "common-lisp/log4slime" ; currently broken
+
+							  "web-utils"
 							  "csv"
 							  "xml"))
 

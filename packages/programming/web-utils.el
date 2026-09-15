@@ -17,6 +17,14 @@
   :config
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   (setq web-mode-markup-indent-offset 4)
+
+  (add-to-list 'hs-special-modes-alist
+			   '(web-mode
+				 "{\\|<[^/>]+?"
+				 "}\\|</[^/>]*[^/]>"
+				 "<!--"
+				 nil ; forward-sexp function
+				 nil))
   :hook (web-mode . sgml-electric-tag-pair-mode))
 ;; (web-mode . web-mode-init-hook))
 
@@ -42,6 +50,21 @@
 		(if (string-match "\w*.s?css" (buffer-name buf)) buf))
 	  (buffer-list))
 	 (concat search-term ".*{") 5)))
+
+(defun html-browse-tag-documentation ()
+  "Open the documentation of the nearest html tag."
+  (interactive)
+  (save-excursion
+	(if (or
+		 (and
+		  (search-backward-regexp "<[^/]" (point-at-bol) t)
+		  (forward-char))
+		 (and
+		  (eq (char-before) ?<)
+		  (not (eq (char-after) ? ))))
+		(let ((tag (thing-at-point 'sexp 'no-properties)))
+		  (browse-url (concat "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/" tag)))
+	  (message "No valid html <tag> at point"))))
 
 ;; to use it
 ;; + create a js file containing alert("Hello");
