@@ -16,7 +16,8 @@
   :defer t
   :ensure (transient :type git :host github :repo "magit/transient")
   :config
-  (setq transient-history-file "/home/nix/.emacs.d/files/transient/history.el")
+  (setq transient-history-file (concat "/home/" user-login-name "/.emacs.d/files/transient/history.el"))
+  (setq magit-clone-set-remote.pushDefault t)
 
   (transient-define-prefix vim-transient ()
 	["Vim"
