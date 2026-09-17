@@ -381,6 +381,20 @@
   ;;		  ("8" . #x2787)
   ;;		  ("9" . #x2788)))
 
+  ;;;;;;;;;;
+  ;; MISC ;;
+  ;;;;;;;;;;
+
+  (setq imenu-auto-rescan t)
+
+  ;; ;; minibuffer-completion-auto-choose must be nil if using M-<Down>
+  ;; ;; with group, set completions-group to t and and completions-format to vertical
+  ;; ;; imenu-level-separator is used by imenu
+  ;; (setq imenu-flatten 'group ; prefix, annotation, group
+  ;;		imenu-level-separator "-:-"
+  ;;		completions-format 'vertical
+  ;;		completions-group t)
+
   ;;;;;;;;;;;;;;;;;;
   ;; KEY BINDINGS ;;
   ;;;;;;;;;;;;;;;;;;
