@@ -17,10 +17,11 @@
 						(filename . "\\tscn\\'")))
 
 		   ("Lisp" (or (mode . lisp-mode)
-					   (mode . slime-repl-mode)
-					   (mode . sldb-mode)
-					   (name . "\*inferior-lisp\*")
-					   (name . "\*slime-events\*")))
+					   (mode . sldb-mode)))
+
+		   ("Lisp utils" (or (mode . slime-repl-mode)
+							 (name . "\*inferior-lisp\*")
+							 (name . "\*slime-events\*")))
 
 		   ("C#" (or (mode . csharp-mode)
 					 (mode . nxml-mode)
