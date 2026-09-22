@@ -13,23 +13,6 @@
 			   ;; alt: (display-buffer-reuse-window display-buffer-pop-up-window) (inhibit-same-window . t))
 			   '("*Help*" display-buffer-same-window))
   :config
-  (defmacro peek-command (command next-mode)
-	;; Make a new COMMAND which respects previous window layout.
-	(let ((name (intern (format "peek-%s" command))))
-	  `(defun ,name ()
-		 (interactive)
-
-		 ;; potential issue if using peek-command from next-mode with current-window-configuration as nil
-		 (unless (string= (symbol-name major-mode) ,next-mode)
-		   (setq peek--initial-window-configuration (current-window-configuration)))
-
-		 (call-interactively #',command)
-
-		 (when (string= (symbol-name major-mode) ,next-mode)
-		   (local-set-key (kbd "q") (lambda () (interactive)
-									  (kill-buffer (current-buffer))
-									  (set-window-configuration peek--initial-window-configuration)))))))
-
   (peek-command helpful-key "helpful-mode")
   (peek-command helpful-command  "helpful-mode")
   (peek-command helpful-at-point "helpful-mode")
@@ -61,6 +44,7 @@
 		;; look at interactive functions.
 		("C" . peek-helpful-command))
 
+
   (:map mode-specific-map
 		;; ("C-c" #'helpful-at-point)
 
@@ -70,5 +54,6 @@
 
   ;; isearch within helpful
   (:map helpful-mode-map
+		("q" . peek-restore-window-configuration)
 		("s" . swiper-isearch)
 		([remap revert-buffer] . helpful-update)))

@@ -91,7 +91,8 @@
 						 "*Eldoc*"
 						 "*General Keybindings*"
 						 "*Org Select*"
-						 "*Agenda Commands*"))
+						 "*Agenda Commands*"
+						 "*slime-description*"))
 				 display-buffer-full-frame))
 
   (add-to-list 'display-buffer-alist '("\\*Flymake Diagnostics for .*\\*" display-buffer-full-frame))

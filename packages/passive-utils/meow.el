@@ -108,6 +108,7 @@
   ;; magit text-mode only needs insert mode
   (setf (alist-get 'text-mode meow-mode-state-list) 'insert)
   (setf (alist-get 'Custom-mode meow-mode-state-list) 'insert)
+  (setf (alist-get 'slime-description-mode meow-mode-state-list) 'insert)
   ;; (setf (alist-get 'org-mode meow-mode-state-list) 'org-motion)
   (setf (alist-get 'nxml-mode meow-mode-state-list) 'normal)
   (setf (alist-get 'org-mode meow-mode-state-list) 'normal)
