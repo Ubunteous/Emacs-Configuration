@@ -13,6 +13,8 @@
   :defer t
   :config
   (setq inferior-lisp-program "sbcl")
+  (add-to-list 'slime-contribs 'slime-asdf) ; for slime-*-system functions
+
   (peek-command slime-describe-symbol "fundamental-mode") ; *slime-description* buffer
   (cl-defun slime-show-description (string package &optional (select slime-description-autofocus))
 	(let ((bufname (slime-buffer-name :description)))
