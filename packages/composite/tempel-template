@@ -21,6 +21,11 @@ nxml-mode
 (input "<input>" n> "<var>" n> "<name>" p "</name>" n> "<required>" p "</required>" n> "</var>" n> "</input>" n> q)
 (output "<output>" n> "<var>" n> "<name>" p "</name>" n "</var>" n "</output>" n> q)
 
+web-mode
+
+(<p "<p>" q "</p>")
+(<button "<button>" q "</button>")
+
 sh-mode
 
 (bash "#!/usr/bin/env bash")
