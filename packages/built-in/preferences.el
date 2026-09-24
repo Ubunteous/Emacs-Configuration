@@ -611,3 +611,27 @@ With argument ARG, do this that many times."
   (interactive)
   (let ((diff-switches "-u")) ;; unified diff
 	(diff-buffer-with-file (current-buffer))))
+
+(defvar peek--initial-window-configuration nil
+  "Window configuration to restore after leaving an help buffer.")
+
+;; also used in eldoc and slime with timers. maybe combine them
+(defmacro peek-command (command doc-mode)
+  ;; Make a new COMMAND which respects previous window layout when leaving with "q".
+  (let ((function-name (intern (format "peek-%s" command))))
+	`(defun ,function-name ()
+	   (interactive)
+
+	   ;; keep the same return window configuration on recurive help calls
+	   ;; note: potential issue if using peek-command from doc-mode with current-window-configuration as nil
+	   (unless (string= major-mode ,doc-mode)
+		 (setq peek--initial-window-configuration (current-window-configuration)))
+
+	   (call-interactively #',command))))
+
+(defun peek-restore-window-configuration ()
+  (interactive)
+  (kill-buffer (current-buffer))
+  (when peek--initial-window-configuration
+	(set-window-configuration peek--initial-window-configuration)
+	(setq peek-restore-window-configuration nil)))
