@@ -60,7 +60,7 @@
   ;; WITH EVIL
   (setq which-key-allow-evil-operators t
 		which-key-show-operator-state-maps t
-		which-key-idle-delay 1
+		which-key-idle-delay 1 ; or 0.5?
 		which-key-use-C-h-commands t) ;; use C-h to cycle pages
 
   ;; WITHOUT EVIL

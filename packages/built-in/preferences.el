@@ -59,8 +59,8 @@
   ;;                   t)))
 
   ;; show matching parenthesis
-  (show-paren-mode t)
-  (setq show-paren-delay 0)
+  (setq show-paren-delay 0.05) ; or 0?
+  (show-paren-mode t) ; must be enabled after setting show-paren-delay
   ;; (setq show-paren-when-point-in-periphery t) ;; interesting
 
   ;; no startup message (probably already at the end of init.el)
@@ -140,6 +140,18 @@
   ;; (grep-apply-setting 'grep-command '("rg -H -e -0 ")) ;; "grep --color=auto -nH --null -e "
   ;; (grep-apply-setting 'grep-find-command '("fd . ")) ;; ("find . -type f -exec grep --color=auto -nH --null -e  \\{\\} +" . 54)
   ;; (grep-apply-setting 'grep-find-template '("fd . "))
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PERFORMANCE AND SMOOTHNESS ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; (setq font-lock-maximum-decoration '((t . 2))) ; level 2 shows less information but displays faster
+  ;; (setq tooltip-delay 0.3)
+  ;; (setq tooltip-short-delay 0.08)
+  ;; (setq line-move-visual nil) ; move by logical line
+  ;; (setq mouse-highlight nil)
+
+  (pixel-scroll-precision-mode 1)
 
   ;;;;;;;;;;;;;;;;;
   ;; COMPLETIONS ;;
