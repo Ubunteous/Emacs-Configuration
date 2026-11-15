@@ -23,6 +23,18 @@
   (interactive)
   (word-boundary-at-point-or-region #'downcase-region))
 
+;; (defun my-capitalize-dwim ()
+;;   ;; Finds the previous word to capitalize even if point is not on it
+;;   (interactive)
+
+;;   (save-excursion
+;;	   (if-let ((bounds (bounds-of-thing-at-point 'word)))
+;;		(goto-char (car bounds))
+;;		 (backward-sexp 1))
+
+;;	   (downcase-word 1)
+;;	   (capitalize-dwim -1)))
+
 ;; (defun upcase-word-at-point ()
 ;;   (interactive)
 ;;   (word-boundary-at-point-or-region #'upcase-region))
@@ -50,8 +62,7 @@
 		   (if (char-upcasep (char-after))
 			   'downcase-region
 			 'upcase-region)
-		   start (1+ start)))
-	  (capitalize-word -1))))
+		   start (1+ start))))))
 
 (defun upcase-word-toggle ()
   (interactive)
