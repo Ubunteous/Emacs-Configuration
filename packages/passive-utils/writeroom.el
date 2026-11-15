@@ -14,7 +14,15 @@
 		("C-M-<" . writeroom-decrease-width)
 		("C-M->" . writeroom-increase-width)
 		("C-M-=" . writeroom-adjust-width))
+  (:map dired-mode-map
+		("(" . dired-toggle-details-and-writeroom))
   :config
+  (defun dired-toggle-details-and-writeroom ()
+	(interactive)
+	(let ((dired-simplify-p (if dired-hide-details-mode -1 1))) ; toggle writeroom+dired hide details
+	  (dired-hide-details-mode dired-simplify-p)
+	  (writeroom-mode dired-simplify-p)))
+
   (setq writeroom-width 60
 		writeroom-fullscreen-effect "maximized")
   ;; writeroom-added-width-left -10)
